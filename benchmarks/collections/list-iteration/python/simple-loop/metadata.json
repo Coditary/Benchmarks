@@ -1,0 +1,19 @@
+{
+  "language": "Python",
+  "implementation": "simple-loop",
+  "run_cmd": "python3 main.py {size}",
+  "tags": [
+    "interpreted",
+    "script",
+    "zero-dependency"
+  ],
+  "hooks": {
+    "install": "if [ -f install.sh ]; then ./install.sh; fi",
+    "clean": "rm -f result.csv metrics.json"
+  },
+  "source_files": [
+    "main.py"
+  ],
+  "artifact_path": "main.py",
+  "notes": "Standard Python for-loop iteration. Script-based execution without pre-compilation."
+}

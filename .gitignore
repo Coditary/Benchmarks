@@ -1,0 +1,18 @@
+# Compiled binaries and build artifacts
+bench_bin
+*.o
+*.exe
+*.out
+/target/
+/build/
+
+# Python caches and virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Locally generated benchmark results and logs
+result.csv
+*.tmp
+*.log

@@ -1,0 +1,9 @@
+{
+  "domain": "collections",
+  "task_name": "list-iteration",
+  "description": "Measures iteration time across various sequence sizes to evaluate scaling tendencies.",
+  "parameters": {
+    "sizes": [10, 100, 1000, 100000, 10000000],
+    "element_type": "int64"
+  }
+}
