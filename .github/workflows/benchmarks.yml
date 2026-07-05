@@ -1,0 +1,66 @@
+name: Benchmark CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "benchmarks/**"
+      - "scripts/**"
+      - "requirements.txt"
+      - ".github/workflows/benchmarks.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "benchmarks/**"
+      - "scripts/**"
+      - "requirements.txt"
+      - ".github/workflows/benchmarks.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed benchmark targets
+        id: detect
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}"
+            BASE="origin/${{ github.base_ref }}"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            BASE="${{ github.event.before }}"
+          else
+            BASE="origin/main~1"
+          fi
+
+          python3 scripts/detect-changes.py "$BASE" | tee /tmp/targets.txt
+          if [ -s /tmp/targets.txt ]; then
+            echo "has_targets=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_targets=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_targets == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hyperfine python3-pip
+          pip install -r requirements.txt
+
+      - name: Run changed benchmarks
+        if: steps.detect.outputs.has_targets == 'true'
+        run: ./scripts/ci-run.sh /tmp/targets.txt
+
+      - name: Publish results to benchmark-results branch
+        if: >-
+          steps.detect.outputs.has_targets == 'true' &&
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/main'
+        run: ./scripts/publish-results.sh /tmp/targets.txt

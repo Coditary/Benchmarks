@@ -1,5 +1,6 @@
 # Compiled binaries and build artifacts
 bench_bin
+bench
 *.o
 *.exe
 *.out
@@ -12,7 +13,13 @@ __pycache__/
 .venv/
 venv/
 
-# Locally generated benchmark results and logs
-result.csv
+# Locally generated benchmark artifacts (published separately on benchmark-results branch)
+benchmarks/**/artifacts/
+report.json
+reports/
+published/
+manifest.json
+
+# Misc
 *.tmp
 *.log

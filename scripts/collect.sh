@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
-# Collects all paths with metadata and passes them to the Python aggregator.
+# Collects benchmark artifacts into per-implementation report.json files.
 
-# Find all folders containing a metadata.json
-TARGETS=$(find benchmarks -name "metadata.json" -printf "%h\n" | tr '\n' ' ')
+if [ "$#" -gt 0 ]; then
+    TARGETS=("$@")
+else
+    mapfile -t TARGETS < <(find benchmarks -name "metadata.json" -printf "%h\n" | sort)
+fi
 
-# Pass all paths as arguments to the python script
-python3 scripts/collect.py $TARGETS
+if [ "${#TARGETS[@]}" -eq 0 ]; then
+    echo "No benchmark targets found." >&2
+    exit 1
+fi
+
+python3 scripts/collect.py "${TARGETS[@]}"

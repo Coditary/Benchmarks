@@ -1,0 +1,20 @@
+{
+  "language": "C",
+  "implementation": "simple-loop",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "compiled",
+    "native",
+    "gcc"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "make build",
+    "clean": "make clean"
+  },
+  "source_files": [
+    "main.c"
+  ],
+  "artifact_path": "bench",
+  "notes": "Standard C for-loop over a heap-allocated int64 array. Compiled with gcc -O3. On Ubuntu, install.sh installs build-essential (gcc, make)."
+}
