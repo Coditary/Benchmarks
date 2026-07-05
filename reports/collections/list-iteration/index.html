@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>collections / list-iteration benchmark report</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #1f2937;
+      --panel: rgba(17, 24, 39, 0.92);
+      --warn: #fbbf24;
+      --error: #fb7185;
+      --info: #38bdf8;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+      color: var(--text);
+    }
+    main { max-width: 1240px; margin: 0 auto; padding: 2rem; }
+    h1, h2, h3 { margin: 0 0 1rem; }
+    p, .muted { color: var(--muted); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .controls { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; margin-bottom: 1rem; }
+    .toggle {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.45rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--border); background: #0b1220;
+      cursor: pointer; user-select: none;
+    }
+    .toggle input { accent-color: var(--accent); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+    canvas { width: 100% !important; height: 360px !important; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.65rem 0.5rem; text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    .warning {
+      border-left: 4px solid var(--warn);
+      padding: 0.75rem 1rem; margin-bottom: 0.75rem;
+      background: rgba(251, 191, 36, 0.08); border-radius: 8px;
+    }
+    .warning.error { border-left-color: var(--error); background: rgba(251, 113, 133, 0.08); }
+    .warning.info { border-left-color: var(--info); background: rgba(56, 189, 248, 0.08); }
+    details {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 0.75rem 1rem; margin-bottom: 0.75rem; background: #0b1220;
+    }
+    summary { cursor: pointer; font-weight: 600; }
+    code { color: #7dd3fc; }
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem; margin-top: 0.75rem;
+    }
+    .stat-card {
+      border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.8); min-width: 0;
+    }
+    .stat-card strong {
+      display: block; color: var(--muted); font-size: 0.85rem; margin-bottom: 0.35rem;
+    }
+    .stat-card .value {
+      display: block; font-size: 0.95rem; line-height: 1.35; word-break: break-word;
+    }
+    .detail-filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .detail-filters label {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .detail-filters input, .detail-filters select {
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }
+    .detail-filters .wide { grid-column: 1 / -1; }
+    .filter-actions { display: flex; gap: 0.75rem; align-items: end; flex-wrap: wrap; }
+    button.secondary {
+      padding: 0.55rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .detail-entry[hidden] { display: none; }
+    #details-empty { color: var(--muted); padding: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>collections / list-iteration</h1>
+    <p>Compare runtime, memory, code size, artifact size, and build time. Use the detail panels to inspect measurement context.</p>
+
+    <section class="panel" id="warnings-panel" hidden>
+      <h2>Comparability warnings</h2>
+      <div id="warnings"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Filters</h2>
+      <div class="controls" id="language-controls"></div>
+      <div class="controls" id="implementation-controls"></div>
+      <label class="toggle">
+        <input type="checkbox" id="build-time-nonzero-only">
+        Build time chart: only compare entries with build time &gt; 0
+      </label>
+    </section>
+
+    <section class="panel grid-2">
+      <div><h2>Runtime</h2><canvas id="runtime-chart"></canvas></div>
+      <div><h2>Peak memory</h2><canvas id="memory-chart"></canvas></div>
+    </section>
+
+    <section class="panel">
+      <h2>Static metrics</h2>
+      <div class="grid-2">
+        <div><h3>Lines of code</h3><canvas id="loc-chart"></canvas></div>
+        <div><h3>Artifact size</h3><canvas id="artifact-chart"></canvas></div>
+        <div><h3>Build time</h3><canvas id="build-chart"></canvas></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Winners</h2>
+      <div id="winner-table"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Implementation details</h2>
+      <p class="muted">Search and filter implementations, then expand an entry to inspect metadata, environment, and raw per-size statistics.</p>
+      <div class="detail-filters">
+        <label class="wide">
+          Search
+          <input type="search" id="detail-search" placeholder="Language, implementation, notes, tags...">
+        </label>
+        <label>
+          Max peak memory (MB)
+          <input type="number" id="detail-max-memory" min="0" step="0.1" placeholder="e.g. 128">
+        </label>
+        <label>
+          Max runtime (ms)
+          <input type="number" id="detail-max-runtime" min="0" step="0.01" placeholder="e.g. 50">
+        </label>
+        <label>
+          Apply limits at size
+          <select id="detail-size-filter"></select>
+        </label>
+        <div class="filter-actions">
+          <button type="button" class="secondary" id="detail-clear-filters">Clear filters</button>
+          <span class="muted" id="detail-match-count"></span>
+        </div>
+      </div>
+      <div id="details"></div>
+      <p id="details-empty" hidden>No implementations match your filters.</p>
+    </section>
+  </main>
+
+  <script>
+    const payload = {"domain": "collections", "test": "list-iteration", "sizes": ["10", "1000", "10000", "100000", "1000000", "10000000", "100000000"], "datasets": [{"label": "C/simple-loop", "lang": "C", "runtime": [0.5023, 0.5141, 0.5652, 0.909, 1.9755, 11.7837, 115.2762], "memory": [3485696, 3485696, 3432448, 3424256, 9383936, 81383424, 801284096], "static": {"lines_of_code": 9, "artifact_size_bytes": 14472, "build_time_ms": 41.2}, "details": {"git_hash": "624e501", "recorded_at": "2026-07-05T23:32:09.068916+00:00", "recorded_at_display": "2026-07-05 23:32:09", "notes": "Minimal C: heap int64 array, fill + sum loop. Built with gcc -O3 -s.", "tags": ["compiled", "native", "gcc", "minimal"], "report_path": "benchmarks/collections/list-iteration/c/simple-loop/artifacts/report.json", "task_config": {"parameters": {"sizes": [10, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 2000000000], "element_type": "int64"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 30, "runs": null}}, "env": {"hostname": "runnervmkkn4f", "os": "Linux 6.17.0-1018-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16770752512, "available_ram_bytes": 15154245632, "used_ram_bytes": 1616506880, "ram_usage_percent": 9.6, "cpu_governor": "unknown", "system_load_1min": 0.5864, "is_ci": true, "runner_name": "GitHub Actions 1000001344"}, "hyperfine_results": [{"command": "./bench 10", "mean": "0.0005023091600000001", "stddev": "0.000031203420638471347", "median": "0.00049300376", "user": "0.00034616666666666655", "system": "0.00021895266666666668", "min": "0.0004551782599999999", "max": "0.0006078202600000001", "parameter_size": "10", "peak_memory_bytes": 3485696, "mean_ms": 0.5023}, {"command": "./bench 1000", "mean": "0.0005141312600000001", "stddev": "0.0000263071749017325", "median": "0.0005054872599999999", "user": "0.0002772", "system": "0.0002959986666666667", "min": "0.00046682026", "max": "0.00058326726", "parameter_size": "1000", "peak_memory_bytes": 3485696, "mean_ms": 0.5141}, {"command": "./bench 10000", "mean": "0.0005651701599999999", "stddev": "0.00004366131536896565", "median": "0.00055492526", "user": "0.0004116333333333333", "system": "0.00022573733333333332", "min": "0.00052724326", "max": "0.0007640852600000001", "parameter_size": "10000", "peak_memory_bytes": 3432448, "mean_ms": 0.5652}, {"command": "./bench 100000", "mean": "0.0009090003933333332", "stddev": "0.000036173682642394076", "median": "0.00090024976", "user": "0.0004572666666666666", "system": "0.0005460833333333334", "min": "0.0008679392600000001", "max": "0.00100987526", "parameter_size": "100000", "peak_memory_bytes": 3424256, "mean_ms": 0.909}, {"command": "./bench 1000000", "mean": "0.00197552466", "stddev": "0.00005723237195106302", "median": "0.0019559337600000004", "user": "0.0008116333333333333", "system": "0.0012612473333333334", "min": "0.0019101672600000002", "max": "0.00214227226", "parameter_size": "1000000", "peak_memory_bytes": 9383936, "mean_ms": 1.9755}, {"command": "./bench 10000000", "mean": "0.011783688126666667", "stddev": "0.00043173962108841463", "median": "0.01158940176", "user": "0.006955233333333333", "system": "0.004794026666666667", "min": "0.01137238626", "max": "0.01288522426", "parameter_size": "10000000", "peak_memory_bytes": 81383424, "mean_ms": 11.7837}, {"command": "./bench 100000000", "mean": "0.11527622990000004", "stddev": "0.0007394365209130464", "median": "0.11507440726000001", "user": "0.06896568", "system": "0.04623738", "min": "0.11412079126", "max": "0.11733821726000002", "parameter_size": "100000000", "peak_memory_bytes": 801284096, "mean_ms": 115.2762}]}}, {"label": "Python/simple-loop", "lang": "Python", "runtime": [15.8675, 15.9435, 16.4635, 21.4413, 71.0643, 543.2732, 5301.8299], "memory": [10522624, 10661888, 10915840, 14438400, 50597888, 411701248, 4023291904], "static": {"lines_of_code": 9, "artifact_size_bytes": 194, "build_time_ms": 0.0}, "details": {"git_hash": "624e501", "recorded_at": "2026-07-05T23:33:13.594712+00:00", "recorded_at_display": "2026-07-05 23:33:13", "notes": "Standard Python for-loop iteration. Script-based execution without pre-compilation.", "tags": ["interpreted", "script", "zero-dependency"], "report_path": "benchmarks/collections/list-iteration/python/simple-loop/artifacts/report.json", "task_config": {"parameters": {"sizes": [10, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 2000000000], "element_type": "int64"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 30, "runs": null}}, "env": {"hostname": "runnervmkkn4f", "os": "Linux 6.17.0-1018-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16770752512, "available_ram_bytes": 14761267200, "used_ram_bytes": 2009485312, "ram_usage_percent": 12.0, "cpu_governor": "unknown", "system_load_1min": 0.8496, "is_ci": true, "runner_name": "GitHub Actions 1000001344"}, "hyperfine_results": [{"command": "python3 main.py 10", "mean": "0.015867450433333333", "stddev": "0.00017444729104091204", "median": "0.015790867700000003", "user": "0.012082653333333332", "system": "0.003793212666666666", "min": "0.0156608447", "max": "0.0163577077", "parameter_size": "10", "peak_memory_bytes": 10522624, "mean_ms": 15.8675}, {"command": "python3 main.py 1000", "mean": "0.015943526899999998", "stddev": "0.00017207623861861666", "median": "0.0159000017", "user": "0.011959119999999998", "system": "0.003978053333333333", "min": "0.015753297700000002", "max": "0.0164060247", "parameter_size": "1000", "peak_memory_bytes": 10661888, "mean_ms": 15.9435}, {"command": "python3 main.py 10000", "mean": "0.016463479766666667", "stddev": "0.0003873952139142284", "median": "0.0163875387", "user": "0.01241535333333333", "system": "0.00404922", "min": "0.0162201607", "max": "0.0184457727", "parameter_size": "10000", "peak_memory_bytes": 10915840, "mean_ms": 16.4635}, {"command": "python3 main.py 100000", "mean": "0.021441297933333332", "stddev": "0.00022934656408839135", "median": "0.0213733417", "user": "0.016104619999999993", "system": "0.005330253333333332", "min": "0.0211687537", "max": "0.0220929217", "parameter_size": "100000", "peak_memory_bytes": 14438400, "mean_ms": 21.4413}, {"command": "python3 main.py 1000000", "mean": "0.07106430379999999", "stddev": "0.0006557854543899796", "median": "0.0709579442", "user": "0.05217362", "system": "0.01883025333333333", "min": "0.0697623187", "max": "0.0724317787", "parameter_size": "1000000", "peak_memory_bytes": 50597888, "mean_ms": 71.0643}, {"command": "python3 main.py 10000000", "mean": "0.5432731654999999", "stddev": "0.006022468019743841", "median": "0.5413403937", "user": "0.40216212", "system": "0.14095001999999998", "min": "0.5368684037", "max": "0.5523976547", "parameter_size": "10000000", "peak_memory_bytes": 411701248, "mean_ms": 543.2732}, {"command": "python3 main.py 100000000", "mean": "5.301829860700001", "stddev": "0.09772882022759212", "median": "5.2586023187", "user": "3.94132212", "system": "1.3597286199999998", "min": "5.2507844017", "max": "5.4759160677", "parameter_size": "100000000", "peak_memory_bytes": 4023291904, "mean_ms": 5301.8299}]}}], "warnings": [], "static_metrics": [{"key": "lines_of_code", "label": "Lines of code", "unit": "lines", "exclude_zero_option": false}, {"key": "artifact_size_bytes", "label": "Artifact size", "unit": "bytes", "exclude_zero_option": false}, {"key": "build_time_ms", "label": "Build time", "unit": "ms", "exclude_zero_option": true}]};
+    const palette = [
+      "#38bdf8", "#f472b6", "#34d399", "#fbbf24", "#a78bfa",
+      "#fb7185", "#22d3ee", "#4ade80", "#f97316", "#c084fc"
+    ];
+
+    const hiddenLabels = new Set();
+    const hiddenLangs = new Set();
+    let buildTimeNonZeroOnly = false;
+
+    function visibleDatasets() {
+      return payload.datasets.filter((dataset) =>
+        !hiddenLabels.has(dataset.label) && !hiddenLangs.has(dataset.lang)
+      );
+    }
+
+    function formatBytes(value) {
+      return formatBytesHuman(value);
+    }
+
+    function formatBytesHuman(value) {
+      if (value == null || value === "") return "-";
+      const bytes = Number(value);
+      if (Number.isNaN(bytes)) return "-";
+      if (bytes < 1024) return `${bytes} B`;
+      if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
+      if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+      return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+    }
+
+    function formatDateTime(value) {
+      if (!value || value === "unknown") return "unknown";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      const pad = (part) => String(part).padStart(2, "0");
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
+
+    function formatMs(value) {
+      if (value == null || value === "") return "-";
+      const ms = Number(value);
+      if (Number.isNaN(ms)) return "-";
+      return `${ms.toFixed(4)} ms`;
+    }
+
+    function formatSecondsAsMs(value) {
+      if (value == null || value === "") return "-";
+      const seconds = Number(value);
+      if (Number.isNaN(seconds)) return "-";
+      return `${(seconds * 1000).toFixed(4)} ms`;
+    }
+
+    function runtimeMsFromMean(value) {
+      if (value == null || value === "") return null;
+      const seconds = Number(value);
+      if (Number.isNaN(seconds)) return null;
+      return seconds * 1000;
+    }
+
+    function datasetMetricAtSize(dataset, sizeFilter, metric) {
+      const results = dataset.details.hyperfine_results || [];
+      if (sizeFilter === "all") {
+        const values = results.map((row) => {
+          if (metric === "memory") return Number(row.peak_memory_bytes) || 0;
+          return runtimeMsFromMean(row.mean) || 0;
+        }).filter((value) => value > 0);
+        return values.length ? Math.max(...values) : Infinity;
+      }
+
+      const row = results.find((entry) => String(entry.parameter_size) === sizeFilter);
+      if (!row) return Infinity;
+      if (metric === "memory") return Number(row.peak_memory_bytes) || Infinity;
+      return runtimeMsFromMean(row.mean) ?? Infinity;
+    }
+
+    function matchesDetailFilters(dataset) {
+      const search = document.getElementById("detail-search").value.trim().toLowerCase();
+      const maxMemMb = parseFloat(document.getElementById("detail-max-memory").value);
+      const maxRuntimeMs = parseFloat(document.getElementById("detail-max-runtime").value);
+      const sizeFilter = document.getElementById("detail-size-filter").value;
+
+      if (search) {
+        const haystack = [
+          dataset.label,
+          dataset.lang,
+          dataset.details.notes || "",
+          ...(dataset.details.tags || [])
+        ].join(" ").toLowerCase();
+        if (!haystack.includes(search)) return false;
+      }
+
+      if (!Number.isNaN(maxMemMb) && maxMemMb > 0) {
+        const peakBytes = datasetMetricAtSize(dataset, sizeFilter, "memory");
+        if (peakBytes > maxMemMb * 1024 * 1024) return false;
+      }
+
+      if (!Number.isNaN(maxRuntimeMs) && maxRuntimeMs > 0) {
+        const runtime = datasetMetricAtSize(dataset, sizeFilter, "runtime");
+        if (runtime > maxRuntimeMs) return false;
+      }
+
+      return true;
+    }
+
+    function applyDetailFilters() {
+      let visibleCount = 0;
+      document.querySelectorAll(".detail-entry").forEach((element) => {
+        const dataset = payload.datasets.find((entry) => entry.label === element.dataset.label);
+        const show = Boolean(dataset && matchesDetailFilters(dataset));
+        element.hidden = !show;
+        if (show) visibleCount += 1;
+      });
+      document.getElementById("details-empty").hidden = visibleCount > 0;
+      document.getElementById("detail-match-count").textContent =
+        `${visibleCount} / ${payload.datasets.length} shown`;
+    }
+
+    function renderWarnings() {
+      const panel = document.getElementById("warnings-panel");
+      const container = document.getElementById("warnings");
+      if (!payload.warnings.length) {
+        panel.hidden = true;
+        return;
+      }
+      panel.hidden = false;
+      container.innerHTML = payload.warnings.map((warning) =>
+        `<div class="warning ${warning.level}"><strong>${warning.level.toUpperCase()}</strong>: ${warning.message}<div class="muted">${warning.details || ""}</div></div>`
+      ).join("");
+    }
+
+    function makeLineChart(canvasId, metric, yTitle) {
+      const chart = new Chart(document.getElementById(canvasId), {
+        type: "line",
+        data: { labels: payload.sizes, datasets: [] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: { legend: { labels: { color: "#e5e7eb" } } },
+          scales: {
+            x: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(148,163,184,0.15)" } },
+            y: {
+              title: { display: true, text: yTitle, color: "#94a3b8" },
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.15)" }
+            }
+          }
+        }
+      });
+
+      return () => {
+        chart.data.datasets = visibleDatasets().map((dataset, index) => ({
+          label: dataset.label,
+          data: dataset[metric],
+          borderColor: palette[index % palette.length],
+          backgroundColor: palette[index % palette.length],
+          tension: 0.25,
+          spanGaps: true
+        }));
+        chart.update();
+      };
+    }
+
+    function makeBarChart(canvasId, metricKey) {
+      const chart = new Chart(document.getElementById(canvasId), {
+        type: "bar",
+        data: { labels: [], datasets: [{ label: metricKey, data: [], backgroundColor: [] }] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: "#94a3b8" }, grid: { display: false } },
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.15)" }
+            }
+          }
+        }
+      });
+
+      return () => {
+        let datasets = visibleDatasets();
+        if (metricKey === "build_time_ms" && buildTimeNonZeroOnly) {
+          datasets = datasets.filter((dataset) => Number(dataset.static.build_time_ms) > 0);
+        }
+        chart.data.labels = datasets.map((dataset) => dataset.label);
+        chart.data.datasets[0].data = datasets.map((dataset) => dataset.static[metricKey]);
+        chart.data.datasets[0].backgroundColor = datasets.map((_, index) => palette[index % palette.length]);
+        chart.update();
+      };
+    }
+
+    const refreshRuntime = makeLineChart("runtime-chart", "runtime", "Milliseconds");
+    const refreshMemory = makeLineChart("memory-chart", "memory", "Bytes");
+    const refreshLoc = makeBarChart("loc-chart", "lines_of_code");
+    const refreshArtifact = makeBarChart("artifact-chart", "artifact_size_bytes");
+    const refreshBuild = makeBarChart("build-chart", "build_time_ms");
+
+    function winnerStatic(metricKey, excludeZero = false) {
+      let best = null;
+      visibleDatasets().forEach((dataset) => {
+        const value = Number(dataset.static[metricKey]);
+        if (excludeZero && value <= 0) return;
+        if (!best || value < best.value) best = { label: dataset.label, value };
+      });
+      return best;
+    }
+
+    function winnerBySize(size, metric) {
+      let best = null;
+      visibleDatasets().forEach((dataset) => {
+        const index = payload.sizes.indexOf(size);
+        const value = dataset[metric][index];
+        if (value == null) return;
+        if (!best || value < best.value) best = { label: dataset.label, value };
+      });
+      return best;
+    }
+
+    function renderWinnerTable() {
+      const staticRows = payload.static_metrics.map((metric) => {
+        const best = winnerStatic(metric.key, metric.exclude_zero_option);
+        let display = "-";
+        if (best) {
+          display = metric.unit === "bytes"
+            ? `${best.label} (${formatBytes(best.value)})`
+            : metric.unit === "ms"
+              ? `${best.label} (${formatMs(best.value)})`
+              : `${best.label} (${best.value})`;
+        }
+        return `<tr><td>${metric.label}</td><td colspan="2">${display}</td></tr>`;
+      }).join("");
+
+      const sizeRows = payload.sizes.map((size) => {
+        const bestRuntime = winnerBySize(size, "runtime");
+        const bestMemory = winnerBySize(size, "memory");
+        return `<tr>
+          <td>${size}</td>
+          <td>${bestRuntime ? `${bestRuntime.label} (${formatMs(bestRuntime.value)})` : "-"}</td>
+          <td>${bestMemory ? `${bestMemory.label} (${formatBytes(bestMemory.value)})` : "-"}</td>
+        </tr>`;
+      }).join("");
+
+      document.getElementById("winner-table").innerHTML = `
+        <table>
+          <thead><tr><th>Metric</th><th colspan="2">Winner</th></tr></thead>
+          <tbody>${staticRows}</tbody>
+        </table>
+        <table style="margin-top: 1rem;">
+          <thead><tr><th>Size</th><th>Fastest runtime</th><th>Lowest memory</th></tr></thead>
+          <tbody>${sizeRows}</tbody>
+        </table>`;
+    }
+
+    function renderDetails() {
+      document.getElementById("details").innerHTML = payload.datasets.map((dataset) => {
+        const env = dataset.details.env || {};
+        const rows = (dataset.details.hyperfine_results || []).map((row) => `
+          <tr>
+            <td>${row.parameter_size}</td>
+            <td>${formatSecondsAsMs(row.mean)}</td>
+            <td>${row.stddev ? (Number(row.stddev) * 1000).toFixed(4) + " ms" : "-"}</td>
+            <td>${formatBytesHuman(row.peak_memory_bytes)}</td>
+            <td>${row.min ? formatSecondsAsMs(row.min) : "-"}</td>
+            <td>${row.max ? formatSecondsAsMs(row.max) : "-"}</td>
+          </tr>`).join("");
+
+        const tags = (dataset.details.tags || []).map((tag) => `<code>${tag}</code>`).join(" ");
+        const recordedAt = dataset.details.recorded_at_display || formatDateTime(dataset.details.recorded_at);
+        return `
+          <details class="detail-entry" data-label="${dataset.label}">
+            <summary>${dataset.label}</summary>
+            <div class="stat-grid">
+              <div class="stat-card"><strong>Git hash</strong><span class="value">${dataset.details.git_hash || "unknown"}</span></div>
+              <div class="stat-card"><strong>Recorded at</strong><span class="value">${recordedAt}</span></div>
+              <div class="stat-card"><strong>CPU</strong><span class="value">${env.cpu_model || "unknown"}</span></div>
+              <div class="stat-card"><strong>OS</strong><span class="value">${env.os || "unknown"}</span></div>
+              <div class="stat-card"><strong>Total RAM</strong><span class="value">${formatBytesHuman(env.total_ram_bytes)}</span></div>
+              <div class="stat-card"><strong>Available RAM at start</strong><span class="value">${formatBytesHuman(env.available_ram_bytes)}</span></div>
+              <div class="stat-card"><strong>RAM usage at start</strong><span class="value">${env.ram_usage_percent ?? "unknown"}%</span></div>
+              <div class="stat-card"><strong>Load avg (1 min)</strong><span class="value">${env.system_load_1min ?? "unknown"}</span></div>
+              <div class="stat-card"><strong>CPU governor</strong><span class="value">${env.cpu_governor || "unknown"}</span></div>
+              <div class="stat-card"><strong>Runner</strong><span class="value">${env.is_ci ? "CI (" + (env.runner_name || "unknown") + ")" : "local"}</span></div>
+              <div class="stat-card"><strong>Lines of code</strong><span class="value">${dataset.static.lines_of_code}</span></div>
+              <div class="stat-card"><strong>Artifact size</strong><span class="value">${formatBytesHuman(dataset.static.artifact_size_bytes)}</span></div>
+              <div class="stat-card"><strong>Build time</strong><span class="value">${formatMs(dataset.static.build_time_ms)}</span></div>
+            </div>
+            <p style="margin-top: 1rem;"><strong>Notes:</strong> ${dataset.details.notes || "-"}</p>
+            <p class="muted">Tags: ${tags || "-"} | Source report: <code>${dataset.details.report_path}</code></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Size</th><th>Mean</th><th>Stddev</th><th>Peak memory</th><th>Min</th><th>Max</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </details>`;
+      }).join("");
+      applyDetailFilters();
+    }
+
+    function initDetailFilters() {
+      const sizeFilter = document.getElementById("detail-size-filter");
+      sizeFilter.innerHTML =
+        `<option value="all">All sizes (worst case)</option>` +
+        payload.sizes.map((size) => `<option value="${size}">Size ${size}</option>`).join("");
+
+      ["detail-search", "detail-max-memory", "detail-max-runtime", "detail-size-filter"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", applyDetailFilters);
+        document.getElementById(id).addEventListener("change", applyDetailFilters);
+      });
+
+      document.getElementById("detail-clear-filters").addEventListener("click", () => {
+        document.getElementById("detail-search").value = "";
+        document.getElementById("detail-max-memory").value = "";
+        document.getElementById("detail-max-runtime").value = "";
+        document.getElementById("detail-size-filter").value = "all";
+        applyDetailFilters();
+      });
+    }
+
+    function refreshAll() {
+      refreshRuntime();
+      refreshMemory();
+      refreshLoc();
+      refreshArtifact();
+      refreshBuild();
+      renderWinnerTable();
+    }
+
+    renderWarnings();
+
+    [...new Set(payload.datasets.map((dataset) => dataset.lang))].sort().forEach((lang) => {
+      const label = document.createElement("label");
+      label.className = "toggle";
+      label.innerHTML = `<input type="checkbox" checked> ${lang}`;
+      label.querySelector("input").addEventListener("change", (event) => {
+        if (event.target.checked) hiddenLangs.delete(lang);
+        else hiddenLangs.add(lang);
+        refreshAll();
+      });
+      document.getElementById("language-controls").appendChild(label);
+    });
+
+    payload.datasets.forEach((dataset) => {
+      const label = document.createElement("label");
+      label.className = "toggle";
+      label.innerHTML = `<input type="checkbox" checked> ${dataset.label}`;
+      label.querySelector("input").addEventListener("change", (event) => {
+        if (event.target.checked) hiddenLabels.delete(dataset.label);
+        else hiddenLabels.add(dataset.label);
+        refreshAll();
+      });
+      document.getElementById("implementation-controls").appendChild(label);
+    });
+
+    document.getElementById("build-time-nonzero-only").addEventListener("change", (event) => {
+      buildTimeNonZeroOnly = event.target.checked;
+      refreshBuild();
+      renderWinnerTable();
+    });
+
+    renderDetails();
+    initDetailFilters();
+    refreshAll();
+  </script>
+</body>
+</html>

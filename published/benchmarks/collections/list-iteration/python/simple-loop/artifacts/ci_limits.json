@@ -1,0 +1,16 @@
+{
+  "effective_sizes": [
+    10,
+    1000,
+    10000,
+    100000,
+    1000000,
+    10000000,
+    100000000
+  ],
+  "skipped_sizes": [
+    1000000000,
+    2000000000
+  ],
+  "limits": "CI limits: active\n  effective sizes: 10, 1000, 10000, 100000, 1000000, 10000000, 100000000\n  skipped sizes: 1000000000, 2000000000\n  memory budget: 6,815,508,480 bytes (45% of available RAM)\n  element size: 8 bytes (int64)\n  benchmark: warmup=2, runs=None, min_runs=5, max_runs=30"
+}

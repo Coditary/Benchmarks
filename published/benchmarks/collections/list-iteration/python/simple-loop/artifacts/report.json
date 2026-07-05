@@ -1,0 +1,151 @@
+{
+  "domain": "collections",
+  "test": "list-iteration",
+  "lang": "python",
+  "impl": "simple-loop",
+  "language": "Python",
+  "implementation": "simple-loop",
+  "git_hash": "624e501",
+  "recorded_at": "2026-07-05T23:33:13.594712+00:00",
+  "tags": [
+    "interpreted",
+    "script",
+    "zero-dependency"
+  ],
+  "notes": "Standard Python for-loop iteration. Script-based execution without pre-compilation.",
+  "task_config": {
+    "parameters": {
+      "sizes": [
+        10,
+        1000,
+        10000,
+        100000,
+        1000000,
+        10000000,
+        100000000,
+        1000000000,
+        2000000000
+      ],
+      "element_type": "int64"
+    },
+    "benchmark": {
+      "warmup": 2,
+      "min_runs": 5,
+      "max_runs": 30,
+      "runs": null
+    }
+  },
+  "env": {
+    "hostname": "runnervmkkn4f",
+    "os": "Linux 6.17.0-1018-azure",
+    "cpu_model": "AMD EPYC 7763 64-Core Processor",
+    "physical_cores": 2,
+    "logical_threads": 4,
+    "total_ram_bytes": 16770752512,
+    "available_ram_bytes": 14761267200,
+    "used_ram_bytes": 2009485312,
+    "ram_usage_percent": 12.0,
+    "cpu_governor": "unknown",
+    "system_load_1min": 0.8496,
+    "is_ci": true,
+    "runner_name": "GitHub Actions 1000001344"
+  },
+  "metrics": {
+    "lines_of_code": 9,
+    "artifact_size_bytes": 194,
+    "build_time_ms": 0.0,
+    "hyperfine_results": [
+      {
+        "command": "python3 main.py 10",
+        "mean": "0.015867450433333333",
+        "stddev": "0.00017444729104091204",
+        "median": "0.015790867700000003",
+        "user": "0.012082653333333332",
+        "system": "0.003793212666666666",
+        "min": "0.0156608447",
+        "max": "0.0163577077",
+        "parameter_size": "10",
+        "peak_memory_bytes": 10522624,
+        "mean_ms": 15.8675
+      },
+      {
+        "command": "python3 main.py 1000",
+        "mean": "0.015943526899999998",
+        "stddev": "0.00017207623861861666",
+        "median": "0.0159000017",
+        "user": "0.011959119999999998",
+        "system": "0.003978053333333333",
+        "min": "0.015753297700000002",
+        "max": "0.0164060247",
+        "parameter_size": "1000",
+        "peak_memory_bytes": 10661888,
+        "mean_ms": 15.9435
+      },
+      {
+        "command": "python3 main.py 10000",
+        "mean": "0.016463479766666667",
+        "stddev": "0.0003873952139142284",
+        "median": "0.0163875387",
+        "user": "0.01241535333333333",
+        "system": "0.00404922",
+        "min": "0.0162201607",
+        "max": "0.0184457727",
+        "parameter_size": "10000",
+        "peak_memory_bytes": 10915840,
+        "mean_ms": 16.4635
+      },
+      {
+        "command": "python3 main.py 100000",
+        "mean": "0.021441297933333332",
+        "stddev": "0.00022934656408839135",
+        "median": "0.0213733417",
+        "user": "0.016104619999999993",
+        "system": "0.005330253333333332",
+        "min": "0.0211687537",
+        "max": "0.0220929217",
+        "parameter_size": "100000",
+        "peak_memory_bytes": 14438400,
+        "mean_ms": 21.4413
+      },
+      {
+        "command": "python3 main.py 1000000",
+        "mean": "0.07106430379999999",
+        "stddev": "0.0006557854543899796",
+        "median": "0.0709579442",
+        "user": "0.05217362",
+        "system": "0.01883025333333333",
+        "min": "0.0697623187",
+        "max": "0.0724317787",
+        "parameter_size": "1000000",
+        "peak_memory_bytes": 50597888,
+        "mean_ms": 71.0643
+      },
+      {
+        "command": "python3 main.py 10000000",
+        "mean": "0.5432731654999999",
+        "stddev": "0.006022468019743841",
+        "median": "0.5413403937",
+        "user": "0.40216212",
+        "system": "0.14095001999999998",
+        "min": "0.5368684037",
+        "max": "0.5523976547",
+        "parameter_size": "10000000",
+        "peak_memory_bytes": 411701248,
+        "mean_ms": 543.2732
+      },
+      {
+        "command": "python3 main.py 100000000",
+        "mean": "5.301829860700001",
+        "stddev": "0.09772882022759212",
+        "median": "5.2586023187",
+        "user": "3.94132212",
+        "system": "1.3597286199999998",
+        "min": "5.2507844017",
+        "max": "5.4759160677",
+        "parameter_size": "100000000",
+        "peak_memory_bytes": 4023291904,
+        "mean_ms": 5301.8299
+      }
+    ]
+  }
+}
