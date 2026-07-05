@@ -12,6 +12,16 @@ fi
 SIZES=$("$SCRIPT_DIR/bench_config.py" sizes "$CONFIG")
 mapfile -t HF_ARGS < <("$SCRIPT_DIR/bench_config.py" hyperfine-args "$CONFIG")
 
+if [ "${CI:-}" = "true" ]; then
+    "$SCRIPT_DIR/bench_config.py" describe-ci "$CONFIG" >&2
+    "$SCRIPT_DIR/bench_config.py" write-ci-metadata "$CONFIG" artifacts
+fi
+
+if [ -z "$SIZES" ]; then
+    echo "Error: no benchmark sizes configured for this environment." >&2
+    exit 1
+fi
+
 echo "-> Running performance benchmark..."
 mkdir -p artifacts
 hyperfine "${HF_ARGS[@]}" \

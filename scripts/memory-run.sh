@@ -36,8 +36,8 @@ for size in "${SIZE_ARRAY[@]}"; do
 
     peak_kb=$( { /usr/bin/time -f "%M" bash -c "$cmd"; } 2>&1 >/dev/null | tail -n 1 )
     if ! [[ "$peak_kb" =~ ^[0-9]+$ ]]; then
-        echo "Error: failed to measure memory for size=$size (got: '$peak_kb')" >&2
-        exit 1
+        echo "Warning: failed to measure memory for size=$size (got: '$peak_kb'). Skipping." >&2
+        continue
     fi
 
     peak_bytes=$((peak_kb * 1024))

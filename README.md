@@ -57,6 +57,25 @@ Each task defines shared parameters and benchmark execution settings in `config.
 - `min_runs` / `max_runs`: adaptive run count (default)
 - `runs`: fixed run count; when set, overrides `min_runs` / `max_runs`
 
+`ci` settings apply automatically when `CI=true` (GitHub Actions):
+
+```json
+"ci": {
+  "memory_budget_ratio": 0.45,
+  "benchmark": {
+    "warmup": 2,
+    "min_runs": 5,
+    "max_runs": 30
+  }
+}
+```
+
+- `memory_budget_ratio`: skips parameter sizes that would need more RAM than this fraction of currently available memory (based on `element_type`, e.g. `int64` = 8 bytes per element)
+- `sizes`: optional explicit CI size list; when set, overrides automatic filtering
+- `ci.benchmark`: lighter Hyperfine settings for faster, safer CI runs
+
+Skipped CI sizes are logged in the workflow output and saved to `artifacts/ci_limits.json`.
+
 Memory is measured separately with GNU `time` and stored as `peak_memory_bytes`.
 
 ## Local usage

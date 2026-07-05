@@ -32,8 +32,7 @@ HAS_BUILD=$(python3 -c "import json; print(json.load(open('metadata.json')).get(
 
 if [[ -n "$HAS_BUILD" && "$HAS_BUILD" != "None" ]]; then
     START_TIME=$(date +%s.%N)
-    # We use 'make build' as the standard build command
-    make -B build >/dev/null 2>&1 || true
+    eval "$HAS_BUILD" >/dev/null 2>&1 || true
     END_TIME=$(date +%s.%N)
     BUILD_TIME=$(python3 -c "print(round($END_TIME - $START_TIME, 4))")
 else
