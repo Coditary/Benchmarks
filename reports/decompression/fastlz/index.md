@@ -1,6 +1,6 @@
 # decompression / fastlz
 
-Generated at 2026-09-02T21:56:38.729340+00:00
+Generated at 2026-09-02T23:36:00.263614+00:00
 
 ## Runtime leaderboard
 

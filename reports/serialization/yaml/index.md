@@ -1,6 +1,6 @@
 # serialization / yaml
 
-Generated at 2026-09-02T21:56:38.817998+00:00
+Generated at 2026-09-02T23:36:00.338377+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 0.0533 ms | — |
+| 1 | Rust/serde-yaml | 0.0489 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 0.0533 ms #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.0489 ms #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 0.0550 ms | — |
+| 1 | Rust/serde-yaml | 0.0519 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 0.0550 ms #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.0519 ms #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 0.0464 ms | — |
+| 1 | Rust/serde-yaml | 0.0438 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 0.0464 ms #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.0438 ms #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 0.2033 ms | — |
+| 1 | Rust/serde-yaml | 0.2197 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 0.2033 ms #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.2197 ms #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 2,514,944 bytes | — |
+| 1 | Rust/serde-yaml | 2,441,216 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 2,514,944 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 2,441,216 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 2,502,656 bytes | — |
+| 1 | Rust/serde-yaml | 2,396,160 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 2,502,656 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 2,396,160 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 2,572,288 bytes | — |
+| 1 | Rust/serde-yaml | 2,465,792 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 2,572,288 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 2,465,792 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 2,629,632 bytes | — |
+| 1 | Rust/serde-yaml | 2,392,064 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 2,629,632 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 2,392,064 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 3,563,520 bytes | — |
+| 1 | Rust/serde-yaml | 3,416,064 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 3,563,520 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 3,416,064 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 3,555,328 bytes | — |
+| 1 | Rust/serde-yaml | 3,448,832 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 3,555,328 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 3,448,832 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 3,547,136 bytes | — |
+| 1 | Rust/serde-yaml | 3,448,832 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 3,547,136 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 3,448,832 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 3,579,904 bytes | — |
+| 1 | Rust/serde-yaml | 3,485,696 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 3,579,904 bytes #1 |
+| Rust/serde-yaml | 1 | 1.00 | 3,485,696 bytes #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 13.02% | — |
+| 1 | Rust/serde-yaml | 10.22% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 13.02% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 10.22% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 9.81% | — |
+| 1 | Rust/serde-yaml | 10.33% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 9.81% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 10.33% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 16.78% | — |
+| 1 | Rust/serde-yaml | 16.84% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 16.78% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 16.84% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 3.51% | — |
+| 1 | Rust/serde-yaml | 5.13% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 3.51% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 5.13% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 55.56% | — |
+| 1 | Rust/serde-yaml | 47.86% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 55.56% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 47.86% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 46.13% | — |
+| 1 | Rust/serde-yaml | 48.04% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 46.13% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 48.04% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 58.65% | — |
+| 1 | Rust/serde-yaml | 68.73% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 58.65% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 68.73% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 13.11% | — |
+| 1 | Rust/serde-yaml | 20.27% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 13.11% #1 |
+| Rust/serde-yaml | 1 | 1.00 | 20.27% #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 0.78x | — |
+| 1 | Rust/serde-yaml | 0.97x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 0.78x #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.97x #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 1.51x | — |
+| 1 | Rust/serde-yaml | 0.97x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 1.51x #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.97x #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 2.58x | — |
+| 1 | Rust/serde-yaml | 1.13x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 2.58x #1 |
+| Rust/serde-yaml | 1 | 1.00 | 1.13x #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/serde-yaml | 0.27x | — |
+| 1 | Rust/serde-yaml | 0.30x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/serde-yaml | 1 | 1.00 | 0.27x #1 |
+| Rust/serde-yaml | 1 | 1.00 | 0.30x #1 |
 | C++/yaml-cpp | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/yaml-cpp | 25 |
 | Artifact size | C++/yaml-cpp | 0 bytes |
-| Build time | Rust/serde-yaml | 39.8000 ms |
+| Build time | Rust/serde-yaml | 40.1000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/serde-yaml | 0.0533 ms |
-| Runtime | profile | 10 | Rust/serde-yaml | 0.0550 ms |
-| Runtime | catalog | 10 | Rust/serde-yaml | 0.0464 ms |
-| Runtime | mesh | 100 | Rust/serde-yaml | 0.2033 ms |
+| Runtime | logs | 10 | Rust/serde-yaml | 0.0489 ms |
+| Runtime | profile | 10 | Rust/serde-yaml | 0.0519 ms |
+| Runtime | catalog | 10 | Rust/serde-yaml | 0.0438 ms |
+| Runtime | mesh | 100 | Rust/serde-yaml | 0.2197 ms |
 | Output size | logs | 10 | Rust/serde-yaml | 2,768 bytes |
 | Output size | profile | 10 | Rust/serde-yaml | 2,658 bytes |
 | Output size | catalog | 10 | Rust/serde-yaml | 2,164 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/serde-yaml | 714 bytes |
 | Gzip size | catalog | 10 | Rust/serde-yaml | 653 bytes |
 | Gzip size | mesh | 100 | Rust/serde-yaml | 3,452 bytes |
-| Serialize peak RSS | logs | 10 | Rust/serde-yaml | 2,514,944 bytes |
-| Serialize peak RSS | profile | 10 | Rust/serde-yaml | 2,502,656 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/serde-yaml | 2,572,288 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/serde-yaml | 2,629,632 bytes |
-| Process peak RSS | logs | 10 | Rust/serde-yaml | 3,563,520 bytes |
-| Process peak RSS | profile | 10 | Rust/serde-yaml | 3,555,328 bytes |
-| Process peak RSS | catalog | 10 | Rust/serde-yaml | 3,547,136 bytes |
-| Process peak RSS | mesh | 100 | Rust/serde-yaml | 3,579,904 bytes |
-| Stability (CV) | logs | 10 | Rust/serde-yaml | 13.02% |
-| Stability (CV) | profile | 10 | Rust/serde-yaml | 9.81% |
-| Stability (CV) | catalog | 10 | Rust/serde-yaml | 16.78% |
-| Stability (CV) | mesh | 100 | Rust/serde-yaml | 3.51% |
-| Spread | logs | 10 | Rust/serde-yaml | 55.56% |
-| Spread | profile | 10 | Rust/serde-yaml | 46.13% |
-| Spread | catalog | 10 | Rust/serde-yaml | 58.65% |
-| Spread | mesh | 100 | Rust/serde-yaml | 13.11% |
-| Load/serialize ratio | logs | 10 | Rust/serde-yaml | 0.78x |
-| Load/serialize ratio | profile | 10 | Rust/serde-yaml | 1.51x |
-| Load/serialize ratio | catalog | 10 | Rust/serde-yaml | 2.58x |
-| Load/serialize ratio | mesh | 100 | Rust/serde-yaml | 0.27x |
+| Serialize peak RSS | logs | 10 | Rust/serde-yaml | 2,441,216 bytes |
+| Serialize peak RSS | profile | 10 | Rust/serde-yaml | 2,396,160 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/serde-yaml | 2,465,792 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/serde-yaml | 2,392,064 bytes |
+| Process peak RSS | logs | 10 | Rust/serde-yaml | 3,416,064 bytes |
+| Process peak RSS | profile | 10 | Rust/serde-yaml | 3,448,832 bytes |
+| Process peak RSS | catalog | 10 | Rust/serde-yaml | 3,448,832 bytes |
+| Process peak RSS | mesh | 100 | Rust/serde-yaml | 3,485,696 bytes |
+| Stability (CV) | logs | 10 | Rust/serde-yaml | 10.22% |
+| Stability (CV) | profile | 10 | Rust/serde-yaml | 10.33% |
+| Stability (CV) | catalog | 10 | Rust/serde-yaml | 16.84% |
+| Stability (CV) | mesh | 100 | Rust/serde-yaml | 5.13% |
+| Spread | logs | 10 | Rust/serde-yaml | 47.86% |
+| Spread | profile | 10 | Rust/serde-yaml | 48.04% |
+| Spread | catalog | 10 | Rust/serde-yaml | 68.73% |
+| Spread | mesh | 100 | Rust/serde-yaml | 20.27% |
+| Load/serialize ratio | logs | 10 | Rust/serde-yaml | 0.97x |
+| Load/serialize ratio | profile | 10 | Rust/serde-yaml | 0.97x |
+| Load/serialize ratio | catalog | 10 | Rust/serde-yaml | 1.13x |
+| Load/serialize ratio | mesh | 100 | Rust/serde-yaml | 0.30x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/yaml-cpp | profile | 10 | - | - | - | - | - | - | - |
 | C++/yaml-cpp | catalog | 10 | - | - | - | - | - | - | - |
 | C++/yaml-cpp | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/serde-yaml | logs | 10 | 0.0533 ms (#1) | 2,768 bytes | 846 bytes | 2,514,944 bytes | 3,563,520 bytes | 13.023576594643885 | 0.7787963578752459 |
-| Rust/serde-yaml | profile | 10 | 0.0550 ms (#1) | 2,658 bytes | 714 bytes | 2,502,656 bytes | 3,555,328 bytes | 9.810217056795711 | 1.511335973896048 |
-| Rust/serde-yaml | catalog | 10 | 0.0464 ms (#1) | 2,164 bytes | 653 bytes | 2,572,288 bytes | 3,547,136 bytes | 16.775213224441938 | 2.5798635080603907 |
-| Rust/serde-yaml | mesh | 100 | 0.2033 ms (#1) | 9,046 bytes | 3,452 bytes | 2,629,632 bytes | 3,579,904 bytes | 3.513083289564171 | 0.2726326072298096 |
+| Rust/serde-yaml | logs | 10 | 0.0489 ms (#1) | 2,768 bytes | 846 bytes | 2,441,216 bytes | 3,416,064 bytes | 10.224551414141153 | 0.9740109091020586 |
+| Rust/serde-yaml | profile | 10 | 0.0519 ms (#1) | 2,658 bytes | 714 bytes | 2,396,160 bytes | 3,448,832 bytes | 10.329386543145654 | 0.9661337392875428 |
+| Rust/serde-yaml | catalog | 10 | 0.0438 ms (#1) | 2,164 bytes | 653 bytes | 2,465,792 bytes | 3,448,832 bytes | 16.84276608406073 | 1.1334347745745972 |
+| Rust/serde-yaml | mesh | 100 | 0.2197 ms (#1) | 9,046 bytes | 3,452 bytes | 2,392,064 bytes | 3,485,696 bytes | 5.127250084805623 | 0.3044185748577745 |
 
 ## Implementation details
 
 ### C++/yaml-cpp
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:22:00`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:26:20`
 - Notes: C++ YAML encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.58 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.665
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.60 GB
+- RAM usage at start: 6.5%
+- Load avg (1 min): 1.6729
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/yaml/cpp/yaml-cpp/artifacts/report.json`
 
 ### Rust/serde-yaml
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:22:19`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:26:40`
 - Notes: YAML encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.58 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.6626
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.63 GB
+- RAM usage at start: 6.4%
+- Load avg (1 min): 1.793
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/yaml/rust/serde-yaml/artifacts/report.json`

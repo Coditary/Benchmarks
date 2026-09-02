@@ -1,6 +1,6 @@
 # compression / brotli
 
-Generated at 2026-09-02T21:56:38.684044+00:00
+Generated at 2026-09-02T23:36:00.206022+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4.5067 ms | — |
+| 1 | Rust/brotli | 4.5396 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4.5067 ms #1 |
+| Rust/brotli | 1 | 1.00 | 4.5396 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4.7948 ms | — |
+| 1 | Rust/brotli | 4.8290 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4.7948 ms #1 |
+| Rust/brotli | 1 | 1.00 | 4.8290 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 3.5713 ms | — |
+| 1 | Rust/brotli | 3.5575 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 3.5713 ms #1 |
+| Rust/brotli | 1 | 1.00 | 3.5575 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 13.2367 ms | — |
+| 1 | Rust/brotli | 13.3341 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 13.2367 ms #1 |
+| Rust/brotli | 1 | 1.00 | 13.3341 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### english
@@ -72,13 +72,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 177.6523 ms | — |
+| 1 | Rust/brotli | 186.2404 ms | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 177.6523 ms #1 |
+| Rust/brotli | 1 | 1.00 | 186.2404 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### random
@@ -87,13 +87,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 16.1959 ms | — |
+| 1 | Rust/brotli | 19.1671 ms | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 16.1959 ms #1 |
+| Rust/brotli | 1 | 1.00 | 19.1671 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### repetitive
@@ -102,13 +102,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 3.6591 ms | — |
+| 1 | Rust/brotli | 3.5760 ms | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 3.6591 ms #1 |
+| Rust/brotli | 1 | 1.00 | 3.5760 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### sparse
@@ -117,13 +117,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 36.0517 ms | — |
+| 1 | Rust/brotli | 38.5449 ms | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 36.0517 ms #1 |
+| Rust/brotli | 1 | 1.00 | 38.5449 ms #1 |
 | C++/libbrotli | 0 | - | - |
 
 ## Output size leaderboard
@@ -384,13 +384,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4,476,928 bytes | — |
+| 1 | Rust/brotli | 4,325,376 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4,476,928 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 4,325,376 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### profile
@@ -399,13 +399,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4,489,216 bytes | — |
+| 1 | Rust/brotli | 4,386,816 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4,489,216 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 4,386,816 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### catalog
@@ -414,13 +414,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4,448,256 bytes | — |
+| 1 | Rust/brotli | 4,407,296 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4,448,256 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 4,407,296 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### mesh
@@ -429,13 +429,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 13,733,888 bytes | — |
+| 1 | Rust/brotli | 13,598,720 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 13,733,888 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 13,598,720 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### english
@@ -444,13 +444,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 18,042,880 bytes | — |
+| 1 | Rust/brotli | 17,911,808 bytes | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 18,042,880 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 17,911,808 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### random
@@ -459,13 +459,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 18,264,064 bytes | — |
+| 1 | Rust/brotli | 18,141,184 bytes | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 18,264,064 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 18,141,184 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### repetitive
@@ -474,13 +474,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 18,173,952 bytes | — |
+| 1 | Rust/brotli | 18,030,592 bytes | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 18,173,952 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 18,030,592 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### sparse
@@ -489,13 +489,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 18,153,472 bytes | — |
+| 1 | Rust/brotli | 18,128,896 bytes | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 18,153,472 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 18,128,896 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -508,13 +508,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 6,586,368 bytes | — |
+| 1 | Rust/brotli | 6,410,240 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 6,586,368 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 6,410,240 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### profile
@@ -523,13 +523,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 6,533,120 bytes | — |
+| 1 | Rust/brotli | 6,356,992 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 6,533,120 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 6,356,992 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### catalog
@@ -538,13 +538,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 6,459,392 bytes | — |
+| 1 | Rust/brotli | 6,402,048 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 6,459,392 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 6,402,048 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### mesh
@@ -553,13 +553,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 15,835,136 bytes | — |
+| 1 | Rust/brotli | 15,675,392 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 15,835,136 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 15,675,392 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### english
@@ -568,13 +568,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 20,193,280 bytes | — |
+| 1 | Rust/brotli | 20,017,152 bytes | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 20,193,280 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 20,017,152 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### random
@@ -583,13 +583,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 20,299,776 bytes | — |
+| 1 | Rust/brotli | 20,127,744 bytes | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 20,299,776 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 20,127,744 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### repetitive
@@ -598,13 +598,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 20,262,912 bytes | — |
+| 1 | Rust/brotli | 20,176,896 bytes | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 20,262,912 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 20,176,896 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### sparse
@@ -613,13 +613,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 20,180,992 bytes | — |
+| 1 | Rust/brotli | 20,119,552 bytes | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 20,180,992 bytes #1 |
+| Rust/brotli | 1 | 1.00 | 20,119,552 bytes #1 |
 | C++/libbrotli | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -632,13 +632,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 1.28% | — |
+| 1 | Rust/brotli | 0.45% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 1.28% #1 |
+| Rust/brotli | 1 | 1.00 | 0.45% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### profile
@@ -647,13 +647,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 1.23% | — |
+| 1 | Rust/brotli | 0.39% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 1.23% #1 |
+| Rust/brotli | 1 | 1.00 | 0.39% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### catalog
@@ -662,13 +662,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 1.49% | — |
+| 1 | Rust/brotli | 0.31% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 1.49% #1 |
+| Rust/brotli | 1 | 1.00 | 0.31% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### mesh
@@ -677,13 +677,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 3.17% | — |
+| 1 | Rust/brotli | 1.97% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 3.17% #1 |
+| Rust/brotli | 1 | 1.00 | 1.97% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### english
@@ -692,13 +692,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 0.57% | — |
+| 1 | Rust/brotli | 0.33% | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 0.57% #1 |
+| Rust/brotli | 1 | 1.00 | 0.33% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### random
@@ -707,13 +707,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 3.46% | — |
+| 1 | Rust/brotli | 2.69% | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 3.46% #1 |
+| Rust/brotli | 1 | 1.00 | 2.69% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### repetitive
@@ -722,13 +722,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 14.71% | — |
+| 1 | Rust/brotli | 13.98% | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 14.71% #1 |
+| Rust/brotli | 1 | 1.00 | 13.98% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### sparse
@@ -737,13 +737,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4.60% | — |
+| 1 | Rust/brotli | 1.28% | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4.60% #1 |
+| Rust/brotli | 1 | 1.00 | 1.28% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ## Spread leaderboard
@@ -756,13 +756,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 5.36% | — |
+| 1 | Rust/brotli | 1.54% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 5.36% #1 |
+| Rust/brotli | 1 | 1.00 | 1.54% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### profile
@@ -771,13 +771,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 4.87% | — |
+| 1 | Rust/brotli | 1.37% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 4.87% #1 |
+| Rust/brotli | 1 | 1.00 | 1.37% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### catalog
@@ -786,13 +786,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 5.34% | — |
+| 1 | Rust/brotli | 1.12% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 5.34% #1 |
+| Rust/brotli | 1 | 1.00 | 1.12% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### mesh
@@ -801,13 +801,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 14.77% | — |
+| 1 | Rust/brotli | 9.47% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 14.77% #1 |
+| Rust/brotli | 1 | 1.00 | 9.47% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### english
@@ -816,13 +816,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 2.49% | — |
+| 1 | Rust/brotli | 1.20% | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 2.49% #1 |
+| Rust/brotli | 1 | 1.00 | 1.20% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### random
@@ -831,13 +831,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 16.37% | — |
+| 1 | Rust/brotli | 12.75% | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 16.37% #1 |
+| Rust/brotli | 1 | 1.00 | 12.75% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### repetitive
@@ -846,13 +846,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 68.30% | — |
+| 1 | Rust/brotli | 65.20% | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 68.30% #1 |
+| Rust/brotli | 1 | 1.00 | 65.20% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### sparse
@@ -861,13 +861,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 18.78% | — |
+| 1 | Rust/brotli | 6.00% | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 18.78% #1 |
+| Rust/brotli | 1 | 1.00 | 6.00% #1 |
 | C++/libbrotli | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -895,13 +895,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/brotli | 0.00x | — |
+| 1 | Rust/brotli | 0.01x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/brotli | 1 | 1.00 | 0.00x #1 |
+| Rust/brotli | 1 | 1.00 | 0.01x #1 |
 | C++/libbrotli | 0 | - | - |
 
 ### catalog
@@ -1000,20 +1000,20 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | Rust/brotli | 28 |
 | Artifact size | C++/libbrotli | 0 bytes |
-| Build time | Rust/brotli | 32.6000 ms |
+| Build time | Rust/brotli | 42.9000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/brotli | 4.5067 ms |
-| Runtime | profile | 10 | Rust/brotli | 4.7948 ms |
-| Runtime | catalog | 10 | Rust/brotli | 3.5713 ms |
-| Runtime | mesh | 100 | Rust/brotli | 13.2367 ms |
-| Runtime | english | 64k | Rust/brotli | 177.6523 ms |
-| Runtime | random | 64k | Rust/brotli | 16.1959 ms |
-| Runtime | repetitive | 64k | Rust/brotli | 3.6591 ms |
-| Runtime | sparse | 64k | Rust/brotli | 36.0517 ms |
+| Runtime | logs | 10 | Rust/brotli | 4.5396 ms |
+| Runtime | profile | 10 | Rust/brotli | 4.8290 ms |
+| Runtime | catalog | 10 | Rust/brotli | 3.5575 ms |
+| Runtime | mesh | 100 | Rust/brotli | 13.3341 ms |
+| Runtime | english | 64k | Rust/brotli | 186.2404 ms |
+| Runtime | random | 64k | Rust/brotli | 19.1671 ms |
+| Runtime | repetitive | 64k | Rust/brotli | 3.5760 ms |
+| Runtime | sparse | 64k | Rust/brotli | 38.5449 ms |
 | Output size | logs | 10 | Rust/brotli | 618 bytes |
 | Output size | profile | 10 | Rust/brotli | 518 bytes |
 | Output size | catalog | 10 | Rust/brotli | 481 bytes |
@@ -1030,40 +1030,40 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | random | 64k | Rust/brotli | 65,619 bytes |
 | Gzip size | repetitive | 64k | Rust/brotli | 89 bytes |
 | Gzip size | sparse | 64k | Rust/brotli | 334 bytes |
-| Serialize peak RSS | logs | 10 | Rust/brotli | 4,476,928 bytes |
-| Serialize peak RSS | profile | 10 | Rust/brotli | 4,489,216 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/brotli | 4,448,256 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/brotli | 13,733,888 bytes |
-| Serialize peak RSS | english | 64k | Rust/brotli | 18,042,880 bytes |
-| Serialize peak RSS | random | 64k | Rust/brotli | 18,264,064 bytes |
-| Serialize peak RSS | repetitive | 64k | Rust/brotli | 18,173,952 bytes |
-| Serialize peak RSS | sparse | 64k | Rust/brotli | 18,153,472 bytes |
-| Process peak RSS | logs | 10 | Rust/brotli | 6,586,368 bytes |
-| Process peak RSS | profile | 10 | Rust/brotli | 6,533,120 bytes |
-| Process peak RSS | catalog | 10 | Rust/brotli | 6,459,392 bytes |
-| Process peak RSS | mesh | 100 | Rust/brotli | 15,835,136 bytes |
-| Process peak RSS | english | 64k | Rust/brotli | 20,193,280 bytes |
-| Process peak RSS | random | 64k | Rust/brotli | 20,299,776 bytes |
-| Process peak RSS | repetitive | 64k | Rust/brotli | 20,262,912 bytes |
-| Process peak RSS | sparse | 64k | Rust/brotli | 20,180,992 bytes |
-| Stability (CV) | logs | 10 | Rust/brotli | 1.28% |
-| Stability (CV) | profile | 10 | Rust/brotli | 1.23% |
-| Stability (CV) | catalog | 10 | Rust/brotli | 1.49% |
-| Stability (CV) | mesh | 100 | Rust/brotli | 3.17% |
-| Stability (CV) | english | 64k | Rust/brotli | 0.57% |
-| Stability (CV) | random | 64k | Rust/brotli | 3.46% |
-| Stability (CV) | repetitive | 64k | Rust/brotli | 14.71% |
-| Stability (CV) | sparse | 64k | Rust/brotli | 4.60% |
-| Spread | logs | 10 | Rust/brotli | 5.36% |
-| Spread | profile | 10 | Rust/brotli | 4.87% |
-| Spread | catalog | 10 | Rust/brotli | 5.34% |
-| Spread | mesh | 100 | Rust/brotli | 14.77% |
-| Spread | english | 64k | Rust/brotli | 2.49% |
-| Spread | random | 64k | Rust/brotli | 16.37% |
-| Spread | repetitive | 64k | Rust/brotli | 68.30% |
-| Spread | sparse | 64k | Rust/brotli | 18.78% |
+| Serialize peak RSS | logs | 10 | Rust/brotli | 4,325,376 bytes |
+| Serialize peak RSS | profile | 10 | Rust/brotli | 4,386,816 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/brotli | 4,407,296 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/brotli | 13,598,720 bytes |
+| Serialize peak RSS | english | 64k | Rust/brotli | 17,911,808 bytes |
+| Serialize peak RSS | random | 64k | Rust/brotli | 18,141,184 bytes |
+| Serialize peak RSS | repetitive | 64k | Rust/brotli | 18,030,592 bytes |
+| Serialize peak RSS | sparse | 64k | Rust/brotli | 18,128,896 bytes |
+| Process peak RSS | logs | 10 | Rust/brotli | 6,410,240 bytes |
+| Process peak RSS | profile | 10 | Rust/brotli | 6,356,992 bytes |
+| Process peak RSS | catalog | 10 | Rust/brotli | 6,402,048 bytes |
+| Process peak RSS | mesh | 100 | Rust/brotli | 15,675,392 bytes |
+| Process peak RSS | english | 64k | Rust/brotli | 20,017,152 bytes |
+| Process peak RSS | random | 64k | Rust/brotli | 20,127,744 bytes |
+| Process peak RSS | repetitive | 64k | Rust/brotli | 20,176,896 bytes |
+| Process peak RSS | sparse | 64k | Rust/brotli | 20,119,552 bytes |
+| Stability (CV) | logs | 10 | Rust/brotli | 0.45% |
+| Stability (CV) | profile | 10 | Rust/brotli | 0.39% |
+| Stability (CV) | catalog | 10 | Rust/brotli | 0.31% |
+| Stability (CV) | mesh | 100 | Rust/brotli | 1.97% |
+| Stability (CV) | english | 64k | Rust/brotli | 0.33% |
+| Stability (CV) | random | 64k | Rust/brotli | 2.69% |
+| Stability (CV) | repetitive | 64k | Rust/brotli | 13.98% |
+| Stability (CV) | sparse | 64k | Rust/brotli | 1.28% |
+| Spread | logs | 10 | Rust/brotli | 1.54% |
+| Spread | profile | 10 | Rust/brotli | 1.37% |
+| Spread | catalog | 10 | Rust/brotli | 1.12% |
+| Spread | mesh | 100 | Rust/brotli | 9.47% |
+| Spread | english | 64k | Rust/brotli | 1.20% |
+| Spread | random | 64k | Rust/brotli | 12.75% |
+| Spread | repetitive | 64k | Rust/brotli | 65.20% |
+| Spread | sparse | 64k | Rust/brotli | 6.00% |
 | Load/serialize ratio | logs | 10 | Rust/brotli | 0.01x |
-| Load/serialize ratio | profile | 10 | Rust/brotli | 0.00x |
+| Load/serialize ratio | profile | 10 | Rust/brotli | 0.01x |
 | Load/serialize ratio | catalog | 10 | Rust/brotli | 0.01x |
 | Load/serialize ratio | mesh | 100 | Rust/brotli | 0.00x |
 | Load/serialize ratio | english | 64k | Rust/brotli | 0.00x |
@@ -1083,43 +1083,43 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/libbrotli | random | 64k | - | - | - | - | - | - | - |
 | C++/libbrotli | repetitive | 64k | - | - | - | - | - | - | - |
 | C++/libbrotli | sparse | 64k | - | - | - | - | - | - | - |
-| Rust/brotli | logs | 10 | 4.5067 ms (#1) | 618 bytes | 641 bytes | 4,476,928 bytes | 6,586,368 bytes | 1.2847457077860875 | 0.005496461792789581 |
-| Rust/brotli | profile | 10 | 4.7948 ms (#1) | 518 bytes | 541 bytes | 4,489,216 bytes | 6,533,120 bytes | 1.2307358918610491 | 0.00422979351762714 |
-| Rust/brotli | catalog | 10 | 3.5713 ms (#1) | 481 bytes | 504 bytes | 4,448,256 bytes | 6,459,392 bytes | 1.4889289813712732 | 0.00572306818168136 |
-| Rust/brotli | mesh | 100 | 13.2367 ms (#1) | 1,837 bytes | 1,860 bytes | 13,733,888 bytes | 15,835,136 bytes | 3.168731601600977 | 0.001722485066979927 |
-| Rust/brotli | english | 64k | 177.6523 ms (#1) | 1,144 bytes | 1,167 bytes | 18,042,880 bytes | 20,193,280 bytes | 0.5657202354207427 | 0.0003368320837486811 |
-| Rust/brotli | random | 64k | 16.1959 ms (#1) | 65,540 bytes | 65,619 bytes | 18,264,064 bytes | 20,299,776 bytes | 3.4604036746923534 | 0.004211489533595825 |
-| Rust/brotli | repetitive | 64k | 3.6591 ms (#1) | 66 bytes | 89 bytes | 18,173,952 bytes | 20,262,912 bytes | 14.711943877262845 | 0.0175379872207424 |
-| Rust/brotli | sparse | 64k | 36.0517 ms (#1) | 311 bytes | 334 bytes | 18,153,472 bytes | 20,180,992 bytes | 4.604813796596659 | 0.0017466292059004087 |
+| Rust/brotli | logs | 10 | 4.5396 ms (#1) | 618 bytes | 641 bytes | 4,325,376 bytes | 6,410,240 bytes | 0.4479729842783043 | 0.006166210295438837 |
+| Rust/brotli | profile | 10 | 4.8290 ms (#1) | 518 bytes | 541 bytes | 4,386,816 bytes | 6,356,992 bytes | 0.3883540568331123 | 0.005806982904190146 |
+| Rust/brotli | catalog | 10 | 3.5575 ms (#1) | 481 bytes | 504 bytes | 4,407,296 bytes | 6,402,048 bytes | 0.30807760579348387 | 0.007556226083206414 |
+| Rust/brotli | mesh | 100 | 13.3341 ms (#1) | 1,837 bytes | 1,860 bytes | 13,598,720 bytes | 15,675,392 bytes | 1.9680106677744929 | 0.0022389898265866943 |
+| Rust/brotli | english | 64k | 186.2404 ms (#1) | 1,144 bytes | 1,167 bytes | 17,911,808 bytes | 20,017,152 bytes | 0.3319614393921712 | 0.0003390510924053974 |
+| Rust/brotli | random | 64k | 19.1671 ms (#1) | 65,540 bytes | 65,619 bytes | 18,141,184 bytes | 20,127,744 bytes | 2.6885984077044145 | 0.0034359923390487063 |
+| Rust/brotli | repetitive | 64k | 3.5760 ms (#1) | 66 bytes | 89 bytes | 18,030,592 bytes | 20,176,896 bytes | 13.977802836230143 | 0.01801953415154329 |
+| Rust/brotli | sparse | 64k | 38.5449 ms (#1) | 311 bytes | 334 bytes | 18,128,896 bytes | 20,119,552 bytes | 1.2782712820507813 | 0.001827636360942926 |
 
 ## Implementation details
 
 ### C++/libbrotli
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:22:20`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:26:41`
 - Notes: Loads payload.bin once (untimed), then measures brotli compression.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.58 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.6626
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.61 GB
+- RAM usage at start: 6.5%
+- Load avg (1 min): 1.729
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/compression/brotli/cpp/libbrotli/artifacts/report.json`
 
 ### Rust/brotli
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:23:02`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:27:25`
 - Notes: Loads payload.bin once (untimed), then measures compression only.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.60 GB
-- RAM usage at start: 6.5%
-- Load avg (1 min): 1.7246
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 1.645
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/compression/brotli/rust/brotli/artifacts/report.json`

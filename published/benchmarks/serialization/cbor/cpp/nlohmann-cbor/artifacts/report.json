@@ -5,8 +5,8 @@
   "impl": "nlohmann-cbor",
   "language": "C++",
   "implementation": "nlohmann-cbor",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:13:20.519884+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:17:47.396300+00:00",
   "tags": [
     "cpp",
     "serialize",
@@ -50,22 +50,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15703580672,
-    "used_ram_bytes": 1061793792,
-    "ram_usage_percent": 6.3,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.3682,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15725367296,
+    "used_ram_bytes": 1045426176,
+    "ram_usage_percent": 6.2,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.5752,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
     "lines_of_code": 25,
     "artifact_size_bytes": 0,
-    "build_time_ms": 205.8,
+    "build_time_ms": 256.4,
     "hyperfine_results": []
   }
 }

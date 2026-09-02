@@ -1,6 +1,6 @@
 # serialization / ini
 
-Generated at 2026-09-02T21:56:38.792883+00:00
+Generated at 2026-09-02T23:36:00.317278+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 0.0045 ms | — |
+| 1 | Rust/ini | 0.0059 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 0.0045 ms #1 |
+| Rust/ini | 1 | 1.00 | 0.0059 ms #1 |
 | C++/inih | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 0.0054 ms | — |
+| 1 | Rust/ini | 0.0058 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 0.0054 ms #1 |
+| Rust/ini | 1 | 1.00 | 0.0058 ms #1 |
 | C++/inih | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 0.0045 ms | — |
+| 1 | Rust/ini | 0.0049 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 0.0045 ms #1 |
+| Rust/ini | 1 | 1.00 | 0.0049 ms #1 |
 | C++/inih | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 0.0683 ms | — |
+| 1 | Rust/ini | 0.0751 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 0.0683 ms #1 |
+| Rust/ini | 1 | 1.00 | 0.0751 ms #1 |
 | C++/inih | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 2,494,464 bytes | — |
+| 1 | Rust/ini | 2,408,448 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 2,494,464 bytes #1 |
+| Rust/ini | 1 | 1.00 | 2,408,448 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 2,387,968 bytes | — |
+| 1 | Rust/ini | 2,310,144 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 2,387,968 bytes #1 |
+| Rust/ini | 1 | 1.00 | 2,310,144 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 2,473,984 bytes | — |
+| 1 | Rust/ini | 2,416,640 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 2,473,984 bytes #1 |
+| Rust/ini | 1 | 1.00 | 2,416,640 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 2,514,944 bytes | — |
+| 1 | Rust/ini | 2,347,008 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 2,514,944 bytes #1 |
+| Rust/ini | 1 | 1.00 | 2,347,008 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 3,608,576 bytes | — |
+| 1 | Rust/ini | 3,362,816 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 3,608,576 bytes #1 |
+| Rust/ini | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 3,596,288 bytes | — |
+| 1 | Rust/ini | 3,403,776 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 3,596,288 bytes #1 |
+| Rust/ini | 1 | 1.00 | 3,403,776 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 3,526,656 bytes | — |
+| 1 | Rust/ini | 3,403,776 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 3,526,656 bytes #1 |
+| Rust/ini | 1 | 1.00 | 3,403,776 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 3,526,656 bytes | — |
+| 1 | Rust/ini | 3,411,968 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 3,526,656 bytes #1 |
+| Rust/ini | 1 | 1.00 | 3,411,968 bytes #1 |
 | C++/inih | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 11.59% | — |
+| 1 | Rust/ini | 78.56% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 11.59% #1 |
+| Rust/ini | 1 | 1.00 | 78.56% #1 |
 | C++/inih | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 6.80% | — |
+| 1 | Rust/ini | 11.47% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 6.80% #1 |
+| Rust/ini | 1 | 1.00 | 11.47% #1 |
 | C++/inih | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 13.74% | — |
+| 1 | Rust/ini | 20.24% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 13.74% #1 |
+| Rust/ini | 1 | 1.00 | 20.24% #1 |
 | C++/inih | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 10.57% | — |
+| 1 | Rust/ini | 12.89% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 10.57% #1 |
+| Rust/ini | 1 | 1.00 | 12.89% #1 |
 | C++/inih | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 41.28% | — |
+| 1 | Rust/ini | 362.36% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 41.28% #1 |
+| Rust/ini | 1 | 1.00 | 362.36% #1 |
 | C++/inih | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 23.71% | — |
+| 1 | Rust/ini | 41.80% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 23.71% #1 |
+| Rust/ini | 1 | 1.00 | 41.80% #1 |
 | C++/inih | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 40.80% | — |
+| 1 | Rust/ini | 56.96% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 40.80% #1 |
+| Rust/ini | 1 | 1.00 | 56.96% #1 |
 | C++/inih | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 49.73% | — |
+| 1 | Rust/ini | 60.01% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 49.73% #1 |
+| Rust/ini | 1 | 1.00 | 60.01% #1 |
 | C++/inih | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 9.51x | — |
+| 1 | Rust/ini | 8.43x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 9.51x #1 |
+| Rust/ini | 1 | 1.00 | 8.43x #1 |
 | C++/inih | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 8.35x | — |
+| 1 | Rust/ini | 9.32x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 8.35x #1 |
+| Rust/ini | 1 | 1.00 | 9.32x #1 |
 | C++/inih | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 9.60x | — |
+| 1 | Rust/ini | 10.13x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 9.60x #1 |
+| Rust/ini | 1 | 1.00 | 10.13x #1 |
 | C++/inih | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ini | 0.81x | — |
+| 1 | Rust/ini | 0.92x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ini | 1 | 1.00 | 0.81x #1 |
+| Rust/ini | 1 | 1.00 | 0.92x #1 |
 | C++/inih | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/inih | 24 |
 | Artifact size | C++/inih | 0 bytes |
-| Build time | Rust/ini | 45.2000 ms |
+| Build time | Rust/ini | 36.8000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/ini | 0.0045 ms |
-| Runtime | profile | 10 | Rust/ini | 0.0054 ms |
-| Runtime | catalog | 10 | Rust/ini | 0.0045 ms |
-| Runtime | mesh | 100 | Rust/ini | 0.0683 ms |
+| Runtime | logs | 10 | Rust/ini | 0.0059 ms |
+| Runtime | profile | 10 | Rust/ini | 0.0058 ms |
+| Runtime | catalog | 10 | Rust/ini | 0.0049 ms |
+| Runtime | mesh | 100 | Rust/ini | 0.0751 ms |
 | Output size | logs | 10 | Rust/ini | 2,585 bytes |
 | Output size | profile | 10 | Rust/ini | 2,438 bytes |
 | Output size | catalog | 10 | Rust/ini | 1,898 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/ini | 689 bytes |
 | Gzip size | catalog | 10 | Rust/ini | 589 bytes |
 | Gzip size | mesh | 100 | Rust/ini | 3,620 bytes |
-| Serialize peak RSS | logs | 10 | Rust/ini | 2,494,464 bytes |
-| Serialize peak RSS | profile | 10 | Rust/ini | 2,387,968 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/ini | 2,473,984 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/ini | 2,514,944 bytes |
-| Process peak RSS | logs | 10 | Rust/ini | 3,608,576 bytes |
-| Process peak RSS | profile | 10 | Rust/ini | 3,596,288 bytes |
-| Process peak RSS | catalog | 10 | Rust/ini | 3,526,656 bytes |
-| Process peak RSS | mesh | 100 | Rust/ini | 3,526,656 bytes |
-| Stability (CV) | logs | 10 | Rust/ini | 11.59% |
-| Stability (CV) | profile | 10 | Rust/ini | 6.80% |
-| Stability (CV) | catalog | 10 | Rust/ini | 13.74% |
-| Stability (CV) | mesh | 100 | Rust/ini | 10.57% |
-| Spread | logs | 10 | Rust/ini | 41.28% |
-| Spread | profile | 10 | Rust/ini | 23.71% |
-| Spread | catalog | 10 | Rust/ini | 40.80% |
-| Spread | mesh | 100 | Rust/ini | 49.73% |
-| Load/serialize ratio | logs | 10 | Rust/ini | 9.51x |
-| Load/serialize ratio | profile | 10 | Rust/ini | 8.35x |
-| Load/serialize ratio | catalog | 10 | Rust/ini | 9.60x |
-| Load/serialize ratio | mesh | 100 | Rust/ini | 0.81x |
+| Serialize peak RSS | logs | 10 | Rust/ini | 2,408,448 bytes |
+| Serialize peak RSS | profile | 10 | Rust/ini | 2,310,144 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/ini | 2,416,640 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/ini | 2,347,008 bytes |
+| Process peak RSS | logs | 10 | Rust/ini | 3,362,816 bytes |
+| Process peak RSS | profile | 10 | Rust/ini | 3,403,776 bytes |
+| Process peak RSS | catalog | 10 | Rust/ini | 3,403,776 bytes |
+| Process peak RSS | mesh | 100 | Rust/ini | 3,411,968 bytes |
+| Stability (CV) | logs | 10 | Rust/ini | 78.56% |
+| Stability (CV) | profile | 10 | Rust/ini | 11.47% |
+| Stability (CV) | catalog | 10 | Rust/ini | 20.24% |
+| Stability (CV) | mesh | 100 | Rust/ini | 12.89% |
+| Spread | logs | 10 | Rust/ini | 362.36% |
+| Spread | profile | 10 | Rust/ini | 41.80% |
+| Spread | catalog | 10 | Rust/ini | 56.96% |
+| Spread | mesh | 100 | Rust/ini | 60.01% |
+| Load/serialize ratio | logs | 10 | Rust/ini | 8.43x |
+| Load/serialize ratio | profile | 10 | Rust/ini | 9.32x |
+| Load/serialize ratio | catalog | 10 | Rust/ini | 10.13x |
+| Load/serialize ratio | mesh | 100 | Rust/ini | 0.92x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/inih | profile | 10 | - | - | - | - | - | - | - |
 | C++/inih | catalog | 10 | - | - | - | - | - | - | - |
 | C++/inih | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/ini | logs | 10 | 0.0045 ms (#1) | 2,585 bytes | 809 bytes | 2,494,464 bytes | 3,608,576 bytes | 11.593348532266928 | 9.50713744107078 |
-| Rust/ini | profile | 10 | 0.0054 ms (#1) | 2,438 bytes | 689 bytes | 2,387,968 bytes | 3,596,288 bytes | 6.802918706568977 | 8.350521179862499 |
-| Rust/ini | catalog | 10 | 0.0045 ms (#1) | 1,898 bytes | 589 bytes | 2,473,984 bytes | 3,526,656 bytes | 13.74394160337045 | 9.601163831692032 |
-| Rust/ini | mesh | 100 | 0.0683 ms (#1) | 8,598 bytes | 3,620 bytes | 2,514,944 bytes | 3,526,656 bytes | 10.568036906040012 | 0.8062570368620003 |
+| Rust/ini | logs | 10 | 0.0059 ms (#1) | 2,585 bytes | 809 bytes | 2,408,448 bytes | 3,362,816 bytes | 78.56175748208445 | 8.42966795301302 |
+| Rust/ini | profile | 10 | 0.0058 ms (#1) | 2,438 bytes | 689 bytes | 2,310,144 bytes | 3,403,776 bytes | 11.468775364115066 | 9.318933712088407 |
+| Rust/ini | catalog | 10 | 0.0049 ms (#1) | 1,898 bytes | 589 bytes | 2,416,640 bytes | 3,403,776 bytes | 20.238809333081477 | 10.131023806873946 |
+| Rust/ini | mesh | 100 | 0.0751 ms (#1) | 8,598 bytes | 3,620 bytes | 2,347,008 bytes | 3,411,968 bytes | 12.889543753785057 | 0.9240211535912958 |
 
 ## Implementation details
 
 ### C++/inih
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:16:58`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:21:23`
 - Notes: C++ INI encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.59 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.8164
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 2.0674
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/ini/cpp/inih/artifacts/report.json`
 
 ### Rust/ini
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:17:13`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:21:39`
 - Notes: INI encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.59 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.6348
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.2%
+- Load avg (1 min): 2.2373
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/ini/rust/ini/artifacts/report.json`

@@ -20,7 +20,11 @@
     "catalog/100k",
     "mesh/1000",
     "mesh/10k",
-    "mesh/100k"
+    "mesh/100k",
+    "ast/10",
+    "ast/100",
+    "ast/1000",
+    "ast/10k"
   ],
-  "limits": "CI limits: active\n  effective sizes: logs/10, profile/10, catalog/10, mesh/100\n  skipped sizes: logs/100, logs/1000, logs/10k, logs/100k, profile/100, profile/1000, profile/10k, profile/100k, catalog/100, catalog/1000, catalog/10k, catalog/100k, mesh/1000, mesh/10k, mesh/100k\n  memory budget: 7,041,941,913 bytes (45% of available RAM)\n  element size: 8 bytes (fixture)\n  benchmark: warmup=2, runs=None, min_runs=5, max_runs=20"
+  "limits": "CI limits: active\n  effective sizes: logs/10, profile/10, catalog/10, mesh/100\n  skipped sizes: logs/100, logs/1000, logs/10k, logs/100k, profile/100, profile/1000, profile/10k, profile/100k, catalog/100, catalog/1000, catalog/10k, catalog/100k, mesh/1000, mesh/10k, mesh/100k, ast/10, ast/100, ast/1000, ast/10k\n  memory budget: 7,033,568,256 bytes (45% of available RAM)\n  element size: 8 bytes (fixture)\n  benchmark: warmup=2, runs=None, min_runs=5, max_runs=20"
 }

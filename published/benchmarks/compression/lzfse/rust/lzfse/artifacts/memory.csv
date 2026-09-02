@@ -1,0 +1,9 @@
+parameter_size,process_peak_memory_bytes
+logs/10,3383296
+profile/10,3362816
+catalog/10,3424256
+mesh/100,3448832
+random/64k,3411968
+sparse/64k,3362816
+english/64k,3342336
+repetitive/64k,3383296

@@ -1,6 +1,6 @@
 # serialization / ucl
 
-Generated at 2026-09-02T21:56:38.814001+00:00
+Generated at 2026-09-02T23:36:00.334767+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 0.0137 ms | — |
+| 1 | Rust/ucl | 0.0150 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 0.0137 ms #1 |
+| Rust/ucl | 1 | 1.00 | 0.0150 ms #1 |
 | C++/libucl | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 0.0194 ms | — |
+| 1 | Rust/ucl | 0.0202 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 0.0194 ms #1 |
+| Rust/ucl | 1 | 1.00 | 0.0202 ms #1 |
 | C++/libucl | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 0.0161 ms | — |
+| 1 | Rust/ucl | 0.0169 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 0.0161 ms #1 |
+| Rust/ucl | 1 | 1.00 | 0.0169 ms #1 |
 | C++/libucl | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 0.0783 ms | — |
+| 1 | Rust/ucl | 0.0871 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 0.0783 ms #1 |
+| Rust/ucl | 1 | 1.00 | 0.0871 ms #1 |
 | C++/libucl | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2,400,256 bytes | — |
+| 1 | Rust/ucl | 2,240,512 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2,400,256 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 2,240,512 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2,531,328 bytes | — |
+| 1 | Rust/ucl | 2,367,488 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2,531,328 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 2,367,488 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2,490,368 bytes | — |
+| 1 | Rust/ucl | 2,351,104 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2,490,368 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 2,351,104 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2,527,232 bytes | — |
+| 1 | Rust/ucl | 2,465,792 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2,527,232 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 2,465,792 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 3,526,656 bytes | — |
+| 1 | Rust/ucl | 3,428,352 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 3,526,656 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 3,428,352 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 3,502,080 bytes | — |
+| 1 | Rust/ucl | 3,440,640 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 3,502,080 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 3,440,640 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 3,469,312 bytes | — |
+| 1 | Rust/ucl | 3,416,064 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 3,469,312 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 3,416,064 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 3,465,216 bytes | — |
+| 1 | Rust/ucl | 3,448,832 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 3,465,216 bytes #1 |
+| Rust/ucl | 1 | 1.00 | 3,448,832 bytes #1 |
 | C++/libucl | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 15.56% | — |
+| 1 | Rust/ucl | 42.94% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 15.56% #1 |
+| Rust/ucl | 1 | 1.00 | 42.94% #1 |
 | C++/libucl | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 10.58% | — |
+| 1 | Rust/ucl | 13.90% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 10.58% #1 |
+| Rust/ucl | 1 | 1.00 | 13.90% #1 |
 | C++/libucl | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 24.48% | — |
+| 1 | Rust/ucl | 30.64% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 24.48% #1 |
+| Rust/ucl | 1 | 1.00 | 30.64% #1 |
 | C++/libucl | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 12.05% | — |
+| 1 | Rust/ucl | 5.02% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 12.05% #1 |
+| Rust/ucl | 1 | 1.00 | 5.02% #1 |
 | C++/libucl | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 63.75% | — |
+| 1 | Rust/ucl | 201.56% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 63.75% #1 |
+| Rust/ucl | 1 | 1.00 | 201.56% #1 |
 | C++/libucl | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 33.83% | — |
+| 1 | Rust/ucl | 53.64% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 33.83% #1 |
+| Rust/ucl | 1 | 1.00 | 53.64% #1 |
 | C++/libucl | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 114.55% | — |
+| 1 | Rust/ucl | 140.68% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 114.55% #1 |
+| Rust/ucl | 1 | 1.00 | 140.68% #1 |
 | C++/libucl | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 55.67% | — |
+| 1 | Rust/ucl | 19.51% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 55.67% #1 |
+| Rust/ucl | 1 | 1.00 | 19.51% #1 |
 | C++/libucl | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2.76x | — |
+| 1 | Rust/ucl | 3.32x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2.76x #1 |
+| Rust/ucl | 1 | 1.00 | 3.32x #1 |
 | C++/libucl | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2.27x | — |
+| 1 | Rust/ucl | 2.53x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2.27x #1 |
+| Rust/ucl | 1 | 1.00 | 2.53x #1 |
 | C++/libucl | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 2.44x | — |
+| 1 | Rust/ucl | 2.92x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 2.44x #1 |
+| Rust/ucl | 1 | 1.00 | 2.92x #1 |
 | C++/libucl | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ucl | 0.63x | — |
+| 1 | Rust/ucl | 0.77x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ucl | 1 | 1.00 | 0.63x #1 |
+| Rust/ucl | 1 | 1.00 | 0.77x #1 |
 | C++/libucl | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/libucl | 24 |
 | Artifact size | C++/libucl | 0 bytes |
-| Build time | Rust/ucl | 30.2000 ms |
+| Build time | Rust/ucl | 36.5000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/ucl | 0.0137 ms |
-| Runtime | profile | 10 | Rust/ucl | 0.0194 ms |
-| Runtime | catalog | 10 | Rust/ucl | 0.0161 ms |
-| Runtime | mesh | 100 | Rust/ucl | 0.0783 ms |
+| Runtime | logs | 10 | Rust/ucl | 0.0150 ms |
+| Runtime | profile | 10 | Rust/ucl | 0.0202 ms |
+| Runtime | catalog | 10 | Rust/ucl | 0.0169 ms |
+| Runtime | mesh | 100 | Rust/ucl | 0.0871 ms |
 | Output size | logs | 10 | Rust/ucl | 2,703 bytes |
 | Output size | profile | 10 | Rust/ucl | 2,840 bytes |
 | Output size | catalog | 10 | Rust/ucl | 2,393 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/ucl | 748 bytes |
 | Gzip size | catalog | 10 | Rust/ucl | 681 bytes |
 | Gzip size | mesh | 100 | Rust/ucl | 3,431 bytes |
-| Serialize peak RSS | logs | 10 | Rust/ucl | 2,400,256 bytes |
-| Serialize peak RSS | profile | 10 | Rust/ucl | 2,531,328 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/ucl | 2,490,368 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/ucl | 2,527,232 bytes |
-| Process peak RSS | logs | 10 | Rust/ucl | 3,526,656 bytes |
-| Process peak RSS | profile | 10 | Rust/ucl | 3,502,080 bytes |
-| Process peak RSS | catalog | 10 | Rust/ucl | 3,469,312 bytes |
-| Process peak RSS | mesh | 100 | Rust/ucl | 3,465,216 bytes |
-| Stability (CV) | logs | 10 | Rust/ucl | 15.56% |
-| Stability (CV) | profile | 10 | Rust/ucl | 10.58% |
-| Stability (CV) | catalog | 10 | Rust/ucl | 24.48% |
-| Stability (CV) | mesh | 100 | Rust/ucl | 12.05% |
-| Spread | logs | 10 | Rust/ucl | 63.75% |
-| Spread | profile | 10 | Rust/ucl | 33.83% |
-| Spread | catalog | 10 | Rust/ucl | 114.55% |
-| Spread | mesh | 100 | Rust/ucl | 55.67% |
-| Load/serialize ratio | logs | 10 | Rust/ucl | 2.76x |
-| Load/serialize ratio | profile | 10 | Rust/ucl | 2.27x |
-| Load/serialize ratio | catalog | 10 | Rust/ucl | 2.44x |
-| Load/serialize ratio | mesh | 100 | Rust/ucl | 0.63x |
+| Serialize peak RSS | logs | 10 | Rust/ucl | 2,240,512 bytes |
+| Serialize peak RSS | profile | 10 | Rust/ucl | 2,367,488 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/ucl | 2,351,104 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/ucl | 2,465,792 bytes |
+| Process peak RSS | logs | 10 | Rust/ucl | 3,428,352 bytes |
+| Process peak RSS | profile | 10 | Rust/ucl | 3,440,640 bytes |
+| Process peak RSS | catalog | 10 | Rust/ucl | 3,416,064 bytes |
+| Process peak RSS | mesh | 100 | Rust/ucl | 3,448,832 bytes |
+| Stability (CV) | logs | 10 | Rust/ucl | 42.94% |
+| Stability (CV) | profile | 10 | Rust/ucl | 13.90% |
+| Stability (CV) | catalog | 10 | Rust/ucl | 30.64% |
+| Stability (CV) | mesh | 100 | Rust/ucl | 5.02% |
+| Spread | logs | 10 | Rust/ucl | 201.56% |
+| Spread | profile | 10 | Rust/ucl | 53.64% |
+| Spread | catalog | 10 | Rust/ucl | 140.68% |
+| Spread | mesh | 100 | Rust/ucl | 19.51% |
+| Load/serialize ratio | logs | 10 | Rust/ucl | 3.32x |
+| Load/serialize ratio | profile | 10 | Rust/ucl | 2.53x |
+| Load/serialize ratio | catalog | 10 | Rust/ucl | 2.92x |
+| Load/serialize ratio | mesh | 100 | Rust/ucl | 0.77x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/libucl | profile | 10 | - | - | - | - | - | - | - |
 | C++/libucl | catalog | 10 | - | - | - | - | - | - | - |
 | C++/libucl | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/ucl | logs | 10 | 0.0137 ms (#1) | 2,703 bytes | 863 bytes | 2,400,256 bytes | 3,526,656 bytes | 15.562886257339406 | 2.7622123301620545 |
-| Rust/ucl | profile | 10 | 0.0194 ms (#1) | 2,840 bytes | 748 bytes | 2,531,328 bytes | 3,502,080 bytes | 10.577522405467828 | 2.267177301459838 |
-| Rust/ucl | catalog | 10 | 0.0161 ms (#1) | 2,393 bytes | 681 bytes | 2,490,368 bytes | 3,469,312 bytes | 24.484314589747257 | 2.4392101734905896 |
-| Rust/ucl | mesh | 100 | 0.0783 ms (#1) | 9,919 bytes | 3,431 bytes | 2,527,232 bytes | 3,465,216 bytes | 12.050044940447261 | 0.6326328423572728 |
+| Rust/ucl | logs | 10 | 0.0150 ms (#1) | 2,703 bytes | 863 bytes | 2,240,512 bytes | 3,428,352 bytes | 42.943725626551185 | 3.324243031882896 |
+| Rust/ucl | profile | 10 | 0.0202 ms (#1) | 2,840 bytes | 748 bytes | 2,367,488 bytes | 3,440,640 bytes | 13.90356437286785 | 2.53000277711656 |
+| Rust/ucl | catalog | 10 | 0.0169 ms (#1) | 2,393 bytes | 681 bytes | 2,351,104 bytes | 3,416,064 bytes | 30.642285238217575 | 2.915029585798817 |
+| Rust/ucl | mesh | 100 | 0.0871 ms (#1) | 9,919 bytes | 3,431 bytes | 2,465,792 bytes | 3,448,832 bytes | 5.024103128862852 | 0.7659976479406855 |
 
 ## Implementation details
 
 ### C++/libucl
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:17`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:25:35`
 - Notes: C++ UCL encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.58 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 2.0532
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.63 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 2.0498
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/ucl/cpp/libucl/artifacts/report.json`
 
 ### Rust/ucl
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:33`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:25:52`
 - Notes: UCL encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.58 GB
-- RAM usage at start: 6.7%
-- Load avg (1 min): 1.8193
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.63 GB
+- RAM usage at start: 6.4%
+- Load avg (1 min): 1.8164
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/ucl/rust/ucl/artifacts/report.json`

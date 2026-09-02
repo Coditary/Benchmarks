@@ -5,8 +5,8 @@
   "impl": "liblz4",
   "language": "C++",
   "implementation": "liblz4",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:23:54.634345+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:29:01.273230+00:00",
   "tags": [
     "cpp",
     "compression",
@@ -61,22 +61,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15627395072,
-    "used_ram_bytes": 1137979392,
-    "ram_usage_percent": 6.8,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.6836,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15695650816,
+    "used_ram_bytes": 1075142656,
+    "ram_usage_percent": 6.4,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.7866,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
-    "lines_of_code": 39,
+    "lines_of_code": 41,
     "artifact_size_bytes": 0,
-    "build_time_ms": 229.0,
+    "build_time_ms": 394.6,
     "hyperfine_results": []
   }
 }

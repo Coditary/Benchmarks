@@ -1,6 +1,6 @@
 # serialization / tsv
 
-Generated at 2026-09-02T21:56:38.812004+00:00
+Generated at 2026-09-02T23:36:00.332989+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 0.0055 ms | — |
+| 1 | Rust/tsv | 0.0060 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 0.0055 ms #1 |
+| Rust/tsv | 1 | 1.00 | 0.0060 ms #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 0.0059 ms | — |
+| 1 | Rust/tsv | 0.0061 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 0.0059 ms #1 |
+| Rust/tsv | 1 | 1.00 | 0.0061 ms #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 0.0085 ms | — |
+| 1 | Rust/tsv | 0.0081 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 0.0085 ms #1 |
+| Rust/tsv | 1 | 1.00 | 0.0081 ms #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 0.0710 ms | — |
+| 1 | Rust/tsv | 0.0736 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 0.0710 ms #1 |
+| Rust/tsv | 1 | 1.00 | 0.0736 ms #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 2,408,448 bytes | — |
+| 1 | Rust/tsv | 2,293,760 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 2,408,448 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 2,293,760 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 2,486,272 bytes | — |
+| 1 | Rust/tsv | 2,404,352 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 2,486,272 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 2,404,352 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 2,408,448 bytes | — |
+| 1 | Rust/tsv | 2,248,704 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 2,408,448 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 2,248,704 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 2,473,984 bytes | — |
+| 1 | Rust/tsv | 2,322,432 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 2,473,984 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 2,322,432 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 3,600,384 bytes | — |
+| 1 | Rust/tsv | 3,395,584 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 3,600,384 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 3,395,584 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 3,489,792 bytes | — |
+| 1 | Rust/tsv | 3,403,776 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 3,489,792 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 3,403,776 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 3,547,136 bytes | — |
+| 1 | Rust/tsv | 3,424,256 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 3,547,136 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 3,424,256 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 3,579,904 bytes | — |
+| 1 | Rust/tsv | 3,473,408 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 3,579,904 bytes #1 |
+| Rust/tsv | 1 | 1.00 | 3,473,408 bytes #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 15.54% | — |
+| 1 | Rust/tsv | 17.56% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 15.54% #1 |
+| Rust/tsv | 1 | 1.00 | 17.56% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 11.89% | — |
+| 1 | Rust/tsv | 17.72% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 11.89% #1 |
+| Rust/tsv | 1 | 1.00 | 17.72% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 54.84% | — |
+| 1 | Rust/tsv | 18.84% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 54.84% #1 |
+| Rust/tsv | 1 | 1.00 | 18.84% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 7.55% | — |
+| 1 | Rust/tsv | 8.37% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 7.55% #1 |
+| Rust/tsv | 1 | 1.00 | 8.37% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 66.73% | — |
+| 1 | Rust/tsv | 48.83% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 66.73% #1 |
+| Rust/tsv | 1 | 1.00 | 48.83% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 36.32% | — |
+| 1 | Rust/tsv | 60.14% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 36.32% #1 |
+| Rust/tsv | 1 | 1.00 | 60.14% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 256.14% | — |
+| 1 | Rust/tsv | 75.43% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 256.14% #1 |
+| Rust/tsv | 1 | 1.00 | 75.43% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 31.77% | — |
+| 1 | Rust/tsv | 33.27% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 31.77% #1 |
+| Rust/tsv | 1 | 1.00 | 33.27% #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 7.07x | — |
+| 1 | Rust/tsv | 8.11x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 7.07x #1 |
+| Rust/tsv | 1 | 1.00 | 8.11x #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 7.77x | — |
+| 1 | Rust/tsv | 8.14x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 7.77x #1 |
+| Rust/tsv | 1 | 1.00 | 8.14x #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 4.84x | — |
+| 1 | Rust/tsv | 5.70x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 4.84x #1 |
+| Rust/tsv | 1 | 1.00 | 5.70x #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/tsv | 0.78x | — |
+| 1 | Rust/tsv | 0.90x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/tsv | 1 | 1.00 | 0.78x #1 |
+| Rust/tsv | 1 | 1.00 | 0.90x #1 |
 | C++/tsv-cpp | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/tsv-cpp | 24 |
 | Artifact size | C++/tsv-cpp | 0 bytes |
-| Build time | Rust/tsv | 29.6000 ms |
+| Build time | Rust/tsv | 36.8000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/tsv | 0.0055 ms |
-| Runtime | profile | 10 | Rust/tsv | 0.0059 ms |
-| Runtime | catalog | 10 | Rust/tsv | 0.0085 ms |
-| Runtime | mesh | 100 | Rust/tsv | 0.0710 ms |
+| Runtime | logs | 10 | Rust/tsv | 0.0060 ms |
+| Runtime | profile | 10 | Rust/tsv | 0.0061 ms |
+| Runtime | catalog | 10 | Rust/tsv | 0.0081 ms |
+| Runtime | mesh | 100 | Rust/tsv | 0.0736 ms |
 | Output size | logs | 10 | Rust/tsv | 1,562 bytes |
 | Output size | profile | 10 | Rust/tsv | 1,279 bytes |
 | Output size | catalog | 10 | Rust/tsv | 1,249 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/tsv | 518 bytes |
 | Gzip size | catalog | 10 | Rust/tsv | 478 bytes |
 | Gzip size | mesh | 100 | Rust/tsv | 2,675 bytes |
-| Serialize peak RSS | logs | 10 | Rust/tsv | 2,408,448 bytes |
-| Serialize peak RSS | profile | 10 | Rust/tsv | 2,486,272 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/tsv | 2,408,448 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/tsv | 2,473,984 bytes |
-| Process peak RSS | logs | 10 | Rust/tsv | 3,600,384 bytes |
-| Process peak RSS | profile | 10 | Rust/tsv | 3,489,792 bytes |
-| Process peak RSS | catalog | 10 | Rust/tsv | 3,547,136 bytes |
-| Process peak RSS | mesh | 100 | Rust/tsv | 3,579,904 bytes |
-| Stability (CV) | logs | 10 | Rust/tsv | 15.54% |
-| Stability (CV) | profile | 10 | Rust/tsv | 11.89% |
-| Stability (CV) | catalog | 10 | Rust/tsv | 54.84% |
-| Stability (CV) | mesh | 100 | Rust/tsv | 7.55% |
-| Spread | logs | 10 | Rust/tsv | 66.73% |
-| Spread | profile | 10 | Rust/tsv | 36.32% |
-| Spread | catalog | 10 | Rust/tsv | 256.14% |
-| Spread | mesh | 100 | Rust/tsv | 31.77% |
-| Load/serialize ratio | logs | 10 | Rust/tsv | 7.07x |
-| Load/serialize ratio | profile | 10 | Rust/tsv | 7.77x |
-| Load/serialize ratio | catalog | 10 | Rust/tsv | 4.84x |
-| Load/serialize ratio | mesh | 100 | Rust/tsv | 0.78x |
+| Serialize peak RSS | logs | 10 | Rust/tsv | 2,293,760 bytes |
+| Serialize peak RSS | profile | 10 | Rust/tsv | 2,404,352 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/tsv | 2,248,704 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/tsv | 2,322,432 bytes |
+| Process peak RSS | logs | 10 | Rust/tsv | 3,395,584 bytes |
+| Process peak RSS | profile | 10 | Rust/tsv | 3,403,776 bytes |
+| Process peak RSS | catalog | 10 | Rust/tsv | 3,424,256 bytes |
+| Process peak RSS | mesh | 100 | Rust/tsv | 3,473,408 bytes |
+| Stability (CV) | logs | 10 | Rust/tsv | 17.56% |
+| Stability (CV) | profile | 10 | Rust/tsv | 17.72% |
+| Stability (CV) | catalog | 10 | Rust/tsv | 18.84% |
+| Stability (CV) | mesh | 100 | Rust/tsv | 8.37% |
+| Spread | logs | 10 | Rust/tsv | 48.83% |
+| Spread | profile | 10 | Rust/tsv | 60.14% |
+| Spread | catalog | 10 | Rust/tsv | 75.43% |
+| Spread | mesh | 100 | Rust/tsv | 33.27% |
+| Load/serialize ratio | logs | 10 | Rust/tsv | 8.11x |
+| Load/serialize ratio | profile | 10 | Rust/tsv | 8.14x |
+| Load/serialize ratio | catalog | 10 | Rust/tsv | 5.70x |
+| Load/serialize ratio | mesh | 100 | Rust/tsv | 0.90x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/tsv-cpp | profile | 10 | - | - | - | - | - | - | - |
 | C++/tsv-cpp | catalog | 10 | - | - | - | - | - | - | - |
 | C++/tsv-cpp | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/tsv | logs | 10 | 0.0055 ms (#1) | 1,562 bytes | 656 bytes | 2,408,448 bytes | 3,600,384 bytes | 15.543446075796687 | 7.069826005237178 |
-| Rust/tsv | profile | 10 | 0.0059 ms (#1) | 1,279 bytes | 518 bytes | 2,486,272 bytes | 3,489,792 bytes | 11.885457495037002 | 7.771589862335315 |
-| Rust/tsv | catalog | 10 | 0.0085 ms (#1) | 1,249 bytes | 478 bytes | 2,408,448 bytes | 3,547,136 bytes | 54.84496345545568 | 4.841300504607027 |
-| Rust/tsv | mesh | 100 | 0.0710 ms (#1) | 5,545 bytes | 2,675 bytes | 2,473,984 bytes | 3,579,904 bytes | 7.552499017619378 | 0.7830441650379958 |
+| Rust/tsv | logs | 10 | 0.0060 ms (#1) | 1,562 bytes | 656 bytes | 2,293,760 bytes | 3,395,584 bytes | 17.564383125664 | 8.110055953650212 |
+| Rust/tsv | profile | 10 | 0.0061 ms (#1) | 1,279 bytes | 518 bytes | 2,404,352 bytes | 3,403,776 bytes | 17.722538309878807 | 8.139906958426662 |
+| Rust/tsv | catalog | 10 | 0.0081 ms (#1) | 1,249 bytes | 478 bytes | 2,248,704 bytes | 3,424,256 bytes | 18.841888606847686 | 5.701533446921994 |
+| Rust/tsv | mesh | 100 | 0.0736 ms (#1) | 5,545 bytes | 2,675 bytes | 2,322,432 bytes | 3,473,408 bytes | 8.365961566990524 | 0.9039853644348153 |
 
 ## Implementation details
 
 ### C++/tsv-cpp
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:01`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:25:18`
 - Notes: C++ TSV encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.58 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 2.0356
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.63 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 2.0317
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/tsv/cpp/tsv-cpp/artifacts/report.json`
 
 ### Rust/tsv
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:16`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:25:34`
 - Notes: TSV encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.59 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 2.145
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 2.1416
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/tsv/rust/tsv/artifacts/report.json`

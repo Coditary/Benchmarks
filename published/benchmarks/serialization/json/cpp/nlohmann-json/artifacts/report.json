@@ -5,8 +5,8 @@
   "impl": "nlohmann-json",
   "language": "C++",
   "implementation": "nlohmann-json",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:17:14.978516+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:21:40.714997+00:00",
   "tags": [
     "cpp",
     "json",
@@ -49,22 +49,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15653277696,
-    "used_ram_bytes": 1112096768,
-    "ram_usage_percent": 6.6,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.6348,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15693717504,
+    "used_ram_bytes": 1077075968,
+    "ram_usage_percent": 6.4,
+    "cpu_governor": "unknown",
+    "system_load_1min": 2.1382,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
     "lines_of_code": 37,
     "artifact_size_bytes": 0,
-    "build_time_ms": 265.3,
+    "build_time_ms": 322.4,
     "hyperfine_results": []
   }
 }

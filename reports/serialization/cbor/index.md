@@ -1,6 +1,6 @@
 # serialization / cbor
 
-Generated at 2026-09-02T21:56:38.780917+00:00
+Generated at 2026-09-02T23:36:00.306890+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 0.0023 ms | — |
+| 1 | Rust/ciborium | 0.0032 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 0.0023 ms #1 |
+| Rust/ciborium | 1 | 1.00 | 0.0032 ms #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 0.0034 ms | — |
+| 1 | Rust/ciborium | 0.0043 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 0.0034 ms #1 |
+| Rust/ciborium | 1 | 1.00 | 0.0043 ms #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 0.0028 ms | — |
+| 1 | Rust/ciborium | 0.0036 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 0.0028 ms #1 |
+| Rust/ciborium | 1 | 1.00 | 0.0036 ms #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 0.0112 ms | — |
+| 1 | Rust/ciborium | 0.0179 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 0.0112 ms #1 |
+| Rust/ciborium | 1 | 1.00 | 0.0179 ms #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 2,453,504 bytes | — |
+| 1 | Rust/ciborium | 2,260,992 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 2,453,504 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 2,260,992 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 2,465,792 bytes | — |
+| 1 | Rust/ciborium | 2,396,160 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 2,465,792 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 2,396,160 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 2,564,096 bytes | — |
+| 1 | Rust/ciborium | 2,400,256 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 2,564,096 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 2,400,256 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 2,371,584 bytes | — |
+| 1 | Rust/ciborium | 2,306,048 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 2,371,584 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 2,306,048 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 3,608,576 bytes | — |
+| 1 | Rust/ciborium | 3,362,816 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 3,608,576 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 3,551,232 bytes | — |
+| 1 | Rust/ciborium | 3,342,336 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 3,342,336 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 3,571,712 bytes | — |
+| 1 | Rust/ciborium | 3,411,968 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 3,571,712 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 3,411,968 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 3,571,712 bytes | — |
+| 1 | Rust/ciborium | 3,457,024 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 3,571,712 bytes #1 |
+| Rust/ciborium | 1 | 1.00 | 3,457,024 bytes #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 44.92% | — |
+| 1 | Rust/ciborium | 28.30% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 44.92% #1 |
+| Rust/ciborium | 1 | 1.00 | 28.30% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 23.41% | — |
+| 1 | Rust/ciborium | 22.26% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 23.41% #1 |
+| Rust/ciborium | 1 | 1.00 | 22.26% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 33.67% | — |
+| 1 | Rust/ciborium | 29.56% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 33.67% #1 |
+| Rust/ciborium | 1 | 1.00 | 29.56% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 7.11% | — |
+| 1 | Rust/ciborium | 37.84% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 7.11% #1 |
+| Rust/ciborium | 1 | 1.00 | 37.84% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 191.40% | — |
+| 1 | Rust/ciborium | 115.59% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 191.40% #1 |
+| Rust/ciborium | 1 | 1.00 | 115.59% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 63.06% | — |
+| 1 | Rust/ciborium | 61.44% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 63.06% #1 |
+| Rust/ciborium | 1 | 1.00 | 61.44% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 140.60% | — |
+| 1 | Rust/ciborium | 91.70% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 140.60% #1 |
+| Rust/ciborium | 1 | 1.00 | 91.70% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 27.23% | — |
+| 1 | Rust/ciborium | 176.34% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 27.23% #1 |
+| Rust/ciborium | 1 | 1.00 | 176.34% #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 18.30x | — |
+| 1 | Rust/ciborium | 13.89x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 18.30x #1 |
+| Rust/ciborium | 1 | 1.00 | 13.89x #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 12.60x | — |
+| 1 | Rust/ciborium | 11.05x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 12.60x #1 |
+| Rust/ciborium | 1 | 1.00 | 11.05x #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 14.72x | — |
+| 1 | Rust/ciborium | 12.87x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 14.72x #1 |
+| Rust/ciborium | 1 | 1.00 | 12.87x #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/ciborium | 4.55x | — |
+| 1 | Rust/ciborium | 3.59x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/ciborium | 1 | 1.00 | 4.55x #1 |
+| Rust/ciborium | 1 | 1.00 | 3.59x #1 |
 | C++/nlohmann-cbor | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/nlohmann-cbor | 25 |
 | Artifact size | C++/nlohmann-cbor | 0 bytes |
-| Build time | Rust/ciborium | 34.5000 ms |
+| Build time | Rust/ciborium | 41.6000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/ciborium | 0.0023 ms |
-| Runtime | profile | 10 | Rust/ciborium | 0.0034 ms |
-| Runtime | catalog | 10 | Rust/ciborium | 0.0028 ms |
-| Runtime | mesh | 100 | Rust/ciborium | 0.0112 ms |
+| Runtime | logs | 10 | Rust/ciborium | 0.0032 ms |
+| Runtime | profile | 10 | Rust/ciborium | 0.0043 ms |
+| Runtime | catalog | 10 | Rust/ciborium | 0.0036 ms |
+| Runtime | mesh | 100 | Rust/ciborium | 0.0179 ms |
 | Output size | logs | 10 | Rust/ciborium | 2,359 bytes |
 | Output size | profile | 10 | Rust/ciborium | 2,012 bytes |
 | Output size | catalog | 10 | Rust/ciborium | 1,606 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/ciborium | 630 bytes |
 | Gzip size | catalog | 10 | Rust/ciborium | 566 bytes |
 | Gzip size | mesh | 100 | Rust/ciborium | 3,113 bytes |
-| Serialize peak RSS | logs | 10 | Rust/ciborium | 2,453,504 bytes |
-| Serialize peak RSS | profile | 10 | Rust/ciborium | 2,465,792 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/ciborium | 2,564,096 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/ciborium | 2,371,584 bytes |
-| Process peak RSS | logs | 10 | Rust/ciborium | 3,608,576 bytes |
-| Process peak RSS | profile | 10 | Rust/ciborium | 3,551,232 bytes |
-| Process peak RSS | catalog | 10 | Rust/ciborium | 3,571,712 bytes |
-| Process peak RSS | mesh | 100 | Rust/ciborium | 3,571,712 bytes |
-| Stability (CV) | logs | 10 | Rust/ciborium | 44.92% |
-| Stability (CV) | profile | 10 | Rust/ciborium | 23.41% |
-| Stability (CV) | catalog | 10 | Rust/ciborium | 33.67% |
-| Stability (CV) | mesh | 100 | Rust/ciborium | 7.11% |
-| Spread | logs | 10 | Rust/ciborium | 191.40% |
-| Spread | profile | 10 | Rust/ciborium | 63.06% |
-| Spread | catalog | 10 | Rust/ciborium | 140.60% |
-| Spread | mesh | 100 | Rust/ciborium | 27.23% |
-| Load/serialize ratio | logs | 10 | Rust/ciborium | 18.30x |
-| Load/serialize ratio | profile | 10 | Rust/ciborium | 12.60x |
-| Load/serialize ratio | catalog | 10 | Rust/ciborium | 14.72x |
-| Load/serialize ratio | mesh | 100 | Rust/ciborium | 4.55x |
+| Serialize peak RSS | logs | 10 | Rust/ciborium | 2,260,992 bytes |
+| Serialize peak RSS | profile | 10 | Rust/ciborium | 2,396,160 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/ciborium | 2,400,256 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/ciborium | 2,306,048 bytes |
+| Process peak RSS | logs | 10 | Rust/ciborium | 3,362,816 bytes |
+| Process peak RSS | profile | 10 | Rust/ciborium | 3,342,336 bytes |
+| Process peak RSS | catalog | 10 | Rust/ciborium | 3,411,968 bytes |
+| Process peak RSS | mesh | 100 | Rust/ciborium | 3,457,024 bytes |
+| Stability (CV) | logs | 10 | Rust/ciborium | 28.30% |
+| Stability (CV) | profile | 10 | Rust/ciborium | 22.26% |
+| Stability (CV) | catalog | 10 | Rust/ciborium | 29.56% |
+| Stability (CV) | mesh | 100 | Rust/ciborium | 37.84% |
+| Spread | logs | 10 | Rust/ciborium | 115.59% |
+| Spread | profile | 10 | Rust/ciborium | 61.44% |
+| Spread | catalog | 10 | Rust/ciborium | 91.70% |
+| Spread | mesh | 100 | Rust/ciborium | 176.34% |
+| Load/serialize ratio | logs | 10 | Rust/ciborium | 13.89x |
+| Load/serialize ratio | profile | 10 | Rust/ciborium | 11.05x |
+| Load/serialize ratio | catalog | 10 | Rust/ciborium | 12.87x |
+| Load/serialize ratio | mesh | 100 | Rust/ciborium | 3.59x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/nlohmann-cbor | profile | 10 | - | - | - | - | - | - | - |
 | C++/nlohmann-cbor | catalog | 10 | - | - | - | - | - | - | - |
 | C++/nlohmann-cbor | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/ciborium | logs | 10 | 0.0023 ms (#1) | 2,359 bytes | 797 bytes | 2,453,504 bytes | 3,608,576 bytes | 44.920372720518365 | 18.298218916775618 |
-| Rust/ciborium | profile | 10 | 0.0034 ms (#1) | 2,012 bytes | 630 bytes | 2,465,792 bytes | 3,551,232 bytes | 23.411280443719736 | 12.60358559794768 |
-| Rust/ciborium | catalog | 10 | 0.0028 ms (#1) | 1,606 bytes | 566 bytes | 2,564,096 bytes | 3,571,712 bytes | 33.66966703399654 | 14.71709456114294 |
-| Rust/ciborium | mesh | 100 | 0.0112 ms (#1) | 4,822 bytes | 3,113 bytes | 2,371,584 bytes | 3,571,712 bytes | 7.112702642869162 | 4.546591480593003 |
+| Rust/ciborium | logs | 10 | 0.0032 ms (#1) | 2,359 bytes | 797 bytes | 2,260,992 bytes | 3,362,816 bytes | 28.302038177983263 | 13.890801923375214 |
+| Rust/ciborium | profile | 10 | 0.0043 ms (#1) | 2,012 bytes | 630 bytes | 2,396,160 bytes | 3,342,336 bytes | 22.264418147256688 | 11.04688458910851 |
+| Rust/ciborium | catalog | 10 | 0.0036 ms (#1) | 1,606 bytes | 566 bytes | 2,400,256 bytes | 3,411,968 bytes | 29.560232702060844 | 12.865672876704771 |
+| Rust/ciborium | mesh | 100 | 0.0179 ms (#1) | 4,822 bytes | 3,113 bytes | 2,306,048 bytes | 3,457,024 bytes | 37.835841185674425 | 3.58645306116758 |
 
 ## Implementation details
 
 ### C++/nlohmann-cbor
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:13:20`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:17:47`
 - Notes: C++ CBOR encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.63 GB
-- RAM usage at start: 6.3%
-- Load avg (1 min): 1.3682
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.65 GB
+- RAM usage at start: 6.2%
+- Load avg (1 min): 1.5752
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/cbor/cpp/nlohmann-cbor/artifacts/report.json`
 
 ### Rust/ciborium
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:13:43`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:18:11`
 - Notes: CBOR encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.63 GB
-- RAM usage at start: 6.3%
-- Load avg (1 min): 1.6489
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.67 GB
+- RAM usage at start: 6.1%
+- Load avg (1 min): 1.6074
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/cbor/rust/ciborium/artifacts/report.json`

@@ -5,8 +5,8 @@
   "impl": "msgpack-cxx",
   "language": "C++",
   "implementation": "msgpack-cxx",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:18:32.715337+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:23:01.399018+00:00",
   "tags": [
     "cpp",
     "messagepack",
@@ -48,22 +48,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15619063808,
-    "used_ram_bytes": 1146310656,
-    "ram_usage_percent": 6.8,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.8154,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15688044544,
+    "used_ram_bytes": 1082748928,
+    "ram_usage_percent": 6.5,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.9697,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
     "lines_of_code": 52,
     "artifact_size_bytes": 0,
-    "build_time_ms": 556.2,
+    "build_time_ms": 665.6,
     "hyperfine_results": []
   }
 }

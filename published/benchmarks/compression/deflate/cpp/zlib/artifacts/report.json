@@ -5,8 +5,8 @@
   "impl": "zlib",
   "language": "C++",
   "implementation": "deflate",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:23:23.390624+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:27:46.336157+00:00",
   "tags": [
     "cpp",
     "compression",
@@ -61,22 +61,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15643734016,
-    "used_ram_bytes": 1121640448,
-    "ram_usage_percent": 6.7,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.7061,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15692488704,
+    "used_ram_bytes": 1078304768,
+    "ram_usage_percent": 6.4,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.6113,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
-    "lines_of_code": 41,
+    "lines_of_code": 43,
     "artifact_size_bytes": 0,
-    "build_time_ms": 201.7,
+    "build_time_ms": 382.0,
     "hyperfine_results": []
   }
 }

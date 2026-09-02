@@ -5,8 +5,8 @@
   "impl": "libbrotli",
   "language": "C++",
   "implementation": "libbrotli",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:22:20.993872+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:26:41.641111+00:00",
   "tags": [
     "cpp",
     "compression",
@@ -61,22 +61,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15655452672,
-    "used_ram_bytes": 1109921792,
-    "ram_usage_percent": 6.6,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.6626,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15685275648,
+    "used_ram_bytes": 1085517824,
+    "ram_usage_percent": 6.5,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.729,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
-    "lines_of_code": 34,
+    "lines_of_code": 36,
     "artifact_size_bytes": 0,
-    "build_time_ms": 254.6,
+    "build_time_ms": 405.9,
     "hyperfine_results": []
   }
 }

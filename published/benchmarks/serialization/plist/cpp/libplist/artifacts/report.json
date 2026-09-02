@@ -5,8 +5,8 @@
   "impl": "libplist",
   "language": "C++",
   "implementation": "libplist",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:19:22.191367+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:23:47.561693+00:00",
   "tags": [
     "cpp",
     "serialize",
@@ -50,22 +50,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15657697280,
-    "used_ram_bytes": 1107677184,
-    "ram_usage_percent": 6.6,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.6831,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15691714560,
+    "used_ram_bytes": 1079078912,
+    "ram_usage_percent": 6.4,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.7256,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
     "lines_of_code": 25,
     "artifact_size_bytes": 0,
-    "build_time_ms": 5246.6,
+    "build_time_ms": 5076.3,
     "hyperfine_results": []
   }
 }

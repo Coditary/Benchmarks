@@ -1,6 +1,6 @@
 # serialization / hjson
 
-Generated at 2026-09-02T21:56:38.790884+00:00
+Generated at 2026-09-02T23:36:00.315480+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 0.0120 ms | — |
+| 1 | Rust/hjson | 0.0140 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 0.0120 ms #1 |
+| Rust/hjson | 1 | 1.00 | 0.0140 ms #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 0.0139 ms | — |
+| 1 | Rust/hjson | 0.0167 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 0.0139 ms #1 |
+| Rust/hjson | 1 | 1.00 | 0.0167 ms #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 0.0124 ms | — |
+| 1 | Rust/hjson | 0.0152 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 0.0124 ms #1 |
+| Rust/hjson | 1 | 1.00 | 0.0152 ms #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 0.1388 ms | — |
+| 1 | Rust/hjson | 0.1626 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 0.1388 ms #1 |
+| Rust/hjson | 1 | 1.00 | 0.1626 ms #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,337,664 bytes | — |
+| 1 | Rust/hjson | 4,304,896 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,337,664 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,304,896 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,415,488 bytes | — |
+| 1 | Rust/hjson | 4,243,456 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,415,488 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,243,456 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,349,952 bytes | — |
+| 1 | Rust/hjson | 4,251,648 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,349,952 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,251,648 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,608,000 bytes | — |
+| 1 | Rust/hjson | 4,304,896 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,608,000 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,304,896 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,259,840 bytes | — |
+| 1 | Rust/hjson | 4,157,440 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,259,840 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,157,440 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,386,816 bytes | — |
+| 1 | Rust/hjson | 4,288,512 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,386,816 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,288,512 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,329,472 bytes | — |
+| 1 | Rust/hjson | 4,292,608 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,329,472 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,292,608 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 4,378,624 bytes | — |
+| 1 | Rust/hjson | 4,280,320 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 4,378,624 bytes #1 |
+| Rust/hjson | 1 | 1.00 | 4,280,320 bytes #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 21.76% | — |
+| 1 | Rust/hjson | 1.85% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 21.76% #1 |
+| Rust/hjson | 1 | 1.00 | 1.85% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 1.50% | — |
+| 1 | Rust/hjson | 2.46% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 1.50% #1 |
+| Rust/hjson | 1 | 1.00 | 2.46% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 2.04% | — |
+| 1 | Rust/hjson | 22.81% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 2.04% #1 |
+| Rust/hjson | 1 | 1.00 | 22.81% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 9.77% | — |
+| 1 | Rust/hjson | 2.73% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 9.77% #1 |
+| Rust/hjson | 1 | 1.00 | 2.73% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 101.07% | — |
+| 1 | Rust/hjson | 8.07% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 101.07% #1 |
+| Rust/hjson | 1 | 1.00 | 8.07% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 5.69% | — |
+| 1 | Rust/hjson | 8.98% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 5.69% #1 |
+| Rust/hjson | 1 | 1.00 | 8.98% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 7.50% | — |
+| 1 | Rust/hjson | 106.62% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 7.50% #1 |
+| Rust/hjson | 1 | 1.00 | 106.62% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 30.53% | — |
+| 1 | Rust/hjson | 9.45% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 30.53% #1 |
+| Rust/hjson | 1 | 1.00 | 9.45% #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 3.60x | — |
+| 1 | Rust/hjson | 3.77x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 3.60x #1 |
+| Rust/hjson | 1 | 1.00 | 3.77x #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 3.42x | — |
+| 1 | Rust/hjson | 3.14x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 3.42x #1 |
+| Rust/hjson | 1 | 1.00 | 3.14x #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 3.67x | — |
+| 1 | Rust/hjson | 5.00x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 3.67x #1 |
+| Rust/hjson | 1 | 1.00 | 5.00x #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/hjson | 0.40x | — |
+| 1 | Rust/hjson | 0.44x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/hjson | 1 | 1.00 | 0.40x #1 |
+| Rust/hjson | 1 | 1.00 | 0.44x #1 |
 | C++/hjson-cpp | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/hjson-cpp | 25 |
 | Artifact size | C++/hjson-cpp | 0 bytes |
-| Build time | Rust/hjson | 35.1000 ms |
+| Build time | Rust/hjson | 42.3000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/hjson | 0.0120 ms |
-| Runtime | profile | 10 | Rust/hjson | 0.0139 ms |
-| Runtime | catalog | 10 | Rust/hjson | 0.0124 ms |
-| Runtime | mesh | 100 | Rust/hjson | 0.1388 ms |
+| Runtime | logs | 10 | Rust/hjson | 0.0140 ms |
+| Runtime | profile | 10 | Rust/hjson | 0.0167 ms |
+| Runtime | catalog | 10 | Rust/hjson | 0.0152 ms |
+| Runtime | mesh | 100 | Rust/hjson | 0.1626 ms |
 | Output size | logs | 10 | Rust/hjson | 3,467 bytes |
 | Output size | profile | 10 | Rust/hjson | 3,873 bytes |
 | Output size | catalog | 10 | Rust/hjson | 3,127 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/hjson | 793 bytes |
 | Gzip size | catalog | 10 | Rust/hjson | 749 bytes |
 | Gzip size | mesh | 100 | Rust/hjson | 3,668 bytes |
-| Serialize peak RSS | logs | 10 | Rust/hjson | 4,337,664 bytes |
-| Serialize peak RSS | profile | 10 | Rust/hjson | 4,415,488 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/hjson | 4,349,952 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/hjson | 4,608,000 bytes |
-| Process peak RSS | logs | 10 | Rust/hjson | 4,259,840 bytes |
-| Process peak RSS | profile | 10 | Rust/hjson | 4,386,816 bytes |
-| Process peak RSS | catalog | 10 | Rust/hjson | 4,329,472 bytes |
-| Process peak RSS | mesh | 100 | Rust/hjson | 4,378,624 bytes |
-| Stability (CV) | logs | 10 | Rust/hjson | 21.76% |
-| Stability (CV) | profile | 10 | Rust/hjson | 1.50% |
-| Stability (CV) | catalog | 10 | Rust/hjson | 2.04% |
-| Stability (CV) | mesh | 100 | Rust/hjson | 9.77% |
-| Spread | logs | 10 | Rust/hjson | 101.07% |
-| Spread | profile | 10 | Rust/hjson | 5.69% |
-| Spread | catalog | 10 | Rust/hjson | 7.50% |
-| Spread | mesh | 100 | Rust/hjson | 30.53% |
-| Load/serialize ratio | logs | 10 | Rust/hjson | 3.60x |
-| Load/serialize ratio | profile | 10 | Rust/hjson | 3.42x |
-| Load/serialize ratio | catalog | 10 | Rust/hjson | 3.67x |
-| Load/serialize ratio | mesh | 100 | Rust/hjson | 0.40x |
+| Serialize peak RSS | logs | 10 | Rust/hjson | 4,304,896 bytes |
+| Serialize peak RSS | profile | 10 | Rust/hjson | 4,243,456 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/hjson | 4,251,648 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/hjson | 4,304,896 bytes |
+| Process peak RSS | logs | 10 | Rust/hjson | 4,157,440 bytes |
+| Process peak RSS | profile | 10 | Rust/hjson | 4,288,512 bytes |
+| Process peak RSS | catalog | 10 | Rust/hjson | 4,292,608 bytes |
+| Process peak RSS | mesh | 100 | Rust/hjson | 4,280,320 bytes |
+| Stability (CV) | logs | 10 | Rust/hjson | 1.85% |
+| Stability (CV) | profile | 10 | Rust/hjson | 2.46% |
+| Stability (CV) | catalog | 10 | Rust/hjson | 22.81% |
+| Stability (CV) | mesh | 100 | Rust/hjson | 2.73% |
+| Spread | logs | 10 | Rust/hjson | 8.07% |
+| Spread | profile | 10 | Rust/hjson | 8.98% |
+| Spread | catalog | 10 | Rust/hjson | 106.62% |
+| Spread | mesh | 100 | Rust/hjson | 9.45% |
+| Load/serialize ratio | logs | 10 | Rust/hjson | 3.77x |
+| Load/serialize ratio | profile | 10 | Rust/hjson | 3.14x |
+| Load/serialize ratio | catalog | 10 | Rust/hjson | 5.00x |
+| Load/serialize ratio | mesh | 100 | Rust/hjson | 0.44x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/hjson-cpp | profile | 10 | - | - | - | - | - | - | - |
 | C++/hjson-cpp | catalog | 10 | - | - | - | - | - | - | - |
 | C++/hjson-cpp | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/hjson | logs | 10 | 0.0120 ms (#1) | 3,467 bytes | 941 bytes | 4,337,664 bytes | 4,259,840 bytes | 21.756676482163865 | 3.600025076797693 |
-| Rust/hjson | profile | 10 | 0.0139 ms (#1) | 3,873 bytes | 793 bytes | 4,415,488 bytes | 4,386,816 bytes | 1.500676486667737 | 3.423208215757453 |
-| Rust/hjson | catalog | 10 | 0.0124 ms (#1) | 3,127 bytes | 749 bytes | 4,349,952 bytes | 4,329,472 bytes | 2.0369983342142306 | 3.6675860841711896 |
-| Rust/hjson | mesh | 100 | 0.1388 ms (#1) | 12,849 bytes | 3,668 bytes | 4,608,000 bytes | 4,378,624 bytes | 9.768083644496368 | 0.39579064130775354 |
+| Rust/hjson | logs | 10 | 0.0140 ms (#1) | 3,467 bytes | 941 bytes | 4,304,896 bytes | 4,157,440 bytes | 1.8468002341693095 | 3.7745393145556294 |
+| Rust/hjson | profile | 10 | 0.0167 ms (#1) | 3,873 bytes | 793 bytes | 4,243,456 bytes | 4,288,512 bytes | 2.4592503883223342 | 3.143552369621494 |
+| Rust/hjson | catalog | 10 | 0.0152 ms (#1) | 3,127 bytes | 749 bytes | 4,251,648 bytes | 4,292,608 bytes | 22.80835126363547 | 4.997712303200472 |
+| Rust/hjson | mesh | 100 | 0.1626 ms (#1) | 12,849 bytes | 3,668 bytes | 4,304,896 bytes | 4,280,320 bytes | 2.7289938049667355 | 0.4423919837205062 |
 
 ## Implementation details
 
 ### C++/hjson-cpp
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:16:25`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:20:48`
 - Notes: C++ HJSON encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.56 GB
-- RAM usage at start: 6.7%
-- Load avg (1 min): 1.8267
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.60 GB
+- RAM usage at start: 6.5%
+- Load avg (1 min): 1.9204
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/hjson/cpp/hjson-cpp/artifacts/report.json`
 
 ### Rust/hjson
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:16:57`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:21:22`
 - Notes: HJSON encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.61 GB
-- RAM usage at start: 6.4%
-- Load avg (1 min): 1.8877
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 2.0674
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/hjson/rust/hjson/artifacts/report.json`

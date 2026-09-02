@@ -1,6 +1,6 @@
 # compression / zstd
 
-Generated at 2026-09-02T21:56:38.716820+00:00
+Generated at 2026-09-02T23:36:00.251803+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0110 ms | — |
+| 1 | Rust/zstd | 0.0133 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0110 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0133 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ### profile
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0102 ms | — |
+| 1 | Rust/zstd | 0.0167 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0102 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0167 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0385 ms | — |
+| 1 | Rust/zstd | 0.0404 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0385 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0404 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ### english
@@ -72,13 +72,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0473 ms | — |
+| 1 | Rust/zstd | 0.0409 ms | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0473 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0409 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ### random
@@ -87,13 +87,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0266 ms | — |
+| 1 | Rust/zstd | 0.0262 ms | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0266 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0262 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ### repetitive
@@ -102,13 +102,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0247 ms | — |
+| 1 | Rust/zstd | 0.0163 ms | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0247 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0163 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ### sparse
@@ -117,13 +117,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.0271 ms | — |
+| 1 | Rust/zstd | 0.0263 ms | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.0271 ms #1 |
+| Rust/zstd | 1 | 1.00 | 0.0263 ms #1 |
 | C++/libzstd | 0 | - | - |
 
 ## Output size leaderboard
@@ -399,13 +399,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 2,600,960 bytes | — |
+| 1 | Rust/zstd | 2,531,328 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 2,600,960 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 2,531,328 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### catalog
@@ -414,13 +414,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 2,658,304 bytes | — |
+| 1 | Rust/zstd | 2,506,752 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 2,658,304 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 2,506,752 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### mesh
@@ -429,13 +429,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 2,854,912 bytes | — |
+| 1 | Rust/zstd | 2,707,456 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 2,854,912 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 2,707,456 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### english
@@ -444,13 +444,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,059,712 bytes | — |
+| 1 | Rust/zstd | 2,998,272 bytes | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,059,712 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 2,998,272 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### random
@@ -459,13 +459,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,231,744 bytes | — |
+| 1 | Rust/zstd | 3,108,864 bytes | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,231,744 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,108,864 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### repetitive
@@ -474,13 +474,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,096,576 bytes | — |
+| 1 | Rust/zstd | 2,969,600 bytes | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,096,576 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 2,969,600 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### sparse
@@ -489,13 +489,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,104,768 bytes | — |
+| 1 | Rust/zstd | 3,043,328 bytes | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,104,768 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,043,328 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -508,13 +508,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,571,712 bytes | — |
+| 1 | Rust/zstd | 3,444,736 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,571,712 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,444,736 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### profile
@@ -523,13 +523,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,551,232 bytes | — |
+| 1 | Rust/zstd | 3,411,968 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,411,968 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### catalog
@@ -538,13 +538,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,563,520 bytes | — |
+| 1 | Rust/zstd | 3,383,296 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,563,520 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,383,296 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### mesh
@@ -553,13 +553,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,547,136 bytes | — |
+| 1 | Rust/zstd | 3,362,816 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,547,136 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### english
@@ -568,13 +568,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,555,328 bytes | — |
+| 1 | Rust/zstd | 3,465,216 bytes | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,555,328 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,465,216 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### random
@@ -583,13 +583,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,489,792 bytes | — |
+| 1 | Rust/zstd | 3,362,816 bytes | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,489,792 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### repetitive
@@ -598,13 +598,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,481,600 bytes | — |
+| 1 | Rust/zstd | 3,432,448 bytes | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,481,600 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,432,448 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ### sparse
@@ -613,13 +613,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 3,551,232 bytes | — |
+| 1 | Rust/zstd | 3,473,408 bytes | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/zstd | 1 | 1.00 | 3,473,408 bytes #1 |
 | C++/libzstd | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -632,13 +632,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 4.74% | — |
+| 1 | Rust/zstd | 43.37% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 4.74% #1 |
+| Rust/zstd | 1 | 1.00 | 43.37% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### profile
@@ -647,13 +647,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 84.45% | — |
+| 1 | Rust/zstd | 19.70% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 84.45% #1 |
+| Rust/zstd | 1 | 1.00 | 19.70% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### catalog
@@ -662,13 +662,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 4.95% | — |
+| 1 | Rust/zstd | 16.22% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 4.95% #1 |
+| Rust/zstd | 1 | 1.00 | 16.22% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### mesh
@@ -677,13 +677,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 6.95% | — |
+| 1 | Rust/zstd | 13.82% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 6.95% #1 |
+| Rust/zstd | 1 | 1.00 | 13.82% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### english
@@ -692,13 +692,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 13.70% | — |
+| 1 | Rust/zstd | 27.74% | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 13.70% #1 |
+| Rust/zstd | 1 | 1.00 | 27.74% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### random
@@ -707,13 +707,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 36.34% | — |
+| 1 | Rust/zstd | 54.20% | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 36.34% #1 |
+| Rust/zstd | 1 | 1.00 | 54.20% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### repetitive
@@ -722,13 +722,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 27.99% | — |
+| 1 | Rust/zstd | 48.34% | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 27.99% #1 |
+| Rust/zstd | 1 | 1.00 | 48.34% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### sparse
@@ -737,13 +737,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 38.70% | — |
+| 1 | Rust/zstd | 30.25% | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 38.70% #1 |
+| Rust/zstd | 1 | 1.00 | 30.25% #1 |
 | C++/libzstd | 0 | - | - |
 
 ## Spread leaderboard
@@ -756,13 +756,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 18.09% | — |
+| 1 | Rust/zstd | 201.01% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 18.09% #1 |
+| Rust/zstd | 1 | 1.00 | 201.01% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### profile
@@ -771,13 +771,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 390.65% | — |
+| 1 | Rust/zstd | 56.46% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 390.65% #1 |
+| Rust/zstd | 1 | 1.00 | 56.46% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### catalog
@@ -786,13 +786,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 23.57% | — |
+| 1 | Rust/zstd | 75.34% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 23.57% #1 |
+| Rust/zstd | 1 | 1.00 | 75.34% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### mesh
@@ -801,13 +801,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 31.62% | — |
+| 1 | Rust/zstd | 51.17% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 31.62% #1 |
+| Rust/zstd | 1 | 1.00 | 51.17% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### english
@@ -816,13 +816,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 62.71% | — |
+| 1 | Rust/zstd | 127.37% | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 62.71% #1 |
+| Rust/zstd | 1 | 1.00 | 127.37% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### random
@@ -831,13 +831,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 152.29% | — |
+| 1 | Rust/zstd | 237.36% | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 152.29% #1 |
+| Rust/zstd | 1 | 1.00 | 237.36% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### repetitive
@@ -846,13 +846,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 94.23% | — |
+| 1 | Rust/zstd | 220.93% | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 94.23% #1 |
+| Rust/zstd | 1 | 1.00 | 220.93% #1 |
 | C++/libzstd | 0 | - | - |
 
 ### sparse
@@ -861,13 +861,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 159.68% | — |
+| 1 | Rust/zstd | 130.63% | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 159.68% #1 |
+| Rust/zstd | 1 | 1.00 | 130.63% #1 |
 | C++/libzstd | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -880,13 +880,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 1.31x | — |
+| 1 | Rust/zstd | 1.79x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 1.31x #1 |
+| Rust/zstd | 1 | 1.00 | 1.79x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### profile
@@ -895,13 +895,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.90x | — |
+| 1 | Rust/zstd | 1.92x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.90x #1 |
+| Rust/zstd | 1 | 1.00 | 1.92x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### catalog
@@ -910,13 +910,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 1.40x | — |
+| 1 | Rust/zstd | 1.23x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 1.40x #1 |
+| Rust/zstd | 1 | 1.00 | 1.23x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### mesh
@@ -925,13 +925,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.47x | — |
+| 1 | Rust/zstd | 0.58x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.47x #1 |
+| Rust/zstd | 1 | 1.00 | 0.58x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### english
@@ -940,13 +940,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 0.82x | — |
+| 1 | Rust/zstd | 1.14x | — |
 
 #### english comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 0.82x #1 |
+| Rust/zstd | 1 | 1.00 | 1.14x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### random
@@ -955,13 +955,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 1.47x | — |
+| 1 | Rust/zstd | 1.87x | — |
 
 #### random comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 1.47x #1 |
+| Rust/zstd | 1 | 1.00 | 1.87x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### repetitive
@@ -970,13 +970,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 1.48x | — |
+| 1 | Rust/zstd | 2.84x | — |
 
 #### repetitive comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 1.48x #1 |
+| Rust/zstd | 1 | 1.00 | 2.84x #1 |
 | C++/libzstd | 0 | - | - |
 
 ### sparse
@@ -985,13 +985,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/zstd | 1.37x | — |
+| 1 | Rust/zstd | 1.89x | — |
 
 #### sparse comparison matrix
 
 | Implementation | Wins | Avg rank | 64k |
 | --- | ---: | ---: | ---: |
-| Rust/zstd | 1 | 1.00 | 1.37x #1 |
+| Rust/zstd | 1 | 1.00 | 1.89x #1 |
 | C++/libzstd | 0 | - | - |
 
 ## Static metric winners
@@ -1000,20 +1000,20 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | Rust/zstd | 28 |
 | Artifact size | C++/libzstd | 0 bytes |
-| Build time | Rust/zstd | 34.6000 ms |
+| Build time | Rust/zstd | 43.2000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/zstd | 0.0110 ms |
+| Runtime | logs | 10 | Rust/zstd | 0.0133 ms |
 | Runtime | profile | 10 | Rust/zstd | 0.0129 ms |
-| Runtime | catalog | 10 | Rust/zstd | 0.0102 ms |
-| Runtime | mesh | 100 | Rust/zstd | 0.0385 ms |
-| Runtime | english | 64k | Rust/zstd | 0.0473 ms |
-| Runtime | random | 64k | Rust/zstd | 0.0266 ms |
-| Runtime | repetitive | 64k | Rust/zstd | 0.0247 ms |
-| Runtime | sparse | 64k | Rust/zstd | 0.0271 ms |
+| Runtime | catalog | 10 | Rust/zstd | 0.0167 ms |
+| Runtime | mesh | 100 | Rust/zstd | 0.0404 ms |
+| Runtime | english | 64k | Rust/zstd | 0.0409 ms |
+| Runtime | random | 64k | Rust/zstd | 0.0262 ms |
+| Runtime | repetitive | 64k | Rust/zstd | 0.0163 ms |
+| Runtime | sparse | 64k | Rust/zstd | 0.0263 ms |
 | Output size | logs | 10 | Rust/zstd | 786 bytes |
 | Output size | profile | 10 | Rust/zstd | 652 bytes |
 | Output size | catalog | 10 | Rust/zstd | 603 bytes |
@@ -1031,45 +1031,45 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | repetitive | 64k | Rust/zstd | 100 bytes |
 | Gzip size | sparse | 64k | Rust/zstd | 351 bytes |
 | Serialize peak RSS | logs | 10 | Rust/zstd | 2,535,424 bytes |
-| Serialize peak RSS | profile | 10 | Rust/zstd | 2,600,960 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/zstd | 2,658,304 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/zstd | 2,854,912 bytes |
-| Serialize peak RSS | english | 64k | Rust/zstd | 3,059,712 bytes |
-| Serialize peak RSS | random | 64k | Rust/zstd | 3,231,744 bytes |
-| Serialize peak RSS | repetitive | 64k | Rust/zstd | 3,096,576 bytes |
-| Serialize peak RSS | sparse | 64k | Rust/zstd | 3,104,768 bytes |
-| Process peak RSS | logs | 10 | Rust/zstd | 3,571,712 bytes |
-| Process peak RSS | profile | 10 | Rust/zstd | 3,551,232 bytes |
-| Process peak RSS | catalog | 10 | Rust/zstd | 3,563,520 bytes |
-| Process peak RSS | mesh | 100 | Rust/zstd | 3,547,136 bytes |
-| Process peak RSS | english | 64k | Rust/zstd | 3,555,328 bytes |
-| Process peak RSS | random | 64k | Rust/zstd | 3,489,792 bytes |
-| Process peak RSS | repetitive | 64k | Rust/zstd | 3,481,600 bytes |
-| Process peak RSS | sparse | 64k | Rust/zstd | 3,551,232 bytes |
-| Stability (CV) | logs | 10 | Rust/zstd | 4.74% |
-| Stability (CV) | profile | 10 | Rust/zstd | 84.45% |
-| Stability (CV) | catalog | 10 | Rust/zstd | 4.95% |
-| Stability (CV) | mesh | 100 | Rust/zstd | 6.95% |
-| Stability (CV) | english | 64k | Rust/zstd | 13.70% |
-| Stability (CV) | random | 64k | Rust/zstd | 36.34% |
-| Stability (CV) | repetitive | 64k | Rust/zstd | 27.99% |
-| Stability (CV) | sparse | 64k | Rust/zstd | 38.70% |
-| Spread | logs | 10 | Rust/zstd | 18.09% |
-| Spread | profile | 10 | Rust/zstd | 390.65% |
-| Spread | catalog | 10 | Rust/zstd | 23.57% |
-| Spread | mesh | 100 | Rust/zstd | 31.62% |
-| Spread | english | 64k | Rust/zstd | 62.71% |
-| Spread | random | 64k | Rust/zstd | 152.29% |
-| Spread | repetitive | 64k | Rust/zstd | 94.23% |
-| Spread | sparse | 64k | Rust/zstd | 159.68% |
-| Load/serialize ratio | logs | 10 | Rust/zstd | 1.31x |
-| Load/serialize ratio | profile | 10 | Rust/zstd | 0.90x |
-| Load/serialize ratio | catalog | 10 | Rust/zstd | 1.40x |
-| Load/serialize ratio | mesh | 100 | Rust/zstd | 0.47x |
-| Load/serialize ratio | english | 64k | Rust/zstd | 0.82x |
-| Load/serialize ratio | random | 64k | Rust/zstd | 1.47x |
-| Load/serialize ratio | repetitive | 64k | Rust/zstd | 1.48x |
-| Load/serialize ratio | sparse | 64k | Rust/zstd | 1.37x |
+| Serialize peak RSS | profile | 10 | Rust/zstd | 2,531,328 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/zstd | 2,506,752 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/zstd | 2,707,456 bytes |
+| Serialize peak RSS | english | 64k | Rust/zstd | 2,998,272 bytes |
+| Serialize peak RSS | random | 64k | Rust/zstd | 3,108,864 bytes |
+| Serialize peak RSS | repetitive | 64k | Rust/zstd | 2,969,600 bytes |
+| Serialize peak RSS | sparse | 64k | Rust/zstd | 3,043,328 bytes |
+| Process peak RSS | logs | 10 | Rust/zstd | 3,444,736 bytes |
+| Process peak RSS | profile | 10 | Rust/zstd | 3,411,968 bytes |
+| Process peak RSS | catalog | 10 | Rust/zstd | 3,383,296 bytes |
+| Process peak RSS | mesh | 100 | Rust/zstd | 3,362,816 bytes |
+| Process peak RSS | english | 64k | Rust/zstd | 3,465,216 bytes |
+| Process peak RSS | random | 64k | Rust/zstd | 3,362,816 bytes |
+| Process peak RSS | repetitive | 64k | Rust/zstd | 3,432,448 bytes |
+| Process peak RSS | sparse | 64k | Rust/zstd | 3,473,408 bytes |
+| Stability (CV) | logs | 10 | Rust/zstd | 43.37% |
+| Stability (CV) | profile | 10 | Rust/zstd | 19.70% |
+| Stability (CV) | catalog | 10 | Rust/zstd | 16.22% |
+| Stability (CV) | mesh | 100 | Rust/zstd | 13.82% |
+| Stability (CV) | english | 64k | Rust/zstd | 27.74% |
+| Stability (CV) | random | 64k | Rust/zstd | 54.20% |
+| Stability (CV) | repetitive | 64k | Rust/zstd | 48.34% |
+| Stability (CV) | sparse | 64k | Rust/zstd | 30.25% |
+| Spread | logs | 10 | Rust/zstd | 201.01% |
+| Spread | profile | 10 | Rust/zstd | 56.46% |
+| Spread | catalog | 10 | Rust/zstd | 75.34% |
+| Spread | mesh | 100 | Rust/zstd | 51.17% |
+| Spread | english | 64k | Rust/zstd | 127.37% |
+| Spread | random | 64k | Rust/zstd | 237.36% |
+| Spread | repetitive | 64k | Rust/zstd | 220.93% |
+| Spread | sparse | 64k | Rust/zstd | 130.63% |
+| Load/serialize ratio | logs | 10 | Rust/zstd | 1.79x |
+| Load/serialize ratio | profile | 10 | Rust/zstd | 1.92x |
+| Load/serialize ratio | catalog | 10 | Rust/zstd | 1.23x |
+| Load/serialize ratio | mesh | 100 | Rust/zstd | 0.58x |
+| Load/serialize ratio | english | 64k | Rust/zstd | 1.14x |
+| Load/serialize ratio | random | 64k | Rust/zstd | 1.87x |
+| Load/serialize ratio | repetitive | 64k | Rust/zstd | 2.84x |
+| Load/serialize ratio | sparse | 64k | Rust/zstd | 1.89x |
 
 ## Per-implementation results
 
@@ -1083,43 +1083,43 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/libzstd | random | 64k | - | - | - | - | - | - | - |
 | C++/libzstd | repetitive | 64k | - | - | - | - | - | - | - |
 | C++/libzstd | sparse | 64k | - | - | - | - | - | - | - |
-| Rust/zstd | logs | 10 | 0.0110 ms (#1) | 786 bytes | 809 bytes | 2,535,424 bytes | 3,571,712 bytes | 4.741367691929726 | 1.313240238144862 |
-| Rust/zstd | profile | 10 | 0.0129 ms (#1) | 652 bytes | 675 bytes | 2,600,960 bytes | 3,551,232 bytes | 84.44711669851884 | 0.9035560074065773 |
-| Rust/zstd | catalog | 10 | 0.0102 ms (#1) | 603 bytes | 626 bytes | 2,658,304 bytes | 3,563,520 bytes | 4.945962280860524 | 1.3988969691053732 |
-| Rust/zstd | mesh | 100 | 0.0385 ms (#1) | 2,765 bytes | 2,788 bytes | 2,854,912 bytes | 3,547,136 bytes | 6.953194119272194 | 0.4744832883736801 |
-| Rust/zstd | english | 64k | 0.0473 ms (#1) | 1,904 bytes | 1,927 bytes | 3,059,712 bytes | 3,555,328 bytes | 13.695311659479199 | 0.8195654562202634 |
-| Rust/zstd | random | 64k | 0.0266 ms (#1) | 65,546 bytes | 65,625 bytes | 3,231,744 bytes | 3,489,792 bytes | 36.33889021754448 | 1.4652324255691602 |
-| Rust/zstd | repetitive | 64k | 0.0247 ms (#1) | 77 bytes | 100 bytes | 3,096,576 bytes | 3,481,600 bytes | 27.99251881501371 | 1.4843101780459866 |
-| Rust/zstd | sparse | 64k | 0.0271 ms (#1) | 328 bytes | 351 bytes | 3,104,768 bytes | 3,551,232 bytes | 38.69582750290532 | 1.3739420955967179 |
+| Rust/zstd | logs | 10 | 0.0133 ms (#1) | 786 bytes | 809 bytes | 2,535,424 bytes | 3,444,736 bytes | 43.36531810427003 | 1.7857746685252052 |
+| Rust/zstd | profile | 10 | 0.0129 ms (#1) | 652 bytes | 675 bytes | 2,531,328 bytes | 3,411,968 bytes | 19.701420235688342 | 1.9152331012261143 |
+| Rust/zstd | catalog | 10 | 0.0167 ms (#1) | 603 bytes | 626 bytes | 2,506,752 bytes | 3,383,296 bytes | 16.22374320339059 | 1.2340883928304256 |
+| Rust/zstd | mesh | 100 | 0.0404 ms (#1) | 2,765 bytes | 2,788 bytes | 2,707,456 bytes | 3,362,816 bytes | 13.816492988015924 | 0.5769876462447483 |
+| Rust/zstd | english | 64k | 0.0409 ms (#1) | 1,904 bytes | 1,927 bytes | 2,998,272 bytes | 3,465,216 bytes | 27.744213808735513 | 1.1365775544880021 |
+| Rust/zstd | random | 64k | 0.0262 ms (#1) | 65,546 bytes | 65,625 bytes | 3,108,864 bytes | 3,362,816 bytes | 54.20475730647843 | 1.8718859577006464 |
+| Rust/zstd | repetitive | 64k | 0.0163 ms (#1) | 77 bytes | 100 bytes | 2,969,600 bytes | 3,432,448 bytes | 48.33952666378614 | 2.8420988183432314 |
+| Rust/zstd | sparse | 64k | 0.0263 ms (#1) | 328 bytes | 351 bytes | 3,043,328 bytes | 3,473,408 bytes | 30.246785133934495 | 1.893569203974613 |
 
 ## Implementation details
 
 ### C++/libzstd
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:25:17`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:35:33`
 - Notes: Loads payload.bin once (untimed), then measures zstd compression.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.56 GB
-- RAM usage at start: 6.7%
-- Load avg (1 min): 1.9336
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.62 GB
+- RAM usage at start: 6.4%
+- Load avg (1 min): 1.0552
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/compression/zstd/cpp/libzstd/artifacts/report.json`
 
 ### Rust/zstd
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:25:42`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:35:59`
 - Notes: Loads payload.bin once (untimed), then measures compression only.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.56 GB
-- RAM usage at start: 6.7%
-- Load avg (1 min): 2.1592
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.62 GB
+- RAM usage at start: 6.4%
+- Load avg (1 min): 1.8726
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/compression/zstd/rust/zstd/artifacts/report.json`

@@ -1,6 +1,6 @@
 # serialization / capnp
 
-Generated at 2026-09-02T21:56:38.777574+00:00
+Generated at 2026-09-02T23:36:00.305065+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 0.0011 ms | — |
+| 1 | Rust/capnp | 0.0013 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 0.0011 ms #1 |
+| Rust/capnp | 1 | 1.00 | 0.0013 ms #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 0.0015 ms | — |
+| 1 | Rust/capnp | 0.0019 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 0.0015 ms #1 |
+| Rust/capnp | 1 | 1.00 | 0.0019 ms #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 0.0019 ms | — |
+| 1 | Rust/capnp | 0.0022 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 0.0019 ms #1 |
+| Rust/capnp | 1 | 1.00 | 0.0022 ms #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 0.0007 ms | — |
+| 1 | Rust/capnp | 0.0008 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 0.0007 ms #1 |
+| Rust/capnp | 1 | 1.00 | 0.0008 ms #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 2,408,448 bytes | — |
+| 1 | Rust/capnp | 2,269,184 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 2,408,448 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 2,269,184 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 2,408,448 bytes | — |
+| 1 | Rust/capnp | 2,375,680 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 2,408,448 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 2,375,680 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 2,424,832 bytes | — |
+| 1 | Rust/capnp | 2,379,776 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 2,424,832 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 2,379,776 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 2,371,584 bytes | — |
+| 1 | Rust/capnp | 2,273,280 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 2,371,584 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 2,273,280 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 3,551,232 bytes | — |
+| 1 | Rust/capnp | 3,379,200 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 3,379,200 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 3,547,136 bytes | — |
+| 1 | Rust/capnp | 3,448,832 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 3,547,136 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 3,448,832 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 3,551,232 bytes | — |
+| 1 | Rust/capnp | 3,358,720 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 3,358,720 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 3,551,232 bytes | — |
+| 1 | Rust/capnp | 3,342,336 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/capnp | 1 | 1.00 | 3,342,336 bytes #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 34.93% | — |
+| 1 | Rust/capnp | 39.23% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 34.93% #1 |
+| Rust/capnp | 1 | 1.00 | 39.23% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 5.59% | — |
+| 1 | Rust/capnp | 4.83% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 5.59% #1 |
+| Rust/capnp | 1 | 1.00 | 4.83% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 19.86% | — |
+| 1 | Rust/capnp | 22.21% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 19.86% #1 |
+| Rust/capnp | 1 | 1.00 | 22.21% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 9.17% | — |
+| 1 | Rust/capnp | 7.69% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 9.17% #1 |
+| Rust/capnp | 1 | 1.00 | 7.69% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 166.23% | — |
+| 1 | Rust/capnp | 187.95% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 166.23% #1 |
+| Rust/capnp | 1 | 1.00 | 187.95% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 19.70% | — |
+| 1 | Rust/capnp | 19.17% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 19.70% #1 |
+| Rust/capnp | 1 | 1.00 | 19.17% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 93.23% | — |
+| 1 | Rust/capnp | 105.15% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 93.23% #1 |
+| Rust/capnp | 1 | 1.00 | 105.15% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 36.68% | — |
+| 1 | Rust/capnp | 29.48% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 36.68% #1 |
+| Rust/capnp | 1 | 1.00 | 29.48% #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 37.18x | — |
+| 1 | Rust/capnp | 37.09x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 37.18x #1 |
+| Rust/capnp | 1 | 1.00 | 37.09x #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 28.12x | — |
+| 1 | Rust/capnp | 27.11x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 28.12x #1 |
+| Rust/capnp | 1 | 1.00 | 27.11x #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 22.79x | — |
+| 1 | Rust/capnp | 22.20x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 22.79x #1 |
+| Rust/capnp | 1 | 1.00 | 22.20x #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/capnp | 76.70x | — |
+| 1 | Rust/capnp | 86.11x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/capnp | 1 | 1.00 | 76.70x #1 |
+| Rust/capnp | 1 | 1.00 | 86.11x #1 |
 | C++/capnp-cpp | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | Rust/capnp | 44 |
 | Artifact size | C++/capnp-cpp | 0 bytes |
-| Build time | Rust/capnp | 31.4000 ms |
+| Build time | Rust/capnp | 38.0000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/capnp | 0.0011 ms |
-| Runtime | profile | 10 | Rust/capnp | 0.0015 ms |
-| Runtime | catalog | 10 | Rust/capnp | 0.0019 ms |
-| Runtime | mesh | 100 | Rust/capnp | 0.0007 ms |
+| Runtime | logs | 10 | Rust/capnp | 0.0013 ms |
+| Runtime | profile | 10 | Rust/capnp | 0.0019 ms |
+| Runtime | catalog | 10 | Rust/capnp | 0.0022 ms |
+| Runtime | mesh | 100 | Rust/capnp | 0.0008 ms |
 | Output size | logs | 10 | Rust/capnp | 2,240 bytes |
 | Output size | profile | 10 | Rust/capnp | 2,488 bytes |
 | Output size | catalog | 10 | Rust/capnp | 2,728 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/capnp | 987 bytes |
 | Gzip size | catalog | 10 | Rust/capnp | 1,012 bytes |
 | Gzip size | mesh | 100 | Rust/capnp | 2,509 bytes |
-| Serialize peak RSS | logs | 10 | Rust/capnp | 2,408,448 bytes |
-| Serialize peak RSS | profile | 10 | Rust/capnp | 2,408,448 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/capnp | 2,424,832 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/capnp | 2,371,584 bytes |
-| Process peak RSS | logs | 10 | Rust/capnp | 3,551,232 bytes |
-| Process peak RSS | profile | 10 | Rust/capnp | 3,547,136 bytes |
-| Process peak RSS | catalog | 10 | Rust/capnp | 3,551,232 bytes |
-| Process peak RSS | mesh | 100 | Rust/capnp | 3,551,232 bytes |
-| Stability (CV) | logs | 10 | Rust/capnp | 34.93% |
-| Stability (CV) | profile | 10 | Rust/capnp | 5.59% |
-| Stability (CV) | catalog | 10 | Rust/capnp | 19.86% |
-| Stability (CV) | mesh | 100 | Rust/capnp | 9.17% |
-| Spread | logs | 10 | Rust/capnp | 166.23% |
-| Spread | profile | 10 | Rust/capnp | 19.70% |
-| Spread | catalog | 10 | Rust/capnp | 93.23% |
-| Spread | mesh | 100 | Rust/capnp | 36.68% |
-| Load/serialize ratio | logs | 10 | Rust/capnp | 37.18x |
-| Load/serialize ratio | profile | 10 | Rust/capnp | 28.12x |
-| Load/serialize ratio | catalog | 10 | Rust/capnp | 22.79x |
-| Load/serialize ratio | mesh | 100 | Rust/capnp | 76.70x |
+| Serialize peak RSS | logs | 10 | Rust/capnp | 2,269,184 bytes |
+| Serialize peak RSS | profile | 10 | Rust/capnp | 2,375,680 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/capnp | 2,379,776 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/capnp | 2,273,280 bytes |
+| Process peak RSS | logs | 10 | Rust/capnp | 3,379,200 bytes |
+| Process peak RSS | profile | 10 | Rust/capnp | 3,448,832 bytes |
+| Process peak RSS | catalog | 10 | Rust/capnp | 3,358,720 bytes |
+| Process peak RSS | mesh | 100 | Rust/capnp | 3,342,336 bytes |
+| Stability (CV) | logs | 10 | Rust/capnp | 39.23% |
+| Stability (CV) | profile | 10 | Rust/capnp | 4.83% |
+| Stability (CV) | catalog | 10 | Rust/capnp | 22.21% |
+| Stability (CV) | mesh | 100 | Rust/capnp | 7.69% |
+| Spread | logs | 10 | Rust/capnp | 187.95% |
+| Spread | profile | 10 | Rust/capnp | 19.17% |
+| Spread | catalog | 10 | Rust/capnp | 105.15% |
+| Spread | mesh | 100 | Rust/capnp | 29.48% |
+| Load/serialize ratio | logs | 10 | Rust/capnp | 37.09x |
+| Load/serialize ratio | profile | 10 | Rust/capnp | 27.11x |
+| Load/serialize ratio | catalog | 10 | Rust/capnp | 22.20x |
+| Load/serialize ratio | mesh | 100 | Rust/capnp | 86.11x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/capnp-cpp | profile | 10 | - | - | - | - | - | - | - |
 | C++/capnp-cpp | catalog | 10 | - | - | - | - | - | - | - |
 | C++/capnp-cpp | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/capnp | logs | 10 | 0.0011 ms (#1) | 2,240 bytes | 1,012 bytes | 2,408,448 bytes | 3,551,232 bytes | 34.93447584886907 | 37.17818381645831 |
-| Rust/capnp | profile | 10 | 0.0015 ms (#1) | 2,488 bytes | 987 bytes | 2,408,448 bytes | 3,547,136 bytes | 5.587942870170993 | 28.122124919071794 |
-| Rust/capnp | catalog | 10 | 0.0019 ms (#1) | 2,728 bytes | 1,012 bytes | 2,424,832 bytes | 3,551,232 bytes | 19.860712734004764 | 22.78991508268265 |
-| Rust/capnp | mesh | 100 | 0.0007 ms (#1) | 2,904 bytes | 2,509 bytes | 2,371,584 bytes | 3,551,232 bytes | 9.173938533392462 | 76.70296604098009 |
+| Rust/capnp | logs | 10 | 0.0013 ms (#1) | 2,240 bytes | 1,012 bytes | 2,269,184 bytes | 3,379,200 bytes | 39.22920778615115 | 37.087308874605775 |
+| Rust/capnp | profile | 10 | 0.0019 ms (#1) | 2,488 bytes | 987 bytes | 2,375,680 bytes | 3,448,832 bytes | 4.833165148121993 | 27.111559603792124 |
+| Rust/capnp | catalog | 10 | 0.0022 ms (#1) | 2,728 bytes | 1,012 bytes | 2,379,776 bytes | 3,358,720 bytes | 22.20756347559012 | 22.20431457596165 |
+| Rust/capnp | mesh | 100 | 0.0008 ms (#1) | 2,904 bytes | 2,509 bytes | 2,273,280 bytes | 3,342,336 bytes | 7.6926995304642585 | 86.10562748365594 |
 
 ## Implementation details
 
 ### C++/capnp-cpp
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:13:01`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:17:28`
 - Notes: Cap'n Proto message build from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
+- RAM total: 15.62 GB
 - RAM available at start: 14.62 GB
 - RAM usage at start: 6.4%
-- Load avg (1 min): 1.4199
-- CPU governor: performance
+- Load avg (1 min): 1.543
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/capnp/cpp/capnp-cpp/artifacts/report.json`
 
 ### Rust/capnp
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:13:19`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:17:46`
 - Notes: capnp message build + serialize from shared log dataset types.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.63 GB
-- RAM usage at start: 6.3%
-- Load avg (1 min): 1.3682
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.65 GB
+- RAM usage at start: 6.2%
+- Load avg (1 min): 1.5752
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/capnp/rust/capnp/artifacts/report.json`

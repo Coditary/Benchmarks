@@ -1,0 +1,82 @@
+{
+  "domain": "compression",
+  "test": "lzf",
+  "lang": "cpp",
+  "impl": "liblzf",
+  "language": "C++",
+  "implementation": "liblzf",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:29:18.789286+00:00",
+  "tags": [
+    "cpp",
+    "compression",
+    "lzf"
+  ],
+  "notes": "Loads payload.bin once (untimed), then measures lzf compression.",
+  "task_config": {
+    "parameters": {
+      "sizes": [
+        "logs/10",
+        "logs/100",
+        "logs/1000",
+        "logs/10k",
+        "logs/100k",
+        "profile/10",
+        "profile/100",
+        "profile/1000",
+        "profile/10k",
+        "profile/100k",
+        "catalog/10",
+        "catalog/100",
+        "catalog/1000",
+        "catalog/10k",
+        "catalog/100k",
+        "mesh/100",
+        "mesh/1000",
+        "mesh/10k",
+        "mesh/100k",
+        "random/64k",
+        "random/256k",
+        "random/1m",
+        "random/4m",
+        "sparse/64k",
+        "sparse/256k",
+        "sparse/1m",
+        "english/64k",
+        "english/256k",
+        "english/1m",
+        "repetitive/64k",
+        "repetitive/256k",
+        "repetitive/1m"
+      ],
+      "element_type": "fixture"
+    },
+    "benchmark": {
+      "warmup": 2,
+      "min_runs": 5,
+      "max_runs": 20,
+      "runs": null
+    }
+  },
+  "env": {
+    "hostname": "runnervmgx7h7",
+    "os": "Linux 6.17.0-1022-azure",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "physical_cores": 2,
+    "logical_threads": 4,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15669972992,
+    "used_ram_bytes": 1100820480,
+    "ram_usage_percent": 6.6,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.7476,
+    "is_ci": true,
+    "runner_name": "GitHub Actions 1000003586"
+  },
+  "metrics": {
+    "lines_of_code": 42,
+    "artifact_size_bytes": 0,
+    "build_time_ms": 700.1,
+    "hyperfine_results": []
+  }
+}

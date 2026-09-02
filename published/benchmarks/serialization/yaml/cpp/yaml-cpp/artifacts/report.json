@@ -5,8 +5,8 @@
   "impl": "yaml-cpp",
   "language": "C++",
   "implementation": "yaml-cpp",
-  "git_hash": "9de0e1c",
-  "recorded_at": "2026-09-02T21:22:00.804596+00:00",
+  "git_hash": "db73122",
+  "recorded_at": "2026-09-02T23:26:20.141835+00:00",
   "tags": [
     "cpp",
     "serialize",
@@ -50,22 +50,22 @@
   "env": {
     "hostname": "runnervmgx7h7",
     "os": "Linux 6.17.0-1022-azure",
-    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
     "physical_cores": 2,
     "logical_threads": 4,
-    "total_ram_bytes": 16765374464,
-    "available_ram_bytes": 15656652800,
-    "used_ram_bytes": 1108721664,
-    "ram_usage_percent": 6.6,
-    "cpu_governor": "performance",
-    "system_load_1min": 1.665,
+    "total_ram_bytes": 16770793472,
+    "available_ram_bytes": 15679700992,
+    "used_ram_bytes": 1091092480,
+    "ram_usage_percent": 6.5,
+    "cpu_governor": "unknown",
+    "system_load_1min": 1.6729,
     "is_ci": true,
-    "runner_name": "GitHub Actions 1000003575"
+    "runner_name": "GitHub Actions 1000003586"
   },
   "metrics": {
     "lines_of_code": 25,
     "artifact_size_bytes": 0,
-    "build_time_ms": 203.8,
+    "build_time_ms": 258.6,
     "hyperfine_results": []
   }
 }

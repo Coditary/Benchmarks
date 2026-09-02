@@ -1,6 +1,6 @@
 # serialization / toml
 
-Generated at 2026-09-02T21:56:38.809998+00:00
+Generated at 2026-09-02T23:36:00.331200+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.0666 ms | — |
+| 1 | Rust/toml | 0.0764 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.0666 ms #1 |
+| Rust/toml | 1 | 1.00 | 0.0764 ms #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.0837 ms | — |
+| 1 | Rust/toml | 0.0999 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.0837 ms #1 |
+| Rust/toml | 1 | 1.00 | 0.0999 ms #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.0681 ms | — |
+| 1 | Rust/toml | 0.0784 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.0681 ms #1 |
+| Rust/toml | 1 | 1.00 | 0.0784 ms #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.3450 ms | — |
+| 1 | Rust/toml | 0.3863 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.3450 ms #1 |
+| Rust/toml | 1 | 1.00 | 0.3863 ms #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 2,564,096 bytes | — |
+| 1 | Rust/toml | 2,486,272 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 2,564,096 bytes #1 |
+| Rust/toml | 1 | 1.00 | 2,486,272 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 2,674,688 bytes | — |
+| 1 | Rust/toml | 2,580,480 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 2,674,688 bytes #1 |
+| Rust/toml | 1 | 1.00 | 2,580,480 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 2,592,768 bytes | — |
+| 1 | Rust/toml | 2,453,504 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 2,592,768 bytes #1 |
+| Rust/toml | 1 | 1.00 | 2,453,504 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 2,908,160 bytes | — |
+| 1 | Rust/toml | 2,822,144 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 2,908,160 bytes #1 |
+| Rust/toml | 1 | 1.00 | 2,822,144 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 3,588,096 bytes | — |
+| 1 | Rust/toml | 3,424,256 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 3,588,096 bytes #1 |
+| Rust/toml | 1 | 1.00 | 3,424,256 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 3,534,848 bytes | — |
+| 1 | Rust/toml | 3,485,696 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 3,534,848 bytes #1 |
+| Rust/toml | 1 | 1.00 | 3,485,696 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 3,477,504 bytes | — |
+| 1 | Rust/toml | 3,424,256 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 3,477,504 bytes #1 |
+| Rust/toml | 1 | 1.00 | 3,424,256 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 3,551,232 bytes | — |
+| 1 | Rust/toml | 3,342,336 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/toml | 1 | 1.00 | 3,342,336 bytes #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 8.61% | — |
+| 1 | Rust/toml | 9.38% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 8.61% #1 |
+| Rust/toml | 1 | 1.00 | 9.38% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 8.03% | — |
+| 1 | Rust/toml | 8.51% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 8.03% #1 |
+| Rust/toml | 1 | 1.00 | 8.51% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 3.15% | — |
+| 1 | Rust/toml | 9.41% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 3.15% #1 |
+| Rust/toml | 1 | 1.00 | 9.41% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 1.93% | — |
+| 1 | Rust/toml | 2.71% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 1.93% #1 |
+| Rust/toml | 1 | 1.00 | 2.71% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 39.36% | — |
+| 1 | Rust/toml | 37.30% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 39.36% #1 |
+| Rust/toml | 1 | 1.00 | 37.30% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 33.75% | — |
+| 1 | Rust/toml | 38.78% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 33.75% #1 |
+| Rust/toml | 1 | 1.00 | 38.78% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 15.35% | — |
+| 1 | Rust/toml | 37.99% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 15.35% #1 |
+| Rust/toml | 1 | 1.00 | 37.99% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 7.64% | — |
+| 1 | Rust/toml | 8.05% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 7.64% #1 |
+| Rust/toml | 1 | 1.00 | 8.05% #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.59x | — |
+| 1 | Rust/toml | 0.61x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.59x #1 |
+| Rust/toml | 1 | 1.00 | 0.61x #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### profile
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.56x | — |
+| 1 | Rust/toml | 0.61x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.56x #1 |
+| Rust/toml | 1 | 1.00 | 0.61x #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/toml | 0.15x | — |
+| 1 | Rust/toml | 0.22x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/toml | 1 | 1.00 | 0.15x #1 |
+| Rust/toml | 1 | 1.00 | 0.22x #1 |
 | C++/tomlplusplus | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/tomlplusplus | 25 |
 | Artifact size | C++/tomlplusplus | 0 bytes |
-| Build time | Rust/toml | 47.2000 ms |
+| Build time | Rust/toml | 45.4000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/toml | 0.0666 ms |
-| Runtime | profile | 10 | Rust/toml | 0.0837 ms |
-| Runtime | catalog | 10 | Rust/toml | 0.0681 ms |
-| Runtime | mesh | 100 | Rust/toml | 0.3450 ms |
+| Runtime | logs | 10 | Rust/toml | 0.0764 ms |
+| Runtime | profile | 10 | Rust/toml | 0.0999 ms |
+| Runtime | catalog | 10 | Rust/toml | 0.0784 ms |
+| Runtime | mesh | 100 | Rust/toml | 0.3863 ms |
 | Output size | logs | 10 | Rust/toml | 2,904 bytes |
 | Output size | profile | 10 | Rust/toml | 2,874 bytes |
 | Output size | catalog | 10 | Rust/toml | 2,289 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/toml | 702 bytes |
 | Gzip size | catalog | 10 | Rust/toml | 619 bytes |
 | Gzip size | mesh | 100 | Rust/toml | 6,647 bytes |
-| Serialize peak RSS | logs | 10 | Rust/toml | 2,564,096 bytes |
-| Serialize peak RSS | profile | 10 | Rust/toml | 2,674,688 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/toml | 2,592,768 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/toml | 2,908,160 bytes |
-| Process peak RSS | logs | 10 | Rust/toml | 3,588,096 bytes |
-| Process peak RSS | profile | 10 | Rust/toml | 3,534,848 bytes |
-| Process peak RSS | catalog | 10 | Rust/toml | 3,477,504 bytes |
-| Process peak RSS | mesh | 100 | Rust/toml | 3,551,232 bytes |
-| Stability (CV) | logs | 10 | Rust/toml | 8.61% |
-| Stability (CV) | profile | 10 | Rust/toml | 8.03% |
-| Stability (CV) | catalog | 10 | Rust/toml | 3.15% |
-| Stability (CV) | mesh | 100 | Rust/toml | 1.93% |
-| Spread | logs | 10 | Rust/toml | 39.36% |
-| Spread | profile | 10 | Rust/toml | 33.75% |
-| Spread | catalog | 10 | Rust/toml | 15.35% |
-| Spread | mesh | 100 | Rust/toml | 7.64% |
-| Load/serialize ratio | logs | 10 | Rust/toml | 0.59x |
+| Serialize peak RSS | logs | 10 | Rust/toml | 2,486,272 bytes |
+| Serialize peak RSS | profile | 10 | Rust/toml | 2,580,480 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/toml | 2,453,504 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/toml | 2,822,144 bytes |
+| Process peak RSS | logs | 10 | Rust/toml | 3,424,256 bytes |
+| Process peak RSS | profile | 10 | Rust/toml | 3,485,696 bytes |
+| Process peak RSS | catalog | 10 | Rust/toml | 3,424,256 bytes |
+| Process peak RSS | mesh | 100 | Rust/toml | 3,342,336 bytes |
+| Stability (CV) | logs | 10 | Rust/toml | 9.38% |
+| Stability (CV) | profile | 10 | Rust/toml | 8.51% |
+| Stability (CV) | catalog | 10 | Rust/toml | 9.41% |
+| Stability (CV) | mesh | 100 | Rust/toml | 2.71% |
+| Spread | logs | 10 | Rust/toml | 37.30% |
+| Spread | profile | 10 | Rust/toml | 38.78% |
+| Spread | catalog | 10 | Rust/toml | 37.99% |
+| Spread | mesh | 100 | Rust/toml | 8.05% |
+| Load/serialize ratio | logs | 10 | Rust/toml | 0.61x |
 | Load/serialize ratio | profile | 10 | Rust/toml | 0.52x |
-| Load/serialize ratio | catalog | 10 | Rust/toml | 0.56x |
-| Load/serialize ratio | mesh | 100 | Rust/toml | 0.15x |
+| Load/serialize ratio | catalog | 10 | Rust/toml | 0.61x |
+| Load/serialize ratio | mesh | 100 | Rust/toml | 0.22x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/tomlplusplus | profile | 10 | - | - | - | - | - | - | - |
 | C++/tomlplusplus | catalog | 10 | - | - | - | - | - | - | - |
 | C++/tomlplusplus | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/toml | logs | 10 | 0.0666 ms (#1) | 2,904 bytes | 827 bytes | 2,564,096 bytes | 3,588,096 bytes | 8.605664986439047 | 0.5903759946984439 |
-| Rust/toml | profile | 10 | 0.0837 ms (#1) | 2,874 bytes | 702 bytes | 2,674,688 bytes | 3,534,848 bytes | 8.032407501015603 | 0.5224352977954118 |
-| Rust/toml | catalog | 10 | 0.0681 ms (#1) | 2,289 bytes | 619 bytes | 2,592,768 bytes | 3,477,504 bytes | 3.1496914083526852 | 0.5570501196752939 |
-| Rust/toml | mesh | 100 | 0.3450 ms (#1) | 16,266 bytes | 6,647 bytes | 2,908,160 bytes | 3,551,232 bytes | 1.92596471561228 | 0.15482158933100185 |
+| Rust/toml | logs | 10 | 0.0764 ms (#1) | 2,904 bytes | 827 bytes | 2,486,272 bytes | 3,424,256 bytes | 9.377276633341788 | 0.613290849551229 |
+| Rust/toml | profile | 10 | 0.0999 ms (#1) | 2,874 bytes | 702 bytes | 2,580,480 bytes | 3,485,696 bytes | 8.513974379491167 | 0.5215560754402551 |
+| Rust/toml | catalog | 10 | 0.0784 ms (#1) | 2,289 bytes | 619 bytes | 2,453,504 bytes | 3,424,256 bytes | 9.40957919904761 | 0.6107693995372225 |
+| Rust/toml | mesh | 100 | 0.3863 ms (#1) | 16,266 bytes | 6,647 bytes | 2,822,144 bytes | 3,342,336 bytes | 2.7072093035729177 | 0.21961198698279244 |
 
 ## Implementation details
 
 ### C++/tomlplusplus
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:20:38`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:24:54`
 - Notes: C++ TOML encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
+- RAM total: 15.62 GB
 - RAM available at start: 14.55 GB
 - RAM usage at start: 6.8%
-- Load avg (1 min): 2.2656
-- CPU governor: performance
+- Load avg (1 min): 2.1318
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/toml/cpp/tomlplusplus/artifacts/report.json`
 
 ### Rust/toml
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:00`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:25:17`
 - Notes: TOML encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.59 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 2.0356
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 2.0317
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/toml/rust/toml/artifacts/report.json`

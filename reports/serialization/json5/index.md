@@ -1,6 +1,6 @@
 # serialization / json5
 
-Generated at 2026-09-02T21:56:38.797673+00:00
+Generated at 2026-09-02T23:36:00.321563+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 0.0309 ms | — |
+| 1 | Rust/json5 | 0.0354 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 0.0309 ms #1 |
+| Rust/json5 | 1 | 1.00 | 0.0354 ms #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 0.0277 ms | — |
+| 1 | Rust/json5 | 0.0311 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 0.0277 ms #1 |
+| Rust/json5 | 1 | 1.00 | 0.0311 ms #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 0.0213 ms | — |
+| 1 | Rust/json5 | 0.0256 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 0.0213 ms #1 |
+| Rust/json5 | 1 | 1.00 | 0.0256 ms #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 0.0718 ms | — |
+| 1 | Rust/json5 | 0.0832 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 0.0718 ms #1 |
+| Rust/json5 | 1 | 1.00 | 0.0832 ms #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 2,428,928 bytes | — |
+| 1 | Rust/json5 | 2,297,856 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 2,428,928 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 2,297,856 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 2,506,752 bytes | — |
+| 1 | Rust/json5 | 2,408,448 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 2,506,752 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 2,408,448 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 2,519,040 bytes | — |
+| 1 | Rust/json5 | 2,424,832 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 2,519,040 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 2,424,832 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 2,482,176 bytes | — |
+| 1 | Rust/json5 | 2,359,296 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 2,482,176 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 2,359,296 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 3,584,000 bytes | — |
+| 1 | Rust/json5 | 3,342,336 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 3,584,000 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 3,342,336 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 3,551,232 bytes | — |
+| 1 | Rust/json5 | 3,362,816 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 3,465,216 bytes | — |
+| 1 | Rust/json5 | 3,362,816 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 3,465,216 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 3,551,232 bytes | — |
+| 1 | Rust/json5 | 3,440,640 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 3,551,232 bytes #1 |
+| Rust/json5 | 1 | 1.00 | 3,440,640 bytes #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 7.28% | — |
+| 1 | Rust/json5 | 2.58% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 7.28% #1 |
+| Rust/json5 | 1 | 1.00 | 2.58% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 15.19% | — |
+| 1 | Rust/json5 | 17.79% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 15.19% #1 |
+| Rust/json5 | 1 | 1.00 | 17.79% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 4.33% | — |
+| 1 | Rust/json5 | 25.11% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 4.33% #1 |
+| Rust/json5 | 1 | 1.00 | 25.11% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 3.84% | — |
+| 1 | Rust/json5 | 7.01% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 3.84% #1 |
+| Rust/json5 | 1 | 1.00 | 7.01% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 35.14% | — |
+| 1 | Rust/json5 | 11.28% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 35.14% #1 |
+| Rust/json5 | 1 | 1.00 | 11.28% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 72.27% | — |
+| 1 | Rust/json5 | 82.67% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 72.27% #1 |
+| Rust/json5 | 1 | 1.00 | 82.67% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 16.64% | — |
+| 1 | Rust/json5 | 117.16% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 16.64% #1 |
+| Rust/json5 | 1 | 1.00 | 117.16% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 17.39% | — |
+| 1 | Rust/json5 | 23.02% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 17.39% #1 |
+| Rust/json5 | 1 | 1.00 | 23.02% #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 1.37x | — |
+| 1 | Rust/json5 | 1.29x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 1.37x #1 |
+| Rust/json5 | 1 | 1.00 | 1.29x #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 1.66x | — |
+| 1 | Rust/json5 | 1.60x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 1.66x #1 |
+| Rust/json5 | 1 | 1.00 | 1.60x #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 2.79x | — |
+| 1 | Rust/json5 | 1.90x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 2.79x #1 |
+| Rust/json5 | 1 | 1.00 | 1.90x #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/json5 | 0.78x | — |
+| 1 | Rust/json5 | 0.80x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/json5 | 1 | 1.00 | 0.78x #1 |
+| Rust/json5 | 1 | 1.00 | 0.80x #1 |
 | C++/json5-cpp | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/json5-cpp | 24 |
 | Artifact size | C++/json5-cpp | 0 bytes |
-| Build time | Rust/json5 | 34.1000 ms |
+| Build time | Rust/json5 | 40.1000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/json5 | 0.0309 ms |
-| Runtime | profile | 10 | Rust/json5 | 0.0277 ms |
-| Runtime | catalog | 10 | Rust/json5 | 0.0213 ms |
-| Runtime | mesh | 100 | Rust/json5 | 0.0718 ms |
+| Runtime | logs | 10 | Rust/json5 | 0.0354 ms |
+| Runtime | profile | 10 | Rust/json5 | 0.0311 ms |
+| Runtime | catalog | 10 | Rust/json5 | 0.0256 ms |
+| Runtime | mesh | 100 | Rust/json5 | 0.0832 ms |
 | Output size | logs | 10 | Rust/json5 | 2,775 bytes |
 | Output size | profile | 10 | Rust/json5 | 2,599 bytes |
 | Output size | catalog | 10 | Rust/json5 | 2,091 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/json5 | 698 bytes |
 | Gzip size | catalog | 10 | Rust/json5 | 619 bytes |
 | Gzip size | mesh | 100 | Rust/json5 | 3,287 bytes |
-| Serialize peak RSS | logs | 10 | Rust/json5 | 2,428,928 bytes |
-| Serialize peak RSS | profile | 10 | Rust/json5 | 2,506,752 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/json5 | 2,519,040 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/json5 | 2,482,176 bytes |
-| Process peak RSS | logs | 10 | Rust/json5 | 3,584,000 bytes |
-| Process peak RSS | profile | 10 | Rust/json5 | 3,551,232 bytes |
-| Process peak RSS | catalog | 10 | Rust/json5 | 3,465,216 bytes |
-| Process peak RSS | mesh | 100 | Rust/json5 | 3,551,232 bytes |
-| Stability (CV) | logs | 10 | Rust/json5 | 7.28% |
-| Stability (CV) | profile | 10 | Rust/json5 | 15.19% |
-| Stability (CV) | catalog | 10 | Rust/json5 | 4.33% |
-| Stability (CV) | mesh | 100 | Rust/json5 | 3.84% |
-| Spread | logs | 10 | Rust/json5 | 35.14% |
-| Spread | profile | 10 | Rust/json5 | 72.27% |
-| Spread | catalog | 10 | Rust/json5 | 16.64% |
-| Spread | mesh | 100 | Rust/json5 | 17.39% |
-| Load/serialize ratio | logs | 10 | Rust/json5 | 1.37x |
-| Load/serialize ratio | profile | 10 | Rust/json5 | 1.66x |
-| Load/serialize ratio | catalog | 10 | Rust/json5 | 2.79x |
-| Load/serialize ratio | mesh | 100 | Rust/json5 | 0.78x |
+| Serialize peak RSS | logs | 10 | Rust/json5 | 2,297,856 bytes |
+| Serialize peak RSS | profile | 10 | Rust/json5 | 2,408,448 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/json5 | 2,424,832 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/json5 | 2,359,296 bytes |
+| Process peak RSS | logs | 10 | Rust/json5 | 3,342,336 bytes |
+| Process peak RSS | profile | 10 | Rust/json5 | 3,362,816 bytes |
+| Process peak RSS | catalog | 10 | Rust/json5 | 3,362,816 bytes |
+| Process peak RSS | mesh | 100 | Rust/json5 | 3,440,640 bytes |
+| Stability (CV) | logs | 10 | Rust/json5 | 2.58% |
+| Stability (CV) | profile | 10 | Rust/json5 | 17.79% |
+| Stability (CV) | catalog | 10 | Rust/json5 | 25.11% |
+| Stability (CV) | mesh | 100 | Rust/json5 | 7.01% |
+| Spread | logs | 10 | Rust/json5 | 11.28% |
+| Spread | profile | 10 | Rust/json5 | 82.67% |
+| Spread | catalog | 10 | Rust/json5 | 117.16% |
+| Spread | mesh | 100 | Rust/json5 | 23.02% |
+| Load/serialize ratio | logs | 10 | Rust/json5 | 1.29x |
+| Load/serialize ratio | profile | 10 | Rust/json5 | 1.60x |
+| Load/serialize ratio | catalog | 10 | Rust/json5 | 1.90x |
+| Load/serialize ratio | mesh | 100 | Rust/json5 | 0.80x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/json5-cpp | profile | 10 | - | - | - | - | - | - | - |
 | C++/json5-cpp | catalog | 10 | - | - | - | - | - | - | - |
 | C++/json5-cpp | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/json5 | logs | 10 | 0.0309 ms (#1) | 2,775 bytes | 848 bytes | 2,428,928 bytes | 3,584,000 bytes | 7.277394628925039 | 1.3689112421049903 |
-| Rust/json5 | profile | 10 | 0.0277 ms (#1) | 2,599 bytes | 698 bytes | 2,506,752 bytes | 3,551,232 bytes | 15.191494072199625 | 1.6553855819974472 |
-| Rust/json5 | catalog | 10 | 0.0213 ms (#1) | 2,091 bytes | 619 bytes | 2,519,040 bytes | 3,465,216 bytes | 4.330290240620718 | 2.785294994355242 |
-| Rust/json5 | mesh | 100 | 0.0718 ms (#1) | 8,439 bytes | 3,287 bytes | 2,482,176 bytes | 3,551,232 bytes | 3.8372418999865245 | 0.775923153188492 |
+| Rust/json5 | logs | 10 | 0.0354 ms (#1) | 2,775 bytes | 848 bytes | 2,297,856 bytes | 3,342,336 bytes | 2.5780638301619483 | 1.2850331713005778 |
+| Rust/json5 | profile | 10 | 0.0311 ms (#1) | 2,599 bytes | 698 bytes | 2,408,448 bytes | 3,362,816 bytes | 17.788364107805695 | 1.6012752411544595 |
+| Rust/json5 | catalog | 10 | 0.0256 ms (#1) | 2,091 bytes | 619 bytes | 2,424,832 bytes | 3,362,816 bytes | 25.10966467164635 | 1.8993664741149099 |
+| Rust/json5 | mesh | 100 | 0.0832 ms (#1) | 8,439 bytes | 3,287 bytes | 2,359,296 bytes | 3,440,640 bytes | 7.014547035344884 | 0.7982786961604228 |
 
 ## Implementation details
 
 ### C++/json5-cpp
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:17:52`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:22:19`
 - Notes: C++ JSON5 encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.59 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.8101
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.64 GB
+- RAM usage at start: 6.3%
+- Load avg (1 min): 1.9453
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/json5/cpp/json5-cpp/artifacts/report.json`
 
 ### Rust/json5
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:18:14`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:22:42`
 - Notes: JSON5 encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.61 GB
-- RAM usage at start: 6.5%
-- Load avg (1 min): 1.7871
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.65 GB
+- RAM usage at start: 6.2%
+- Load avg (1 min): 1.9189
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/json5/rust/json5/artifacts/report.json`

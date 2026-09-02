@@ -1,6 +1,6 @@
 # Benchmark reports
 
-Generated at 2026-09-02T21:56:38.819609+00:00
+Generated at 2026-09-02T23:36:00.339788+00:00
 
 ## Tasks
 
@@ -10,12 +10,19 @@ Generated at 2026-09-02T21:56:38.819609+00:00
 | compression | brotli | 2 | [compression/brotli](compression/brotli/index.html) |
 | compression | bzip2 | 2 | [compression/bzip2](compression/bzip2/index.html) |
 | compression | deflate | 1 | [compression/deflate](compression/deflate/index.html) |
+| compression | fastlz | 2 | [compression/fastlz](compression/fastlz/index.html) |
 | compression | gzip | 1 | [compression/gzip](compression/gzip/index.html) |
+| compression | libdeflate | 2 | [compression/libdeflate](compression/libdeflate/index.html) |
 | compression | lz4 | 2 | [compression/lz4](compression/lz4/index.html) |
+| compression | lzf | 2 | [compression/lzf](compression/lzf/index.html) |
+| compression | lzfse | 2 | [compression/lzfse](compression/lzfse/index.html) |
 | compression | lzma | 2 | [compression/lzma](compression/lzma/index.html) |
+| compression | minilzo | 2 | [compression/minilzo](compression/minilzo/index.html) |
 | compression | snappy | 2 | [compression/snappy](compression/snappy/index.html) |
 | compression | xz | 2 | [compression/xz](compression/xz/index.html) |
 | compression | zlib | 1 | [compression/zlib](compression/zlib/index.html) |
+| compression | zlib-ng | 2 | [compression/zlib-ng](compression/zlib-ng/index.html) |
+| compression | zopfli | 2 | [compression/zopfli](compression/zopfli/index.html) |
 | compression | zstd | 2 | [compression/zstd](compression/zstd/index.html) |
 | decompression | brotli | 2 | [decompression/brotli](decompression/brotli/index.html) |
 | decompression | bzip2 | 2 | [decompression/bzip2](decompression/bzip2/index.html) |

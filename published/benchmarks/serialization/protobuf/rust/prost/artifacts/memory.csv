@@ -1,5 +1,5 @@
 parameter_size,process_peak_memory_bytes
-logs/10,3547136
-profile/10,3465216
-catalog/10,3538944
-mesh/100,3469312
+logs/10,3424256
+profile/10,3362816
+catalog/10,3383296
+mesh/100,3362816

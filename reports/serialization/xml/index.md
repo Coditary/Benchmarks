@@ -1,6 +1,6 @@
 # serialization / xml
 
-Generated at 2026-09-02T21:56:38.816031+00:00
+Generated at 2026-09-02T23:36:00.336566+00:00
 
 ## Runtime leaderboard
 
@@ -12,13 +12,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 0.0099 ms | — |
+| 1 | Rust/quick-xml | 0.0116 ms | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 0.0099 ms #1 |
+| Rust/quick-xml | 1 | 1.00 | 0.0116 ms #1 |
 | C++/pugixml | 0 | - | - |
 
 ### profile
@@ -27,13 +27,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 0.0126 ms | — |
+| 1 | Rust/quick-xml | 0.0131 ms | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 0.0126 ms #1 |
+| Rust/quick-xml | 1 | 1.00 | 0.0131 ms #1 |
 | C++/pugixml | 0 | - | - |
 
 ### catalog
@@ -42,13 +42,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 0.0122 ms | — |
+| 1 | Rust/quick-xml | 0.0121 ms | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 0.0122 ms #1 |
+| Rust/quick-xml | 1 | 1.00 | 0.0121 ms #1 |
 | C++/pugixml | 0 | - | - |
 
 ### mesh
@@ -57,13 +57,13 @@ Implementations ranked fastest-first per domain and tier. `vs best` shows how mu
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 0.1158 ms | — |
+| 1 | Rust/quick-xml | 0.1568 ms | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 0.1158 ms #1 |
+| Rust/quick-xml | 1 | 1.00 | 0.1568 ms #1 |
 | C++/pugixml | 0 | - | - |
 
 ## Output size leaderboard
@@ -204,13 +204,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 2,392,064 bytes | — |
+| 1 | Rust/quick-xml | 2,293,760 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 2,392,064 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 2,293,760 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ### profile
@@ -219,13 +219,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 2,420,736 bytes | — |
+| 1 | Rust/quick-xml | 2,224,128 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 2,420,736 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 2,224,128 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ### catalog
@@ -234,13 +234,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 2,408,448 bytes | — |
+| 1 | Rust/quick-xml | 2,244,608 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 2,408,448 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 2,244,608 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ### mesh
@@ -249,13 +249,13 @@ Lowest RSS during timed serialize loop; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 2,428,928 bytes | — |
+| 1 | Rust/quick-xml | 2,318,336 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 2,428,928 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 2,318,336 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ## Process peak RSS leaderboard
@@ -268,13 +268,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3,592,192 bytes | — |
+| 1 | Rust/quick-xml | 3,342,336 bytes | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3,592,192 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 3,342,336 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ### profile
@@ -283,13 +283,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3,608,576 bytes | — |
+| 1 | Rust/quick-xml | 3,461,120 bytes | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3,608,576 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 3,461,120 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ### catalog
@@ -298,13 +298,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3,608,576 bytes | — |
+| 1 | Rust/quick-xml | 3,362,816 bytes | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3,608,576 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 3,362,816 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ### mesh
@@ -313,13 +313,13 @@ Lowest whole-process RSS (includes load); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3,481,600 bytes | — |
+| 1 | Rust/quick-xml | 3,424,256 bytes | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3,481,600 bytes #1 |
+| Rust/quick-xml | 1 | 1.00 | 3,424,256 bytes #1 |
 | C++/pugixml | 0 | - | - |
 
 ## Stability (CV) leaderboard
@@ -332,13 +332,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 5.55% | — |
+| 1 | Rust/quick-xml | 39.09% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 5.55% #1 |
+| Rust/quick-xml | 1 | 1.00 | 39.09% #1 |
 | C++/pugixml | 0 | - | - |
 
 ### profile
@@ -347,13 +347,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 4.09% | — |
+| 1 | Rust/quick-xml | 5.80% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 4.09% #1 |
+| Rust/quick-xml | 1 | 1.00 | 5.80% #1 |
 | C++/pugixml | 0 | - | - |
 
 ### catalog
@@ -362,13 +362,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 33.78% | — |
+| 1 | Rust/quick-xml | 7.57% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 33.78% #1 |
+| Rust/quick-xml | 1 | 1.00 | 7.57% #1 |
 | C++/pugixml | 0 | - | - |
 
 ### mesh
@@ -377,13 +377,13 @@ Lowest coefficient of variation (stddev/mean); lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 6.34% | — |
+| 1 | Rust/quick-xml | 8.83% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 6.34% #1 |
+| Rust/quick-xml | 1 | 1.00 | 8.83% #1 |
 | C++/pugixml | 0 | - | - |
 
 ## Spread leaderboard
@@ -396,13 +396,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 20.34% | — |
+| 1 | Rust/quick-xml | 180.88% | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 20.34% #1 |
+| Rust/quick-xml | 1 | 1.00 | 180.88% #1 |
 | C++/pugixml | 0 | - | - |
 
 ### profile
@@ -411,13 +411,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 15.77% | — |
+| 1 | Rust/quick-xml | 21.24% | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 15.77% #1 |
+| Rust/quick-xml | 1 | 1.00 | 21.24% #1 |
 | C++/pugixml | 0 | - | - |
 
 ### catalog
@@ -426,13 +426,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 156.43% | — |
+| 1 | Rust/quick-xml | 26.45% | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 156.43% #1 |
+| Rust/quick-xml | 1 | 1.00 | 26.45% #1 |
 | C++/pugixml | 0 | - | - |
 
 ### mesh
@@ -441,13 +441,13 @@ Lowest min-max spread relative to mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 25.65% | — |
+| 1 | Rust/quick-xml | 39.81% | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 25.65% #1 |
+| Rust/quick-xml | 1 | 1.00 | 39.81% #1 |
 | C++/pugixml | 0 | - | - |
 
 ## Load/serialize ratio leaderboard
@@ -460,13 +460,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3.92x | — |
+| 1 | Rust/quick-xml | 4.17x | — |
 
 #### logs comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3.92x #1 |
+| Rust/quick-xml | 1 | 1.00 | 4.17x #1 |
 | C++/pugixml | 0 | - | - |
 
 ### profile
@@ -475,13 +475,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3.50x | — |
+| 1 | Rust/quick-xml | 3.79x | — |
 
 #### profile comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3.50x #1 |
+| Rust/quick-xml | 1 | 1.00 | 3.79x #1 |
 | C++/pugixml | 0 | - | - |
 
 ### catalog
@@ -490,13 +490,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 3.25x | — |
+| 1 | Rust/quick-xml | 3.89x | — |
 
 #### catalog comparison matrix
 
 | Implementation | Wins | Avg rank | 10 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 3.25x #1 |
+| Rust/quick-xml | 1 | 1.00 | 3.89x #1 |
 | C++/pugixml | 0 | - | - |
 
 ### mesh
@@ -505,13 +505,13 @@ Lowest load time relative to serialize mean; lower is better.
 
 | Rank | Implementation | Value | vs best |
 | ---: | --- | ---: | ---: |
-| 1 | Rust/quick-xml | 0.46x | — |
+| 1 | Rust/quick-xml | 0.42x | — |
 
 #### mesh comparison matrix
 
 | Implementation | Wins | Avg rank | 100 |
 | --- | ---: | ---: | ---: |
-| Rust/quick-xml | 1 | 1.00 | 0.46x #1 |
+| Rust/quick-xml | 1 | 1.00 | 0.42x #1 |
 | C++/pugixml | 0 | - | - |
 
 ## Static metric winners
@@ -520,16 +520,16 @@ Lowest load time relative to serialize mean; lower is better.
 | --- | --- | --- |
 | Lines of code | C++/pugixml | 25 |
 | Artifact size | C++/pugixml | 0 bytes |
-| Build time | Rust/quick-xml | 30.1000 ms |
+| Build time | Rust/quick-xml | 36.7000 ms |
 
 ## Metric winners (summary)
 
 | Metric | Domain | Tier | Winner | Value |
 | --- | --- | --- | --- | --- |
-| Runtime | logs | 10 | Rust/quick-xml | 0.0099 ms |
-| Runtime | profile | 10 | Rust/quick-xml | 0.0126 ms |
-| Runtime | catalog | 10 | Rust/quick-xml | 0.0122 ms |
-| Runtime | mesh | 100 | Rust/quick-xml | 0.1158 ms |
+| Runtime | logs | 10 | Rust/quick-xml | 0.0116 ms |
+| Runtime | profile | 10 | Rust/quick-xml | 0.0131 ms |
+| Runtime | catalog | 10 | Rust/quick-xml | 0.0121 ms |
+| Runtime | mesh | 100 | Rust/quick-xml | 0.1568 ms |
 | Output size | logs | 10 | Rust/quick-xml | 3,852 bytes |
 | Output size | profile | 10 | Rust/quick-xml | 3,775 bytes |
 | Output size | catalog | 10 | Rust/quick-xml | 3,250 bytes |
@@ -538,26 +538,26 @@ Lowest load time relative to serialize mean; lower is better.
 | Gzip size | profile | 10 | Rust/quick-xml | 816 bytes |
 | Gzip size | catalog | 10 | Rust/quick-xml | 777 bytes |
 | Gzip size | mesh | 100 | Rust/quick-xml | 4,185 bytes |
-| Serialize peak RSS | logs | 10 | Rust/quick-xml | 2,392,064 bytes |
-| Serialize peak RSS | profile | 10 | Rust/quick-xml | 2,420,736 bytes |
-| Serialize peak RSS | catalog | 10 | Rust/quick-xml | 2,408,448 bytes |
-| Serialize peak RSS | mesh | 100 | Rust/quick-xml | 2,428,928 bytes |
-| Process peak RSS | logs | 10 | Rust/quick-xml | 3,592,192 bytes |
-| Process peak RSS | profile | 10 | Rust/quick-xml | 3,608,576 bytes |
-| Process peak RSS | catalog | 10 | Rust/quick-xml | 3,608,576 bytes |
-| Process peak RSS | mesh | 100 | Rust/quick-xml | 3,481,600 bytes |
-| Stability (CV) | logs | 10 | Rust/quick-xml | 5.55% |
-| Stability (CV) | profile | 10 | Rust/quick-xml | 4.09% |
-| Stability (CV) | catalog | 10 | Rust/quick-xml | 33.78% |
-| Stability (CV) | mesh | 100 | Rust/quick-xml | 6.34% |
-| Spread | logs | 10 | Rust/quick-xml | 20.34% |
-| Spread | profile | 10 | Rust/quick-xml | 15.77% |
-| Spread | catalog | 10 | Rust/quick-xml | 156.43% |
-| Spread | mesh | 100 | Rust/quick-xml | 25.65% |
-| Load/serialize ratio | logs | 10 | Rust/quick-xml | 3.92x |
-| Load/serialize ratio | profile | 10 | Rust/quick-xml | 3.50x |
-| Load/serialize ratio | catalog | 10 | Rust/quick-xml | 3.25x |
-| Load/serialize ratio | mesh | 100 | Rust/quick-xml | 0.46x |
+| Serialize peak RSS | logs | 10 | Rust/quick-xml | 2,293,760 bytes |
+| Serialize peak RSS | profile | 10 | Rust/quick-xml | 2,224,128 bytes |
+| Serialize peak RSS | catalog | 10 | Rust/quick-xml | 2,244,608 bytes |
+| Serialize peak RSS | mesh | 100 | Rust/quick-xml | 2,318,336 bytes |
+| Process peak RSS | logs | 10 | Rust/quick-xml | 3,342,336 bytes |
+| Process peak RSS | profile | 10 | Rust/quick-xml | 3,461,120 bytes |
+| Process peak RSS | catalog | 10 | Rust/quick-xml | 3,362,816 bytes |
+| Process peak RSS | mesh | 100 | Rust/quick-xml | 3,424,256 bytes |
+| Stability (CV) | logs | 10 | Rust/quick-xml | 39.09% |
+| Stability (CV) | profile | 10 | Rust/quick-xml | 5.80% |
+| Stability (CV) | catalog | 10 | Rust/quick-xml | 7.57% |
+| Stability (CV) | mesh | 100 | Rust/quick-xml | 8.83% |
+| Spread | logs | 10 | Rust/quick-xml | 180.88% |
+| Spread | profile | 10 | Rust/quick-xml | 21.24% |
+| Spread | catalog | 10 | Rust/quick-xml | 26.45% |
+| Spread | mesh | 100 | Rust/quick-xml | 39.81% |
+| Load/serialize ratio | logs | 10 | Rust/quick-xml | 4.17x |
+| Load/serialize ratio | profile | 10 | Rust/quick-xml | 3.79x |
+| Load/serialize ratio | catalog | 10 | Rust/quick-xml | 3.89x |
+| Load/serialize ratio | mesh | 100 | Rust/quick-xml | 0.42x |
 
 ## Per-implementation results
 
@@ -567,39 +567,39 @@ Lowest load time relative to serialize mean; lower is better.
 | C++/pugixml | profile | 10 | - | - | - | - | - | - | - |
 | C++/pugixml | catalog | 10 | - | - | - | - | - | - | - |
 | C++/pugixml | mesh | 100 | - | - | - | - | - | - | - |
-| Rust/quick-xml | logs | 10 | 0.0099 ms (#1) | 3,852 bytes | 963 bytes | 2,392,064 bytes | 3,592,192 bytes | 5.549654623070452 | 3.9166780453021395 |
-| Rust/quick-xml | profile | 10 | 0.0126 ms (#1) | 3,775 bytes | 816 bytes | 2,420,736 bytes | 3,608,576 bytes | 4.094128987234668 | 3.4973985473076055 |
-| Rust/quick-xml | catalog | 10 | 0.0122 ms (#1) | 3,250 bytes | 777 bytes | 2,408,448 bytes | 3,608,576 bytes | 33.78196907281012 | 3.2505822592066544 |
-| Rust/quick-xml | mesh | 100 | 0.1158 ms (#1) | 12,923 bytes | 4,185 bytes | 2,428,928 bytes | 3,481,600 bytes | 6.335722818034038 | 0.4582797428347092 |
+| Rust/quick-xml | logs | 10 | 0.0116 ms (#1) | 3,852 bytes | 963 bytes | 2,293,760 bytes | 3,342,336 bytes | 39.09423202416225 | 4.173315870198357 |
+| Rust/quick-xml | profile | 10 | 0.0131 ms (#1) | 3,775 bytes | 816 bytes | 2,224,128 bytes | 3,461,120 bytes | 5.8004355153156535 | 3.786213021375635 |
+| Rust/quick-xml | catalog | 10 | 0.0121 ms (#1) | 3,250 bytes | 777 bytes | 2,244,608 bytes | 3,362,816 bytes | 7.5718416851663095 | 3.886195891097102 |
+| Rust/quick-xml | mesh | 100 | 0.1568 ms (#1) | 12,923 bytes | 4,185 bytes | 2,318,336 bytes | 3,424,256 bytes | 8.834402869711859 | 0.4155261669930703 |
 
 ## Implementation details
 
 ### C++/pugixml
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:44`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:26:02`
 - Notes: C++ XML encode from canonical dataset.
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.57 GB
-- RAM usage at start: 6.7%
-- Load avg (1 min): 1.7671
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.61 GB
+- RAM usage at start: 6.5%
+- Load avg (1 min): 1.6904
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/xml/cpp/pugixml/artifacts/report.json`
 
 ### Rust/quick-xml
 
-- Git hash: `9de0e1c`
-- Recorded at: `2026-09-02 21:21:59`
+- Git hash: `db73122`
+- Recorded at: `2026-09-02 23:26:19`
 - Notes: XML encode from canonical dataset (untimed load, timed serialize).
-- CPU: INTEL(R) XEON(R) PLATINUM 8573C
+- CPU: AMD EPYC 9V74 80-Core Processor
 - OS: Linux 6.17.0-1022-azure
-- RAM total: 15.61 GB
-- RAM available at start: 14.59 GB
-- RAM usage at start: 6.6%
-- Load avg (1 min): 1.665
-- CPU governor: performance
+- RAM total: 15.62 GB
+- RAM available at start: 14.62 GB
+- RAM usage at start: 6.4%
+- Load avg (1 min): 1.6729
+- CPU governor: unknown
 - CI run: True
 - Source report: `benchmarks/serialization/xml/rust/quick-xml/artifacts/report.json`

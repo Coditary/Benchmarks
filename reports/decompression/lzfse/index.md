@@ -1,6 +1,6 @@
 # decompression / lzfse
 
-Generated at 2026-09-02T21:56:38.742017+00:00
+Generated at 2026-09-02T23:36:00.275952+00:00
 
 ## Runtime leaderboard
 
