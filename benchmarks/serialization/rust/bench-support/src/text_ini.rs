@@ -12,6 +12,7 @@ pub fn encode(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => encode_profile(value),
         Dataset::Mesh(value) => encode_mesh(value),
         Dataset::Catalog(value) => encode_catalog(value),
+        Dataset::Ast(_) => panic!("ast domain is not supported for ini wire format"),
     };
     text.into_bytes()
 }
@@ -23,6 +24,7 @@ pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(decode_profile(text)),
         "mesh" => DecodedDataset::Mesh(decode_mesh(text)),
         "catalog" => DecodedDataset::Catalog(decode_catalog(text)),
+        "ast" => panic!("ast domain is not supported for ini wire format"),
         other => panic!("unknown dataset domain: {other}"),
     }
 }

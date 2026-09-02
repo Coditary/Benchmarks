@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 
+use bench_support::ast::{AstDataset, AstNode, AstSpan};
 use bench_support::catalog::{CatalogDataset, Product};
 use bench_support::deserialize::DecodedDataset;
 use bench_support::logs::{LogDataset, LogEntry, LogMetadata};
@@ -10,8 +11,8 @@ use bench_support::profile::{
 use bench_support::shared::domain_from_spec;
 
 use crate::benchmark_capnp::{
-    catalog_dataset, log_dataset, log_entry, log_metadata, mesh_dataset, product,
-    profile as capnp_profile, profile_dataset,
+    ast_dataset, ast_node, catalog_dataset, log_dataset, log_entry, log_metadata, mesh_dataset,
+    product, profile as capnp_profile, profile_dataset,
 };
 
 pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
@@ -20,6 +21,7 @@ pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(materialize_profile(bytes)),
         "mesh" => DecodedDataset::Mesh(materialize_mesh(bytes)),
         "catalog" => DecodedDataset::Catalog(materialize_catalog(bytes)),
+        "ast" => DecodedDataset::Ast(materialize_ast(bytes)),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -192,5 +194,45 @@ fn materialize_product(product: product::Reader<'_>) -> Product {
         in_stock: product.get_in_stock(),
         tags,
         attributes,
+    }
+}
+
+fn materialize_ast(bytes: &[u8]) -> AstDataset {
+    let message = read_message(bytes);
+    let root = message
+        .get_root::<ast_dataset::Reader>()
+        .expect("root");
+    let trees_reader = root.get_trees().expect("trees");
+    let mut trees = Vec::with_capacity(trees_reader.len() as usize);
+    for tree in trees_reader {
+        trees.push(materialize_ast_node(tree));
+    }
+    AstDataset {
+        version: root.get_version(),
+        domain: read_text(root.get_domain().expect("domain")),
+        tier: read_text(root.get_tier().expect("tier")),
+        max_depth: root.get_max_depth(),
+        trees,
+    }
+}
+
+fn materialize_ast_node(node: ast_node::Reader<'_>) -> AstNode {
+    let span = node.get_span().expect("span");
+    let children_reader = node.get_children().expect("children");
+    let mut children = Vec::with_capacity(children_reader.len() as usize);
+    for child in children_reader {
+        children.push(Box::new(materialize_ast_node(child)));
+    }
+    let value = read_text(node.get_value().expect("value"));
+    AstNode {
+        node_type: read_text(node.get_node_type().expect("node_type")),
+        id: node.get_id(),
+        name: read_text(node.get_name().expect("name")),
+        span: AstSpan {
+            line: span.get_line(),
+            column: span.get_column(),
+        },
+        value: if value.is_empty() { None } else { Some(value) },
+        children,
     }
 }

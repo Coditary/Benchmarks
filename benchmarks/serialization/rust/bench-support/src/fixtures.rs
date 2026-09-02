@@ -167,6 +167,7 @@ pub fn record_count_field(domain: &str) -> &'static str {
         "profile" => "profile_count",
         "catalog" => "product_count",
         "mesh" => "vertex_count",
+        "ast" => "tree_count",
         other => panic!("unknown dataset domain: {other}"),
     }
 }

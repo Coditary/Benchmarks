@@ -3,6 +3,7 @@
 //! Every implementation should return `DecodedDataset` with fully materialized
 //! owned Rust structs so comparisons use the same end state.
 
+use crate::ast::AstDataset;
 use crate::catalog::CatalogDataset;
 use crate::logs::LogDataset;
 use crate::mesh::MeshDataset;
@@ -15,6 +16,7 @@ pub enum DecodedDataset {
     Profile(ProfileDataset),
     Mesh(MeshDataset),
     Catalog(CatalogDataset),
+    Ast(AstDataset),
 }
 
 pub fn json(spec: &str, bytes: &[u8]) -> DecodedDataset {
@@ -23,6 +25,7 @@ pub fn json(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(serde_json::from_slice(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(serde_json::from_slice(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(serde_json::from_slice(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(serde_json::from_slice(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -43,6 +46,9 @@ pub fn simd_json(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "catalog" => DecodedDataset::Catalog(
             simd_json::serde::from_slice(&mut buffer).expect("decode"),
         ),
+        "ast" => DecodedDataset::Ast(
+            simd_json::serde::from_slice(&mut buffer).expect("decode"),
+        ),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -54,6 +60,7 @@ pub fn bitcode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(::bitcode::decode(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(::bitcode::decode(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(::bitcode::decode(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(::bitcode::decode(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -72,6 +79,9 @@ pub fn rkyv(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "catalog" => {
             DecodedDataset::Catalog(from_bytes::<CatalogDataset, Error>(bytes).expect("decode"))
         }
+        "ast" => {
+            DecodedDataset::Ast(from_bytes::<AstDataset, Error>(bytes).expect("decode"))
+        }
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -83,6 +93,7 @@ pub fn flexbuffers(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(flexbuffers::from_slice(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(flexbuffers::from_slice(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(flexbuffers::from_slice(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(flexbuffers::from_slice(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -94,6 +105,7 @@ pub fn rmp_serde(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(rmp_serde::from_slice(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(rmp_serde::from_slice(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(rmp_serde::from_slice(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(rmp_serde::from_slice(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -105,6 +117,7 @@ pub fn yaml(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(serde_yaml::from_slice(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(serde_yaml::from_slice(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(serde_yaml::from_slice(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(serde_yaml::from_slice(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -117,6 +130,7 @@ pub fn toml_format(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(toml::from_str(text).expect("decode")),
         "mesh" => DecodedDataset::Mesh(toml::from_str(text).expect("decode")),
         "catalog" => DecodedDataset::Catalog(toml::from_str(text).expect("decode")),
+        "ast" => DecodedDataset::Ast(toml::from_str(text).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -143,6 +157,7 @@ pub fn bson(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(::bson::from_slice(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(::bson::from_slice(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(::bson::from_slice(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(::bson::from_slice(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -156,6 +171,7 @@ pub fn cbor(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(from_reader(Cursor::new(bytes)).expect("decode")),
         "mesh" => DecodedDataset::Mesh(from_reader(Cursor::new(bytes)).expect("decode")),
         "catalog" => DecodedDataset::Catalog(from_reader(Cursor::new(bytes)).expect("decode")),
+        "ast" => DecodedDataset::Ast(from_reader(Cursor::new(bytes)).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -178,6 +194,7 @@ pub fn json5_format(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(::json5::from_str(text).expect("decode")),
         "mesh" => DecodedDataset::Mesh(::json5::from_str(text).expect("decode")),
         "catalog" => DecodedDataset::Catalog(::json5::from_str(text).expect("decode")),
+        "ast" => DecodedDataset::Ast(::json5::from_str(text).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -190,6 +207,7 @@ pub fn hjson_format(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(::serde_hjson::from_str(text).expect("decode")),
         "mesh" => DecodedDataset::Mesh(::serde_hjson::from_str(text).expect("decode")),
         "catalog" => DecodedDataset::Catalog(::serde_hjson::from_str(text).expect("decode")),
+        "ast" => DecodedDataset::Ast(::serde_hjson::from_str(text).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -201,6 +219,7 @@ pub fn cjson(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(sonic_rs::from_slice(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(sonic_rs::from_slice(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(sonic_rs::from_slice(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(sonic_rs::from_slice(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -212,6 +231,7 @@ pub fn plist_format(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(::plist::from_reader_xml(bytes).expect("decode")),
         "mesh" => DecodedDataset::Mesh(::plist::from_reader_xml(bytes).expect("decode")),
         "catalog" => DecodedDataset::Catalog(::plist::from_reader_xml(bytes).expect("decode")),
+        "ast" => DecodedDataset::Ast(::plist::from_reader_xml(bytes).expect("decode")),
         other => panic!("unknown dataset domain: {other}"),
     }
 }

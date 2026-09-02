@@ -1,3 +1,4 @@
+use bench_support::ast::{AstDataset, AstNode};
 use bench_support::catalog::CatalogDataset;
 use bench_support::dataset::Dataset;
 use bench_support::logs::{LogDataset, LogEntry, LogMetadata};
@@ -5,8 +6,8 @@ use bench_support::mesh::MeshDataset;
 use bench_support::profile::ProfileDataset;
 
 use crate::benchmark_capnp::{
-    catalog_dataset, log_dataset, log_entry, log_metadata, mesh_dataset, product, profile,
-    profile_dataset,
+    ast_dataset, ast_node, catalog_dataset, log_dataset, log_entry, log_metadata, mesh_dataset,
+    product, profile, profile_dataset,
 };
 
 pub fn serialize(data: &Dataset) -> Vec<u8> {
@@ -15,6 +16,7 @@ pub fn serialize(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => serialize_profile(value),
         Dataset::Mesh(value) => serialize_mesh(value),
         Dataset::Catalog(value) => serialize_catalog(value),
+        Dataset::Ast(value) => serialize_ast(value),
     }
 }
 
@@ -89,6 +91,22 @@ fn serialize_catalog(data: &CatalogDataset) -> Vec<u8> {
     write_message(message)
 }
 
+fn serialize_ast(data: &AstDataset) -> Vec<u8> {
+    let mut message = ::capnp::message::Builder::new_default();
+    {
+        let mut root = message.init_root::<ast_dataset::Builder>();
+        root.set_version(data.version);
+        root.set_domain(&data.domain);
+        root.set_tier(&data.tier);
+        root.set_max_depth(data.max_depth);
+        let mut trees = root.reborrow().init_trees(data.trees.len() as u32);
+        for (index, tree) in data.trees.iter().enumerate() {
+            populate_ast_node(&mut trees.reborrow().get(index as u32), tree);
+        }
+    }
+    write_message(message)
+}
+
 fn write_message(message: ::capnp::message::Builder<::capnp::message::HeapAllocator>) -> Vec<u8> {
     let mut buffer = Vec::new();
     capnp::serialize::write_message(&mut buffer, &message).expect("serialize output");
@@ -149,5 +167,23 @@ fn populate_product(builder: &mut product::Builder, product: &bench_support::cat
         let mut item = attributes.reborrow().get(index as u32);
         item.set_key(key);
         item.set_value(value);
+    }
+}
+
+fn populate_ast_node(builder: &mut ast_node::Builder, node: &AstNode) {
+    builder.set_node_type(&node.node_type);
+    builder.set_id(node.id);
+    builder.set_name(&node.name);
+    let mut span = builder.reborrow().init_span();
+    span.set_line(node.span.line);
+    span.set_column(node.span.column);
+    if let Some(value) = &node.value {
+        builder.set_value(value);
+    }
+    let mut children = builder
+        .reborrow()
+        .init_children(node.children.len() as u32);
+    for (index, child) in node.children.iter().enumerate() {
+        populate_ast_node(&mut children.reborrow().get(index as u32), child);
     }
 }

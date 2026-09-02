@@ -127,6 +127,10 @@ stored in git.
 Synthetic compression inputs (`random`, `sparse`, `english`, `repetitive`) live under
 `datasets/compression/` because they are not derived from the structured canonical datasets.
 
+The `ast` domain provides AST-like JSON with a fixed maximum nesting depth of 10. Tiers follow record
+counts up to `10k` (`10`, `100`, `1000`, `10k`): each tier contains that many trees with mixed shapes
+(chains, branching, shallow-wide) so payloads are not uniform.
+
 Optional: materialize fixture files for inspection only:
 
 ```bash

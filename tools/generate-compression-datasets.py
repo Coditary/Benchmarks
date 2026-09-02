@@ -36,6 +36,13 @@ BYTE_TIERS = {
     "4m": 4_194_304,
 }
 
+AST_TIERS = {
+    "10": 10,
+    "100": 100,
+    "1000": 1_000,
+    "10k": 10_000,
+}
+
 RECORD_DOMAINS = ("logs", "profile", "catalog")
 SYNTHETIC_DOMAINS = ("random", "sparse", "english", "repetitive")
 
@@ -76,6 +83,7 @@ def reference_shared(domain: str, tier: str) -> dict:
         "profile": "structured_nested_json",
         "catalog": "structured_key_value_catalog",
         "mesh": "numeric_float_arrays",
+        "ast": "deeply_nested_ast_json",
     }
     return {
         "domain": domain,
@@ -128,6 +136,9 @@ def main() -> None:
         for tier in RECORD_TIERS:
             entries.append(reference_shared(domain, tier))
 
+    for tier in AST_TIERS:
+        entries.append(reference_shared("ast", tier))
+
     for tier in MESH_TIERS:
         entries.append(reference_shared("mesh", tier))
 
@@ -163,6 +174,7 @@ def main() -> None:
             "profile": {"profile": "structured_nested_json", "record_field": "profile_count"},
             "catalog": {"profile": "structured_key_value_catalog", "record_field": "product_count"},
             "mesh": {"profile": "numeric_float_arrays", "record_field": "vertex_count"},
+            "ast": {"profile": "deeply_nested_ast_json", "record_field": "tree_count"},
             "random": {"profile": "high_entropy_random", "record_field": "payload_bytes"},
             "sparse": {"profile": "sparse_mostly_zeros", "record_field": "payload_bytes"},
             "english": {"profile": "natural_language_text", "record_field": "payload_bytes"},

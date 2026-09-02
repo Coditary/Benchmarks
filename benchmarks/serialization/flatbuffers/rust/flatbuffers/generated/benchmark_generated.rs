@@ -1930,6 +1930,467 @@ impl core::fmt::Debug for CatalogDataset<'_> {
       ds.finish()
   }
 }
+pub enum AstSpanOffset {}
+#[derive(Copy, Clone, PartialEq)]
+
+pub struct AstSpan<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for AstSpan<'a> {
+  type Inner = AstSpan<'a>;
+  #[inline]
+  unsafe fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    Self { _tab: flatbuffers::Table::new(buf, loc) }
+  }
+}
+
+impl<'a> AstSpan<'a> {
+  pub const VT_LINE: flatbuffers::VOffsetT = 4;
+  pub const VT_COLUMN: flatbuffers::VOffsetT = 6;
+
+  #[inline]
+  pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+    AstSpan { _tab: table }
+  }
+  #[allow(unused_mut)]
+  pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
+    _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
+    args: &'args AstSpanArgs
+  ) -> flatbuffers::WIPOffset<AstSpan<'bldr>> {
+    let mut builder = AstSpanBuilder::new(_fbb);
+    builder.add_column(args.column);
+    builder.add_line(args.line);
+    builder.finish()
+  }
+
+
+  #[inline]
+  pub fn line(&self) -> u32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<u32>(AstSpan::VT_LINE, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn column(&self) -> u32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<u32>(AstSpan::VT_COLUMN, Some(0)).unwrap()}
+  }
+}
+
+impl flatbuffers::Verifiable for AstSpan<'_> {
+  #[inline]
+  fn run_verifier(
+    v: &mut flatbuffers::Verifier, pos: usize
+  ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
+    use self::flatbuffers::Verifiable;
+    v.visit_table(pos)?
+     .visit_field::<u32>("line", Self::VT_LINE, false)?
+     .visit_field::<u32>("column", Self::VT_COLUMN, false)?
+     .finish();
+    Ok(())
+  }
+}
+pub struct AstSpanArgs {
+    pub line: u32,
+    pub column: u32,
+}
+impl<'a> Default for AstSpanArgs {
+  #[inline]
+  fn default() -> Self {
+    AstSpanArgs {
+      line: 0,
+      column: 0,
+    }
+  }
+}
+
+pub struct AstSpanBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a, A>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AstSpanBuilder<'a, 'b, A> {
+  #[inline]
+  pub fn add_line(&mut self, line: u32) {
+    self.fbb_.push_slot::<u32>(AstSpan::VT_LINE, line, 0);
+  }
+  #[inline]
+  pub fn add_column(&mut self, column: u32) {
+    self.fbb_.push_slot::<u32>(AstSpan::VT_COLUMN, column, 0);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> AstSpanBuilder<'a, 'b, A> {
+    let start = _fbb.start_table();
+    AstSpanBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<AstSpan<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
+impl core::fmt::Debug for AstSpan<'_> {
+  fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    let mut ds = f.debug_struct("AstSpan");
+      ds.field("line", &self.line());
+      ds.field("column", &self.column());
+      ds.finish()
+  }
+}
+pub enum AstNodeOffset {}
+#[derive(Copy, Clone, PartialEq)]
+
+pub struct AstNode<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for AstNode<'a> {
+  type Inner = AstNode<'a>;
+  #[inline]
+  unsafe fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    Self { _tab: flatbuffers::Table::new(buf, loc) }
+  }
+}
+
+impl<'a> AstNode<'a> {
+  pub const VT_NODE_TYPE: flatbuffers::VOffsetT = 4;
+  pub const VT_ID: flatbuffers::VOffsetT = 6;
+  pub const VT_NAME: flatbuffers::VOffsetT = 8;
+  pub const VT_SPAN: flatbuffers::VOffsetT = 10;
+  pub const VT_VALUE: flatbuffers::VOffsetT = 12;
+  pub const VT_CHILDREN: flatbuffers::VOffsetT = 14;
+
+  #[inline]
+  pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+    AstNode { _tab: table }
+  }
+  #[allow(unused_mut)]
+  pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
+    _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
+    args: &'args AstNodeArgs<'args>
+  ) -> flatbuffers::WIPOffset<AstNode<'bldr>> {
+    let mut builder = AstNodeBuilder::new(_fbb);
+    builder.add_id(args.id);
+    if let Some(x) = args.children { builder.add_children(x); }
+    if let Some(x) = args.value { builder.add_value(x); }
+    if let Some(x) = args.span { builder.add_span(x); }
+    if let Some(x) = args.name { builder.add_name(x); }
+    if let Some(x) = args.node_type { builder.add_node_type(x); }
+    builder.finish()
+  }
+
+
+  #[inline]
+  pub fn node_type(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(AstNode::VT_NODE_TYPE, None)}
+  }
+  #[inline]
+  pub fn id(&self) -> u64 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<u64>(AstNode::VT_ID, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn name(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(AstNode::VT_NAME, None)}
+  }
+  #[inline]
+  pub fn span(&self) -> Option<AstSpan<'a>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<AstSpan>>(AstNode::VT_SPAN, None)}
+  }
+  #[inline]
+  pub fn value(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(AstNode::VT_VALUE, None)}
+  }
+  #[inline]
+  pub fn children(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<AstNode<'a>>>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<AstNode>>>>(AstNode::VT_CHILDREN, None)}
+  }
+}
+
+impl flatbuffers::Verifiable for AstNode<'_> {
+  #[inline]
+  fn run_verifier(
+    v: &mut flatbuffers::Verifier, pos: usize
+  ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
+    use self::flatbuffers::Verifiable;
+    v.visit_table(pos)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("node_type", Self::VT_NODE_TYPE, false)?
+     .visit_field::<u64>("id", Self::VT_ID, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("name", Self::VT_NAME, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<AstSpan>>("span", Self::VT_SPAN, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("value", Self::VT_VALUE, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<AstNode>>>>("children", Self::VT_CHILDREN, false)?
+     .finish();
+    Ok(())
+  }
+}
+pub struct AstNodeArgs<'a> {
+    pub node_type: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub id: u64,
+    pub name: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub span: Option<flatbuffers::WIPOffset<AstSpan<'a>>>,
+    pub value: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub children: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<AstNode<'a>>>>>,
+}
+impl<'a> Default for AstNodeArgs<'a> {
+  #[inline]
+  fn default() -> Self {
+    AstNodeArgs {
+      node_type: None,
+      id: 0,
+      name: None,
+      span: None,
+      value: None,
+      children: None,
+    }
+  }
+}
+
+pub struct AstNodeBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a, A>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AstNodeBuilder<'a, 'b, A> {
+  #[inline]
+  pub fn add_node_type(&mut self, node_type: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstNode::VT_NODE_TYPE, node_type);
+  }
+  #[inline]
+  pub fn add_id(&mut self, id: u64) {
+    self.fbb_.push_slot::<u64>(AstNode::VT_ID, id, 0);
+  }
+  #[inline]
+  pub fn add_name(&mut self, name: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstNode::VT_NAME, name);
+  }
+  #[inline]
+  pub fn add_span(&mut self, span: flatbuffers::WIPOffset<AstSpan<'b >>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<AstSpan>>(AstNode::VT_SPAN, span);
+  }
+  #[inline]
+  pub fn add_value(&mut self, value: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstNode::VT_VALUE, value);
+  }
+  #[inline]
+  pub fn add_children(&mut self, children: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<AstNode<'b >>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstNode::VT_CHILDREN, children);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> AstNodeBuilder<'a, 'b, A> {
+    let start = _fbb.start_table();
+    AstNodeBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<AstNode<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
+impl core::fmt::Debug for AstNode<'_> {
+  fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    let mut ds = f.debug_struct("AstNode");
+      ds.field("node_type", &self.node_type());
+      ds.field("id", &self.id());
+      ds.field("name", &self.name());
+      ds.field("span", &self.span());
+      ds.field("value", &self.value());
+      ds.field("children", &self.children());
+      ds.finish()
+  }
+}
+pub enum AstDatasetOffset {}
+#[derive(Copy, Clone, PartialEq)]
+
+pub struct AstDataset<'a> {
+  pub _tab: flatbuffers::Table<'a>,
+}
+
+impl<'a> flatbuffers::Follow<'a> for AstDataset<'a> {
+  type Inner = AstDataset<'a>;
+  #[inline]
+  unsafe fn follow(buf: &'a [u8], loc: usize) -> Self::Inner {
+    Self { _tab: flatbuffers::Table::new(buf, loc) }
+  }
+}
+
+impl<'a> AstDataset<'a> {
+  pub const VT_VERSION: flatbuffers::VOffsetT = 4;
+  pub const VT_DOMAIN: flatbuffers::VOffsetT = 6;
+  pub const VT_TIER: flatbuffers::VOffsetT = 8;
+  pub const VT_MAX_DEPTH: flatbuffers::VOffsetT = 10;
+  pub const VT_TREES: flatbuffers::VOffsetT = 12;
+
+  #[inline]
+  pub unsafe fn init_from_table(table: flatbuffers::Table<'a>) -> Self {
+    AstDataset { _tab: table }
+  }
+  #[allow(unused_mut)]
+  pub fn create<'bldr: 'args, 'args: 'mut_bldr, 'mut_bldr, A: flatbuffers::Allocator + 'bldr>(
+    _fbb: &'mut_bldr mut flatbuffers::FlatBufferBuilder<'bldr, A>,
+    args: &'args AstDatasetArgs<'args>
+  ) -> flatbuffers::WIPOffset<AstDataset<'bldr>> {
+    let mut builder = AstDatasetBuilder::new(_fbb);
+    if let Some(x) = args.trees { builder.add_trees(x); }
+    builder.add_max_depth(args.max_depth);
+    if let Some(x) = args.tier { builder.add_tier(x); }
+    if let Some(x) = args.domain { builder.add_domain(x); }
+    builder.add_version(args.version);
+    builder.finish()
+  }
+
+
+  #[inline]
+  pub fn version(&self) -> u32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<u32>(AstDataset::VT_VERSION, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn domain(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(AstDataset::VT_DOMAIN, None)}
+  }
+  #[inline]
+  pub fn tier(&self) -> Option<&'a str> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<&str>>(AstDataset::VT_TIER, None)}
+  }
+  #[inline]
+  pub fn max_depth(&self) -> u32 {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<u32>(AstDataset::VT_MAX_DEPTH, Some(0)).unwrap()}
+  }
+  #[inline]
+  pub fn trees(&self) -> Option<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<AstNode<'a>>>> {
+    // Safety:
+    // Created from valid Table for this object
+    // which contains a valid value in this slot
+    unsafe { self._tab.get::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<AstNode>>>>(AstDataset::VT_TREES, None)}
+  }
+}
+
+impl flatbuffers::Verifiable for AstDataset<'_> {
+  #[inline]
+  fn run_verifier(
+    v: &mut flatbuffers::Verifier, pos: usize
+  ) -> Result<(), flatbuffers::InvalidFlatbuffer> {
+    use self::flatbuffers::Verifiable;
+    v.visit_table(pos)?
+     .visit_field::<u32>("version", Self::VT_VERSION, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("domain", Self::VT_DOMAIN, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<&str>>("tier", Self::VT_TIER, false)?
+     .visit_field::<u32>("max_depth", Self::VT_MAX_DEPTH, false)?
+     .visit_field::<flatbuffers::ForwardsUOffset<flatbuffers::Vector<'_, flatbuffers::ForwardsUOffset<AstNode>>>>("trees", Self::VT_TREES, false)?
+     .finish();
+    Ok(())
+  }
+}
+pub struct AstDatasetArgs<'a> {
+    pub version: u32,
+    pub domain: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub tier: Option<flatbuffers::WIPOffset<&'a str>>,
+    pub max_depth: u32,
+    pub trees: Option<flatbuffers::WIPOffset<flatbuffers::Vector<'a, flatbuffers::ForwardsUOffset<AstNode<'a>>>>>,
+}
+impl<'a> Default for AstDatasetArgs<'a> {
+  #[inline]
+  fn default() -> Self {
+    AstDatasetArgs {
+      version: 0,
+      domain: None,
+      tier: None,
+      max_depth: 0,
+      trees: None,
+    }
+  }
+}
+
+pub struct AstDatasetBuilder<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> {
+  fbb_: &'b mut flatbuffers::FlatBufferBuilder<'a, A>,
+  start_: flatbuffers::WIPOffset<flatbuffers::TableUnfinishedWIPOffset>,
+}
+impl<'a: 'b, 'b, A: flatbuffers::Allocator + 'a> AstDatasetBuilder<'a, 'b, A> {
+  #[inline]
+  pub fn add_version(&mut self, version: u32) {
+    self.fbb_.push_slot::<u32>(AstDataset::VT_VERSION, version, 0);
+  }
+  #[inline]
+  pub fn add_domain(&mut self, domain: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstDataset::VT_DOMAIN, domain);
+  }
+  #[inline]
+  pub fn add_tier(&mut self, tier: flatbuffers::WIPOffset<&'b  str>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstDataset::VT_TIER, tier);
+  }
+  #[inline]
+  pub fn add_max_depth(&mut self, max_depth: u32) {
+    self.fbb_.push_slot::<u32>(AstDataset::VT_MAX_DEPTH, max_depth, 0);
+  }
+  #[inline]
+  pub fn add_trees(&mut self, trees: flatbuffers::WIPOffset<flatbuffers::Vector<'b , flatbuffers::ForwardsUOffset<AstNode<'b >>>>) {
+    self.fbb_.push_slot_always::<flatbuffers::WIPOffset<_>>(AstDataset::VT_TREES, trees);
+  }
+  #[inline]
+  pub fn new(_fbb: &'b mut flatbuffers::FlatBufferBuilder<'a, A>) -> AstDatasetBuilder<'a, 'b, A> {
+    let start = _fbb.start_table();
+    AstDatasetBuilder {
+      fbb_: _fbb,
+      start_: start,
+    }
+  }
+  #[inline]
+  pub fn finish(self) -> flatbuffers::WIPOffset<AstDataset<'a>> {
+    let o = self.fbb_.end_table(self.start_);
+    flatbuffers::WIPOffset::new(o.value())
+  }
+}
+
+impl core::fmt::Debug for AstDataset<'_> {
+  fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    let mut ds = f.debug_struct("AstDataset");
+      ds.field("version", &self.version());
+      ds.field("domain", &self.domain());
+      ds.field("tier", &self.tier());
+      ds.field("max_depth", &self.max_depth());
+      ds.field("trees", &self.trees());
+      ds.finish()
+  }
+}
 #[inline]
 /// Verifies that a buffer of bytes contains a `LogDataset`
 /// and returns it.

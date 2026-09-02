@@ -20,6 +20,7 @@ pub fn encode(data: &Dataset, delimiter: Delimiter) -> Vec<u8> {
         Dataset::Profile(value) => encode_profile(value, delimiter),
         Dataset::Mesh(value) => encode_mesh(value, delimiter),
         Dataset::Catalog(value) => encode_catalog(value, delimiter),
+        Dataset::Ast(_) => panic!("ast domain is not supported for csv wire format"),
     };
     text.into_bytes()
 }
@@ -31,6 +32,7 @@ pub fn decode(spec: &str, bytes: &[u8], delimiter: Delimiter) -> DecodedDataset 
         "profile" => DecodedDataset::Profile(decode_profile(text, delimiter)),
         "mesh" => DecodedDataset::Mesh(decode_mesh(text, delimiter)),
         "catalog" => DecodedDataset::Catalog(decode_catalog(text, delimiter)),
+        "ast" => panic!("ast domain is not supported for csv wire format"),
         other => panic!("unknown dataset domain: {other}"),
     }
 }

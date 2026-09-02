@@ -1,3 +1,4 @@
+use bench_support::ast::{AstDataset, AstNode};
 use bench_support::catalog::CatalogDataset;
 use bench_support::dataset::Dataset;
 use bench_support::logs::{LogDataset, LogEntry, LogMetadata};
@@ -10,13 +11,14 @@ mod benchmark_generated {
 }
 
 use benchmark_generated::benchmark::{
-    CatalogDataset as FbCatalogDataset, CatalogDatasetArgs, KeyValue, KeyValueArgs,
-    LogDataset as FbLogDataset, LogDatasetArgs, LogEntry as FbLogEntry, LogEntryArgs,
-    LogMetadata as FbLogMetadata, LogMetadataArgs, MeshDataset as FbMeshDataset, MeshDatasetArgs,
-    Product as FbProduct, ProductArgs, Profile as FbProfile, ProfileAddress as FbProfileAddress,
-    ProfileAddressArgs, ProfileDataset as FbProfileDataset, ProfileDatasetArgs,
-    ProfilePreferences as FbProfilePreferences, ProfilePreferencesArgs, ProfileArgs, Vertex as FbVertex,
-    VertexArgs,
+    AstDataset as FbAstDataset, AstDatasetArgs, AstNode as FbAstNode, AstNodeArgs,
+    AstSpan as FbAstSpan, AstSpanArgs, CatalogDataset as FbCatalogDataset, CatalogDatasetArgs,
+    KeyValue, KeyValueArgs, LogDataset as FbLogDataset, LogDatasetArgs, LogEntry as FbLogEntry,
+    LogEntryArgs, LogMetadata as FbLogMetadata, LogMetadataArgs, MeshDataset as FbMeshDataset,
+    MeshDatasetArgs, Product as FbProduct, ProductArgs, Profile as FbProfile,
+    ProfileAddress as FbProfileAddress, ProfileAddressArgs, ProfileDataset as FbProfileDataset,
+    ProfileDatasetArgs, ProfilePreferences as FbProfilePreferences, ProfilePreferencesArgs,
+    ProfileArgs, Vertex as FbVertex, VertexArgs,
 };
 
 pub fn serialize(data: &Dataset) -> Vec<u8> {
@@ -25,6 +27,7 @@ pub fn serialize(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => serialize_profile(value),
         Dataset::Mesh(value) => serialize_mesh(value),
         Dataset::Catalog(value) => serialize_catalog(value),
+        Dataset::Ast(value) => serialize_ast(value),
     }
 }
 
@@ -210,6 +213,31 @@ fn serialize_catalog(data: &CatalogDataset) -> Vec<u8> {
     builder.finished_data().to_vec()
 }
 
+fn serialize_ast(data: &AstDataset) -> Vec<u8> {
+    let mut builder = FlatBufferBuilder::with_capacity(1024);
+    let mut tree_offsets = Vec::with_capacity(data.trees.len());
+
+    for tree in &data.trees {
+        tree_offsets.push(build_ast_node(&mut builder, tree));
+    }
+
+    let trees = builder.create_vector(&tree_offsets);
+    let domain = builder.create_string(&data.domain);
+    let tier = builder.create_string(&data.tier);
+    let root = FbAstDataset::create(
+        &mut builder,
+        &AstDatasetArgs {
+            version: data.version,
+            domain: Some(domain),
+            tier: Some(tier),
+            max_depth: data.max_depth,
+            trees: Some(trees),
+        },
+    );
+    builder.finish(root, None);
+    builder.finished_data().to_vec()
+}
+
 fn build_log_entry<'a>(
     builder: &mut FlatBufferBuilder<'a>,
     entry: &LogEntry,
@@ -245,6 +273,38 @@ fn build_log_metadata<'a>(
             bytes_sent: metadata.bytes_sent,
             user_agent: Some(user_agent),
             remote_addr: Some(remote_addr),
+        },
+    )
+}
+
+fn build_ast_node<'a>(
+    builder: &mut FlatBufferBuilder<'a>,
+    node: &AstNode,
+) -> flatbuffers::WIPOffset<FbAstNode<'a>> {
+    let node_type = builder.create_string(&node.node_type);
+    let name = builder.create_string(&node.name);
+    let value = builder.create_string(node.value.as_deref().unwrap_or(""));
+    let mut child_offsets = Vec::with_capacity(node.children.len());
+    for child in &node.children {
+        child_offsets.push(build_ast_node(builder, child));
+    }
+    let children = builder.create_vector(&child_offsets);
+    let span = FbAstSpan::create(
+        builder,
+        &AstSpanArgs {
+            line: node.span.line,
+            column: node.span.column,
+        },
+    );
+    FbAstNode::create(
+        builder,
+        &AstNodeArgs {
+            node_type: Some(node_type),
+            id: node.id,
+            name: Some(name),
+            span: Some(span),
+            value: Some(value),
+            children: Some(children),
         },
     )
 }

@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 
+use bench_support::ast::{AstDataset, AstNode, AstSpan};
 use bench_support::catalog::{CatalogDataset, Product};
 use bench_support::deserialize::DecodedDataset;
 use bench_support::logs::{LogDataset, LogEntry, LogMetadata};
@@ -14,9 +15,10 @@ mod benchmark_generated {
 }
 
 use benchmark_generated::benchmark::{
-    CatalogDataset as FbCatalogDataset, LogDataset as FbLogDataset, LogEntry as FbLogEntry,
-    LogMetadata as FbLogMetadata, MeshDataset as FbMeshDataset, Product as FbProduct,
-    Profile as FbProfile, ProfileAddress as FbProfileAddress, ProfileDataset as FbProfileDataset,
+    AstDataset as FbAstDataset, AstNode as FbAstNode, CatalogDataset as FbCatalogDataset,
+    LogDataset as FbLogDataset, LogEntry as FbLogEntry, LogMetadata as FbLogMetadata,
+    MeshDataset as FbMeshDataset, Product as FbProduct, Profile as FbProfile,
+    ProfileAddress as FbProfileAddress, ProfileDataset as FbProfileDataset,
     ProfilePreferences as FbProfilePreferences,
 };
 
@@ -26,6 +28,7 @@ pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(materialize_profile(bytes)),
         "mesh" => DecodedDataset::Mesh(materialize_mesh(bytes)),
         "catalog" => DecodedDataset::Catalog(materialize_catalog(bytes)),
+        "ast" => DecodedDataset::Ast(materialize_ast(bytes)),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -195,5 +198,46 @@ fn materialize_product(product: FbProduct<'_>) -> Product {
         in_stock: product.in_stock(),
         tags,
         attributes,
+    }
+}
+
+fn materialize_ast(bytes: &[u8]) -> AstDataset {
+    let root = flatbuffers::root::<FbAstDataset>(bytes).expect("decode");
+    let mut trees = Vec::new();
+    if let Some(items) = root.trees() {
+        trees.reserve(items.len());
+        for index in 0..items.len() {
+            trees.push(materialize_ast_node(items.get(index)));
+        }
+    }
+    AstDataset {
+        version: root.version(),
+        domain: read_string(root.domain()),
+        tier: read_string(root.tier()),
+        max_depth: root.max_depth(),
+        trees,
+    }
+}
+
+fn materialize_ast_node(node: FbAstNode<'_>) -> AstNode {
+    let span = node.span().expect("span");
+    let mut children = Vec::new();
+    if let Some(items) = node.children() {
+        children.reserve(items.len());
+        for index in 0..items.len() {
+            children.push(Box::new(materialize_ast_node(items.get(index))));
+        }
+    }
+    let value = read_string(node.value());
+    AstNode {
+        node_type: read_string(node.node_type()),
+        id: node.id(),
+        name: read_string(node.name()),
+        span: AstSpan {
+            line: span.line(),
+            column: span.column(),
+        },
+        value: if value.is_empty() { None } else { Some(value) },
+        children,
     }
 }

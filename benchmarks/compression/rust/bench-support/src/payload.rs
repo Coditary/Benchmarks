@@ -12,7 +12,7 @@ fn shared_root() -> PathBuf {
 }
 
 fn is_structured_domain(domain: &str) -> bool {
-    matches!(domain, "logs" | "profile" | "catalog" | "mesh")
+    matches!(domain, "logs" | "profile" | "catalog" | "mesh" | "ast")
 }
 
 pub fn payload_path(spec: &str) -> PathBuf {

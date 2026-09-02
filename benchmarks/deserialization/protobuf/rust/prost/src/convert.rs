@@ -1,3 +1,4 @@
+use bench_support::ast::{AstDataset, AstNode, AstSpan};
 use bench_support::catalog::CatalogDataset;
 use bench_support::dataset::Dataset;
 use bench_support::deserialize::DecodedDataset;
@@ -15,6 +16,7 @@ pub enum PreparedProst {
     Profile(bench::ProfileDataset),
     Mesh(bench::MeshDataset),
     Catalog(bench::CatalogDataset),
+    Ast(bench::AstDataset),
 }
 
 pub fn prepare(data: Dataset) -> PreparedProst {
@@ -23,6 +25,7 @@ pub fn prepare(data: Dataset) -> PreparedProst {
         Dataset::Profile(value) => PreparedProst::Profile(to_profile(&value)),
         Dataset::Mesh(value) => PreparedProst::Mesh(to_mesh(&value)),
         Dataset::Catalog(value) => PreparedProst::Catalog(to_catalog(&value)),
+        Dataset::Ast(value) => PreparedProst::Ast(to_ast(&value)),
     }
 }
 
@@ -33,6 +36,7 @@ pub fn encode(prepared: &PreparedProst) -> Vec<u8> {
         PreparedProst::Profile(value) => value.encode(&mut buffer).expect("serialize output"),
         PreparedProst::Mesh(value) => value.encode(&mut buffer).expect("serialize output"),
         PreparedProst::Catalog(value) => value.encode(&mut buffer).expect("serialize output"),
+        PreparedProst::Ast(value) => value.encode(&mut buffer).expect("serialize output"),
     }
     buffer
 }
@@ -138,6 +142,63 @@ fn to_catalog(data: &CatalogDataset) -> bench::CatalogDataset {
     }
 }
 
+fn to_ast_node(node: &AstNode) -> bench::AstNode {
+    bench::AstNode {
+        node_type: node.node_type.clone(),
+        id: node.id,
+        name: node.name.clone(),
+        span: Some(bench::AstSpan {
+            line: node.span.line,
+            column: node.span.column,
+        }),
+        value: node.value.clone(),
+        children: node
+            .children
+            .iter()
+            .map(|child| to_ast_node(child))
+            .collect(),
+    }
+}
+
+fn to_ast(data: &AstDataset) -> bench::AstDataset {
+    bench::AstDataset {
+        version: data.version,
+        domain: data.domain.clone(),
+        tier: data.tier.clone(),
+        max_depth: data.max_depth,
+        trees: data.trees.iter().map(to_ast_node).collect(),
+    }
+}
+
+fn from_ast_node(node: &bench::AstNode) -> AstNode {
+    let span = node.span.as_ref();
+    AstNode {
+        node_type: node.node_type.clone(),
+        id: node.id,
+        name: node.name.clone(),
+        span: AstSpan {
+            line: span.map(|value| value.line).unwrap_or(0),
+            column: span.map(|value| value.column).unwrap_or(0),
+        },
+        value: node.value.clone(),
+        children: node
+            .children
+            .iter()
+            .map(|child| Box::new(from_ast_node(child)))
+            .collect(),
+    }
+}
+
+fn from_ast(data: &bench::AstDataset) -> AstDataset {
+    AstDataset {
+        version: data.version,
+        domain: data.domain.clone(),
+        tier: data.tier.clone(),
+        max_depth: data.max_depth,
+        trees: data.trees.iter().map(from_ast_node).collect(),
+    }
+}
+
 
 pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
     use bench_support::shared::domain_from_spec;
@@ -154,6 +215,9 @@ pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         )),
         "catalog" => DecodedDataset::Catalog(from_catalog(
             &bench::CatalogDataset::decode(bytes).expect("decode"),
+        )),
+        "ast" => DecodedDataset::Ast(from_ast(
+            &bench::AstDataset::decode(bytes).expect("decode"),
         )),
         other => panic!("unknown dataset domain: {other}"),
     }

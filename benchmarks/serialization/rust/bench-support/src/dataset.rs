@@ -1,3 +1,5 @@
+use crate::ast::AstDataset;
+use crate::ast;
 use crate::catalog::CatalogDataset;
 use crate::catalog;
 use crate::logs::LogDataset;
@@ -14,6 +16,7 @@ pub enum Dataset {
     Profile(ProfileDataset),
     Mesh(MeshDataset),
     Catalog(CatalogDataset),
+    Ast(AstDataset),
 }
 
 pub fn load(spec: &str) -> Dataset {
@@ -22,6 +25,7 @@ pub fn load(spec: &str) -> Dataset {
         "profile" => Dataset::Profile(profile::load(spec)),
         "mesh" => Dataset::Mesh(mesh::load(spec)),
         "catalog" => Dataset::Catalog(catalog::load(spec)),
+        "ast" => Dataset::Ast(ast::load(spec)),
         other => panic!("unknown dataset domain: {other}"),
     }
 }

@@ -91,3 +91,25 @@ struct CatalogDataset {
   tier @2 :Text;
   products @3 :List(Product);
 }
+
+struct AstSpan {
+  line @0 :UInt32;
+  column @1 :UInt32;
+}
+
+struct AstNode {
+  nodeType @0 :Text;
+  id @1 :UInt64;
+  name @2 :Text;
+  span @3 :AstSpan;
+  value @4 :Text;
+  children @5 :List(AstNode);
+}
+
+struct AstDataset {
+  version @0 :UInt32;
+  domain @1 :Text;
+  tier @2 :Text;
+  maxDepth @3 :UInt32;
+  trees @4 :List(AstNode);
+}

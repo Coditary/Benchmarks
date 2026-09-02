@@ -1,3 +1,4 @@
+use crate::ast::{AstDataset, AstNode, AstSpan};
 use crate::catalog::{CatalogDataset, Product};
 use crate::deserialize::DecodedDataset;
 use crate::dataset::Dataset;
@@ -12,6 +13,7 @@ pub fn encode(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => encode_profile(value),
         Dataset::Mesh(value) => encode_mesh(value),
         Dataset::Catalog(value) => encode_catalog(value),
+        Dataset::Ast(value) => encode_ast(value),
     };
     text.into_bytes()
 }
@@ -23,6 +25,7 @@ pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(decode_profile(input)),
         "mesh" => DecodedDataset::Mesh(decode_mesh(input)),
         "catalog" => DecodedDataset::Catalog(decode_catalog(input)),
+        "ast" => DecodedDataset::Ast(decode_ast(input)),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -189,6 +192,48 @@ fn encode_catalog(data: &CatalogDataset) -> String {
     }
     close_tag(&mut out, "products");
     close_tag(&mut out, "CatalogDataset");
+    out
+}
+
+fn encode_ast_span(out: &mut String, span: &AstSpan) {
+    open_tag(out, "span");
+    write_u64(out, "line", span.line as u64);
+    write_u64(out, "column", span.column as u64);
+    close_tag(out, "span");
+}
+
+fn encode_ast_node(out: &mut String, node: &AstNode) {
+    open_tag(out, "AstNode");
+    write_node_text(out, "node_type", &node.node_type);
+    write_u64(out, "id", node.id);
+    write_node_text(out, "name", &node.name);
+    encode_ast_span(out, &node.span);
+    if let Some(value) = &node.value {
+        write_node_text(out, "value", value);
+    }
+    if !node.children.is_empty() {
+        open_tag(out, "children");
+        for child in &node.children {
+            encode_ast_node(out, child);
+        }
+        close_tag(out, "children");
+    }
+    close_tag(out, "AstNode");
+}
+
+fn encode_ast(data: &AstDataset) -> String {
+    let mut out = String::from("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    open_tag(&mut out, "AstDataset");
+    write_u64(&mut out, "version", data.version as u64);
+    write_node_text(&mut out, "domain", &data.domain);
+    write_node_text(&mut out, "tier", &data.tier);
+    write_u64(&mut out, "max_depth", data.max_depth as u64);
+    open_tag(&mut out, "trees");
+    for tree in &data.trees {
+        encode_ast_node(&mut out, tree);
+    }
+    close_tag(&mut out, "trees");
+    close_tag(&mut out, "AstDataset");
     out
 }
 
@@ -438,5 +483,50 @@ fn decode_catalog(input: &str) -> CatalogDataset {
         domain: node_text(child(&root, "domain")),
         tier: node_text(child(&root, "tier")),
         products,
+    }
+}
+
+fn node_text_u64(node: &XmlNode) -> u64 {
+    node_text(node).parse().expect("u64")
+}
+
+fn decode_ast_node(node: &XmlNode) -> AstNode {
+    let children = if let Some(children_node) = node.children.iter().find(|child| child.name == "children") {
+        children(children_node, "AstNode")
+            .into_iter()
+            .map(|child| Box::new(decode_ast_node(child)))
+            .collect()
+    } else {
+        Vec::new()
+    };
+    AstNode {
+        node_type: node_text(child(node, "node_type")),
+        id: node_text_u64(child(node, "id")),
+        name: node_text(child(node, "name")),
+        span: AstSpan {
+            line: node_text_u32(child(child(node, "span"), "line")),
+            column: node_text_u32(child(child(node, "span"), "column")),
+        },
+        value: node
+            .children
+            .iter()
+            .find(|child| child.name == "value")
+            .map(node_text),
+        children,
+    }
+}
+
+fn decode_ast(input: &str) -> AstDataset {
+    let root = parse_xml(input);
+    let trees = children(&child(&root, "trees"), "AstNode")
+        .into_iter()
+        .map(decode_ast_node)
+        .collect();
+    AstDataset {
+        version: node_text_u32(child(&root, "version")),
+        domain: node_text(child(&root, "domain")),
+        tier: node_text(child(&root, "tier")),
+        max_depth: node_text_u32(child(&root, "max_depth")),
+        trees,
     }
 }

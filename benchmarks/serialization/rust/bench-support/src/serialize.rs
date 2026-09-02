@@ -7,6 +7,7 @@ pub fn simd_json(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => simd_json::serde::to_vec(value).expect("serialize output"),
         Dataset::Mesh(value) => simd_json::serde::to_vec(value).expect("serialize output"),
         Dataset::Catalog(value) => simd_json::serde::to_vec(value).expect("serialize output"),
+        Dataset::Ast(value) => simd_json::serde::to_vec(value).expect("serialize output"),
     }
 }
 
@@ -16,6 +17,7 @@ pub fn json(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => serde_json::to_vec(value).expect("serialize output"),
         Dataset::Mesh(value) => serde_json::to_vec(value).expect("serialize output"),
         Dataset::Catalog(value) => serde_json::to_vec(value).expect("serialize output"),
+        Dataset::Ast(value) => serde_json::to_vec(value).expect("serialize output"),
     }
 }
 
@@ -26,6 +28,7 @@ pub fn bitcode(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => ::bitcode::encode(value),
         Dataset::Mesh(value) => ::bitcode::encode(value),
         Dataset::Catalog(value) => ::bitcode::encode(value),
+        Dataset::Ast(value) => ::bitcode::encode(value),
     }
 }
 
@@ -46,6 +49,9 @@ pub fn rkyv(data: &Dataset) -> Vec<u8> {
         Dataset::Catalog(value) => to_bytes::<Error>(value)
             .expect("serialize output")
             .into_vec(),
+        Dataset::Ast(value) => to_bytes::<Error>(value)
+            .expect("serialize output")
+            .into_vec(),
     }
 }
 
@@ -56,6 +62,7 @@ pub fn flexbuffers(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => flexbuffers::to_vec(value).expect("serialize output"),
         Dataset::Mesh(value) => flexbuffers::to_vec(value).expect("serialize output"),
         Dataset::Catalog(value) => flexbuffers::to_vec(value).expect("serialize output"),
+        Dataset::Ast(value) => flexbuffers::to_vec(value).expect("serialize output"),
     }
 }
 
@@ -66,6 +73,7 @@ pub fn rmp_serde(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => rmp_serde::to_vec(value).expect("serialize output"),
         Dataset::Mesh(value) => rmp_serde::to_vec(value).expect("serialize output"),
         Dataset::Catalog(value) => rmp_serde::to_vec(value).expect("serialize output"),
+        Dataset::Ast(value) => rmp_serde::to_vec(value).expect("serialize output"),
     }
 }
 
@@ -76,6 +84,7 @@ pub fn yaml(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => serde_yaml::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Mesh(value) => serde_yaml::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Catalog(value) => serde_yaml::to_string(value).expect("serialize output").into_bytes(),
+        Dataset::Ast(value) => serde_yaml::to_string(value).expect("serialize output").into_bytes(),
     }
 }
 
@@ -86,6 +95,7 @@ pub fn toml_format(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => toml::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Mesh(value) => toml::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Catalog(value) => toml::to_string(value).expect("serialize output").into_bytes(),
+        Dataset::Ast(value) => toml::to_string(value).expect("serialize output").into_bytes(),
     }
 }
 
@@ -111,6 +121,7 @@ pub fn bson(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => ::bson::to_vec(value).expect("serialize output"),
         Dataset::Mesh(value) => ::bson::to_vec(value).expect("serialize output"),
         Dataset::Catalog(value) => ::bson::to_vec(value).expect("serialize output"),
+        Dataset::Ast(value) => ::bson::to_vec(value).expect("serialize output"),
     }
 }
 
@@ -138,6 +149,11 @@ pub fn cbor(data: &Dataset) -> Vec<u8> {
             into_writer(value, &mut buffer).expect("serialize output");
             buffer
         }
+        Dataset::Ast(value) => {
+            let mut buffer = Vec::new();
+            into_writer(value, &mut buffer).expect("serialize output");
+            buffer
+        }
     }
 }
 
@@ -158,6 +174,7 @@ pub fn json5_format(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => ::json5::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Mesh(value) => ::json5::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Catalog(value) => ::json5::to_string(value).expect("serialize output").into_bytes(),
+        Dataset::Ast(value) => ::json5::to_string(value).expect("serialize output").into_bytes(),
     }
 }
 
@@ -168,6 +185,7 @@ pub fn hjson_format(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => ::serde_hjson::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Mesh(value) => ::serde_hjson::to_string(value).expect("serialize output").into_bytes(),
         Dataset::Catalog(value) => ::serde_hjson::to_string(value).expect("serialize output").into_bytes(),
+        Dataset::Ast(value) => ::serde_hjson::to_string(value).expect("serialize output").into_bytes(),
     }
 }
 
@@ -178,6 +196,7 @@ pub fn cjson(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => sonic_rs::to_vec(value).expect("serialize output"),
         Dataset::Mesh(value) => sonic_rs::to_vec(value).expect("serialize output"),
         Dataset::Catalog(value) => sonic_rs::to_vec(value).expect("serialize output"),
+        Dataset::Ast(value) => sonic_rs::to_vec(value).expect("serialize output"),
     }
 }
 
@@ -189,6 +208,7 @@ pub fn plist_format(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => ::plist::to_writer_xml(&mut buffer, value).expect("serialize output"),
         Dataset::Mesh(value) => ::plist::to_writer_xml(&mut buffer, value).expect("serialize output"),
         Dataset::Catalog(value) => ::plist::to_writer_xml(&mut buffer, value).expect("serialize output"),
+        Dataset::Ast(value) => ::plist::to_writer_xml(&mut buffer, value).expect("serialize output"),
     }
     buffer
 }

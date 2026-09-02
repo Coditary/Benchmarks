@@ -21,7 +21,11 @@
       "mesh/100",
       "mesh/1000",
       "mesh/10k",
-      "mesh/100k"
+      "mesh/100k",
+      "ast/10",
+      "ast/100",
+      "ast/1000",
+      "ast/10k"
     ],
     "element_type": "fixture"
   },

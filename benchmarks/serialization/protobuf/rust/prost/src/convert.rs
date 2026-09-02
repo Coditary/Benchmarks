@@ -1,3 +1,4 @@
+use bench_support::ast::{AstDataset, AstNode};
 use bench_support::catalog::CatalogDataset;
 use bench_support::dataset::Dataset;
 use bench_support::logs::LogDataset;
@@ -14,6 +15,7 @@ pub enum PreparedProst {
     Profile(bench::ProfileDataset),
     Mesh(bench::MeshDataset),
     Catalog(bench::CatalogDataset),
+    Ast(bench::AstDataset),
 }
 
 pub fn prepare(data: Dataset) -> PreparedProst {
@@ -22,6 +24,7 @@ pub fn prepare(data: Dataset) -> PreparedProst {
         Dataset::Profile(value) => PreparedProst::Profile(to_profile(&value)),
         Dataset::Mesh(value) => PreparedProst::Mesh(to_mesh(&value)),
         Dataset::Catalog(value) => PreparedProst::Catalog(to_catalog(&value)),
+        Dataset::Ast(value) => PreparedProst::Ast(to_ast(&value)),
     }
 }
 
@@ -32,6 +35,7 @@ pub fn encode(prepared: &PreparedProst) -> Vec<u8> {
         PreparedProst::Profile(value) => value.encode(&mut buffer).expect("serialize output"),
         PreparedProst::Mesh(value) => value.encode(&mut buffer).expect("serialize output"),
         PreparedProst::Catalog(value) => value.encode(&mut buffer).expect("serialize output"),
+        PreparedProst::Ast(value) => value.encode(&mut buffer).expect("serialize output"),
     }
     buffer
 }
@@ -134,5 +138,33 @@ fn to_catalog(data: &CatalogDataset) -> bench::CatalogDataset {
                     .collect(),
             })
             .collect(),
+    }
+}
+
+fn to_ast_node(node: &AstNode) -> bench::AstNode {
+    bench::AstNode {
+        node_type: node.node_type.clone(),
+        id: node.id,
+        name: node.name.clone(),
+        span: Some(bench::AstSpan {
+            line: node.span.line,
+            column: node.span.column,
+        }),
+        value: node.value.clone(),
+        children: node
+            .children
+            .iter()
+            .map(|child| to_ast_node(child))
+            .collect(),
+    }
+}
+
+fn to_ast(data: &AstDataset) -> bench::AstDataset {
+    bench::AstDataset {
+        version: data.version,
+        domain: data.domain.clone(),
+        tier: data.tier.clone(),
+        max_depth: data.max_depth,
+        trees: data.trees.iter().map(to_ast_node).collect(),
     }
 }

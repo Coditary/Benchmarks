@@ -92,4 +92,26 @@ table CatalogDataset {
   products:[Product];
 }
 
+table AstSpan {
+  line:uint;
+  column:uint;
+}
+
+table AstNode {
+  node_type:string;
+  id:uint64;
+  name:string;
+  span:AstSpan;
+  value:string;
+  children:[AstNode];
+}
+
+table AstDataset {
+  version:uint;
+  domain:string;
+  tier:string;
+  max_depth:uint;
+  trees:[AstNode];
+}
+
 root_type LogDataset;

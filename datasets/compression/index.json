@@ -24,6 +24,10 @@
       "profile": "numeric_float_arrays",
       "record_field": "vertex_count"
     },
+    "ast": {
+      "profile": "deeply_nested_ast_json",
+      "record_field": "tree_count"
+    },
     "random": {
       "profile": "high_entropy_random",
       "record_field": "payload_bytes"
@@ -191,6 +195,46 @@
       "payload_sha256": "de9edf4929faccc8d5b45c3f7f3f4a7bd048bc23195faba50c2d6fe149708b61",
       "source": "datasets/shared/catalog/100k/canonical.json",
       "path": "datasets/shared/catalog/100k/canonical.json"
+    },
+    "ast/10": {
+      "domain": "ast",
+      "tier": "10",
+      "spec": "ast/10",
+      "profile": "deeply_nested_ast_json",
+      "payload_bytes": 21661,
+      "payload_sha256": "3cef4dfd11cab8c587b13ca9590e52f1722e25b79a52633ef73cee6fe0fa0a99",
+      "source": "datasets/shared/ast/10/canonical.json",
+      "path": "datasets/shared/ast/10/canonical.json"
+    },
+    "ast/100": {
+      "domain": "ast",
+      "tier": "100",
+      "spec": "ast/100",
+      "profile": "deeply_nested_ast_json",
+      "payload_bytes": 157962,
+      "payload_sha256": "32ebf93e534d511704478b6150da3fe3895f6686c4256bc5627db35b5c20b4ff",
+      "source": "datasets/shared/ast/100/canonical.json",
+      "path": "datasets/shared/ast/100/canonical.json"
+    },
+    "ast/1000": {
+      "domain": "ast",
+      "tier": "1000",
+      "spec": "ast/1000",
+      "profile": "deeply_nested_ast_json",
+      "payload_bytes": 1695796,
+      "payload_sha256": "ddc921d7b04dff11a2a76245482b504d00b422af5818d6855a51b2edbce28237",
+      "source": "datasets/shared/ast/1000/canonical.json",
+      "path": "datasets/shared/ast/1000/canonical.json"
+    },
+    "ast/10k": {
+      "domain": "ast",
+      "tier": "10k",
+      "spec": "ast/10k",
+      "profile": "deeply_nested_ast_json",
+      "payload_bytes": 16731412,
+      "payload_sha256": "3445bcf799b15a32d3e774acc13206db625c627ddb7709989a8c41c9fad7a7f9",
+      "source": "datasets/shared/ast/10k/canonical.json",
+      "path": "datasets/shared/ast/10k/canonical.json"
     },
     "mesh/100": {
       "domain": "mesh",
@@ -377,5 +421,5 @@
       "path": "datasets/compression/repetitive/4m/payload.bin"
     }
   },
-  "datasets_count": 35
+  "datasets_count": 39
 }

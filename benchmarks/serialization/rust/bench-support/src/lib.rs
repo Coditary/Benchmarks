@@ -1,3 +1,4 @@
+pub mod ast;
 pub mod catalog;
 pub mod dataset;
 pub mod deserialize;

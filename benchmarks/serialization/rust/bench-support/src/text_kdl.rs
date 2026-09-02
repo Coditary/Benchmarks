@@ -1,3 +1,4 @@
+use crate::ast::{AstDataset, AstNode, AstSpan};
 use crate::catalog::{CatalogDataset, Product};
 use crate::deserialize::DecodedDataset;
 use crate::dataset::Dataset;
@@ -12,6 +13,7 @@ pub fn encode(data: &Dataset) -> Vec<u8> {
         Dataset::Profile(value) => encode_profile(value),
         Dataset::Mesh(value) => encode_mesh(value),
         Dataset::Catalog(value) => encode_catalog(value),
+        Dataset::Ast(value) => encode_ast(value),
     };
     text.into_bytes()
 }
@@ -23,6 +25,7 @@ pub fn decode(spec: &str, bytes: &[u8]) -> DecodedDataset {
         "profile" => DecodedDataset::Profile(decode_profile(text)),
         "mesh" => DecodedDataset::Mesh(decode_mesh(text)),
         "catalog" => DecodedDataset::Catalog(decode_catalog(text)),
+        "ast" => DecodedDataset::Ast(decode_ast(text)),
         other => panic!("unknown dataset domain: {other}"),
     }
 }
@@ -268,6 +271,68 @@ fn encode_catalog(data: &CatalogDataset) -> String {
     out
 }
 
+fn encode_ast_span(span: &AstSpan) -> String {
+    let mut inner = String::new();
+    inner.push_str("line");
+    push_int(&mut inner, span.line);
+    inner.push('\n');
+    inner.push_str("column");
+    push_int(&mut inner, span.column);
+    inner.push('\n');
+    let mut out = String::new();
+    push_block(&mut out, "span", &inner);
+    out
+}
+
+fn encode_ast_node(node: &AstNode) -> String {
+    let mut body = String::new();
+    body.push_str("node_type");
+    push_arg(&mut body, &node.node_type);
+    body.push('\n');
+    body.push_str("id");
+    push_int(&mut body, node.id);
+    body.push('\n');
+    body.push_str("name");
+    push_arg(&mut body, &node.name);
+    body.push('\n');
+    body.push_str(&encode_ast_span(&node.span));
+    if let Some(value) = &node.value {
+        body.push_str("value");
+        push_arg(&mut body, value);
+        body.push('\n');
+    }
+    if !node.children.is_empty() {
+        let mut children = String::new();
+        for child in &node.children {
+            push_block(&mut children, "node", &encode_ast_node(child));
+        }
+        push_block(&mut body, "children", &children);
+    }
+    body
+}
+
+fn encode_ast(data: &AstDataset) -> String {
+    let mut out = String::new();
+    out.push_str("version");
+    push_int(&mut out, data.version);
+    out.push('\n');
+    out.push_str("domain");
+    push_arg(&mut out, &data.domain);
+    out.push('\n');
+    out.push_str("tier");
+    push_arg(&mut out, &data.tier);
+    out.push('\n');
+    out.push_str("max_depth");
+    push_int(&mut out, data.max_depth);
+    out.push('\n');
+    let mut trees = String::new();
+    for tree in &data.trees {
+        push_block(&mut trees, "node", &encode_ast_node(tree));
+    }
+    push_block(&mut out, "trees", &trees);
+    out
+}
+
 #[derive(Debug)]
 struct KdlNode {
     name: String,
@@ -501,5 +566,47 @@ fn decode_catalog(text: &str) -> CatalogDataset {
         domain: arg_string(child(&doc, "domain")),
         tier: arg_string(child(&doc, "tier")),
         products,
+    }
+}
+
+fn arg_u64(node: &KdlNode) -> u64 {
+    arg_string(node).parse().expect("u64")
+}
+
+fn decode_ast_node(node: &KdlNode) -> AstNode {
+    let children = child_opt(&node.children, "children")
+        .map(|children_node| {
+            children(&children_node.children, "node")
+                .into_iter()
+                .map(|child| Box::new(decode_ast_node(child)))
+                .collect()
+        })
+        .unwrap_or_default();
+    AstNode {
+        node_type: arg_string(child(&node.children, "node_type")),
+        id: arg_u64(child(&node.children, "id")),
+        name: arg_string(child(&node.children, "name")),
+        span: AstSpan {
+            line: arg_u32(child(&child(&node.children, "span").children, "line")),
+            column: arg_u32(child(&child(&node.children, "span").children, "column")),
+        },
+        value: child_opt(&node.children, "value").map(|value| arg_string(value)),
+        children,
+    }
+}
+
+fn decode_ast(text: &str) -> AstDataset {
+    let doc = parse_document(text);
+    let trees_node = child(&doc, "trees");
+    let trees = children(&trees_node.children, "node")
+        .into_iter()
+        .map(decode_ast_node)
+        .collect();
+    AstDataset {
+        version: arg_u32(child(&doc, "version")),
+        domain: arg_string(child(&doc, "domain")),
+        tier: arg_string(child(&doc, "tier")),
+        max_depth: arg_u32(child(&doc, "max_depth")),
+        trees,
     }
 }

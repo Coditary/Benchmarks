@@ -88,3 +88,25 @@ message CatalogDataset {
   string tier = 3;
   repeated Product products = 4;
 }
+
+message AstSpan {
+  uint32 line = 1;
+  uint32 column = 2;
+}
+
+message AstNode {
+  string node_type = 1;
+  uint64 id = 2;
+  string name = 3;
+  AstSpan span = 4;
+  optional string value = 5;
+  repeated AstNode children = 6;
+}
+
+message AstDataset {
+  uint32 version = 1;
+  string domain = 2;
+  string tier = 3;
+  uint32 max_depth = 4;
+  repeated AstNode trees = 5;
+}

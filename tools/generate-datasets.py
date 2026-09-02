@@ -29,9 +29,20 @@ MESH_TIERS = {
     "100k": 100_000,
 }
 
-ALL_TIERS = sorted(set(RECORD_TIERS) | set(MESH_TIERS))
+AST_MAX_DEPTH = 10
 
-DOMAINS = ["logs", "profile", "mesh", "catalog"]
+AST_TIERS = {
+    "10": 10,
+    "100": 100,
+    "1000": 1_000,
+    "10k": 10_000,
+}
+
+ALL_TIERS = sorted(set(RECORD_TIERS) | set(MESH_TIERS) | set(AST_TIERS))
+
+DOMAINS = ["logs", "profile", "mesh", "catalog", "ast"]
+
+AST_NODE_TYPES = ["Program", "Block", "Call", "Member", "Binary", "Unary", "Literal"]
 
 LEVELS = ["DEBUG", "INFO", "WARN", "ERROR"]
 METHODS = ["GET", "POST", "PUT", "DELETE", "PATCH"]
@@ -289,6 +300,140 @@ def generate_catalog(tier: str, count: int, rng: random.Random) -> dict:
     return meta
 
 
+def build_ast_chain(*, depth: int, node_id: int) -> tuple[dict, int]:
+    node_type = AST_NODE_TYPES[depth % len(AST_NODE_TYPES)]
+    node: dict = {
+        "node_type": node_type,
+        "id": node_id,
+        "name": f"node-{depth}",
+        "span": {"line": depth + 1, "column": depth * 3},
+    }
+    if depth <= 0:
+        node["value"] = f"leaf-{node_id}"
+        node["children"] = []
+        return node, node_id + 1
+
+    child, next_id = build_ast_chain(depth=depth - 1, node_id=node_id + 1)
+    node["children"] = [child]
+    return node, next_id
+
+
+def build_ast_branching(
+    rng: random.Random,
+    *,
+    depth: int,
+    target_depth: int,
+    max_children: int,
+    node_id: int,
+    node_budget: int,
+) -> tuple[dict, int, int]:
+    node_type = AST_NODE_TYPES[depth % len(AST_NODE_TYPES)]
+    node: dict = {
+        "node_type": node_type,
+        "id": node_id,
+        "name": f"node-{depth}",
+        "span": {"line": depth + 1, "column": depth * 3},
+    }
+    next_id = node_id + 1
+    remaining_budget = node_budget - 1
+
+    if depth >= target_depth or remaining_budget <= 0:
+        node["value"] = f"leaf-{node_id}"
+        node["children"] = []
+        return node, next_id, remaining_budget
+
+    child_count = 1 if max_children <= 1 else rng.randint(1, max_children)
+    child_count = min(child_count, remaining_budget)
+    children: list[dict] = []
+    for _ in range(child_count):
+        child, next_id, remaining_budget = build_ast_branching(
+            rng,
+            depth=depth + 1,
+            target_depth=target_depth,
+            max_children=max_children,
+            node_id=next_id,
+            node_budget=remaining_budget,
+        )
+        children.append(child)
+    node["children"] = children
+    return node, next_id, remaining_budget
+
+
+def generate_ast_tree(rng: random.Random, *, node_id: int) -> tuple[dict, int]:
+    shape_roll = rng.random()
+    if shape_roll < 0.5:
+        target_depth = rng.randint(1, AST_MAX_DEPTH)
+        return build_ast_chain(depth=target_depth, node_id=node_id)
+
+    if shape_roll < 0.8:
+        target_depth = rng.randint(3, AST_MAX_DEPTH)
+        max_children = 2
+        node_budget = min(32, 2 ** (target_depth - 1) + 8)
+    else:
+        target_depth = rng.randint(2, min(5, AST_MAX_DEPTH))
+        max_children = rng.randint(3, 5)
+        node_budget = 24
+
+    tree, next_id, _ = build_ast_branching(
+        rng,
+        depth=0,
+        target_depth=target_depth,
+        max_children=max_children,
+        node_id=node_id,
+        node_budget=node_budget,
+    )
+    return tree, next_id
+
+
+def write_ast_canonical(path: Path, *, tier: str, tree_count: int, rng: random.Random) -> dict:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    hasher = hashlib.sha256()
+    size = 0
+    next_node_id = 0
+
+    with path.open("w", encoding="utf-8") as handle:
+        header = (
+            '{\n  "version": 1,\n'
+            '  "domain": "ast",\n'
+            f'  "tier": "{tier}",\n'
+            f'  "max_depth": {AST_MAX_DEPTH},\n'
+            '  "trees": [\n'
+        )
+        handle.write(header)
+        hasher.update(header.encode("utf-8"))
+        size += len(header.encode("utf-8"))
+
+        for index in range(tree_count):
+            tree, next_node_id = generate_ast_tree(rng, node_id=next_node_id)
+            tree_json = json.dumps(tree, ensure_ascii=True)
+            chunk = ("    " if index == 0 else ",\n    ") + tree_json
+            handle.write(chunk)
+            hasher.update(chunk.encode("utf-8"))
+            size += len(chunk.encode("utf-8"))
+
+        footer = "\n  ]\n}\n"
+        handle.write(footer)
+        hasher.update(footer.encode("utf-8"))
+        size += len(footer.encode("utf-8"))
+
+    return {
+        "canonical_bytes": size,
+        "canonical_sha256": hasher.hexdigest(),
+        "tree_count": tree_count,
+        "max_depth": AST_MAX_DEPTH,
+        "node_count": next_node_id,
+    }
+
+
+def generate_ast(tier: str, tree_count: int, rng: random.Random) -> dict:
+    return write_ast_canonical(
+        SHARED / "ast" / tier / "canonical.json",
+        tier=tier,
+        tree_count=tree_count,
+        rng=rng,
+    )
+
+
 def build_index(generated: dict) -> None:
     existing: dict[str, dict] = {}
     if INDEX.exists():
@@ -298,6 +443,8 @@ def build_index(generated: dict) -> None:
     for domain in DOMAINS:
         for obsolete in ("xs", "sm", "md", "lg"):
             merged.pop(f"{domain}/{obsolete}", None)
+    for obsolete in ("depth-10", "depth-50", "depth-100", "branch-depth-10", "100k"):
+        merged.pop(f"ast/{obsolete}", None)
     index = {
         "version": 1,
         "layout": {
@@ -309,7 +456,7 @@ def build_index(generated: dict) -> None:
         "size_tiers": {
             tier: {
                 "record_count": count,
-                "description": f"{count:,} records (logs, profile, catalog)",
+                "description": f"{count:,} records (logs, profile, catalog, ast)",
             }
             for tier, count in RECORD_TIERS.items()
         },
@@ -336,6 +483,13 @@ def build_index(generated: dict) -> None:
             "catalog": {
                 "description": "Product catalog with prices, tags, and attributes.",
                 "record_field": "products",
+            },
+            "ast": {
+                "description": (
+                    "AST-like JSON trees (max nesting depth 10) with mixed shapes "
+                    "and varying subtree counts per tier (up to 10k trees)."
+                ),
+                "record_field": "trees",
             },
         },
         "datasets": merged,
@@ -386,6 +540,19 @@ def main() -> None:
             key = f"catalog/{tier}"
             generated[key] = generate_catalog(tier, count, rng)
             print(f"generated {key}: {generated[key]['product_count']} products")
+
+        if "ast" in args.domains:
+            if tier not in AST_TIERS:
+                continue
+            count = AST_TIERS[tier]
+            rng = random.Random(31415 + count)
+            key = f"ast/{tier}"
+            generated[key] = generate_ast(tier, count, rng)
+            print(
+                f"generated {key}: {generated[key]['tree_count']} trees, "
+                f"{generated[key]['node_count']} nodes, "
+                f"max depth {generated[key]['max_depth']}"
+            )
 
     for tier in mesh_tiers:
         if "mesh" in args.domains:

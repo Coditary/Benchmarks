@@ -9,14 +9,17 @@ CAPNP="${CAPNP:-$ROOT/tools/bin/capnp}"
 CAPNPC_RUST="$ROOT/tools/capnpc-codegen/target/release/capnpc-rust"
 FLAT_GEN="$ROOT/benchmarks/serialization/flatbuffers/rust/flatbuffers/generated"
 CAPNP_GEN="$ROOT/benchmarks/serialization/capnp/rust/capnp/generated"
+CAPNP_DESER_GEN="$ROOT/benchmarks/deserialization/capnp/rust/capnp/generated"
+FLAT_DESER_GEN="$ROOT/benchmarks/deserialization/flatbuffers/rust/flatbuffers/generated"
 
 if ! command -v "$FLATC" >/dev/null 2>&1; then
   echo "flatc not found (set FLATC or place binary in tools/bin/flatc)" >&2
   exit 1
 fi
 
-mkdir -p "$FLAT_GEN" "$CAPNP_GEN"
+mkdir -p "$FLAT_GEN" "$FLAT_DESER_GEN" "$CAPNP_GEN" "$CAPNP_DESER_GEN"
 "$FLATC" --rust -o "$FLAT_GEN" "$SCHEMAS/benchmark.fbs"
+cp "$FLAT_GEN/benchmark_generated.rs" "$FLAT_DESER_GEN/benchmark_generated.rs"
 
 if command -v "$CAPNP" >/dev/null 2>&1; then
   if [[ ! -x "$CAPNPC_RUST" ]]; then
@@ -29,6 +32,7 @@ if command -v "$CAPNP" >/dev/null 2>&1; then
       --src-prefix="$SCHEMAS" \
       -I "$SCHEMAS" \
       "$SCHEMAS/benchmark.capnp"
+  cp "$CAPNP_GEN/benchmark_capnp.rs" "$CAPNP_DESER_GEN/benchmark_capnp.rs"
 else
   echo "capnp not found (set CAPNP or place binary in tools/bin/capnp)" >&2
   exit 1
