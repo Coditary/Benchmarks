@@ -88,3 +88,77 @@ pub fn lzma(data: &[u8]) -> Vec<u8> {
     lzma_rs::lzma_compress(&mut Cursor::new(data), &mut output).expect("compress output");
     output
 }
+
+#[cfg(any(feature = "lzf", feature = "fastlz", feature = "minilzo"))]
+fn prepend_size(original_len: usize, compressed: &[u8]) -> Vec<u8> {
+    let mut output = Vec::with_capacity(4 + compressed.len());
+    output.extend_from_slice(&(original_len as u32).to_le_bytes());
+    output.extend_from_slice(compressed);
+    output
+}
+
+#[cfg(feature = "lzf")]
+pub fn lzf(data: &[u8]) -> Vec<u8> {
+    let compressed = lzf::compress(data).expect("compress output");
+    prepend_size(data.len(), &compressed)
+}
+
+#[cfg(feature = "fastlz")]
+pub fn fastlz(data: &[u8]) -> Vec<u8> {
+    let mut buffer = vec![0u8; data.len() + data.len() / 20 + 66];
+    let compressed_len = fastlz::compress(data, &mut buffer)
+        .expect("compress output")
+        .len();
+    prepend_size(data.len(), &buffer[..compressed_len])
+}
+
+#[cfg(feature = "minilzo")]
+pub fn minilzo(data: &[u8]) -> Vec<u8> {
+    use lzokay::compress::compress;
+
+    let compressed = compress(data).expect("compress output");
+    prepend_size(data.len(), &compressed)
+}
+
+#[cfg(feature = "lzfse")]
+pub fn lzfse(data: &[u8]) -> Vec<u8> {
+    let mut output = vec![0u8; data.len() + 12];
+    let written = lzfse::encode_buffer(data, &mut output).expect("compress output");
+    output.truncate(written);
+    output
+}
+
+#[cfg(feature = "libdeflate")]
+pub fn libdeflate(data: &[u8]) -> Vec<u8> {
+    let mut compressor = libdeflater::Compressor::new(libdeflater::CompressionLvl::default());
+    let mut output = vec![0u8; compressor.deflate_compress_bound(data.len())];
+    let written = compressor
+        .deflate_compress(data, &mut output)
+        .expect("compress output");
+    output.truncate(written);
+    output
+}
+
+#[cfg(feature = "zopfli")]
+pub fn zopfli(data: &[u8]) -> Vec<u8> {
+    let mut output = Vec::new();
+    zopfli::compress(
+        zopfli::Options::default(),
+        zopfli::Format::Deflate,
+        &mut std::io::Cursor::new(data),
+        &mut output,
+    )
+    .expect("compress output");
+    output
+}
+
+#[cfg(feature = "zlib-ng")]
+pub fn zlib_ng(data: &[u8]) -> Vec<u8> {
+    use flate2_zlib_ng::write::ZlibEncoder;
+    use flate2_zlib_ng::Compression;
+    use std::io::Write;
+
+    let mut encoder = ZlibEncoder::new(Vec::new(), Compression::default());
+    encoder.write_all(data).expect("compress output");
+    encoder.finish().expect("finish compress output")
+}

@@ -1,0 +1,65 @@
+{
+  "domain": "compression",
+  "task_name": "zlib-ng",
+  "description": "Compression benchmark using zlib-ng.",
+  "parameters": {
+    "sizes": [
+      "logs/10",
+      "logs/100",
+      "logs/1000",
+      "logs/10k",
+      "logs/100k",
+      "profile/10",
+      "profile/100",
+      "profile/1000",
+      "profile/10k",
+      "profile/100k",
+      "catalog/10",
+      "catalog/100",
+      "catalog/1000",
+      "catalog/10k",
+      "catalog/100k",
+      "mesh/100",
+      "mesh/1000",
+      "mesh/10k",
+      "mesh/100k",
+      "random/64k",
+      "random/256k",
+      "random/1m",
+      "random/4m",
+      "sparse/64k",
+      "sparse/256k",
+      "sparse/1m",
+      "english/64k",
+      "english/256k",
+      "english/1m",
+      "repetitive/64k",
+      "repetitive/256k",
+      "repetitive/1m"
+    ],
+    "element_type": "fixture"
+  },
+  "benchmark": {
+    "warmup": 3,
+    "min_runs": 10,
+    "max_runs": 50,
+    "runs": null
+  },
+  "ci": {
+    "sizes": [
+      "logs/10",
+      "profile/10",
+      "catalog/10",
+      "mesh/100",
+      "random/64k",
+      "sparse/64k",
+      "english/64k",
+      "repetitive/64k"
+    ],
+    "benchmark": {
+      "warmup": 2,
+      "min_runs": 5,
+      "max_runs": 20
+    }
+  }
+}

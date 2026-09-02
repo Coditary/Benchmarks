@@ -29,6 +29,13 @@ CODECS = [
     "bzip2",
     "xz",
     "lzma",
+    "lzf",
+    "fastlz",
+    "minilzo",
+    "lzfse",
+    "libdeflate",
+    "zopfli",
+    "zlib-ng",
 ]
 
 

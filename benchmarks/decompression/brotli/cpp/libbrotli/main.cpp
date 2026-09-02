@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -7,6 +8,17 @@
 #include <brotli/decode.h>
 
 namespace {
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    std::size_t bound = BrotliEncoderMaxCompressedSize(data.size());
+    std::vector<std::uint8_t> output(bound);
+    if (!BrotliEncoderCompress(BROTLI_DEFAULT_QUALITY, BROTLI_DEFAULT_WINDOW, BROTLI_MODE_GENERIC,
+                               data.size(), data.data(), &bound, output.data())) {
+        throw std::runtime_error("brotli compress failed");
+    }
+    output.resize(bound);
+    return output;
+}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     std::size_t decoded_size = data.size() * 8;

@@ -142,7 +142,7 @@ C++ implementations live under `benchmarks/<domain>/<task>/cpp/<impl>/` and shar
 | serialization / deserialization | `nlohmann-json`, `msgpack-cxx`, `protobuf-cpp`, `flatbuffers-cpp`, `capnp-cpp`, `flexbuffers-cpp` | Wire bytes derived from canonical JSON at runtime |
 | serialization / deserialization (text) | `yaml-cpp`, `tomlplusplus`, `pugixml`, custom `ini` / `kdl` | YAML/TOML/XML via libraries; INI/KDL use shared custom wire format |
 | serialization / deserialization (more) | `nlohmann` BSON/CBOR, custom `csv`/`tsv`/`ucl`, `json5-cpp`, `hjson-cpp`, `cjson`, `pugixml` plist | BSON/CBOR via nlohmann/json; CSV/TSV/UCL custom wire format |
-| compression / decompression | `libzstd`, `zlib`, `lz4`, `libbz2`, `snappy`, `libbrotli`, `liblzma` | Structured domains read canonical JSON; synthetic payloads stay under `datasets/compression/` |
+| compression / decompression | `libzstd`, `zlib`, `lz4`, `libbz2`, `snappy`, `libbrotli`, `liblzma`, `liblzf`, `fastlz`, `minilzo`, `lzfse`, `libdeflate`, `zopfli`, `zlib-ng` | Structured domains read canonical JSON; synthetic payloads stay under `datasets/compression/` |
 | Rust-only formats | — | `bitcode`, `rkyv` (no C++ equivalent) |
 
 Install C++ dependencies (Debian/Ubuntu or Fedora):

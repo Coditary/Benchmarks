@@ -15,6 +15,13 @@ snappy = ["dep:snap"]
 bzip2 = ["dep:bzip2"]
 xz = ["dep:xz2"]
 lzma = ["dep:lzma-rs"]
+lzf = ["dep:lzf"]
+fastlz = ["dep:fastlz"]
+minilzo = ["dep:lzokay"]
+lzfse = ["dep:lzfse"]
+libdeflate = ["dep:libdeflater"]
+zopfli = ["dep:zopfli", "dep:flate2"]
+zlib-ng = ["dep:flate2_zlib_ng"]
 
 [dependencies]
 bench-support = { path = "../../../serialization/rust/bench-support", default-features = false }
@@ -26,3 +33,10 @@ snap = { version = "1", optional = true }
 bzip2 = { version = "0.5", optional = true }
 xz2 = { version = "0.1", optional = true }
 lzma-rs = { version = "0.3", optional = true }
+lzf = { version = "1.0", optional = true }
+fastlz = { version = "0.1", optional = true }
+lzokay = { version = "2.0", optional = true }
+lzfse = { version = "0.2", optional = true }
+libdeflater = { version = "1.26", optional = true }
+zopfli = { version = "0.8", optional = true }
+flate2_zlib_ng = { package = "flate2", version = "1", default-features = false, features = ["zlib-ng"], optional = true }

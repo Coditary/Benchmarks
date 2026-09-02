@@ -91,6 +91,13 @@ CODECS = [
     ("bzip2", "bzip2", "bzip2"),
     ("xz", "xz", "xz"),
     ("lzma", "lzma", "lzma"),
+    ("lzf", "lzf", "lzf"),
+    ("fastlz", "fastlz", "fastlz"),
+    ("minilzo", "minilzo", "minilzo"),
+    ("lzfse", "lzfse", "lzfse"),
+    ("libdeflate", "libdeflate", "libdeflate"),
+    ("zopfli", "zopfli", "zopfli"),
+    ("zlib-ng", "zlib-ng", "zlib_ng"),
 ]
 
 COMPRESS_MAIN = """use std::env;

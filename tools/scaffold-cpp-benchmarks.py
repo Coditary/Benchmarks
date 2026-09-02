@@ -58,6 +58,19 @@ target_compile_options(bench PRIVATE -O3 -DNDEBUG)
 {link_libs}
 """
 
+CMAKE_COMPRESSION = """cmake_minimum_required(VERSION 3.16)
+project({project} LANGUAGES CXX C)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable(bench {sources})
+target_include_directories(bench PRIVATE "{bench_support}")
+target_compile_options(bench PRIVATE -O3 -DNDEBUG)
+{extra_cmake}
+{link_libs}
+"""
+
 
 def write_executable(path: Path, content: str) -> None:
     path.write_text(content)
@@ -506,8 +519,12 @@ int main(int argc, char** argv) {
 
 
 def compression_codec(codec: str, fn_name: str, includes: str, body: str, decompress_body: str,
-                      libs: str, pkg: str) -> None:
-    comp_main = f'''#include <iostream>
+                      libs: str, pkg: str, *, link_z: bool = True,
+                      decomp_pkg: str | None = None, decomp_link_z: bool | None = None) -> None:
+    decomp_pkg = pkg if decomp_pkg is None else decomp_pkg
+    decomp_link_z = link_z if decomp_link_z is None else decomp_link_z
+    comp_main = f'''#include <cstring>
+#include <iostream>
 #include <vector>
 
 #include "bench/paths.hpp"
@@ -536,7 +553,8 @@ int main(int argc, char** argv) {{
     return 0;
 }}
 '''
-    decomp_main = f'''#include <iostream>
+    decomp_main = f'''#include <cstring>
+#include <iostream>
 #include <vector>
 
 #include "bench/paths.hpp"
@@ -544,6 +562,10 @@ int main(int argc, char** argv) {{
 {includes}
 
 namespace {{
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {{
+{body}
+}}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {{
 {decompress_body}
@@ -558,7 +580,8 @@ int main(int argc, char** argv) {{
     }}
     const std::string spec = argv[1];
     const double load_start = benchkit::now_seconds();
-    const std::vector<std::uint8_t> payload = benchkit::load_compression_fixture("{codec}", spec);
+    const std::vector<std::uint8_t> uncompressed = benchkit::load_compression_payload(spec);
+    const std::vector<std::uint8_t> payload = compress_payload(uncompressed);
     const double load_seconds = benchkit::now_seconds() - load_start;
     const auto result = benchkit::run_deserialize_with_setup(
         load_seconds, payload, decompress_payload);
@@ -566,12 +589,33 @@ int main(int argc, char** argv) {{
     return 0;
 }}
 '''
-    cmake = CMAKE_BASE.format(
+    link_libs = (
+        f"target_link_libraries(bench PRIVATE {libs} z)"
+        if link_z and libs
+        else "target_link_libraries(bench PRIVATE z)" if link_z else (
+            f"target_link_libraries(bench PRIVATE {libs})" if libs else ""
+        )
+    )
+    decomp_libs = (
+        f"target_link_libraries(bench PRIVATE {libs} z)"
+        if decomp_link_z and libs
+        else "target_link_libraries(bench PRIVATE z)" if decomp_link_z else (
+            f"target_link_libraries(bench PRIVATE {libs})" if libs else ""
+        )
+    )
+    comp_cmake = CMAKE_COMPRESSION.format(
         project=f"compression_{codec}",
         sources="main.cpp",
         bench_support=BENCH_SUPPORT,
         extra_cmake=pkg,
-        link_libs=f"target_link_libraries(bench PRIVATE {libs} z)",
+        link_libs=link_libs,
+    )
+    decomp_cmake = CMAKE_COMPRESSION.format(
+        project=f"decompression_{codec}",
+        sources="main.cpp",
+        bench_support=BENCH_SUPPORT,
+        extra_cmake=decomp_pkg,
+        link_libs=decomp_libs,
     )
     comp_meta = json.loads(
         METADATA_TEMPLATE.format(
@@ -591,12 +635,12 @@ int main(int argc, char** argv) {{
             source_files=json.dumps(["main.cpp", "CMakeLists.txt"]),
             dataset=json.dumps(
                 {
-                    "root": "datasets/fixtures/compression",
+                    "root": "datasets/compression",
                     "parameter": "{domain}/{tier}",
-                    "input": "fixture.bin",
+                    "input": "payload.bin",
                 }
             ),
-            notes=f"Loads {codec} fixture once (untimed), then measures decompression.",
+            notes=f"Loads payload.bin once (untimed), compresses to {codec} wire bytes (untimed), then measures decompression only.",
         )
     )
     impl_name = {
@@ -610,9 +654,16 @@ int main(int argc, char** argv) {{
         "bzip2": "libbz2",
         "xz": "liblzma",
         "lzma": "liblzma",
+        "lzf": "liblzf",
+        "fastlz": "fastlz",
+        "minilzo": "minilzo",
+        "lzfse": "lzfse",
+        "libdeflate": "libdeflate",
+        "zopfli": "zopfli",
+        "zlib-ng": "zlib-ng",
     }[codec]
-    write_impl(ROOT / f"benchmarks/compression/{codec}/cpp/{impl_name}", comp_meta, cmake, comp_main)
-    write_impl(ROOT / f"benchmarks/decompression/{codec}/cpp/{impl_name}", decomp_meta, cmake, decomp_main)
+    write_impl(ROOT / f"benchmarks/compression/{codec}/cpp/{impl_name}", comp_meta, comp_cmake, comp_main)
+    write_impl(ROOT / f"benchmarks/decompression/{codec}/cpp/{impl_name}", decomp_meta, decomp_cmake, decomp_main)
 
 
 def compression_all() -> None:
@@ -940,6 +991,279 @@ def compression_all() -> None:
     return output;""",
         "brotlienc brotlidec",
         "find_package(PkgConfig REQUIRED)\npkg_check_modules(BROTLI REQUIRED libbrotlienc libbrotlidec)",
+    )
+
+    size_prefix_compress = """    std::vector<std::uint8_t> output(sizeof(std::uint32_t) + {bound});
+    {compress_call};
+    if ({written_check}) {{
+        throw std::runtime_error("{codec} compress failed");
+    }}
+    const std::uint32_t size = static_cast<std::uint32_t>(data.size());
+    std::memcpy(output.data(), &size, sizeof(size));
+    output.resize(sizeof(std::uint32_t) + static_cast<std::size_t>(written));
+    return output;"""
+
+    size_prefix_decompress = """    if (data.size() < sizeof(std::uint32_t)) {{
+        throw std::runtime_error("invalid {codec} payload");
+    }}
+    std::uint32_t original_size = 0;
+    std::memcpy(&original_size, data.data(), sizeof(original_size));
+    std::vector<std::uint8_t> output(original_size);
+    {decompress_call};
+    if ({written_check}) {{
+        throw std::runtime_error("{codec} decompress failed");
+    }}
+    output.resize(static_cast<std::size_t>(written));
+    return output;"""
+
+    compression_codec(
+        "lzf",
+        "lzf",
+        "extern \"C\" {\n#include <lzf.h>\n}",
+        size_prefix_compress.format(
+            bound="data.size()",
+            compress_call="""const unsigned int written = lzf_compress(
+        data.data(), static_cast<unsigned int>(data.size()),
+        output.data() + sizeof(std::uint32_t),
+        static_cast<unsigned int>(output.size() - sizeof(std::uint32_t)))""",
+            written_check="written == 0",
+            codec="lzf",
+        ),
+        size_prefix_decompress.format(
+            decompress_call="""const unsigned int written = lzf_decompress(
+        data.data() + sizeof(std::uint32_t),
+        static_cast<unsigned int>(data.size() - sizeof(std::uint32_t)),
+        output.data(),
+        static_cast<unsigned int>(output.size()))""",
+            written_check="written != original_size",
+            codec="lzf",
+        ),
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_lzf(bench)',
+    )
+
+    compression_codec(
+        "fastlz",
+        "fastlz",
+        "#include <fastlz.h>",
+        size_prefix_compress.format(
+            bound="data.size() + data.size() / 20 + 66",
+            compress_call="""const int written = fastlz_compress(
+        data.data(),
+        static_cast<int>(data.size()),
+        output.data() + sizeof(std::uint32_t))""",
+            written_check="written <= 0",
+            codec="fastlz",
+        ),
+        size_prefix_decompress.format(
+            decompress_call="""const int written = fastlz_decompress(
+        data.data() + sizeof(std::uint32_t),
+        static_cast<int>(data.size() - sizeof(std::uint32_t)),
+        output.data(),
+        static_cast<int>(output.size()))""",
+            written_check="written <= 0",
+            codec="fastlz",
+        ),
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_fastlz(bench)',
+    )
+
+    compression_codec(
+        "minilzo",
+        "minilzo",
+        '#include "minilzo.h"',
+        """    if (lzo_init() != LZO_E_OK) {
+        throw std::runtime_error("minilzo init failed");
+    }
+    std::vector<std::uint8_t> output(sizeof(std::uint32_t) + data.size() + data.size() / 16 + 64 + 3);
+    lzo_uint written = static_cast<lzo_uint>(output.size() - sizeof(std::uint32_t));
+    std::vector<unsigned char> workmem(LZO1X_1_MEM_COMPRESS);
+    if (lzo1x_1_compress(
+            data.data(),
+            static_cast<lzo_uint>(data.size()),
+            output.data() + sizeof(std::uint32_t),
+            &written,
+            workmem.data()) != LZO_E_OK) {
+        throw std::runtime_error("minilzo compress failed");
+    }
+    const std::uint32_t size = static_cast<std::uint32_t>(data.size());
+    std::memcpy(output.data(), &size, sizeof(size));
+    output.resize(sizeof(std::uint32_t) + static_cast<std::size_t>(written));
+    return output;""",
+        """    if (data.size() < sizeof(std::uint32_t)) {
+        throw std::runtime_error("invalid minilzo payload");
+    }
+    std::uint32_t original_size = 0;
+    std::memcpy(&original_size, data.data(), sizeof(original_size));
+    std::vector<std::uint8_t> output(original_size);
+    lzo_uint written = static_cast<lzo_uint>(output.size());
+    if (lzo1x_decompress(
+            data.data() + sizeof(std::uint32_t),
+            static_cast<lzo_uint>(data.size() - sizeof(std::uint32_t)),
+            output.data(),
+            &written,
+            nullptr) != LZO_E_OK || written != original_size) {
+        throw std::runtime_error("minilzo decompress failed");
+    }
+    output.resize(static_cast<std::size_t>(written));
+    return output;""",
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_minilzo(bench)',
+    )
+
+    compression_codec(
+        "lzfse",
+        "lzfse",
+        "extern \"C\" {\n#include <lzfse.h>\n}",
+        """    std::vector<std::uint8_t> output(data.size() + 12);
+    const std::size_t written = lzfse_encode_buffer(
+        output.data(),
+        output.size(),
+        data.data(),
+        data.size(),
+        nullptr);
+    if (written == 0) {
+        throw std::runtime_error("lzfse compress failed");
+    }
+    output.resize(written);
+    return output;""",
+        """    std::size_t capacity = std::max<std::size_t>(data.size() * 4, 64);
+    constexpr std::size_t kMaxCapacity = 256ULL * 1024 * 1024;
+    std::vector<std::uint8_t> output;
+    while (capacity <= kMaxCapacity) {
+        output.assign(capacity, 0);
+        const std::size_t written = lzfse_decode_buffer(
+            output.data(),
+            output.size(),
+            data.data(),
+            data.size(),
+            nullptr);
+        if (written == 0) {
+            throw std::runtime_error("lzfse decompress failed");
+        }
+        if (written < capacity) {
+            output.resize(written);
+            return output;
+        }
+        capacity *= 2;
+    }
+    throw std::runtime_error("lzfse decompress output too large");""",
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_lzfse(bench)',
+    )
+
+    libdeflate_decompress = """    struct libdeflate_decompressor* decompressor = libdeflate_alloc_decompressor();
+    if (decompressor == nullptr) {
+        throw std::runtime_error("libdeflate decompress init failed");
+    }
+    std::size_t capacity = std::max<std::size_t>(data.size() * 4, 64);
+    constexpr std::size_t kMaxCapacity = 256ULL * 1024 * 1024;
+    std::vector<std::uint8_t> output;
+    while (capacity <= kMaxCapacity) {
+        output.assign(capacity, 0);
+        std::size_t actual_out = 0;
+        const enum libdeflate_result result = libdeflate_deflate_decompress(
+            decompressor,
+            data.data(),
+            data.size(),
+            output.data(),
+            output.size(),
+            &actual_out);
+        if (result == LIBDEFLATE_SUCCESS) {
+            libdeflate_free_decompressor(decompressor);
+            output.resize(actual_out);
+            return output;
+        }
+        if (result == LIBDEFLATE_INSUFFICIENT_SPACE) {
+            capacity *= 2;
+            continue;
+        }
+        libdeflate_free_decompressor(decompressor);
+        throw std::runtime_error("libdeflate decompress failed");
+    }
+    libdeflate_free_decompressor(decompressor);
+    throw std::runtime_error("libdeflate decompress output too large");"""
+
+    compression_codec(
+        "libdeflate",
+        "libdeflate",
+        "extern \"C\" {\n#include <libdeflate.h>\n}",
+        """    struct libdeflate_compressor* compressor = libdeflate_alloc_compressor(6);
+    if (compressor == nullptr) {
+        throw std::runtime_error("libdeflate compress init failed");
+    }
+    const std::size_t bound = libdeflate_deflate_compress_bound(compressor, data.size());
+    std::vector<std::uint8_t> output(bound);
+    const std::size_t written = libdeflate_deflate_compress(
+        compressor,
+        data.data(),
+        data.size(),
+        output.data(),
+        output.size());
+    libdeflate_free_compressor(compressor);
+    if (written == 0) {
+        throw std::runtime_error("libdeflate compress failed");
+    }
+    output.resize(written);
+    return output;""",
+        libdeflate_decompress,
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_libdeflate(bench)',
+    )
+
+    compression_codec(
+        "zopfli",
+        "zopfli",
+        "extern \"C\" {\n#include \"zopfli.h\"\n#include <libdeflate.h>\n}",
+        """    ZopfliOptions options;
+    ZopfliInitOptions(&options);
+    unsigned char* out = nullptr;
+    std::size_t outsize = 0;
+    ZopfliCompress(
+        &options,
+        ZOPFLI_FORMAT_DEFLATE,
+        data.data(),
+        data.size(),
+        &out,
+        &outsize);
+    if (out == nullptr || outsize == 0) {
+        throw std::runtime_error("zopfli compress failed");
+    }
+    std::vector<std::uint8_t> output(out, out + outsize);
+    std::free(out);
+    return output;""",
+        libdeflate_decompress,
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_zopfli(bench)',
+        decomp_pkg='include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_zopfli(bench)\nbench_link_libdeflate(bench)',
+    )
+
+    zlib_ng_compress = """    uLongf bound = compressBound(static_cast<uLong>(data.size()));
+    std::vector<std::uint8_t> output(bound);
+    if (compress2(output.data(), &bound, data.data(), static_cast<uLong>(data.size()), Z_BEST_SPEED) != Z_OK) {
+        throw std::runtime_error("zlib-ng compress failed");
+    }
+    output.resize(bound);
+    return output;"""
+
+    zlib_ng_decompress = """    std::vector<std::uint8_t> output(data.size() * 8);
+    uLongf out_len = static_cast<uLongf>(output.size());
+    if (uncompress(output.data(), &out_len, data.data(), static_cast<uLong>(data.size())) != Z_OK) {
+        throw std::runtime_error("zlib-ng decompress failed");
+    }
+    output.resize(out_len);
+    return output;"""
+
+    compression_codec(
+        "zlib-ng",
+        "zlib-ng",
+        "#include <zlib.h>",
+        zlib_ng_compress,
+        zlib_ng_decompress,
+        "",
+        'include("../../../../../tools/cpp/cmake/BenchDeps.cmake")\nbench_link_zlib_ng(bench)',
+        link_z=False,
+        decomp_link_z=False,
     )
 
 

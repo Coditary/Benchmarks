@@ -8,6 +8,22 @@
 
 namespace {
 
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    std::vector<std::uint8_t> output(sizeof(std::uint32_t) + LZ4_compressBound(static_cast<int>(data.size())));
+    const int written = LZ4_compress_default(
+        reinterpret_cast<const char*>(data.data()),
+        reinterpret_cast<char*>(output.data() + sizeof(std::uint32_t)),
+        static_cast<int>(data.size()),
+        static_cast<int>(output.size() - sizeof(std::uint32_t)));
+    if (written <= 0) {
+        throw std::runtime_error("lz4 compress failed");
+    }
+    const std::uint32_t size = static_cast<std::uint32_t>(data.size());
+    std::memcpy(output.data(), &size, sizeof(size));
+    output.resize(sizeof(std::uint32_t) + static_cast<std::size_t>(written));
+    return output;
+}
+
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     if (data.size() < sizeof(std::uint32_t)) {
         throw std::runtime_error("invalid lz4 payload");

@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -7,9 +8,29 @@
 
 namespace {
 
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    lzma_stream stream = LZMA_STREAM_INIT;
+    lzma_options_lzma options {};
+    if (lzma_lzma_encoder(&stream, &options) != LZMA_OK) {
+        throw std::runtime_error("lzma init failed");
+    }
+    std::vector<std::uint8_t> output(data.size() + 1024);
+    stream.next_in = data.data();
+    stream.avail_in = data.size();
+    stream.next_out = output.data();
+    stream.avail_out = output.size();
+    if (lzma_code(&stream, LZMA_FINISH) != LZMA_STREAM_END) {
+        lzma_end(&stream);
+        throw std::runtime_error("lzma compress failed");
+    }
+    output.resize(stream.total_out);
+    lzma_end(&stream);
+    return output;
+}
+
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     lzma_stream stream = LZMA_STREAM_INIT;
-    if (lzma_alone_decoder(&stream, UINT64_MAX) != LZMA_OK) {
+    if (lzma_stream_decoder(&stream, UINT64_MAX, LZMA_CONCATENATED) != LZMA_OK) {
         throw std::runtime_error("lzma init failed");
     }
     std::vector<std::uint8_t> output(data.size() * 8);

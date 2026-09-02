@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -6,6 +7,25 @@
 #include <zlib.h>
 
 namespace {
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    z_stream stream {};
+    if (deflateInit2(&stream, Z_BEST_SPEED, Z_DEFLATED, 15 + 16, 8, Z_DEFAULT_STRATEGY) != Z_OK) {
+        throw std::runtime_error("gzip init failed");
+    }
+    stream.next_in = const_cast<Bytef*>(reinterpret_cast<const Bytef*>(data.data()));
+    stream.avail_in = static_cast<uInt>(data.size());
+    std::vector<std::uint8_t> output(deflateBound(&stream, static_cast<uLong>(data.size())));
+    stream.next_out = output.data();
+    stream.avail_out = static_cast<uInt>(output.size());
+    if (deflate(&stream, Z_FINISH) != Z_STREAM_END) {
+        deflateEnd(&stream);
+        throw std::runtime_error("gzip compress failed");
+    }
+    output.resize(stream.total_out);
+    deflateEnd(&stream);
+    return output;
+}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     z_stream stream {};

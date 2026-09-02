@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -10,10 +11,7 @@ namespace {
 std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
     lzma_stream stream = LZMA_STREAM_INIT;
     lzma_options_lzma options {};
-    if (lzma_lzma_preset(&options, LZMA_PRESET_DEFAULT) != LZMA_OK) {
-        throw std::runtime_error("lzma preset failed");
-    }
-    if (lzma_alone_encoder(&stream, &options) != LZMA_OK) {
+    if (lzma_lzma_encoder(&stream, &options) != LZMA_OK) {
         throw std::runtime_error("lzma init failed");
     }
     std::vector<std::uint8_t> output(data.size() + 1024);

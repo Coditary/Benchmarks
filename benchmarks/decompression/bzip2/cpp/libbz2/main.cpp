@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -6,6 +7,21 @@
 #include <bzlib.h>
 
 namespace {
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    const unsigned int block = 9;
+    const unsigned int extra = 0;
+    const unsigned int work = 30;
+    std::vector<std::uint8_t> output(data.size() + 1024);
+    unsigned int out_len = static_cast<unsigned int>(output.size());
+    if (BZ2_bzBuffToBuffCompress(reinterpret_cast<char*>(output.data()), &out_len,
+                                 reinterpret_cast<char*>(const_cast<std::uint8_t*>(data.data())),
+                                 static_cast<unsigned int>(data.size()), block, extra, work) != BZ_OK) {
+        throw std::runtime_error("bzip2 compress failed");
+    }
+    output.resize(out_len);
+    return output;
+}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     std::vector<std::uint8_t> output(data.size() * 8);

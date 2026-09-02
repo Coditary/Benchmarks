@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -6,6 +7,16 @@
 #include <zlib.h>
 
 namespace {
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    uLongf bound = compressBound(static_cast<uLong>(data.size()));
+    std::vector<std::uint8_t> output(bound);
+    if (compress2(output.data(), &bound, data.data(), static_cast<uLong>(data.size()), Z_BEST_SPEED) != Z_OK) {
+        throw std::runtime_error("zlib compress failed");
+    }
+    output.resize(bound);
+    return output;
+}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     std::vector<std::uint8_t> output(data.size() * 8);

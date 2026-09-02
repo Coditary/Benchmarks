@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -6,6 +7,12 @@
 #include <snappy.h>
 
 namespace {
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    std::string output;
+    snappy::Compress(reinterpret_cast<const char*>(data.data()), data.size(), &output);
+    return std::vector<std::uint8_t>(output.begin(), output.end());
+}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     std::string output;

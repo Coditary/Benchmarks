@@ -12,6 +12,41 @@ fn compress_payload(payload: &[u8]) -> Vec<u8> {
     crate::compress::lzma(payload)
 }
 
+#[cfg(feature = "lzfse")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::lzfse(payload)
+}
+
+#[cfg(feature = "zlib-ng")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::zlib_ng(payload)
+}
+
+#[cfg(feature = "zopfli")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::zopfli(payload)
+}
+
+#[cfg(feature = "libdeflate")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::libdeflate(payload)
+}
+
+#[cfg(feature = "minilzo")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::minilzo(payload)
+}
+
+#[cfg(feature = "fastlz")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::fastlz(payload)
+}
+
+#[cfg(feature = "lzf")]
+fn compress_payload(payload: &[u8]) -> Vec<u8> {
+    crate::compress::lzf(payload)
+}
+
 #[cfg(feature = "xz")]
 fn compress_payload(payload: &[u8]) -> Vec<u8> {
     crate::compress::xz(payload)

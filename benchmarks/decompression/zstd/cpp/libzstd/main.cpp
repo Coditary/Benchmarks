@@ -1,3 +1,4 @@
+#include <cstring>
 #include <iostream>
 #include <vector>
 
@@ -6,6 +7,17 @@
 #include <zstd.h>
 
 namespace {
+
+std::vector<std::uint8_t> compress_payload(const std::vector<std::uint8_t>& data) {
+    const std::size_t bound = ZSTD_compressBound(data.size());
+    std::vector<std::uint8_t> output(bound);
+    const std::size_t written = ZSTD_compress(output.data(), bound, data.data(), data.size(), 3);
+    if (ZSTD_isError(written)) {
+        throw std::runtime_error("zstd compress failed");
+    }
+    output.resize(written);
+    return output;
+}
 
 std::vector<std::uint8_t> decompress_payload(const std::vector<std::uint8_t>& data) {
     const std::size_t bound = ZSTD_getFrameContentSize(data.data(), data.size());

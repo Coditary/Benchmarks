@@ -1,0 +1,27 @@
+{
+  "language": "Rust",
+  "implementation": "libdeflate",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "rust",
+    "decompression",
+    "libdeflate"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/decompression-libdeflate ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": [
+    "src/main.rs",
+    "Cargo.toml"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/fixtures/compression",
+    "parameter": "{domain}/{tier}",
+    "input": "fixture.bin"
+  },
+  "notes": "Loads pre-compressed fixture once (untimed), then measures decompression only."
+}
