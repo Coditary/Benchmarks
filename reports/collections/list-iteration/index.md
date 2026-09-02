@@ -1,74 +1,269 @@
 # collections / list-iteration
 
-Generated at 2026-07-05T23:33:13.789096+00:00
+Generated at 2026-09-02T21:25:43.512927+00:00
+
+## Runtime leaderboard
+
+Implementations ranked fastest-first per domain and tier. `vs best` shows how much slower the entry is compared to the winner.
+
+### default
+
+#### 10
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 15.8675 ms | — |
+
+#### 1000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 15.9435 ms | — |
+
+#### 10000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 16.4635 ms | — |
+
+#### 100000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 21.4413 ms | — |
+
+#### 1000000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 71.0643 ms | — |
+
+#### 10000000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 543.2732 ms | — |
+
+#### 100000000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 5301.8299 ms | — |
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 7 | 1.00 | 15.8675 ms #1 | 15.9435 ms #1 | 16.4635 ms #1 | 21.4413 ms #1 | 71.0643 ms #1 | 543.2732 ms #1 | 5301.8299 ms #1 |
+
+## Output size leaderboard
+
+Smallest raw output; lower is better.
+
+### default
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 0 | - | - | - | - | - | - | - | - |
+
+## Gzip size leaderboard
+
+Smallest gzip-compressed output; lower is better.
+
+### default
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 0 | - | - | - | - | - | - | - | - |
+
+## Serialize peak RSS leaderboard
+
+Lowest RSS during timed serialize loop; lower is better.
+
+### default
+
+#### 10
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 10,522,624 bytes | — |
+
+#### 1000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 10,661,888 bytes | — |
+
+#### 10000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 10,915,840 bytes | — |
+
+#### 100000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 14,438,400 bytes | — |
+
+#### 1000000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 50,597,888 bytes | — |
+
+#### 10000000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 411,701,248 bytes | — |
+
+#### 100000000
+
+| Rank | Implementation | Value | vs best |
+| ---: | --- | ---: | ---: |
+| 1 | Python/simple-loop | 4,023,291,904 bytes | — |
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 7 | 1.00 | 10,522,624 bytes #1 | 10,661,888 bytes #1 | 10,915,840 bytes #1 | 14,438,400 bytes #1 | 50,597,888 bytes #1 | 411,701,248 bytes #1 | 4,023,291,904 bytes #1 |
+
+## Process peak RSS leaderboard
+
+Lowest whole-process RSS (includes load); lower is better.
+
+### default
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 0 | - | - | - | - | - | - | - | - |
+
+## Stability (CV) leaderboard
+
+Lowest coefficient of variation (stddev/mean); lower is better.
+
+### default
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 0 | - | - | - | - | - | - | - | - |
+
+## Spread leaderboard
+
+Lowest min-max spread relative to mean; lower is better.
+
+### default
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 0 | - | - | - | - | - | - | - | - |
+
+## Load/serialize ratio leaderboard
+
+Lowest load time relative to serialize mean; lower is better.
+
+### default
+
+#### default comparison matrix
+
+| Implementation | Wins | Avg rank | 10 | 1000 | 10000 | 100000 | 1000000 | 10000000 | 100000000 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | 0 | - | - | - | - | - | - | - | - |
 
 ## Static metric winners
 
 | Metric | Winner | Value |
 | --- | --- | --- |
-| Lines of code | C/simple-loop | 9 |
+| Lines of code | Python/simple-loop | 9 |
 | Artifact size | Python/simple-loop | 194 bytes |
-| Build time | C/simple-loop | 41.2000 ms |
+| Build time | - | - |
 
-## Runtime winners (mean)
+## Metric winners (summary)
 
-| Size | Winner | Mean |
-| --- | --- | --- |
-| 10 | C/simple-loop | 0.5023 ms |
-| 1000 | C/simple-loop | 0.5141 ms |
-| 10000 | C/simple-loop | 0.5652 ms |
-| 100000 | C/simple-loop | 0.9090 ms |
-| 1000000 | C/simple-loop | 1.9755 ms |
-| 10000000 | C/simple-loop | 11.7837 ms |
-| 100000000 | C/simple-loop | 115.2762 ms |
+| Metric | Domain | Tier | Winner | Value |
+| --- | --- | --- | --- | --- |
+| Runtime | default | 10 | Python/simple-loop | 15.8675 ms |
+| Runtime | default | 1000 | Python/simple-loop | 15.9435 ms |
+| Runtime | default | 10000 | Python/simple-loop | 16.4635 ms |
+| Runtime | default | 100000 | Python/simple-loop | 21.4413 ms |
+| Runtime | default | 1000000 | Python/simple-loop | 71.0643 ms |
+| Runtime | default | 10000000 | Python/simple-loop | 543.2732 ms |
+| Runtime | default | 100000000 | Python/simple-loop | 5301.8299 ms |
+| Output size | default | 10 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Output size | default | 1000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Output size | default | 10000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Output size | default | 100000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Output size | default | 1000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Output size | default | 10000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Output size | default | 100000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 10 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 1000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 10000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 100000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 1000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 10000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Gzip size | default | 100000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Serialize peak RSS | default | 10 | Python/simple-loop | 10,522,624 bytes |
+| Serialize peak RSS | default | 1000 | Python/simple-loop | 10,661,888 bytes |
+| Serialize peak RSS | default | 10000 | Python/simple-loop | 10,915,840 bytes |
+| Serialize peak RSS | default | 100000 | Python/simple-loop | 14,438,400 bytes |
+| Serialize peak RSS | default | 1000000 | Python/simple-loop | 50,597,888 bytes |
+| Serialize peak RSS | default | 10000000 | Python/simple-loop | 411,701,248 bytes |
+| Serialize peak RSS | default | 100000000 | Python/simple-loop | 4,023,291,904 bytes |
+| Process peak RSS | default | 10 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Process peak RSS | default | 1000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Process peak RSS | default | 10000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Process peak RSS | default | 100000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Process peak RSS | default | 1000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Process peak RSS | default | 10000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Process peak RSS | default | 100000000 | Python/simple-loop | 4,611,686,018,427,387,904 bytes |
+| Stability (CV) | default | 10 | Python/simple-loop | inf% |
+| Stability (CV) | default | 1000 | Python/simple-loop | inf% |
+| Stability (CV) | default | 10000 | Python/simple-loop | inf% |
+| Stability (CV) | default | 100000 | Python/simple-loop | inf% |
+| Stability (CV) | default | 1000000 | Python/simple-loop | inf% |
+| Stability (CV) | default | 10000000 | Python/simple-loop | inf% |
+| Stability (CV) | default | 100000000 | Python/simple-loop | inf% |
+| Spread | default | 10 | Python/simple-loop | inf% |
+| Spread | default | 1000 | Python/simple-loop | inf% |
+| Spread | default | 10000 | Python/simple-loop | inf% |
+| Spread | default | 100000 | Python/simple-loop | inf% |
+| Spread | default | 1000000 | Python/simple-loop | inf% |
+| Spread | default | 10000000 | Python/simple-loop | inf% |
+| Spread | default | 100000000 | Python/simple-loop | inf% |
+| Load/serialize ratio | default | 10 | Python/simple-loop | infx |
+| Load/serialize ratio | default | 1000 | Python/simple-loop | infx |
+| Load/serialize ratio | default | 10000 | Python/simple-loop | infx |
+| Load/serialize ratio | default | 100000 | Python/simple-loop | infx |
+| Load/serialize ratio | default | 1000000 | Python/simple-loop | infx |
+| Load/serialize ratio | default | 10000000 | Python/simple-loop | infx |
+| Load/serialize ratio | default | 100000000 | Python/simple-loop | infx |
 
-## Memory winners (peak RSS)
+## Per-implementation results
 
-| Size | Winner | Peak memory |
-| --- | --- | --- |
-| 10 | C/simple-loop | 3,485,696 bytes |
-| 1000 | C/simple-loop | 3,485,696 bytes |
-| 10000 | C/simple-loop | 3,432,448 bytes |
-| 100000 | C/simple-loop | 3,424,256 bytes |
-| 1000000 | C/simple-loop | 9,383,936 bytes |
-| 10000000 | C/simple-loop | 81,383,424 bytes |
-| 100000000 | C/simple-loop | 801,284,096 bytes |
-
-## Full comparison
-
-| Implementation | LoC | Artifact | Build time | Size | Mean | Peak memory |
-| --- | --- | --- | --- | --- | --- | --- |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 10 | 0.5023 ms | 3,485,696 bytes |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 1000 | 0.5141 ms | 3,485,696 bytes |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 10000 | 0.5652 ms | 3,432,448 bytes |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 100000 | 0.9090 ms | 3,424,256 bytes |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 1000000 | 1.9755 ms | 9,383,936 bytes |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 10000000 | 11.7837 ms | 81,383,424 bytes |
-| C/simple-loop | 9 | 14,472 bytes | 41.2000 ms | 100000000 | 115.2762 ms | 801,284,096 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 10 | 15.8675 ms | 10,522,624 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 1000 | 15.9435 ms | 10,661,888 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 10000 | 16.4635 ms | 10,915,840 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 100000 | 21.4413 ms | 14,438,400 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 1000000 | 71.0643 ms | 50,597,888 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 10000000 | 543.2732 ms | 411,701,248 bytes |
-| Python/simple-loop | 9 | 194 bytes | 0.0000 ms | 100000000 | 5301.8299 ms | 4,023,291,904 bytes |
+| Implementation | Domain | Tier | Mean | Output | Gzip | Serialize RSS | Process RSS | CV% | Load/ser |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Python/simple-loop | default | 10 | 15.8675 ms (#1) | - | - | 10,522,624 bytes | - | - | - |
+| Python/simple-loop | default | 1000 | 15.9435 ms (#1) | - | - | 10,661,888 bytes | - | - | - |
+| Python/simple-loop | default | 10000 | 16.4635 ms (#1) | - | - | 10,915,840 bytes | - | - | - |
+| Python/simple-loop | default | 100000 | 21.4413 ms (#1) | - | - | 14,438,400 bytes | - | - | - |
+| Python/simple-loop | default | 1000000 | 71.0643 ms (#1) | - | - | 50,597,888 bytes | - | - | - |
+| Python/simple-loop | default | 10000000 | 543.2732 ms (#1) | - | - | 411,701,248 bytes | - | - | - |
+| Python/simple-loop | default | 100000000 | 5301.8299 ms (#1) | - | - | 4,023,291,904 bytes | - | - | - |
 
 ## Implementation details
-
-### C/simple-loop
-
-- Git hash: `624e501`
-- Recorded at: `2026-07-05 23:32:09`
-- Notes: Minimal C: heap int64 array, fill + sum loop. Built with gcc -O3 -s.
-- CPU: AMD EPYC 7763 64-Core Processor
-- OS: Linux 6.17.0-1018-azure
-- RAM total: 15.62 GB
-- RAM available at start: 14.11 GB
-- RAM usage at start: 9.6%
-- Load avg (1 min): 0.5864
-- CPU governor: unknown
-- CI run: True
-- Source report: `benchmarks/collections/list-iteration/c/simple-loop/artifacts/report.json`
 
 ### Python/simple-loop
 

@@ -1,0 +1,69 @@
+{
+  "domain": "serialization",
+  "test": "protobuf",
+  "lang": "cpp",
+  "impl": "protobuf-cpp",
+  "language": "C++",
+  "implementation": "protobuf-cpp",
+  "git_hash": "9de0e1c",
+  "recorded_at": "2026-09-02T21:19:50.891303+00:00",
+  "tags": [
+    "cpp",
+    "protobuf",
+    "binary"
+  ],
+  "notes": "Canonical dataset to protobuf message (untimed), then timed SerializeToString.",
+  "task_config": {
+    "parameters": {
+      "sizes": [
+        "logs/10",
+        "logs/100",
+        "logs/1000",
+        "logs/10k",
+        "logs/100k",
+        "profile/10",
+        "profile/100",
+        "profile/1000",
+        "profile/10k",
+        "profile/100k",
+        "catalog/10",
+        "catalog/100",
+        "catalog/1000",
+        "catalog/10k",
+        "catalog/100k",
+        "mesh/100",
+        "mesh/1000",
+        "mesh/10k",
+        "mesh/100k"
+      ],
+      "element_type": "fixture"
+    },
+    "benchmark": {
+      "warmup": 2,
+      "min_runs": 5,
+      "max_runs": 20,
+      "runs": null
+    }
+  },
+  "env": {
+    "hostname": "runnervmgx7h7",
+    "os": "Linux 6.17.0-1022-azure",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "physical_cores": 2,
+    "logical_threads": 4,
+    "total_ram_bytes": 16765374464,
+    "available_ram_bytes": 15647248384,
+    "used_ram_bytes": 1118126080,
+    "ram_usage_percent": 6.7,
+    "cpu_governor": "performance",
+    "system_load_1min": 1.7964,
+    "is_ci": true,
+    "runner_name": "GitHub Actions 1000003575"
+  },
+  "metrics": {
+    "lines_of_code": 275,
+    "artifact_size_bytes": 0,
+    "build_time_ms": 3142.3,
+    "hyperfine_results": []
+  }
+}

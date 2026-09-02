@@ -46,6 +46,73 @@
     table { width: 100%; border-collapse: collapse; }
     th, td { border-bottom: 1px solid var(--border); padding: 0.65rem 0.5rem; text-align: left; vertical-align: top; }
     th { color: var(--muted); font-weight: 600; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.best { background: rgba(52, 211, 153, 0.18); font-weight: 600; }
+    .rank-badge {
+      display: inline-block; min-width: 1.5rem; margin-right: 0.35rem;
+      padding: 0.1rem 0.35rem; border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15); color: #7dd3fc; font-size: 0.8rem;
+    }
+    .rank-badge.gold { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
+    .matrix-scroll { overflow-x: auto; }
+    .leaderboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .leaderboard-card {
+      border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem;
+      background: #0b1220;
+    }
+    .leaderboard-card h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+    .domain-section {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #0b1220;
+    }
+    .domain-section > h3 {
+      margin: 0 0 0.75rem;
+      text-transform: capitalize;
+    }
+    .domain-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+    .domain-chart-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.8);
+    }
+    .domain-chart-card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+    .domain-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .domain-controls label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    #metric-select {
+      margin-top: 0.35rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }
     .warning {
       border-left: 4px solid var(--warn);
       padding: 0.75rem 1rem; margin-bottom: 0.75rem;
@@ -115,6 +182,50 @@
     </section>
 
     <section class="panel">
+      <h2>Runtime leaderboard</h2>
+      <p class="muted">Per domain: implementations ranked fastest-first for each tier.</p>
+      <div id="leaderboard-by-domain"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Runtime comparison matrix</h2>
+      <p class="muted">One matrix per domain. Columns are tiers (10, 100, 10k, …), not mixed domains.</p>
+      <div id="comparison-matrix-by-domain"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Metric comparison</h2>
+      <p class="muted">Pick a domain and metric to inspect rankings and the comparison matrix.</p>
+      <div class="domain-controls">
+        <label>
+          Domain
+          <select id="domain-select"></select>
+        </label>
+        <label>
+          Metric
+          <select id="metric-select"></select>
+        </label>
+      </div>
+      <div class="leaderboard-grid" id="metric-leaderboard-grid" style="margin-top: 1rem;"></div>
+      <div class="matrix-scroll" id="metric-comparison-matrix" style="margin-top: 1rem;"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Output size by domain</h2>
+      <div id="output-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Gzip size by domain</h2>
+      <div id="gzip-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Stability (CV %) by domain</h2>
+      <div id="stability-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
       <h2>Filters</h2>
       <div class="controls" id="language-controls"></div>
       <div class="controls" id="implementation-controls"></div>
@@ -124,9 +235,14 @@
       </label>
     </section>
 
-    <section class="panel grid-2">
-      <div><h2>Runtime</h2><canvas id="runtime-chart"></canvas></div>
-      <div><h2>Peak memory</h2><canvas id="memory-chart"></canvas></div>
+    <section class="panel">
+      <h2>Runtime by domain</h2>
+      <div id="runtime-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Peak memory by domain</h2>
+      <div id="memory-domain-charts" class="domain-chart-grid"></div>
     </section>
 
     <section class="panel">
@@ -174,7 +290,7 @@
   </main>
 
   <script>
-    const payload = {"domain": "collections", "test": "list-iteration", "sizes": ["10", "1000", "10000", "100000", "1000000", "10000000", "100000000"], "datasets": [{"label": "C/simple-loop", "lang": "C", "runtime": [0.5023, 0.5141, 0.5652, 0.909, 1.9755, 11.7837, 115.2762], "memory": [3485696, 3485696, 3432448, 3424256, 9383936, 81383424, 801284096], "static": {"lines_of_code": 9, "artifact_size_bytes": 14472, "build_time_ms": 41.2}, "details": {"git_hash": "624e501", "recorded_at": "2026-07-05T23:32:09.068916+00:00", "recorded_at_display": "2026-07-05 23:32:09", "notes": "Minimal C: heap int64 array, fill + sum loop. Built with gcc -O3 -s.", "tags": ["compiled", "native", "gcc", "minimal"], "report_path": "benchmarks/collections/list-iteration/c/simple-loop/artifacts/report.json", "task_config": {"parameters": {"sizes": [10, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 2000000000], "element_type": "int64"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 30, "runs": null}}, "env": {"hostname": "runnervmkkn4f", "os": "Linux 6.17.0-1018-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16770752512, "available_ram_bytes": 15154245632, "used_ram_bytes": 1616506880, "ram_usage_percent": 9.6, "cpu_governor": "unknown", "system_load_1min": 0.5864, "is_ci": true, "runner_name": "GitHub Actions 1000001344"}, "hyperfine_results": [{"command": "./bench 10", "mean": "0.0005023091600000001", "stddev": "0.000031203420638471347", "median": "0.00049300376", "user": "0.00034616666666666655", "system": "0.00021895266666666668", "min": "0.0004551782599999999", "max": "0.0006078202600000001", "parameter_size": "10", "peak_memory_bytes": 3485696, "mean_ms": 0.5023}, {"command": "./bench 1000", "mean": "0.0005141312600000001", "stddev": "0.0000263071749017325", "median": "0.0005054872599999999", "user": "0.0002772", "system": "0.0002959986666666667", "min": "0.00046682026", "max": "0.00058326726", "parameter_size": "1000", "peak_memory_bytes": 3485696, "mean_ms": 0.5141}, {"command": "./bench 10000", "mean": "0.0005651701599999999", "stddev": "0.00004366131536896565", "median": "0.00055492526", "user": "0.0004116333333333333", "system": "0.00022573733333333332", "min": "0.00052724326", "max": "0.0007640852600000001", "parameter_size": "10000", "peak_memory_bytes": 3432448, "mean_ms": 0.5652}, {"command": "./bench 100000", "mean": "0.0009090003933333332", "stddev": "0.000036173682642394076", "median": "0.00090024976", "user": "0.0004572666666666666", "system": "0.0005460833333333334", "min": "0.0008679392600000001", "max": "0.00100987526", "parameter_size": "100000", "peak_memory_bytes": 3424256, "mean_ms": 0.909}, {"command": "./bench 1000000", "mean": "0.00197552466", "stddev": "0.00005723237195106302", "median": "0.0019559337600000004", "user": "0.0008116333333333333", "system": "0.0012612473333333334", "min": "0.0019101672600000002", "max": "0.00214227226", "parameter_size": "1000000", "peak_memory_bytes": 9383936, "mean_ms": 1.9755}, {"command": "./bench 10000000", "mean": "0.011783688126666667", "stddev": "0.00043173962108841463", "median": "0.01158940176", "user": "0.006955233333333333", "system": "0.004794026666666667", "min": "0.01137238626", "max": "0.01288522426", "parameter_size": "10000000", "peak_memory_bytes": 81383424, "mean_ms": 11.7837}, {"command": "./bench 100000000", "mean": "0.11527622990000004", "stddev": "0.0007394365209130464", "median": "0.11507440726000001", "user": "0.06896568", "system": "0.04623738", "min": "0.11412079126", "max": "0.11733821726000002", "parameter_size": "100000000", "peak_memory_bytes": 801284096, "mean_ms": 115.2762}]}}, {"label": "Python/simple-loop", "lang": "Python", "runtime": [15.8675, 15.9435, 16.4635, 21.4413, 71.0643, 543.2732, 5301.8299], "memory": [10522624, 10661888, 10915840, 14438400, 50597888, 411701248, 4023291904], "static": {"lines_of_code": 9, "artifact_size_bytes": 194, "build_time_ms": 0.0}, "details": {"git_hash": "624e501", "recorded_at": "2026-07-05T23:33:13.594712+00:00", "recorded_at_display": "2026-07-05 23:33:13", "notes": "Standard Python for-loop iteration. Script-based execution without pre-compilation.", "tags": ["interpreted", "script", "zero-dependency"], "report_path": "benchmarks/collections/list-iteration/python/simple-loop/artifacts/report.json", "task_config": {"parameters": {"sizes": [10, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 2000000000], "element_type": "int64"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 30, "runs": null}}, "env": {"hostname": "runnervmkkn4f", "os": "Linux 6.17.0-1018-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16770752512, "available_ram_bytes": 14761267200, "used_ram_bytes": 2009485312, "ram_usage_percent": 12.0, "cpu_governor": "unknown", "system_load_1min": 0.8496, "is_ci": true, "runner_name": "GitHub Actions 1000001344"}, "hyperfine_results": [{"command": "python3 main.py 10", "mean": "0.015867450433333333", "stddev": "0.00017444729104091204", "median": "0.015790867700000003", "user": "0.012082653333333332", "system": "0.003793212666666666", "min": "0.0156608447", "max": "0.0163577077", "parameter_size": "10", "peak_memory_bytes": 10522624, "mean_ms": 15.8675}, {"command": "python3 main.py 1000", "mean": "0.015943526899999998", "stddev": "0.00017207623861861666", "median": "0.0159000017", "user": "0.011959119999999998", "system": "0.003978053333333333", "min": "0.015753297700000002", "max": "0.0164060247", "parameter_size": "1000", "peak_memory_bytes": 10661888, "mean_ms": 15.9435}, {"command": "python3 main.py 10000", "mean": "0.016463479766666667", "stddev": "0.0003873952139142284", "median": "0.0163875387", "user": "0.01241535333333333", "system": "0.00404922", "min": "0.0162201607", "max": "0.0184457727", "parameter_size": "10000", "peak_memory_bytes": 10915840, "mean_ms": 16.4635}, {"command": "python3 main.py 100000", "mean": "0.021441297933333332", "stddev": "0.00022934656408839135", "median": "0.0213733417", "user": "0.016104619999999993", "system": "0.005330253333333332", "min": "0.0211687537", "max": "0.0220929217", "parameter_size": "100000", "peak_memory_bytes": 14438400, "mean_ms": 21.4413}, {"command": "python3 main.py 1000000", "mean": "0.07106430379999999", "stddev": "0.0006557854543899796", "median": "0.0709579442", "user": "0.05217362", "system": "0.01883025333333333", "min": "0.0697623187", "max": "0.0724317787", "parameter_size": "1000000", "peak_memory_bytes": 50597888, "mean_ms": 71.0643}, {"command": "python3 main.py 10000000", "mean": "0.5432731654999999", "stddev": "0.006022468019743841", "median": "0.5413403937", "user": "0.40216212", "system": "0.14095001999999998", "min": "0.5368684037", "max": "0.5523976547", "parameter_size": "10000000", "peak_memory_bytes": 411701248, "mean_ms": 543.2732}, {"command": "python3 main.py 100000000", "mean": "5.301829860700001", "stddev": "0.09772882022759212", "median": "5.2586023187", "user": "3.94132212", "system": "1.3597286199999998", "min": "5.2507844017", "max": "5.4759160677", "parameter_size": "100000000", "peak_memory_bytes": 4023291904, "mean_ms": 5301.8299}]}}], "warnings": [], "static_metrics": [{"key": "lines_of_code", "label": "Lines of code", "unit": "lines", "exclude_zero_option": false}, {"key": "artifact_size_bytes", "label": "Artifact size", "unit": "bytes", "exclude_zero_option": false}, {"key": "build_time_ms", "label": "Build time", "unit": "ms", "exclude_zero_option": true}]};
+    const payload = {"domain": "collections", "test": "list-iteration", "sizes": ["10", "1000", "10000", "100000", "1000000", "10000000", "100000000"], "domain_reports": [{"name": "default", "tiers": ["10", "1000", "10000", "100000", "1000000", "10000000", "100000000"], "sizes": ["10", "1000", "10000", "100000", "1000000", "10000000", "100000000"], "runtime_rankings": {"10": [{"rank": 1, "label": "Python/simple-loop", "value": 15.867450433333333, "display": "15.8675 ms", "vs_best_pct": 0.0, "mean_ms": 15.867450433333333}], "1000": [{"rank": 1, "label": "Python/simple-loop", "value": 15.943526899999998, "display": "15.9435 ms", "vs_best_pct": 0.0, "mean_ms": 15.943526899999998}], "10000": [{"rank": 1, "label": "Python/simple-loop", "value": 16.463479766666666, "display": "16.4635 ms", "vs_best_pct": 0.0, "mean_ms": 16.463479766666666}], "100000": [{"rank": 1, "label": "Python/simple-loop", "value": 21.44129793333333, "display": "21.4413 ms", "vs_best_pct": 0.0, "mean_ms": 21.44129793333333}], "1000000": [{"rank": 1, "label": "Python/simple-loop", "value": 71.06430379999999, "display": "71.0643 ms", "vs_best_pct": 0.0, "mean_ms": 71.06430379999999}], "10000000": [{"rank": 1, "label": "Python/simple-loop", "value": 543.2731654999999, "display": "543.2732 ms", "vs_best_pct": 0.0, "mean_ms": 543.2731654999999}], "100000000": [{"rank": 1, "label": "Python/simple-loop", "value": 5301.829860700001, "display": "5301.8299 ms", "vs_best_pct": 0.0, "mean_ms": 5301.829860700001}]}, "runtime_matrix": [{"label": "Python/simple-loop", "values": {"10": 15.867450433333333, "1000": 15.943526899999998, "10000": 16.463479766666666, "100000": 21.44129793333333, "1000000": 71.06430379999999, "10000000": 543.2731654999999, "100000000": 5301.829860700001}, "ranks": {"10": 1, "1000": 1, "10000": 1, "100000": 1, "1000000": 1, "10000000": 1, "100000000": 1}, "wins": 7, "avg_rank": 1.0}], "metric_rankings": {"mean": {"10": [{"rank": 1, "label": "Python/simple-loop", "value": 15.867450433333333, "display": "15.8675 ms", "vs_best_pct": 0.0}], "1000": [{"rank": 1, "label": "Python/simple-loop", "value": 15.943526899999998, "display": "15.9435 ms", "vs_best_pct": 0.0}], "10000": [{"rank": 1, "label": "Python/simple-loop", "value": 16.463479766666666, "display": "16.4635 ms", "vs_best_pct": 0.0}], "100000": [{"rank": 1, "label": "Python/simple-loop", "value": 21.44129793333333, "display": "21.4413 ms", "vs_best_pct": 0.0}], "1000000": [{"rank": 1, "label": "Python/simple-loop", "value": 71.06430379999999, "display": "71.0643 ms", "vs_best_pct": 0.0}], "10000000": [{"rank": 1, "label": "Python/simple-loop", "value": 543.2731654999999, "display": "543.2732 ms", "vs_best_pct": 0.0}], "100000000": [{"rank": 1, "label": "Python/simple-loop", "value": 5301.829860700001, "display": "5301.8299 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"10": [], "1000": [], "10000": [], "100000": [], "1000000": [], "10000000": [], "100000000": []}, "output_gzip_bytes": {"10": [], "1000": [], "10000": [], "100000": [], "1000000": [], "10000000": [], "100000000": []}, "peak_memory_bytes": {"10": [{"rank": 1, "label": "Python/simple-loop", "value": 10522624.0, "display": "10,522,624 bytes", "vs_best_pct": 0.0}], "1000": [{"rank": 1, "label": "Python/simple-loop", "value": 10661888.0, "display": "10,661,888 bytes", "vs_best_pct": 0.0}], "10000": [{"rank": 1, "label": "Python/simple-loop", "value": 10915840.0, "display": "10,915,840 bytes", "vs_best_pct": 0.0}], "100000": [{"rank": 1, "label": "Python/simple-loop", "value": 14438400.0, "display": "14,438,400 bytes", "vs_best_pct": 0.0}], "1000000": [{"rank": 1, "label": "Python/simple-loop", "value": 50597888.0, "display": "50,597,888 bytes", "vs_best_pct": 0.0}], "10000000": [{"rank": 1, "label": "Python/simple-loop", "value": 411701248.0, "display": "411,701,248 bytes", "vs_best_pct": 0.0}], "100000000": [{"rank": 1, "label": "Python/simple-loop", "value": 4023291904.0, "display": "4,023,291,904 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"10": [], "1000": [], "10000": [], "100000": [], "1000000": [], "10000000": [], "100000000": []}, "cv_percent": {"10": [], "1000": [], "10000": [], "100000": [], "1000000": [], "10000000": [], "100000000": []}, "spread_percent": {"10": [], "1000": [], "10000": [], "100000": [], "1000000": [], "10000000": [], "100000000": []}, "load_serialize_ratio": {"10": [], "1000": [], "10000": [], "100000": [], "1000000": [], "10000000": [], "100000000": []}}, "metric_matrices": {"mean": [{"label": "Python/simple-loop", "values": {"10": 15.867450433333333, "1000": 15.943526899999998, "10000": 16.463479766666666, "100000": 21.44129793333333, "1000000": 71.06430379999999, "10000000": 543.2731654999999, "100000000": 5301.829860700001}, "ranks": {"10": 1, "1000": 1, "10000": 1, "100000": 1, "1000000": 1, "10000000": 1, "100000000": 1}, "wins": 7, "avg_rank": 1.0}], "output_bytes": [{"label": "Python/simple-loop", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Python/simple-loop", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Python/simple-loop", "values": {"10": 10522624.0, "1000": 10661888.0, "10000": 10915840.0, "100000": 14438400.0, "1000000": 50597888.0, "10000000": 411701248.0, "100000000": 4023291904.0}, "ranks": {"10": 1, "1000": 1, "10000": 1, "100000": 1, "1000000": 1, "10000000": 1, "100000000": 1}, "wins": 7, "avg_rank": 1.0}], "process_peak_memory_bytes": [{"label": "Python/simple-loop", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Python/simple-loop", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Python/simple-loop", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Python/simple-loop", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}], "datasets": [{"label": "Python/simple-loop", "lang": "Python", "by_domain": {"default": {"runtime": [15.8675, 15.9435, 16.4635, 21.4413, 71.0643, 543.2732, 5301.8299], "memory": [10522624, 10661888, 10915840, 14438400, 50597888, 411701248, 4023291904], "output_size": [null, null, null, null, null, null, null], "output_gzip": [null, null, null, null, null, null, null], "stability": [null, null, null, null, null, null, null]}}, "static": {"lines_of_code": 9, "artifact_size_bytes": 194, "build_time_ms": 0.0}, "details": {"git_hash": "624e501", "recorded_at": "2026-07-05T23:33:13.594712+00:00", "recorded_at_display": "2026-07-05 23:33:13", "notes": "Standard Python for-loop iteration. Script-based execution without pre-compilation.", "tags": ["interpreted", "script", "zero-dependency"], "report_path": "benchmarks/collections/list-iteration/python/simple-loop/artifacts/report.json", "task_config": {"parameters": {"sizes": [10, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 2000000000], "element_type": "int64"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 30, "runs": null}}, "env": {"hostname": "runnervmkkn4f", "os": "Linux 6.17.0-1018-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16770752512, "available_ram_bytes": 14761267200, "used_ram_bytes": 2009485312, "ram_usage_percent": 12.0, "cpu_governor": "unknown", "system_load_1min": 0.8496, "is_ci": true, "runner_name": "GitHub Actions 1000001344"}, "hyperfine_results": [{"command": "python3 main.py 10", "mean": "0.015867450433333333", "stddev": "0.00017444729104091204", "median": "0.015790867700000003", "user": "0.012082653333333332", "system": "0.003793212666666666", "min": "0.0156608447", "max": "0.0163577077", "parameter_size": "10", "peak_memory_bytes": 10522624, "mean_ms": 15.8675}, {"command": "python3 main.py 1000", "mean": "0.015943526899999998", "stddev": "0.00017207623861861666", "median": "0.0159000017", "user": "0.011959119999999998", "system": "0.003978053333333333", "min": "0.015753297700000002", "max": "0.0164060247", "parameter_size": "1000", "peak_memory_bytes": 10661888, "mean_ms": 15.9435}, {"command": "python3 main.py 10000", "mean": "0.016463479766666667", "stddev": "0.0003873952139142284", "median": "0.0163875387", "user": "0.01241535333333333", "system": "0.00404922", "min": "0.0162201607", "max": "0.0184457727", "parameter_size": "10000", "peak_memory_bytes": 10915840, "mean_ms": 16.4635}, {"command": "python3 main.py 100000", "mean": "0.021441297933333332", "stddev": "0.00022934656408839135", "median": "0.0213733417", "user": "0.016104619999999993", "system": "0.005330253333333332", "min": "0.0211687537", "max": "0.0220929217", "parameter_size": "100000", "peak_memory_bytes": 14438400, "mean_ms": 21.4413}, {"command": "python3 main.py 1000000", "mean": "0.07106430379999999", "stddev": "0.0006557854543899796", "median": "0.0709579442", "user": "0.05217362", "system": "0.01883025333333333", "min": "0.0697623187", "max": "0.0724317787", "parameter_size": "1000000", "peak_memory_bytes": 50597888, "mean_ms": 71.0643}, {"command": "python3 main.py 10000000", "mean": "0.5432731654999999", "stddev": "0.006022468019743841", "median": "0.5413403937", "user": "0.40216212", "system": "0.14095001999999998", "min": "0.5368684037", "max": "0.5523976547", "parameter_size": "10000000", "peak_memory_bytes": 411701248, "mean_ms": 543.2732}, {"command": "python3 main.py 100000000", "mean": "5.301829860700001", "stddev": "0.09772882022759212", "median": "5.2586023187", "user": "3.94132212", "system": "1.3597286199999998", "min": "5.2507844017", "max": "5.4759160677", "parameter_size": "100000000", "peak_memory_bytes": 4023291904, "mean_ms": 5301.8299}]}}], "warnings": [], "ranked_metric_specs": [{"key": "mean", "label": "Runtime", "description": "Fastest serialize mean; lower is better."}, {"key": "output_bytes", "label": "Output size", "description": "Smallest raw output; lower is better."}, {"key": "output_gzip_bytes", "label": "Gzip size", "description": "Smallest gzip-compressed output; lower is better."}, {"key": "peak_memory_bytes", "label": "Serialize peak RSS", "description": "Lowest RSS during timed serialize loop; lower is better."}, {"key": "process_peak_memory_bytes", "label": "Process peak RSS", "description": "Lowest whole-process RSS (includes load); lower is better."}, {"key": "cv_percent", "label": "Stability (CV)", "description": "Lowest coefficient of variation (stddev/mean); lower is better."}, {"key": "spread_percent", "label": "Spread", "description": "Lowest min-max spread relative to mean; lower is better."}, {"key": "load_serialize_ratio", "label": "Load/serialize ratio", "description": "Lowest load time relative to serialize mean; lower is better."}], "static_metrics": [{"key": "lines_of_code", "label": "Lines of code", "unit": "lines", "exclude_zero_option": false}, {"key": "artifact_size_bytes", "label": "Artifact size", "unit": "bytes", "exclude_zero_option": false}, {"key": "build_time_ms", "label": "Build time", "unit": "ms", "exclude_zero_option": true}]};
     const palette = [
       "#38bdf8", "#f472b6", "#34d399", "#fbbf24", "#a78bfa",
       "#fb7185", "#22d3ee", "#4ade80", "#f97316", "#c084fc"
@@ -304,36 +420,59 @@
       ).join("");
     }
 
-    function makeLineChart(canvasId, metric, yTitle) {
-      const chart = new Chart(document.getElementById(canvasId), {
-        type: "line",
-        data: { labels: payload.sizes, datasets: [] },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: { mode: "index", intersect: false },
-          plugins: { legend: { labels: { color: "#e5e7eb" } } },
-          scales: {
-            x: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(148,163,184,0.15)" } },
-            y: {
-              title: { display: true, text: yTitle, color: "#94a3b8" },
-              ticks: { color: "#94a3b8" },
-              grid: { color: "rgba(148,163,184,0.15)" }
+    function domainReport(name) {
+      return (payload.domain_reports || []).find((report) => report.name === name);
+    }
+
+    function makeDomainCharts(containerId, metric, yTitle) {
+      const container = document.getElementById(containerId);
+      const charts = [];
+
+      container.innerHTML = (payload.domain_reports || []).map((report) => `
+        <div class="domain-chart-card">
+          <h3>${report.name}</h3>
+          <canvas id="${containerId}-${report.name}"></canvas>
+        </div>
+      `).join("");
+
+      (payload.domain_reports || []).forEach((report) => {
+        const chart = new Chart(document.getElementById(`${containerId}-${report.name}`), {
+          type: "line",
+          data: { labels: report.tiers, datasets: [] },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: { legend: { labels: { color: "#e5e7eb" } } },
+            scales: {
+              x: {
+                title: { display: true, text: "Tier", color: "#94a3b8" },
+                ticks: { color: "#94a3b8" },
+                grid: { color: "rgba(148,163,184,0.15)" }
+              },
+              y: {
+                title: { display: true, text: yTitle, color: "#94a3b8" },
+                ticks: { color: "#94a3b8" },
+                grid: { color: "rgba(148,163,184,0.15)" }
+              }
             }
           }
-        }
+        });
+        charts.push({ report, chart });
       });
 
       return () => {
-        chart.data.datasets = visibleDatasets().map((dataset, index) => ({
-          label: dataset.label,
-          data: dataset[metric],
-          borderColor: palette[index % palette.length],
-          backgroundColor: palette[index % palette.length],
-          tension: 0.25,
-          spanGaps: true
-        }));
-        chart.update();
+        charts.forEach(({ report, chart }, chartIndex) => {
+          chart.data.datasets = visibleDatasets().map((dataset, index) => ({
+            label: dataset.label,
+            data: (dataset.by_domain[report.name] || {})[metric] || [],
+            borderColor: palette[index % palette.length],
+            backgroundColor: palette[index % palette.length],
+            tension: 0.25,
+            spanGaps: true
+          }));
+          chart.update();
+        });
       };
     }
 
@@ -368,8 +507,11 @@
       };
     }
 
-    const refreshRuntime = makeLineChart("runtime-chart", "runtime", "Milliseconds");
-    const refreshMemory = makeLineChart("memory-chart", "memory", "Bytes");
+    const refreshRuntime = makeDomainCharts("runtime-domain-charts", "runtime", "Milliseconds");
+    const refreshMemory = makeDomainCharts("memory-domain-charts", "memory", "Bytes");
+    const refreshOutput = makeDomainCharts("output-domain-charts", "output_size", "Bytes");
+    const refreshGzip = makeDomainCharts("gzip-domain-charts", "output_gzip", "Bytes");
+    const refreshStability = makeDomainCharts("stability-domain-charts", "stability", "CV %");
     const refreshLoc = makeBarChart("loc-chart", "lines_of_code");
     const refreshArtifact = makeBarChart("artifact-chart", "artifact_size_bytes");
     const refreshBuild = makeBarChart("build-chart", "build_time_ms");
@@ -384,15 +526,122 @@
       return best;
     }
 
-    function winnerBySize(size, metric) {
+    function winnerByTier(domainName, tierIndex, metric) {
       let best = null;
       visibleDatasets().forEach((dataset) => {
-        const index = payload.sizes.indexOf(size);
-        const value = dataset[metric][index];
+        const value = (dataset.by_domain[domainName] || {})[metric]?.[tierIndex];
         if (value == null) return;
         if (!best || value < best.value) best = { label: dataset.label, value };
       });
       return best;
+    }
+
+    function renderLeaderboardCard(title, rows, valueFormatter) {
+      if (!rows.length) return "";
+      const body = rows.map((row) => {
+        const badgeClass = row.rank === 1 ? "rank-badge gold" : "rank-badge";
+        const delta = row.rank === 1 ? "" : `<span class="muted">+${row.vs_best_pct}%</span>`;
+        const display = valueFormatter ? valueFormatter(row) : row.display;
+        return `<tr>
+          <td class="num"><span class="${badgeClass}">#${row.rank}</span></td>
+          <td>${row.label}</td>
+          <td class="num">${display}</td>
+          <td class="num">${delta}</td>
+        </tr>`;
+      }).join("");
+      return `
+        <div class="leaderboard-card">
+          <h3>${title}</h3>
+          <table>
+            <thead><tr><th class="num">#</th><th>Implementation</th><th class="num">Value</th><th class="num">vs best</th></tr></thead>
+            <tbody>${body}</tbody>
+          </table>
+        </div>`;
+    }
+
+    function renderLeaderboard() {
+      const container = document.getElementById("leaderboard-by-domain");
+      container.innerHTML = (payload.domain_reports || []).map((report) => {
+        const cards = report.tiers.map((tier, index) => {
+          const size = report.sizes[index];
+          const rows = (report.runtime_rankings || {})[size] || [];
+          return renderLeaderboardCard(
+            tier,
+            rows,
+            (row) => formatMs(row.mean_ms)
+          );
+        }).join("");
+        return `
+          <div class="domain-section">
+            <h3>${report.name}</h3>
+            <div class="leaderboard-grid">${cards}</div>
+          </div>`;
+      }).join("");
+    }
+
+    function renderComparisonMatrix(containerId, matrix, metricKey, report) {
+      const rows = (matrix || []).filter((row) =>
+        visibleDatasets().some((dataset) => dataset.label === row.label)
+      );
+      const header = `<tr><th>Implementation</th><th class="num">Wins</th><th class="num">Avg rank</th>${
+        report.tiers.map((tier) => `<th class="num">${tier}</th>`).join("")
+      }</tr>`;
+      const body = rows.map((row) => {
+        const cells = report.sizes.map((size) => {
+          const value = row.values[size];
+          if (value == null) return `<td class="num">-</td>`;
+          const rank = row.ranks[size];
+          const best = rank === 1 ? "best" : "";
+          const rankLabel = rank ? `<div class="muted">#${rank}</div>` : "";
+          const display = metricKey === "mean"
+            ? formatMs(value)
+            : metricKey === "cv_percent" || metricKey === "spread_percent"
+              ? `${Number(value).toFixed(2)}%`
+              : metricKey === "load_serialize_ratio"
+                ? `${Number(value).toFixed(2)}x`
+                : formatBytesHuman(value);
+          return `<td class="num ${best}">${display}${rankLabel}</td>`;
+        }).join("");
+        const avgRank = row.avg_rank == null ? "-" : row.avg_rank.toFixed(2);
+        return `<tr>
+          <td>${row.label}</td>
+          <td class="num">${row.wins}</td>
+          <td class="num">${avgRank}</td>
+          ${cells}
+        </tr>`;
+      }).join("");
+      return `<table><thead>${header}</thead><tbody>${body}</tbody></table>`;
+    }
+
+    function renderComparisonMatrices() {
+      const container = document.getElementById("comparison-matrix-by-domain");
+      container.innerHTML = (payload.domain_reports || []).map((report) => `
+        <div class="domain-section">
+          <h3>${report.name}</h3>
+          <div class="matrix-scroll">${
+            renderComparisonMatrix("", report.runtime_matrix || [], "mean", report)
+          }</div>
+        </div>
+      `).join("");
+    }
+
+    function renderMetricSections(metricKey, domainName) {
+      const report = domainReport(domainName);
+      if (!report) return;
+      const rankings = (report.metric_rankings || {})[metricKey] || {};
+      const container = document.getElementById("metric-leaderboard-grid");
+      container.innerHTML = report.tiers.map((tier, index) => {
+        const size = report.sizes[index];
+        const rows = rankings[size] || [];
+        return renderLeaderboardCard(tier, rows);
+      }).join("");
+      document.getElementById("metric-comparison-matrix").innerHTML =
+        renderComparisonMatrix(
+          "metric-comparison-matrix",
+          (report.metric_matrices || {})[metricKey] || [],
+          metricKey,
+          report
+        );
     }
 
     function renderWinnerTable() {
@@ -409,15 +658,18 @@
         return `<tr><td>${metric.label}</td><td colspan="2">${display}</td></tr>`;
       }).join("");
 
-      const sizeRows = payload.sizes.map((size) => {
-        const bestRuntime = winnerBySize(size, "runtime");
-        const bestMemory = winnerBySize(size, "memory");
-        return `<tr>
-          <td>${size}</td>
-          <td>${bestRuntime ? `${bestRuntime.label} (${formatMs(bestRuntime.value)})` : "-"}</td>
-          <td>${bestMemory ? `${bestMemory.label} (${formatBytes(bestMemory.value)})` : "-"}</td>
-        </tr>`;
-      }).join("");
+      const sizeRows = (payload.domain_reports || []).flatMap((report) =>
+        report.tiers.map((tier, index) => {
+          const bestRuntime = winnerByTier(report.name, index, "runtime");
+          const bestMemory = winnerByTier(report.name, index, "memory");
+          return `<tr>
+            <td>${report.name}</td>
+            <td>${tier}</td>
+            <td>${bestRuntime ? `${bestRuntime.label} (${formatMs(bestRuntime.value)})` : "-"}</td>
+            <td>${bestMemory ? `${bestMemory.label} (${formatBytes(bestMemory.value)})` : "-"}</td>
+          </tr>`;
+        })
+      ).join("");
 
       document.getElementById("winner-table").innerHTML = `
         <table>
@@ -425,7 +677,7 @@
           <tbody>${staticRows}</tbody>
         </table>
         <table style="margin-top: 1rem;">
-          <thead><tr><th>Size</th><th>Fastest runtime</th><th>Lowest memory</th></tr></thead>
+          <thead><tr><th>Domain</th><th>Tier</th><th>Fastest runtime</th><th>Lowest memory</th></tr></thead>
           <tbody>${sizeRows}</tbody>
         </table>`;
     }
@@ -438,7 +690,12 @@
             <td>${row.parameter_size}</td>
             <td>${formatSecondsAsMs(row.mean)}</td>
             <td>${row.stddev ? (Number(row.stddev) * 1000).toFixed(4) + " ms" : "-"}</td>
+            <td>${formatBytesHuman(row.output_bytes)}</td>
+            <td>${formatBytesHuman(row.output_gzip_bytes)}</td>
             <td>${formatBytesHuman(row.peak_memory_bytes)}</td>
+            <td>${formatBytesHuman(row.process_peak_memory_bytes)}</td>
+            <td>${row.cv_percent != null ? Number(row.cv_percent).toFixed(2) + "%" : "-"}</td>
+            <td>${row.load_serialize_ratio != null ? Number(row.load_serialize_ratio).toFixed(2) + "x" : "-"}</td>
             <td>${row.min ? formatSecondsAsMs(row.min) : "-"}</td>
             <td>${row.max ? formatSecondsAsMs(row.max) : "-"}</td>
           </tr>`).join("");
@@ -468,7 +725,8 @@
             <table>
               <thead>
                 <tr>
-                  <th>Size</th><th>Mean</th><th>Stddev</th><th>Peak memory</th><th>Min</th><th>Max</th>
+                  <th>Size</th><th>Mean</th><th>Stddev</th><th>Output</th><th>Gzip</th>
+                  <th>Serialize RSS</th><th>Process RSS</th><th>CV%</th><th>Load/ser</th><th>Min</th><th>Max</th>
                 </tr>
               </thead>
               <tbody>${rows}</tbody>
@@ -501,11 +759,46 @@
     function refreshAll() {
       refreshRuntime();
       refreshMemory();
+      refreshOutput();
+      refreshGzip();
+      refreshStability();
       refreshLoc();
       refreshArtifact();
       refreshBuild();
+      renderLeaderboard();
+      renderComparisonMatrices();
+      renderMetricSections(
+        document.getElementById("metric-select").value,
+        document.getElementById("domain-select").value
+      );
       renderWinnerTable();
     }
+
+    const domainSelect = document.getElementById("domain-select");
+    (payload.domain_reports || []).forEach((report) => {
+      const option = document.createElement("option");
+      option.value = report.name;
+      option.textContent = report.name;
+      domainSelect.appendChild(option);
+    });
+    domainSelect.addEventListener("change", () => {
+      renderMetricSections(
+        document.getElementById("metric-select").value,
+        domainSelect.value
+      );
+    });
+
+    const metricSelect = document.getElementById("metric-select");
+    (payload.ranked_metric_specs || []).forEach((spec) => {
+      const option = document.createElement("option");
+      option.value = spec.key;
+      option.textContent = spec.label;
+      metricSelect.appendChild(option);
+    });
+    metricSelect.value = "output_bytes";
+    metricSelect.addEventListener("change", () => {
+      renderMetricSections(metricSelect.value, domainSelect.value);
+    });
 
     renderWarnings();
 
