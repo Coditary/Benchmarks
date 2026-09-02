@@ -1,6 +1,6 @@
 # serialization / rkyv
 
-Generated at 2026-09-02T21:25:43.568791+00:00
+Generated at 2026-09-02T21:56:38.808341+00:00
 
 ## Runtime leaderboard
 

@@ -1,6 +1,6 @@
 # Benchmark reports
 
-Generated at 2026-09-02T21:25:43.577354+00:00
+Generated at 2026-09-02T21:56:38.819609+00:00
 
 ## Tasks
 
@@ -17,6 +17,23 @@ Generated at 2026-09-02T21:25:43.577354+00:00
 | compression | xz | 2 | [compression/xz](compression/xz/index.html) |
 | compression | zlib | 1 | [compression/zlib](compression/zlib/index.html) |
 | compression | zstd | 2 | [compression/zstd](compression/zstd/index.html) |
+| decompression | brotli | 2 | [decompression/brotli](decompression/brotli/index.html) |
+| decompression | bzip2 | 2 | [decompression/bzip2](decompression/bzip2/index.html) |
+| decompression | deflate | 1 | [decompression/deflate](decompression/deflate/index.html) |
+| decompression | fastlz | 2 | [decompression/fastlz](decompression/fastlz/index.html) |
+| decompression | gzip | 1 | [decompression/gzip](decompression/gzip/index.html) |
+| decompression | libdeflate | 2 | [decompression/libdeflate](decompression/libdeflate/index.html) |
+| decompression | lz4 | 2 | [decompression/lz4](decompression/lz4/index.html) |
+| decompression | lzf | 2 | [decompression/lzf](decompression/lzf/index.html) |
+| decompression | lzfse | 2 | [decompression/lzfse](decompression/lzfse/index.html) |
+| decompression | lzma | 2 | [decompression/lzma](decompression/lzma/index.html) |
+| decompression | minilzo | 2 | [decompression/minilzo](decompression/minilzo/index.html) |
+| decompression | snappy | 2 | [decompression/snappy](decompression/snappy/index.html) |
+| decompression | xz | 2 | [decompression/xz](decompression/xz/index.html) |
+| decompression | zlib | 1 | [decompression/zlib](decompression/zlib/index.html) |
+| decompression | zlib-ng | 2 | [decompression/zlib-ng](decompression/zlib-ng/index.html) |
+| decompression | zopfli | 2 | [decompression/zopfli](decompression/zopfli/index.html) |
+| decompression | zstd | 2 | [decompression/zstd](decompression/zstd/index.html) |
 | serialization | bitcode | 1 | [serialization/bitcode](serialization/bitcode/index.html) |
 | serialization | bson | 2 | [serialization/bson](serialization/bson/index.html) |
 | serialization | capnp | 2 | [serialization/capnp](serialization/capnp/index.html) |

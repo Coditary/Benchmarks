@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>decompression / lzma benchmark report</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #1f2937;
+      --panel: rgba(17, 24, 39, 0.92);
+      --warn: #fbbf24;
+      --error: #fb7185;
+      --info: #38bdf8;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+      color: var(--text);
+    }
+    main { max-width: 1240px; margin: 0 auto; padding: 2rem; }
+    h1, h2, h3 { margin: 0 0 1rem; }
+    p, .muted { color: var(--muted); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .controls { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; margin-bottom: 1rem; }
+    .toggle {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.45rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--border); background: #0b1220;
+      cursor: pointer; user-select: none;
+    }
+    .toggle input { accent-color: var(--accent); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+    canvas { width: 100% !important; height: 360px !important; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.65rem 0.5rem; text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.best { background: rgba(52, 211, 153, 0.18); font-weight: 600; }
+    .rank-badge {
+      display: inline-block; min-width: 1.5rem; margin-right: 0.35rem;
+      padding: 0.1rem 0.35rem; border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15); color: #7dd3fc; font-size: 0.8rem;
+    }
+    .rank-badge.gold { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
+    .matrix-scroll { overflow-x: auto; }
+    .leaderboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .leaderboard-card {
+      border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem;
+      background: #0b1220;
+    }
+    .leaderboard-card h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+    .domain-section {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #0b1220;
+    }
+    .domain-section > h3 {
+      margin: 0 0 0.75rem;
+      text-transform: capitalize;
+    }
+    .domain-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+    .domain-chart-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.8);
+    }
+    .domain-chart-card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+    .domain-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .domain-controls label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    #metric-select {
+      margin-top: 0.35rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }
+    .warning {
+      border-left: 4px solid var(--warn);
+      padding: 0.75rem 1rem; margin-bottom: 0.75rem;
+      background: rgba(251, 191, 36, 0.08); border-radius: 8px;
+    }
+    .warning.error { border-left-color: var(--error); background: rgba(251, 113, 133, 0.08); }
+    .warning.info { border-left-color: var(--info); background: rgba(56, 189, 248, 0.08); }
+    details {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 0.75rem 1rem; margin-bottom: 0.75rem; background: #0b1220;
+    }
+    summary { cursor: pointer; font-weight: 600; }
+    code { color: #7dd3fc; }
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem; margin-top: 0.75rem;
+    }
+    .stat-card {
+      border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.8); min-width: 0;
+    }
+    .stat-card strong {
+      display: block; color: var(--muted); font-size: 0.85rem; margin-bottom: 0.35rem;
+    }
+    .stat-card .value {
+      display: block; font-size: 0.95rem; line-height: 1.35; word-break: break-word;
+    }
+    .detail-filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .detail-filters label {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .detail-filters input, .detail-filters select {
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }
+    .detail-filters .wide { grid-column: 1 / -1; }
+    .filter-actions { display: flex; gap: 0.75rem; align-items: end; flex-wrap: wrap; }
+    button.secondary {
+      padding: 0.55rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .detail-entry[hidden] { display: none; }
+    #details-empty { color: var(--muted); padding: 0.5rem 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>decompression / lzma</h1>
+    <p>Compare runtime, memory, code size, artifact size, and build time. Use the detail panels to inspect measurement context.</p>
+
+    <section class="panel" id="warnings-panel" hidden>
+      <h2>Comparability warnings</h2>
+      <div id="warnings"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Runtime leaderboard</h2>
+      <p class="muted">Per domain: implementations ranked fastest-first for each tier.</p>
+      <div id="leaderboard-by-domain"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Runtime comparison matrix</h2>
+      <p class="muted">One matrix per domain. Columns are tiers (10, 100, 10k, …), not mixed domains.</p>
+      <div id="comparison-matrix-by-domain"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Metric comparison</h2>
+      <p class="muted">Pick a domain and metric to inspect rankings and the comparison matrix.</p>
+      <div class="domain-controls">
+        <label>
+          Domain
+          <select id="domain-select"></select>
+        </label>
+        <label>
+          Metric
+          <select id="metric-select"></select>
+        </label>
+      </div>
+      <div class="leaderboard-grid" id="metric-leaderboard-grid" style="margin-top: 1rem;"></div>
+      <div class="matrix-scroll" id="metric-comparison-matrix" style="margin-top: 1rem;"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Output size by domain</h2>
+      <div id="output-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Gzip size by domain</h2>
+      <div id="gzip-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Stability (CV %) by domain</h2>
+      <div id="stability-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Filters</h2>
+      <div class="controls" id="language-controls"></div>
+      <div class="controls" id="implementation-controls"></div>
+      <label class="toggle">
+        <input type="checkbox" id="build-time-nonzero-only">
+        Build time chart: only compare entries with build time &gt; 0
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>Runtime by domain</h2>
+      <div id="runtime-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Peak memory by domain</h2>
+      <div id="memory-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Static metrics</h2>
+      <div class="grid-2">
+        <div><h3>Lines of code</h3><canvas id="loc-chart"></canvas></div>
+        <div><h3>Artifact size</h3><canvas id="artifact-chart"></canvas></div>
+        <div><h3>Build time</h3><canvas id="build-chart"></canvas></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Winners</h2>
+      <div id="winner-table"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Implementation details</h2>
+      <p class="muted">Search and filter implementations, then expand an entry to inspect metadata, environment, and raw per-size statistics.</p>
+      <div class="detail-filters">
+        <label class="wide">
+          Search
+          <input type="search" id="detail-search" placeholder="Language, implementation, notes, tags...">
+        </label>
+        <label>
+          Max peak memory (MB)
+          <input type="number" id="detail-max-memory" min="0" step="0.1" placeholder="e.g. 128">
+        </label>
+        <label>
+          Max runtime (ms)
+          <input type="number" id="detail-max-runtime" min="0" step="0.01" placeholder="e.g. 50">
+        </label>
+        <label>
+          Apply limits at size
+          <select id="detail-size-filter"></select>
+        </label>
+        <div class="filter-actions">
+          <button type="button" class="secondary" id="detail-clear-filters">Clear filters</button>
+          <span class="muted" id="detail-match-count"></span>
+        </div>
+      </div>
+      <div id="details"></div>
+      <p id="details-empty" hidden>No implementations match your filters.</p>
+    </section>
+  </main>
+
+  <script>
+    const payload = {"domain": "decompression", "test": "lzma", "sizes": ["logs/10", "profile/10", "catalog/10", "mesh/100", "english/64k", "random/64k", "repetitive/64k", "sparse/64k"], "domain_reports": [{"name": "logs", "tiers": ["10"], "sizes": ["logs/10"], "runtime_rankings": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.12943729999999998, "display": "0.1294 ms", "vs_best_pct": 0.0, "mean_ms": 0.12943729999999998}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"logs/10": 0.12943729999999998}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.12943729999999998, "display": "0.1294 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 1866.0, "display": "1,866 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 1889.0, "display": "1,889 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 2150400.0, "display": "2,150,400 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 3432448.0, "display": "3,432,448 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 15.358224045652062, "display": "15.36%", "vs_best_pct": 0.0}]}, "spread_percent": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 61.47995979520587, "display": "61.48%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"logs/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"logs/10": 0.12943729999999998}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"logs/10": 1866.0}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"logs/10": 1889.0}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"logs/10": 2150400.0}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"logs/10": 3432448.0}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"logs/10": 15.358224045652062}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"logs/10": 61.47995979520587}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"logs/10": 0.0}, "ranks": {"logs/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "profile", "tiers": ["10"], "sizes": ["profile/10"], "runtime_rankings": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.11068789999999999, "display": "0.1107 ms", "vs_best_pct": 0.0, "mean_ms": 0.11068789999999999}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"profile/10": 0.11068789999999999}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.11068789999999999, "display": "0.1107 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 1791.0, "display": "1,791 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 1814.0, "display": "1,814 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 2220032.0, "display": "2,220,032 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 3424256.0, "display": "3,424,256 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 7.583475311509896, "display": "7.58%", "vs_best_pct": 0.0}]}, "spread_percent": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 24.057733501132457, "display": "24.06%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"profile/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"profile/10": 0.11068789999999999}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"profile/10": 1791.0}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"profile/10": 1814.0}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"profile/10": 2220032.0}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"profile/10": 3424256.0}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"profile/10": 7.583475311509896}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"profile/10": 24.057733501132457}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"profile/10": 0.0}, "ranks": {"profile/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "catalog", "tiers": ["10"], "sizes": ["catalog/10"], "runtime_rankings": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.08579015, "display": "0.0858 ms", "vs_best_pct": 0.0, "mean_ms": 0.08579015}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"catalog/10": 0.08579015}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.08579015, "display": "0.0858 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 1465.0, "display": "1,465 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 1488.0, "display": "1,488 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 2088960.0, "display": "2,088,960 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 3325952.0, "display": "3,325,952 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 15.98167571868259, "display": "15.98%", "vs_best_pct": 0.0}]}, "spread_percent": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 68.25958457934857, "display": "68.26%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"catalog/10": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"catalog/10": 0.08579015}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"catalog/10": 1465.0}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"catalog/10": 1488.0}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"catalog/10": 2088960.0}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"catalog/10": 3325952.0}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"catalog/10": 15.98167571868259}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"catalog/10": 68.25958457934857}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"catalog/10": 0.0}, "ranks": {"catalog/10": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "mesh", "tiers": ["100"], "sizes": ["mesh/100"], "runtime_rankings": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 0.4134424500000001, "display": "0.4134 ms", "vs_best_pct": 0.0, "mean_ms": 0.4134424500000001}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"mesh/100": 0.4134424500000001}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 0.4134424500000001, "display": "0.4134 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 5325.0, "display": "5,325 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 5348.0, "display": "5,348 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 2170880.0, "display": "2,170,880 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 3440640.0, "display": "3,440,640 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 3.3903725058014604, "display": "3.39%", "vs_best_pct": 0.0}]}, "spread_percent": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 11.570896989411715, "display": "11.57%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"mesh/100": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"mesh/100": 0.4134424500000001}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"mesh/100": 5325.0}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"mesh/100": 5348.0}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"mesh/100": 2170880.0}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"mesh/100": 3440640.0}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"mesh/100": 3.3903725058014604}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"mesh/100": 11.570896989411715}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"mesh/100": 0.0}, "ranks": {"mesh/100": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "english", "tiers": ["64k"], "sizes": ["english/64k"], "runtime_rankings": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 3.3040866499999995, "display": "3.3041 ms", "vs_best_pct": 0.0, "mean_ms": 3.3040866499999995}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"english/64k": 3.3040866499999995}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 3.3040866499999995, "display": "3.3041 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 36234.0, "display": "36,234 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 36295.0, "display": "36,295 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 2363392.0, "display": "2,363,392 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 3342336.0, "display": "3,342,336 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.5112415895030679, "display": "0.51%", "vs_best_pct": 0.0}]}, "spread_percent": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1.966413320304416, "display": "1.97%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"english/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"english/64k": 3.3040866499999995}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"english/64k": 36234.0}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"english/64k": 36295.0}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"english/64k": 2363392.0}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"english/64k": 3342336.0}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"english/64k": 0.5112415895030679}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"english/64k": 1.966413320304416}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"english/64k": 0.0}, "ranks": {"english/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "random", "tiers": ["64k"], "sizes": ["random/64k"], "runtime_rankings": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 4.7561618, "display": "4.7562 ms", "vs_best_pct": 0.0, "mean_ms": 4.7561618}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"random/64k": 4.7561618}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 4.7561618, "display": "4.7562 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 66444.0, "display": "66,444 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 66519.0, "display": "66,519 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 2387968.0, "display": "2,387,968 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 3485696.0, "display": "3,485,696 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.3589998310415842, "display": "0.36%", "vs_best_pct": 0.0}]}, "spread_percent": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1.2702048950479454, "display": "1.27%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"random/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"random/64k": 4.7561618}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"random/64k": 66444.0}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"random/64k": 66519.0}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"random/64k": 2387968.0}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"random/64k": 3485696.0}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"random/64k": 0.3589998310415842}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"random/64k": 1.2702048950479454}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"random/64k": 0.0}, "ranks": {"random/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "repetitive", "tiers": ["64k"], "sizes": ["repetitive/64k"], "runtime_rankings": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1.9526719499999996, "display": "1.9527 ms", "vs_best_pct": 0.0, "mean_ms": 1.9526719499999996}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"repetitive/64k": 1.9526719499999996}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1.9526719499999996, "display": "1.9527 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 31044.0, "display": "31,044 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 22188.0, "display": "22,188 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 2363392.0, "display": "2,363,392 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 3383296.0, "display": "3,383,296 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.6585942690729826, "display": "0.66%", "vs_best_pct": 0.0}]}, "spread_percent": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 2.7623687634781633, "display": "2.76%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"repetitive/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"repetitive/64k": 1.9526719499999996}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"repetitive/64k": 31044.0}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"repetitive/64k": 22188.0}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"repetitive/64k": 2363392.0}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"repetitive/64k": 3383296.0}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"repetitive/64k": 0.6585942690729826}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"repetitive/64k": 2.7623687634781633}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"repetitive/64k": 0.0}, "ranks": {"repetitive/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}, {"name": "sparse", "tiers": ["64k"], "sizes": ["sparse/64k"], "runtime_rankings": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1.78707195, "display": "1.7871 ms", "vs_best_pct": 0.0, "mean_ms": 1.78707195}]}, "runtime_matrix": [{"label": "Rust/lzma", "values": {"sparse/64k": 1.78707195}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "metric_rankings": {"mean": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1.78707195, "display": "1.7871 ms", "vs_best_pct": 0.0}]}, "output_bytes": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 1890.0, "display": "1,890 bytes", "vs_best_pct": 0.0}]}, "output_gzip_bytes": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 721.0, "display": "721 bytes", "vs_best_pct": 0.0}]}, "peak_memory_bytes": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 2318336.0, "display": "2,318,336 bytes", "vs_best_pct": 0.0}]}, "process_peak_memory_bytes": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 3424256.0, "display": "3,424,256 bytes", "vs_best_pct": 0.0}]}, "cv_percent": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.8120837416683904, "display": "0.81%", "vs_best_pct": 0.0}]}, "spread_percent": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 2.7952427992616604, "display": "2.80%", "vs_best_pct": 0.0}]}, "load_serialize_ratio": {"sparse/64k": [{"rank": 1, "label": "Rust/lzma", "value": 0.0, "display": "0.00x", "vs_best_pct": 0.0}]}}, "metric_matrices": {"mean": [{"label": "Rust/lzma", "values": {"sparse/64k": 1.78707195}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_bytes": [{"label": "Rust/lzma", "values": {"sparse/64k": 1890.0}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "output_gzip_bytes": [{"label": "Rust/lzma", "values": {"sparse/64k": 721.0}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "peak_memory_bytes": [{"label": "Rust/lzma", "values": {"sparse/64k": 2318336.0}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "process_peak_memory_bytes": [{"label": "Rust/lzma", "values": {"sparse/64k": 3424256.0}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "cv_percent": [{"label": "Rust/lzma", "values": {"sparse/64k": 0.8120837416683904}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "spread_percent": [{"label": "Rust/lzma", "values": {"sparse/64k": 2.7952427992616604}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}], "load_serialize_ratio": [{"label": "Rust/lzma", "values": {"sparse/64k": 0.0}, "ranks": {"sparse/64k": 1}, "wins": 1, "avg_rank": 1.0}, {"label": "C++/liblzma", "values": {}, "ranks": {}, "wins": 0, "avg_rank": null}]}}], "datasets": [{"label": "C++/liblzma", "lang": "C++", "by_domain": {"logs": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "profile": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "catalog": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "mesh": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "english": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "random": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "repetitive": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}, "sparse": {"runtime": [null], "memory": [null], "output_size": [null], "output_gzip": [null], "stability": [null]}}, "static": {"lines_of_code": 65, "artifact_size_bytes": 0, "build_time_ms": 389.3}, "details": {"git_hash": "6684b5b", "recorded_at": "2026-09-02T21:53:09.026335+00:00", "recorded_at_display": "2026-09-02 21:53:09", "notes": "Loads payload.bin once (untimed), compresses to lzma wire bytes (untimed), then measures decompression only.", "tags": ["cpp", "decompression", "lzma"], "report_path": "benchmarks/decompression/lzma/cpp/liblzma/artifacts/report.json", "task_config": {"parameters": {"sizes": ["logs/10", "logs/100", "logs/1000", "logs/10k", "logs/100k", "profile/10", "profile/100", "profile/1000", "profile/10k", "profile/100k", "catalog/10", "catalog/100", "catalog/1000", "catalog/10k", "catalog/100k", "mesh/100", "mesh/1000", "mesh/10k", "mesh/100k", "random/64k", "random/256k", "random/1m", "random/4m", "sparse/64k", "sparse/256k", "sparse/1m", "english/64k", "english/256k", "english/1m", "repetitive/64k", "repetitive/256k", "repetitive/1m"], "element_type": "fixture"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 20, "runs": null}}, "env": {"hostname": "runnervmgx7h7", "os": "Linux 6.17.0-1022-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16766410752, "available_ram_bytes": 15696285696, "used_ram_bytes": 1070125056, "ram_usage_percent": 6.4, "cpu_governor": "unknown", "system_load_1min": 1.7036, "is_ci": true, "runner_name": "GitHub Actions 1000003582"}, "hyperfine_results": []}}, {"label": "Rust/lzma", "lang": "Rust", "by_domain": {"logs": {"runtime": [0.1294], "memory": [2150400], "output_size": [1866], "output_gzip": [1889], "stability": [15.3582]}, "profile": {"runtime": [0.1107], "memory": [2220032], "output_size": [1791], "output_gzip": [1814], "stability": [7.5835]}, "catalog": {"runtime": [0.0858], "memory": [2088960], "output_size": [1465], "output_gzip": [1488], "stability": [15.9817]}, "mesh": {"runtime": [0.4134], "memory": [2170880], "output_size": [5325], "output_gzip": [5348], "stability": [3.3904]}, "english": {"runtime": [3.3041], "memory": [2363392], "output_size": [36234], "output_gzip": [36295], "stability": [0.5112]}, "random": {"runtime": [4.7562], "memory": [2387968], "output_size": [66444], "output_gzip": [66519], "stability": [0.359]}, "repetitive": {"runtime": [1.9527], "memory": [2363392], "output_size": [31044], "output_gzip": [22188], "stability": [0.6586]}, "sparse": {"runtime": [1.7871], "memory": [2318336], "output_size": [1890], "output_gzip": [721], "stability": [0.8121]}}, "static": {"lines_of_code": 27, "artifact_size_bytes": 564784, "build_time_ms": 38.3}, "details": {"git_hash": "6684b5b", "recorded_at": "2026-09-02T21:53:26.507327+00:00", "recorded_at_display": "2026-09-02 21:53:26", "notes": "Loads pre-compressed fixture once (untimed), then measures decompression only.", "tags": ["rust", "decompression", "lzma"], "report_path": "benchmarks/decompression/lzma/rust/lzma/artifacts/report.json", "task_config": {"parameters": {"sizes": ["logs/10", "logs/100", "logs/1000", "logs/10k", "logs/100k", "profile/10", "profile/100", "profile/1000", "profile/10k", "profile/100k", "catalog/10", "catalog/100", "catalog/1000", "catalog/10k", "catalog/100k", "mesh/100", "mesh/1000", "mesh/10k", "mesh/100k", "random/64k", "random/256k", "random/1m", "random/4m", "sparse/64k", "sparse/256k", "sparse/1m", "english/64k", "english/256k", "english/1m", "repetitive/64k", "repetitive/256k", "repetitive/1m"], "element_type": "fixture"}, "benchmark": {"warmup": 2, "min_runs": 5, "max_runs": 20, "runs": null}}, "env": {"hostname": "runnervmgx7h7", "os": "Linux 6.17.0-1022-azure", "cpu_model": "AMD EPYC 7763 64-Core Processor", "physical_cores": 2, "logical_threads": 4, "total_ram_bytes": 16766410752, "available_ram_bytes": 15713357824, "used_ram_bytes": 1053052928, "ram_usage_percent": 6.3, "cpu_governor": "unknown", "system_load_1min": 1.8188, "is_ci": true, "runner_name": "GitHub Actions 1000003582"}, "hyperfine_results": [{"parameter_size": "logs/10", "mean": "0.00012943729999999998", "stddev": "1.987927053264279e-05", "median": "0.0001259705", "min": "0.000109595", "max": "0.000189173", "runs": "20", "load_seconds": "0.00014463", "output_bytes": "1866", "output_gzip_bytes": "1889", "peak_memory_bytes": "2150400", "cv_percent": "15.358224045652062", "spread_percent": "61.47995979520587", "load_serialize_ratio": "0.0", "input_bytes": "1866", "load_deserialize_ratio": "1.1173749761467524", "mean_ms": 0.1294, "process_peak_memory_bytes": 3432448}, {"parameter_size": "profile/10", "mean": "0.00011068789999999999", "stddev": "8.393989569328762e-06", "median": "0.0001060035", "min": "0.000104506", "max": "0.000131135", "runs": "20", "load_seconds": "0.000132989", "output_bytes": "1791", "output_gzip_bytes": "1814", "peak_memory_bytes": "2220032", "cv_percent": "7.583475311509896", "spread_percent": "24.057733501132457", "load_serialize_ratio": "0.0", "input_bytes": "1791", "load_deserialize_ratio": "1.201477306914306", "mean_ms": 0.1107, "process_peak_memory_bytes": 3424256}, {"parameter_size": "catalog/10", "mean": "8.579015e-05", "stddev": "1.3710703571571372e-05", "median": "7.937849999999999e-05", "min": "7.8296e-05", "max": "0.000136856", "runs": "20", "load_seconds": "0.000111849", "output_bytes": "1465", "output_gzip_bytes": "1488", "peak_memory_bytes": "2088960", "cv_percent": "15.98167571868259", "spread_percent": "68.25958457934857", "load_serialize_ratio": "0.0", "input_bytes": "1465", "load_deserialize_ratio": "1.3037510716556622", "mean_ms": 0.0858, "process_peak_memory_bytes": 3325952}, {"parameter_size": "mesh/100", "mean": "0.0004134424500000001", "stddev": "1.401723915211195e-05", "median": "0.00040618900000000005", "min": "0.000399657", "max": "0.000447496", "runs": "20", "load_seconds": "0.000363299", "output_bytes": "5325", "output_gzip_bytes": "5348", "peak_memory_bytes": "2170880", "cv_percent": "3.3903725058014604", "spread_percent": "11.570896989411715", "load_serialize_ratio": "0.0", "input_bytes": "5325", "load_deserialize_ratio": "0.8787172192889238", "mean_ms": 0.4134, "process_peak_memory_bytes": 3440640}, {"parameter_size": "random/64k", "mean": "0.0047561618", "stddev": "1.7074612826064373e-05", "median": "0.0047503505", "min": "0.004737351", "max": "0.004797764", "runs": "20", "load_seconds": "0.0039177", "output_bytes": "66444", "output_gzip_bytes": "66519", "peak_memory_bytes": "2387968", "cv_percent": "0.3589998310415842", "spread_percent": "1.2702048950479454", "load_serialize_ratio": "0.0", "input_bytes": "66444", "load_deserialize_ratio": "0.8237104128795617", "mean_ms": 4.7562, "process_peak_memory_bytes": 3485696}, {"parameter_size": "sparse/64k", "mean": "0.00178707195", "stddev": "1.4512520757866267e-05", "median": "0.0017842840000000001", "min": "0.001763816", "max": "0.001813769", "runs": "20", "load_seconds": "0.001567208", "output_bytes": "1890", "output_gzip_bytes": "721", "peak_memory_bytes": "2318336", "cv_percent": "0.8120837416683904", "spread_percent": "2.7952427992616604", "load_serialize_ratio": "0.0", "input_bytes": "1890", "load_deserialize_ratio": "0.8769697269323712", "mean_ms": 1.7871, "process_peak_memory_bytes": 3424256}, {"parameter_size": "english/64k", "mean": "0.0033040866499999995", "stddev": "1.6891865108018664e-05", "median": "0.0033004569999999997", "min": "0.003283204", "max": "0.003348176", "runs": "20", "load_seconds": "0.002247269", "output_bytes": "36234", "output_gzip_bytes": "36295", "peak_memory_bytes": "2363392", "cv_percent": "0.5112415895030679", "spread_percent": "1.966413320304416", "load_serialize_ratio": "0.0", "input_bytes": "36234", "load_deserialize_ratio": "0.6801483248025594", "mean_ms": 3.3041, "process_peak_memory_bytes": 3342336}, {"parameter_size": "repetitive/64k", "mean": "0.0019526719499999997", "stddev": "1.2860185556495654e-05", "median": "0.0019489415", "min": "0.001938813", "max": "0.001992753", "runs": "20", "load_seconds": "0.001490965", "output_bytes": "31044", "output_gzip_bytes": "22188", "peak_memory_bytes": "2363392", "cv_percent": "0.6585942690729826", "spread_percent": "2.7623687634781633", "load_serialize_ratio": "0.0", "input_bytes": "31044", "load_deserialize_ratio": "0.7635511945567713", "mean_ms": 1.9527, "process_peak_memory_bytes": 3383296}]}}], "warnings": [], "ranked_metric_specs": [{"key": "mean", "label": "Runtime", "description": "Fastest serialize mean; lower is better."}, {"key": "output_bytes", "label": "Output size", "description": "Smallest raw output; lower is better."}, {"key": "output_gzip_bytes", "label": "Gzip size", "description": "Smallest gzip-compressed output; lower is better."}, {"key": "peak_memory_bytes", "label": "Serialize peak RSS", "description": "Lowest RSS during timed serialize loop; lower is better."}, {"key": "process_peak_memory_bytes", "label": "Process peak RSS", "description": "Lowest whole-process RSS (includes load); lower is better."}, {"key": "cv_percent", "label": "Stability (CV)", "description": "Lowest coefficient of variation (stddev/mean); lower is better."}, {"key": "spread_percent", "label": "Spread", "description": "Lowest min-max spread relative to mean; lower is better."}, {"key": "load_serialize_ratio", "label": "Load/serialize ratio", "description": "Lowest load time relative to serialize mean; lower is better."}], "static_metrics": [{"key": "lines_of_code", "label": "Lines of code", "unit": "lines", "exclude_zero_option": false}, {"key": "artifact_size_bytes", "label": "Artifact size", "unit": "bytes", "exclude_zero_option": false}, {"key": "build_time_ms", "label": "Build time", "unit": "ms", "exclude_zero_option": true}]};
+    const palette = [
+      "#38bdf8", "#f472b6", "#34d399", "#fbbf24", "#a78bfa",
+      "#fb7185", "#22d3ee", "#4ade80", "#f97316", "#c084fc"
+    ];
+
+    const hiddenLabels = new Set();
+    const hiddenLangs = new Set();
+    let buildTimeNonZeroOnly = false;
+
+    function visibleDatasets() {
+      return payload.datasets.filter((dataset) =>
+        !hiddenLabels.has(dataset.label) && !hiddenLangs.has(dataset.lang)
+      );
+    }
+
+    function formatBytes(value) {
+      return formatBytesHuman(value);
+    }
+
+    function formatBytesHuman(value) {
+      if (value == null || value === "") return "-";
+      const bytes = Number(value);
+      if (Number.isNaN(bytes)) return "-";
+      if (bytes < 1024) return `${bytes} B`;
+      if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(2)} KB`;
+      if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+      return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+    }
+
+    function formatDateTime(value) {
+      if (!value || value === "unknown") return "unknown";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      const pad = (part) => String(part).padStart(2, "0");
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
+
+    function formatMs(value) {
+      if (value == null || value === "") return "-";
+      const ms = Number(value);
+      if (Number.isNaN(ms)) return "-";
+      return `${ms.toFixed(4)} ms`;
+    }
+
+    function formatSecondsAsMs(value) {
+      if (value == null || value === "") return "-";
+      const seconds = Number(value);
+      if (Number.isNaN(seconds)) return "-";
+      return `${(seconds * 1000).toFixed(4)} ms`;
+    }
+
+    function runtimeMsFromMean(value) {
+      if (value == null || value === "") return null;
+      const seconds = Number(value);
+      if (Number.isNaN(seconds)) return null;
+      return seconds * 1000;
+    }
+
+    function datasetMetricAtSize(dataset, sizeFilter, metric) {
+      const results = dataset.details.hyperfine_results || [];
+      if (sizeFilter === "all") {
+        const values = results.map((row) => {
+          if (metric === "memory") return Number(row.peak_memory_bytes) || 0;
+          return runtimeMsFromMean(row.mean) || 0;
+        }).filter((value) => value > 0);
+        return values.length ? Math.max(...values) : Infinity;
+      }
+
+      const row = results.find((entry) => String(entry.parameter_size) === sizeFilter);
+      if (!row) return Infinity;
+      if (metric === "memory") return Number(row.peak_memory_bytes) || Infinity;
+      return runtimeMsFromMean(row.mean) ?? Infinity;
+    }
+
+    function matchesDetailFilters(dataset) {
+      const search = document.getElementById("detail-search").value.trim().toLowerCase();
+      const maxMemMb = parseFloat(document.getElementById("detail-max-memory").value);
+      const maxRuntimeMs = parseFloat(document.getElementById("detail-max-runtime").value);
+      const sizeFilter = document.getElementById("detail-size-filter").value;
+
+      if (search) {
+        const haystack = [
+          dataset.label,
+          dataset.lang,
+          dataset.details.notes || "",
+          ...(dataset.details.tags || [])
+        ].join(" ").toLowerCase();
+        if (!haystack.includes(search)) return false;
+      }
+
+      if (!Number.isNaN(maxMemMb) && maxMemMb > 0) {
+        const peakBytes = datasetMetricAtSize(dataset, sizeFilter, "memory");
+        if (peakBytes > maxMemMb * 1024 * 1024) return false;
+      }
+
+      if (!Number.isNaN(maxRuntimeMs) && maxRuntimeMs > 0) {
+        const runtime = datasetMetricAtSize(dataset, sizeFilter, "runtime");
+        if (runtime > maxRuntimeMs) return false;
+      }
+
+      return true;
+    }
+
+    function applyDetailFilters() {
+      let visibleCount = 0;
+      document.querySelectorAll(".detail-entry").forEach((element) => {
+        const dataset = payload.datasets.find((entry) => entry.label === element.dataset.label);
+        const show = Boolean(dataset && matchesDetailFilters(dataset));
+        element.hidden = !show;
+        if (show) visibleCount += 1;
+      });
+      document.getElementById("details-empty").hidden = visibleCount > 0;
+      document.getElementById("detail-match-count").textContent =
+        `${visibleCount} / ${payload.datasets.length} shown`;
+    }
+
+    function renderWarnings() {
+      const panel = document.getElementById("warnings-panel");
+      const container = document.getElementById("warnings");
+      if (!payload.warnings.length) {
+        panel.hidden = true;
+        return;
+      }
+      panel.hidden = false;
+      container.innerHTML = payload.warnings.map((warning) =>
+        `<div class="warning ${warning.level}"><strong>${warning.level.toUpperCase()}</strong>: ${warning.message}<div class="muted">${warning.details || ""}</div></div>`
+      ).join("");
+    }
+
+    function domainReport(name) {
+      return (payload.domain_reports || []).find((report) => report.name === name);
+    }
+
+    function makeDomainCharts(containerId, metric, yTitle) {
+      const container = document.getElementById(containerId);
+      const charts = [];
+
+      container.innerHTML = (payload.domain_reports || []).map((report) => `
+        <div class="domain-chart-card">
+          <h3>${report.name}</h3>
+          <canvas id="${containerId}-${report.name}"></canvas>
+        </div>
+      `).join("");
+
+      (payload.domain_reports || []).forEach((report) => {
+        const chart = new Chart(document.getElementById(`${containerId}-${report.name}`), {
+          type: "line",
+          data: { labels: report.tiers, datasets: [] },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: { legend: { labels: { color: "#e5e7eb" } } },
+            scales: {
+              x: {
+                title: { display: true, text: "Tier", color: "#94a3b8" },
+                ticks: { color: "#94a3b8" },
+                grid: { color: "rgba(148,163,184,0.15)" }
+              },
+              y: {
+                title: { display: true, text: yTitle, color: "#94a3b8" },
+                ticks: { color: "#94a3b8" },
+                grid: { color: "rgba(148,163,184,0.15)" }
+              }
+            }
+          }
+        });
+        charts.push({ report, chart });
+      });
+
+      return () => {
+        charts.forEach(({ report, chart }, chartIndex) => {
+          chart.data.datasets = visibleDatasets().map((dataset, index) => ({
+            label: dataset.label,
+            data: (dataset.by_domain[report.name] || {})[metric] || [],
+            borderColor: palette[index % palette.length],
+            backgroundColor: palette[index % palette.length],
+            tension: 0.25,
+            spanGaps: true
+          }));
+          chart.update();
+        });
+      };
+    }
+
+    function makeBarChart(canvasId, metricKey) {
+      const chart = new Chart(document.getElementById(canvasId), {
+        type: "bar",
+        data: { labels: [], datasets: [{ label: metricKey, data: [], backgroundColor: [] }] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: "#94a3b8" }, grid: { display: false } },
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#94a3b8" },
+              grid: { color: "rgba(148,163,184,0.15)" }
+            }
+          }
+        }
+      });
+
+      return () => {
+        let datasets = visibleDatasets();
+        if (metricKey === "build_time_ms" && buildTimeNonZeroOnly) {
+          datasets = datasets.filter((dataset) => Number(dataset.static.build_time_ms) > 0);
+        }
+        chart.data.labels = datasets.map((dataset) => dataset.label);
+        chart.data.datasets[0].data = datasets.map((dataset) => dataset.static[metricKey]);
+        chart.data.datasets[0].backgroundColor = datasets.map((_, index) => palette[index % palette.length]);
+        chart.update();
+      };
+    }
+
+    const refreshRuntime = makeDomainCharts("runtime-domain-charts", "runtime", "Milliseconds");
+    const refreshMemory = makeDomainCharts("memory-domain-charts", "memory", "Bytes");
+    const refreshOutput = makeDomainCharts("output-domain-charts", "output_size", "Bytes");
+    const refreshGzip = makeDomainCharts("gzip-domain-charts", "output_gzip", "Bytes");
+    const refreshStability = makeDomainCharts("stability-domain-charts", "stability", "CV %");
+    const refreshLoc = makeBarChart("loc-chart", "lines_of_code");
+    const refreshArtifact = makeBarChart("artifact-chart", "artifact_size_bytes");
+    const refreshBuild = makeBarChart("build-chart", "build_time_ms");
+
+    function winnerStatic(metricKey, excludeZero = false) {
+      let best = null;
+      visibleDatasets().forEach((dataset) => {
+        const value = Number(dataset.static[metricKey]);
+        if (excludeZero && value <= 0) return;
+        if (!best || value < best.value) best = { label: dataset.label, value };
+      });
+      return best;
+    }
+
+    function winnerByTier(domainName, tierIndex, metric) {
+      let best = null;
+      visibleDatasets().forEach((dataset) => {
+        const value = (dataset.by_domain[domainName] || {})[metric]?.[tierIndex];
+        if (value == null) return;
+        if (!best || value < best.value) best = { label: dataset.label, value };
+      });
+      return best;
+    }
+
+    function renderLeaderboardCard(title, rows, valueFormatter) {
+      if (!rows.length) return "";
+      const body = rows.map((row) => {
+        const badgeClass = row.rank === 1 ? "rank-badge gold" : "rank-badge";
+        const delta = row.rank === 1 ? "" : `<span class="muted">+${row.vs_best_pct}%</span>`;
+        const display = valueFormatter ? valueFormatter(row) : row.display;
+        return `<tr>
+          <td class="num"><span class="${badgeClass}">#${row.rank}</span></td>
+          <td>${row.label}</td>
+          <td class="num">${display}</td>
+          <td class="num">${delta}</td>
+        </tr>`;
+      }).join("");
+      return `
+        <div class="leaderboard-card">
+          <h3>${title}</h3>
+          <table>
+            <thead><tr><th class="num">#</th><th>Implementation</th><th class="num">Value</th><th class="num">vs best</th></tr></thead>
+            <tbody>${body}</tbody>
+          </table>
+        </div>`;
+    }
+
+    function renderLeaderboard() {
+      const container = document.getElementById("leaderboard-by-domain");
+      container.innerHTML = (payload.domain_reports || []).map((report) => {
+        const cards = report.tiers.map((tier, index) => {
+          const size = report.sizes[index];
+          const rows = (report.runtime_rankings || {})[size] || [];
+          return renderLeaderboardCard(
+            tier,
+            rows,
+            (row) => formatMs(row.mean_ms)
+          );
+        }).join("");
+        return `
+          <div class="domain-section">
+            <h3>${report.name}</h3>
+            <div class="leaderboard-grid">${cards}</div>
+          </div>`;
+      }).join("");
+    }
+
+    function renderComparisonMatrix(containerId, matrix, metricKey, report) {
+      const rows = (matrix || []).filter((row) =>
+        visibleDatasets().some((dataset) => dataset.label === row.label)
+      );
+      const header = `<tr><th>Implementation</th><th class="num">Wins</th><th class="num">Avg rank</th>${
+        report.tiers.map((tier) => `<th class="num">${tier}</th>`).join("")
+      }</tr>`;
+      const body = rows.map((row) => {
+        const cells = report.sizes.map((size) => {
+          const value = row.values[size];
+          if (value == null) return `<td class="num">-</td>`;
+          const rank = row.ranks[size];
+          const best = rank === 1 ? "best" : "";
+          const rankLabel = rank ? `<div class="muted">#${rank}</div>` : "";
+          const display = metricKey === "mean"
+            ? formatMs(value)
+            : metricKey === "cv_percent" || metricKey === "spread_percent"
+              ? `${Number(value).toFixed(2)}%`
+              : metricKey === "load_serialize_ratio"
+                ? `${Number(value).toFixed(2)}x`
+                : formatBytesHuman(value);
+          return `<td class="num ${best}">${display}${rankLabel}</td>`;
+        }).join("");
+        const avgRank = row.avg_rank == null ? "-" : row.avg_rank.toFixed(2);
+        return `<tr>
+          <td>${row.label}</td>
+          <td class="num">${row.wins}</td>
+          <td class="num">${avgRank}</td>
+          ${cells}
+        </tr>`;
+      }).join("");
+      return `<table><thead>${header}</thead><tbody>${body}</tbody></table>`;
+    }
+
+    function renderComparisonMatrices() {
+      const container = document.getElementById("comparison-matrix-by-domain");
+      container.innerHTML = (payload.domain_reports || []).map((report) => `
+        <div class="domain-section">
+          <h3>${report.name}</h3>
+          <div class="matrix-scroll">${
+            renderComparisonMatrix("", report.runtime_matrix || [], "mean", report)
+          }</div>
+        </div>
+      `).join("");
+    }
+
+    function renderMetricSections(metricKey, domainName) {
+      const report = domainReport(domainName);
+      if (!report) return;
+      const rankings = (report.metric_rankings || {})[metricKey] || {};
+      const container = document.getElementById("metric-leaderboard-grid");
+      container.innerHTML = report.tiers.map((tier, index) => {
+        const size = report.sizes[index];
+        const rows = rankings[size] || [];
+        return renderLeaderboardCard(tier, rows);
+      }).join("");
+      document.getElementById("metric-comparison-matrix").innerHTML =
+        renderComparisonMatrix(
+          "metric-comparison-matrix",
+          (report.metric_matrices || {})[metricKey] || [],
+          metricKey,
+          report
+        );
+    }
+
+    function renderWinnerTable() {
+      const staticRows = payload.static_metrics.map((metric) => {
+        const best = winnerStatic(metric.key, metric.exclude_zero_option);
+        let display = "-";
+        if (best) {
+          display = metric.unit === "bytes"
+            ? `${best.label} (${formatBytes(best.value)})`
+            : metric.unit === "ms"
+              ? `${best.label} (${formatMs(best.value)})`
+              : `${best.label} (${best.value})`;
+        }
+        return `<tr><td>${metric.label}</td><td colspan="2">${display}</td></tr>`;
+      }).join("");
+
+      const sizeRows = (payload.domain_reports || []).flatMap((report) =>
+        report.tiers.map((tier, index) => {
+          const bestRuntime = winnerByTier(report.name, index, "runtime");
+          const bestMemory = winnerByTier(report.name, index, "memory");
+          return `<tr>
+            <td>${report.name}</td>
+            <td>${tier}</td>
+            <td>${bestRuntime ? `${bestRuntime.label} (${formatMs(bestRuntime.value)})` : "-"}</td>
+            <td>${bestMemory ? `${bestMemory.label} (${formatBytes(bestMemory.value)})` : "-"}</td>
+          </tr>`;
+        })
+      ).join("");
+
+      document.getElementById("winner-table").innerHTML = `
+        <table>
+          <thead><tr><th>Metric</th><th colspan="2">Winner</th></tr></thead>
+          <tbody>${staticRows}</tbody>
+        </table>
+        <table style="margin-top: 1rem;">
+          <thead><tr><th>Domain</th><th>Tier</th><th>Fastest runtime</th><th>Lowest memory</th></tr></thead>
+          <tbody>${sizeRows}</tbody>
+        </table>`;
+    }
+
+    function renderDetails() {
+      document.getElementById("details").innerHTML = payload.datasets.map((dataset) => {
+        const env = dataset.details.env || {};
+        const rows = (dataset.details.hyperfine_results || []).map((row) => `
+          <tr>
+            <td>${row.parameter_size}</td>
+            <td>${formatSecondsAsMs(row.mean)}</td>
+            <td>${row.stddev ? (Number(row.stddev) * 1000).toFixed(4) + " ms" : "-"}</td>
+            <td>${formatBytesHuman(row.output_bytes)}</td>
+            <td>${formatBytesHuman(row.output_gzip_bytes)}</td>
+            <td>${formatBytesHuman(row.peak_memory_bytes)}</td>
+            <td>${formatBytesHuman(row.process_peak_memory_bytes)}</td>
+            <td>${row.cv_percent != null ? Number(row.cv_percent).toFixed(2) + "%" : "-"}</td>
+            <td>${row.load_serialize_ratio != null ? Number(row.load_serialize_ratio).toFixed(2) + "x" : "-"}</td>
+            <td>${row.min ? formatSecondsAsMs(row.min) : "-"}</td>
+            <td>${row.max ? formatSecondsAsMs(row.max) : "-"}</td>
+          </tr>`).join("");
+
+        const tags = (dataset.details.tags || []).map((tag) => `<code>${tag}</code>`).join(" ");
+        const recordedAt = dataset.details.recorded_at_display || formatDateTime(dataset.details.recorded_at);
+        return `
+          <details class="detail-entry" data-label="${dataset.label}">
+            <summary>${dataset.label}</summary>
+            <div class="stat-grid">
+              <div class="stat-card"><strong>Git hash</strong><span class="value">${dataset.details.git_hash || "unknown"}</span></div>
+              <div class="stat-card"><strong>Recorded at</strong><span class="value">${recordedAt}</span></div>
+              <div class="stat-card"><strong>CPU</strong><span class="value">${env.cpu_model || "unknown"}</span></div>
+              <div class="stat-card"><strong>OS</strong><span class="value">${env.os || "unknown"}</span></div>
+              <div class="stat-card"><strong>Total RAM</strong><span class="value">${formatBytesHuman(env.total_ram_bytes)}</span></div>
+              <div class="stat-card"><strong>Available RAM at start</strong><span class="value">${formatBytesHuman(env.available_ram_bytes)}</span></div>
+              <div class="stat-card"><strong>RAM usage at start</strong><span class="value">${env.ram_usage_percent ?? "unknown"}%</span></div>
+              <div class="stat-card"><strong>Load avg (1 min)</strong><span class="value">${env.system_load_1min ?? "unknown"}</span></div>
+              <div class="stat-card"><strong>CPU governor</strong><span class="value">${env.cpu_governor || "unknown"}</span></div>
+              <div class="stat-card"><strong>Runner</strong><span class="value">${env.is_ci ? "CI (" + (env.runner_name || "unknown") + ")" : "local"}</span></div>
+              <div class="stat-card"><strong>Lines of code</strong><span class="value">${dataset.static.lines_of_code}</span></div>
+              <div class="stat-card"><strong>Artifact size</strong><span class="value">${formatBytesHuman(dataset.static.artifact_size_bytes)}</span></div>
+              <div class="stat-card"><strong>Build time</strong><span class="value">${formatMs(dataset.static.build_time_ms)}</span></div>
+            </div>
+            <p style="margin-top: 1rem;"><strong>Notes:</strong> ${dataset.details.notes || "-"}</p>
+            <p class="muted">Tags: ${tags || "-"} | Source report: <code>${dataset.details.report_path}</code></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Size</th><th>Mean</th><th>Stddev</th><th>Output</th><th>Gzip</th>
+                  <th>Serialize RSS</th><th>Process RSS</th><th>CV%</th><th>Load/ser</th><th>Min</th><th>Max</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </details>`;
+      }).join("");
+      applyDetailFilters();
+    }
+
+    function initDetailFilters() {
+      const sizeFilter = document.getElementById("detail-size-filter");
+      sizeFilter.innerHTML =
+        `<option value="all">All sizes (worst case)</option>` +
+        payload.sizes.map((size) => `<option value="${size}">Size ${size}</option>`).join("");
+
+      ["detail-search", "detail-max-memory", "detail-max-runtime", "detail-size-filter"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", applyDetailFilters);
+        document.getElementById(id).addEventListener("change", applyDetailFilters);
+      });
+
+      document.getElementById("detail-clear-filters").addEventListener("click", () => {
+        document.getElementById("detail-search").value = "";
+        document.getElementById("detail-max-memory").value = "";
+        document.getElementById("detail-max-runtime").value = "";
+        document.getElementById("detail-size-filter").value = "all";
+        applyDetailFilters();
+      });
+    }
+
+    function refreshAll() {
+      refreshRuntime();
+      refreshMemory();
+      refreshOutput();
+      refreshGzip();
+      refreshStability();
+      refreshLoc();
+      refreshArtifact();
+      refreshBuild();
+      renderLeaderboard();
+      renderComparisonMatrices();
+      renderMetricSections(
+        document.getElementById("metric-select").value,
+        document.getElementById("domain-select").value
+      );
+      renderWinnerTable();
+    }
+
+    const domainSelect = document.getElementById("domain-select");
+    (payload.domain_reports || []).forEach((report) => {
+      const option = document.createElement("option");
+      option.value = report.name;
+      option.textContent = report.name;
+      domainSelect.appendChild(option);
+    });
+    domainSelect.addEventListener("change", () => {
+      renderMetricSections(
+        document.getElementById("metric-select").value,
+        domainSelect.value
+      );
+    });
+
+    const metricSelect = document.getElementById("metric-select");
+    (payload.ranked_metric_specs || []).forEach((spec) => {
+      const option = document.createElement("option");
+      option.value = spec.key;
+      option.textContent = spec.label;
+      metricSelect.appendChild(option);
+    });
+    metricSelect.value = "output_bytes";
+    metricSelect.addEventListener("change", () => {
+      renderMetricSections(metricSelect.value, domainSelect.value);
+    });
+
+    renderWarnings();
+
+    [...new Set(payload.datasets.map((dataset) => dataset.lang))].sort().forEach((lang) => {
+      const label = document.createElement("label");
+      label.className = "toggle";
+      label.innerHTML = `<input type="checkbox" checked> ${lang}`;
+      label.querySelector("input").addEventListener("change", (event) => {
+        if (event.target.checked) hiddenLangs.delete(lang);
+        else hiddenLangs.add(lang);
+        refreshAll();
+      });
+      document.getElementById("language-controls").appendChild(label);
+    });
+
+    payload.datasets.forEach((dataset) => {
+      const label = document.createElement("label");
+      label.className = "toggle";
+      label.innerHTML = `<input type="checkbox" checked> ${dataset.label}`;
+      label.querySelector("input").addEventListener("change", (event) => {
+        if (event.target.checked) hiddenLabels.delete(dataset.label);
+        else hiddenLabels.add(dataset.label);
+        refreshAll();
+      });
+      document.getElementById("implementation-controls").appendChild(label);
+    });
+
+    document.getElementById("build-time-nonzero-only").addEventListener("change", (event) => {
+      buildTimeNonZeroOnly = event.target.checked;
+      refreshBuild();
+      renderWinnerTable();
+    });
+
+    renderDetails();
+    initDetailFilters();
+    refreshAll();
+  </script>
+</body>
+</html>

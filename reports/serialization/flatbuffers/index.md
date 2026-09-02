@@ -1,6 +1,6 @@
 # serialization / flatbuffers
 
-Generated at 2026-09-02T21:25:43.552140+00:00
+Generated at 2026-09-02T21:56:38.786874+00:00
 
 ## Runtime leaderboard
 

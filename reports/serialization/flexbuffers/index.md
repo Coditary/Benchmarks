@@ -1,6 +1,6 @@
 # serialization / flexbuffers
 
-Generated at 2026-09-02T21:25:43.553696+00:00
+Generated at 2026-09-02T21:56:38.788875+00:00
 
 ## Runtime leaderboard
 

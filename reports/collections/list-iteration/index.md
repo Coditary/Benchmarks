@@ -1,6 +1,6 @@
 # collections / list-iteration
 
-Generated at 2026-09-02T21:25:43.512927+00:00
+Generated at 2026-09-02T21:56:38.680803+00:00
 
 ## Runtime leaderboard
 

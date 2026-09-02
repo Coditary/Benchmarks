@@ -1,6 +1,6 @@
 # serialization / cjson
 
-Generated at 2026-09-02T21:25:43.549230+00:00
+Generated at 2026-09-02T21:56:38.783122+00:00
 
 ## Runtime leaderboard
 

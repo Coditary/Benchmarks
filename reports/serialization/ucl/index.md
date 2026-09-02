@@ -1,6 +1,6 @@
 # serialization / ucl
 
-Generated at 2026-09-02T21:25:43.573191+00:00
+Generated at 2026-09-02T21:56:38.814001+00:00
 
 ## Runtime leaderboard
 

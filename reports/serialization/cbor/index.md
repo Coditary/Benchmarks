@@ -1,6 +1,6 @@
 # serialization / cbor
 
-Generated at 2026-09-02T21:25:43.546897+00:00
+Generated at 2026-09-02T21:56:38.780917+00:00
 
 ## Runtime leaderboard
 

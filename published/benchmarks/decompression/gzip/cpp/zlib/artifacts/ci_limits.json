@@ -1,0 +1,39 @@
+{
+  "effective_sizes": [
+    "logs/10",
+    "profile/10",
+    "catalog/10",
+    "mesh/100",
+    "random/64k",
+    "sparse/64k",
+    "english/64k",
+    "repetitive/64k"
+  ],
+  "skipped_sizes": [
+    "logs/100",
+    "logs/1000",
+    "logs/10k",
+    "logs/100k",
+    "profile/100",
+    "profile/1000",
+    "profile/10k",
+    "profile/100k",
+    "catalog/100",
+    "catalog/1000",
+    "catalog/10k",
+    "catalog/100k",
+    "mesh/1000",
+    "mesh/10k",
+    "mesh/100k",
+    "random/256k",
+    "random/1m",
+    "random/4m",
+    "sparse/256k",
+    "sparse/1m",
+    "english/256k",
+    "english/1m",
+    "repetitive/256k",
+    "repetitive/1m"
+  ],
+  "limits": "CI limits: active\n  effective sizes: logs/10, profile/10, catalog/10, mesh/100, random/64k, sparse/64k, english/64k, repetitive/64k\n  skipped sizes: logs/100, logs/1000, logs/10k, logs/100k, profile/100, profile/1000, profile/10k, profile/100k, catalog/100, catalog/1000, catalog/10k, catalog/100k, mesh/1000, mesh/10k, mesh/100k, random/256k, random/1m, random/4m, sparse/256k, sparse/1m, english/256k, english/1m, repetitive/256k, repetitive/1m\n  memory budget: 7,061,520,384 bytes (45% of available RAM)\n  element size: 8 bytes (fixture)\n  benchmark: warmup=2, runs=None, min_runs=5, max_runs=20"
+}
