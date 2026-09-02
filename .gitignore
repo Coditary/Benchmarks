@@ -1,4 +1,6 @@
 # Compiled binaries and build artifacts
+bench
+**/cpp/**/build/
 bench_bin
 bench
 *.o
@@ -6,6 +8,12 @@ bench
 *.out
 /target/
 /build/
+.cargo-target/
+benchmarks/**/target/
+tools/bin/
+tools/target/
+tools/capnp-prefix/
+tools/capnpc-codegen/target/
 
 # Python caches and virtual environments
 __pycache__/
@@ -20,6 +28,8 @@ reports/
 published/
 manifest.json
 
-# Misc
+# Generated wire fixtures (derived on demand from datasets/shared/)
+datasets/fixtures/
+
 *.tmp
 *.log

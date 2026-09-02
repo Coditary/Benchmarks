@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "domain": "logs",
+  "tier": "10",
+  "entries": [
+    {"timestamp": "2024-01-15T10:00:00.000Z", "level": "ERROR", "message": "PUT /api/users/8399", "request_id": "00000000-aaaa-bbbb-cccc-000000000000", "metadata": {"status": 500, "duration_ms": 760, "bytes_sent": 3364, "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36", "remote_addr": "10.71.81.252"}},
+    {"timestamp": "2024-01-15T10:07:13.001Z", "level": "ERROR", "message": "DELETE /api/orders/5671", "request_id": "00000001-aaaa-bbbb-cccc-000000000001", "metadata": {"status": 500, "duration_ms": 3, "bytes_sent": 312, "user_agent": "Go-http-client/1.1", "remote_addr": "10.198.224.3"}},
+    {"timestamp": "2024-01-15T10:14:26.002Z", "level": "INFO", "message": "POST /api/users/2606", "request_id": "00000002-aaaa-bbbb-cccc-000000000002", "metadata": {"status": 204, "duration_ms": 473, "bytes_sent": 5152, "user_agent": "PostmanRuntime/7.36.0", "remote_addr": "10.250.255.107"}},
+    {"timestamp": "2024-01-15T10:21:39.003Z", "level": "WARN", "message": "GET /api/users/6197", "request_id": "00000003-aaaa-bbbb-cccc-000000000003", "metadata": {"status": 201, "duration_ms": 809, "bytes_sent": 5530, "user_agent": "PostmanRuntime/7.36.0", "remote_addr": "10.67.72.102"}},
+    {"timestamp": "2024-01-15T10:28:52.004Z", "level": "INFO", "message": "PATCH /api/auth/login", "request_id": "00000004-aaaa-bbbb-cccc-000000000004", "metadata": {"status": 204, "duration_ms": 190, "bytes_sent": 2671, "user_agent": "curl/8.5.0", "remote_addr": "10.216.218.154"}},
+    {"timestamp": "2024-01-15T10:35:05.005Z", "level": "WARN", "message": "GET /api/orders/71", "request_id": "00000005-aaaa-bbbb-cccc-000000000005", "metadata": {"status": 301, "duration_ms": 1085, "bytes_sent": 3979, "user_agent": "python-requests/2.31.0", "remote_addr": "10.68.87.186"}},
+    {"timestamp": "2024-01-15T10:42:18.006Z", "level": "WARN", "message": "GET /api/orders/1429", "request_id": "00000006-aaaa-bbbb-cccc-000000000006", "metadata": {"status": 204, "duration_ms": 447, "bytes_sent": 2547, "user_agent": "curl/8.5.0", "remote_addr": "10.219.37.141"}},
+    {"timestamp": "2024-01-15T10:49:31.007Z", "level": "WARN", "message": "POST /api/auth/login", "request_id": "00000007-aaaa-bbbb-cccc-000000000007", "metadata": {"status": 204, "duration_ms": 474, "bytes_sent": 6748, "user_agent": "Go-http-client/1.1", "remote_addr": "10.231.78.208"}},
+    {"timestamp": "2024-01-15T10:56:44.008Z", "level": "DEBUG", "message": "POST /health", "request_id": "00000008-aaaa-bbbb-cccc-000000000008", "metadata": {"status": 301, "duration_ms": 300, "bytes_sent": 377, "user_agent": "Go-http-client/1.1", "remote_addr": "10.2.190.68"}},
+    {"timestamp": "2024-01-15T10:03:57.009Z", "level": "WARN", "message": "GET /api/search?q=bench", "request_id": "00000009-aaaa-bbbb-cccc-000000000009", "metadata": {"status": 204, "duration_ms": 320, "bytes_sent": 900, "user_agent": "Go-http-client/1.1", "remote_addr": "10.192.2.39"}}
+  ]
+}

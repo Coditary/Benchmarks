@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "layout": {
+    "root": "datasets/shared",
+    "path_pattern": "datasets/shared/{domain}/{tier}",
+    "input_file": "canonical.json",
+    "benchmark_parameter": "{domain}/{tier}"
+  },
+  "size_tiers": {
+    "10": {
+      "record_count": 10,
+      "description": "10 records (logs, profile, catalog)"
+    },
+    "100": {
+      "record_count": 100,
+      "description": "100 records (logs, profile, catalog)"
+    },
+    "1000": {
+      "record_count": 1000,
+      "description": "1,000 records (logs, profile, catalog)"
+    },
+    "10k": {
+      "record_count": 10000,
+      "description": "10,000 records (logs, profile, catalog)"
+    },
+    "100k": {
+      "record_count": 100000,
+      "description": "100,000 records (logs, profile, catalog)"
+    }
+  },
+  "mesh_tiers": {
+    "100": {
+      "vertex_count": 100,
+      "description": "100 vertices"
+    },
+    "1000": {
+      "vertex_count": 1000,
+      "description": "1,000 vertices"
+    },
+    "10k": {
+      "vertex_count": 10000,
+      "description": "10,000 vertices"
+    },
+    "100k": {
+      "vertex_count": 100000,
+      "description": "100,000 vertices"
+    }
+  },
+  "domains": {
+    "logs": {
+      "description": "HTTP request logs with string-heavy metadata.",
+      "record_field": "entries"
+    },
+    "profile": {
+      "description": "User profile records with nested objects and tags.",
+      "record_field": "profiles"
+    },
+    "mesh": {
+      "description": "3D mesh with float-heavy vertices and triangle indices.",
+      "record_field": "vertices"
+    },
+    "catalog": {
+      "description": "Product catalog with prices, tags, and attributes.",
+      "record_field": "products"
+    }
+  },
+  "datasets": {
+    "logs/10": {
+      "canonical_bytes": 2988,
+      "canonical_sha256": "5bfb6ca3b187c7a28352bcd96f9c119c4f3475de34a7afe11bee9976f422184a",
+      "entry_count": 10
+    },
+    "profile/10": {
+      "canonical_bytes": 2909,
+      "canonical_sha256": "97423c6cb63b9459dc57d136d5c72ff9afd7a8d9a2500e43b4890db00aa63865",
+      "profile_count": 10
+    },
+    "catalog/10": {
+      "canonical_bytes": 2362,
+      "canonical_sha256": "32d29204e5a149e488c0fafae6ac75c194baa1deff960ec81c4d1f1e8662a503",
+      "product_count": 10
+    },
+    "logs/100": {
+      "canonical_bytes": 29788,
+      "canonical_sha256": "8477c9fa891b0ff185d035f3e9f4a116bd57877a294d02e3410db829a967e47b",
+      "entry_count": 100
+    },
+    "profile/100": {
+      "canonical_bytes": 28431,
+      "canonical_sha256": "bcef20926d9d0d87ab4bb4830d6bf5065b8ab36eee58c13d36bff4dbe4070626",
+      "profile_count": 100
+    },
+    "catalog/100": {
+      "canonical_bytes": 21560,
+      "canonical_sha256": "c9d5634904eff9481ed56670fd9d415f068b3300ba227538a232be06123567ea",
+      "product_count": 100
+    },
+    "logs/10k": {
+      "canonical_bytes": 2963149,
+      "canonical_sha256": "e88eb27aadf6136845c548aa98720543f6d761a9ac254b5a280b7c08f6ab56c5",
+      "entry_count": 10000
+    },
+    "profile/10k": {
+      "canonical_bytes": 2834891,
+      "canonical_sha256": "ddcea5f6b7eea5092024e8a2e6c0a95f3c2838eee2b5d944ac88d553ae44cc9e",
+      "profile_count": 10000
+    },
+    "catalog/10k": {
+      "canonical_bytes": 2178120,
+      "canonical_sha256": "890106b616b1366cf3cf3b35e8551b80cd24721075b49fe9bbb239bcdfb76e4a",
+      "product_count": 10000
+    },
+    "mesh/100": {
+      "canonical_bytes": 10590,
+      "canonical_sha256": "7926a8029916a26a3d0fd786f1368950f779cefb0e8cbb815b485c3c3f0c20ca",
+      "vertex_count": 100,
+      "triangle_count": 33
+    },
+    "mesh/100k": {
+      "canonical_bytes": 10816695,
+      "canonical_sha256": "c8b8ff1d3c68276f3935ece8b184aa3846505ddca6d5d0d4168506cd0f1d25ee",
+      "vertex_count": 100000,
+      "triangle_count": 33333
+    },
+    "mesh/10k": {
+      "canonical_bytes": 1071559,
+      "canonical_sha256": "fdd854a099215a52d80fdd48c4006b8491cff7fb7c8f2d828e984cbb3e7331ab",
+      "vertex_count": 10000,
+      "triangle_count": 3333
+    },
+    "logs/1000": {
+      "canonical_bytes": 296437,
+      "canonical_sha256": "e63e000f40180e9dc30832062bc959c0705909806f80b5599abb89f2584236e0",
+      "entry_count": 1000
+    },
+    "profile/1000": {
+      "canonical_bytes": 283585,
+      "canonical_sha256": "c7861c5dd1f8157e1325a164208ca6704aeb74ce92c1617ec0e5034707057321",
+      "profile_count": 1000
+    },
+    "catalog/1000": {
+      "canonical_bytes": 216533,
+      "canonical_sha256": "663886434cd4b2febb6e3df1a8b9de70833c83affc30327acfdb827a05873b61",
+      "product_count": 1000
+    },
+    "logs/100k": {
+      "canonical_bytes": 29628985,
+      "canonical_sha256": "7090c893ec4fb6f58473e678c335fa60c865d4cdd3af4fcc28b668bcde90afe7",
+      "entry_count": 100000
+    },
+    "profile/100k": {
+      "canonical_bytes": 28347539,
+      "canonical_sha256": "c8fec8ca91c5cecbc88722fc94aab7f85ac0cfaf939735bc9e803fc4fa72e39b",
+      "profile_count": 100000
+    },
+    "catalog/100k": {
+      "canonical_bytes": 21866557,
+      "canonical_sha256": "de9edf4929faccc8d5b45c3f7f3f4a7bd048bc23195faba50c2d6fe149708b61",
+      "product_count": 100000
+    },
+    "mesh/1000": {
+      "canonical_bytes": 106209,
+      "canonical_sha256": "d4e9483337b97205d44dd2adf0fbcf4da76fba0b175dc98f75d5ff250e0f5a3c",
+      "vertex_count": 1000,
+      "triangle_count": 333
+    }
+  }
+}

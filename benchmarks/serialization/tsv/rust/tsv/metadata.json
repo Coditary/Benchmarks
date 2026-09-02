@@ -1,0 +1,29 @@
+{
+  "language": "Rust",
+  "implementation": "tsv",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "rust",
+    "serialize",
+    "tsv",
+    "text",
+    "tabular"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/tsv-serialize ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": [
+    "src/main.rs",
+    "Cargo.toml"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "TSV encode from canonical dataset (untimed load, timed serialize)."
+}

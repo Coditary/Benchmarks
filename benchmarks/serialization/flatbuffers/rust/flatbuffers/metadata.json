@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "flatbuffers",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "flatbuffers", "binary", "zero-copy"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/flatbuffers-serialize ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml", "build.rs"],
+  "artifact_path": "bench",
+  "notes": "FlatBufferBuilder encode from shared log dataset types."
+}

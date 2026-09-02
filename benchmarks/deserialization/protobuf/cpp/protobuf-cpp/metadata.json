@@ -1,0 +1,29 @@
+{
+  "language": "C++",
+  "implementation": "protobuf-cpp",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "protobuf",
+    "deserialize"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "convert.cpp",
+    "convert.hpp",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/fixtures",
+    "parameter": "{domain}/{tier}",
+    "input": "fixture.bin"
+  },
+  "notes": "Loads prost fixture once (untimed), then timed ParseFromArray + full materialization."
+}

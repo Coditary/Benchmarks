@@ -1,0 +1,381 @@
+{
+  "layout": {
+    "root": "datasets/compression",
+    "path_pattern": "datasets/compression/{domain}/{tier}",
+    "input_file": "payload.bin",
+    "structured_source_root": "datasets/shared",
+    "structured_source_file": "canonical.json",
+    "benchmark_parameter": "{domain}/{tier}"
+  },
+  "domains": {
+    "logs": {
+      "profile": "structured_repetitive_logs",
+      "record_field": "entry_count"
+    },
+    "profile": {
+      "profile": "structured_nested_json",
+      "record_field": "profile_count"
+    },
+    "catalog": {
+      "profile": "structured_key_value_catalog",
+      "record_field": "product_count"
+    },
+    "mesh": {
+      "profile": "numeric_float_arrays",
+      "record_field": "vertex_count"
+    },
+    "random": {
+      "profile": "high_entropy_random",
+      "record_field": "payload_bytes"
+    },
+    "sparse": {
+      "profile": "sparse_mostly_zeros",
+      "record_field": "payload_bytes"
+    },
+    "english": {
+      "profile": "natural_language_text",
+      "record_field": "payload_bytes"
+    },
+    "repetitive": {
+      "profile": "low_entropy_repeated_pattern",
+      "record_field": "payload_bytes"
+    }
+  },
+  "datasets": {
+    "logs/10": {
+      "domain": "logs",
+      "tier": "10",
+      "spec": "logs/10",
+      "profile": "structured_repetitive_logs",
+      "payload_bytes": 2988,
+      "payload_sha256": "5bfb6ca3b187c7a28352bcd96f9c119c4f3475de34a7afe11bee9976f422184a",
+      "source": "datasets/shared/logs/10/canonical.json",
+      "path": "datasets/shared/logs/10/canonical.json"
+    },
+    "logs/100": {
+      "domain": "logs",
+      "tier": "100",
+      "spec": "logs/100",
+      "profile": "structured_repetitive_logs",
+      "payload_bytes": 29788,
+      "payload_sha256": "8477c9fa891b0ff185d035f3e9f4a116bd57877a294d02e3410db829a967e47b",
+      "source": "datasets/shared/logs/100/canonical.json",
+      "path": "datasets/shared/logs/100/canonical.json"
+    },
+    "logs/1000": {
+      "domain": "logs",
+      "tier": "1000",
+      "spec": "logs/1000",
+      "profile": "structured_repetitive_logs",
+      "payload_bytes": 296437,
+      "payload_sha256": "e63e000f40180e9dc30832062bc959c0705909806f80b5599abb89f2584236e0",
+      "source": "datasets/shared/logs/1000/canonical.json",
+      "path": "datasets/shared/logs/1000/canonical.json"
+    },
+    "logs/10k": {
+      "domain": "logs",
+      "tier": "10k",
+      "spec": "logs/10k",
+      "profile": "structured_repetitive_logs",
+      "payload_bytes": 2963149,
+      "payload_sha256": "e88eb27aadf6136845c548aa98720543f6d761a9ac254b5a280b7c08f6ab56c5",
+      "source": "datasets/shared/logs/10k/canonical.json",
+      "path": "datasets/shared/logs/10k/canonical.json"
+    },
+    "logs/100k": {
+      "domain": "logs",
+      "tier": "100k",
+      "spec": "logs/100k",
+      "profile": "structured_repetitive_logs",
+      "payload_bytes": 29628985,
+      "payload_sha256": "7090c893ec4fb6f58473e678c335fa60c865d4cdd3af4fcc28b668bcde90afe7",
+      "source": "datasets/shared/logs/100k/canonical.json",
+      "path": "datasets/shared/logs/100k/canonical.json"
+    },
+    "profile/10": {
+      "domain": "profile",
+      "tier": "10",
+      "spec": "profile/10",
+      "profile": "structured_nested_json",
+      "payload_bytes": 2909,
+      "payload_sha256": "97423c6cb63b9459dc57d136d5c72ff9afd7a8d9a2500e43b4890db00aa63865",
+      "source": "datasets/shared/profile/10/canonical.json",
+      "path": "datasets/shared/profile/10/canonical.json"
+    },
+    "profile/100": {
+      "domain": "profile",
+      "tier": "100",
+      "spec": "profile/100",
+      "profile": "structured_nested_json",
+      "payload_bytes": 28431,
+      "payload_sha256": "bcef20926d9d0d87ab4bb4830d6bf5065b8ab36eee58c13d36bff4dbe4070626",
+      "source": "datasets/shared/profile/100/canonical.json",
+      "path": "datasets/shared/profile/100/canonical.json"
+    },
+    "profile/1000": {
+      "domain": "profile",
+      "tier": "1000",
+      "spec": "profile/1000",
+      "profile": "structured_nested_json",
+      "payload_bytes": 283585,
+      "payload_sha256": "c7861c5dd1f8157e1325a164208ca6704aeb74ce92c1617ec0e5034707057321",
+      "source": "datasets/shared/profile/1000/canonical.json",
+      "path": "datasets/shared/profile/1000/canonical.json"
+    },
+    "profile/10k": {
+      "domain": "profile",
+      "tier": "10k",
+      "spec": "profile/10k",
+      "profile": "structured_nested_json",
+      "payload_bytes": 2834891,
+      "payload_sha256": "ddcea5f6b7eea5092024e8a2e6c0a95f3c2838eee2b5d944ac88d553ae44cc9e",
+      "source": "datasets/shared/profile/10k/canonical.json",
+      "path": "datasets/shared/profile/10k/canonical.json"
+    },
+    "profile/100k": {
+      "domain": "profile",
+      "tier": "100k",
+      "spec": "profile/100k",
+      "profile": "structured_nested_json",
+      "payload_bytes": 28347539,
+      "payload_sha256": "c8fec8ca91c5cecbc88722fc94aab7f85ac0cfaf939735bc9e803fc4fa72e39b",
+      "source": "datasets/shared/profile/100k/canonical.json",
+      "path": "datasets/shared/profile/100k/canonical.json"
+    },
+    "catalog/10": {
+      "domain": "catalog",
+      "tier": "10",
+      "spec": "catalog/10",
+      "profile": "structured_key_value_catalog",
+      "payload_bytes": 2362,
+      "payload_sha256": "32d29204e5a149e488c0fafae6ac75c194baa1deff960ec81c4d1f1e8662a503",
+      "source": "datasets/shared/catalog/10/canonical.json",
+      "path": "datasets/shared/catalog/10/canonical.json"
+    },
+    "catalog/100": {
+      "domain": "catalog",
+      "tier": "100",
+      "spec": "catalog/100",
+      "profile": "structured_key_value_catalog",
+      "payload_bytes": 21560,
+      "payload_sha256": "c9d5634904eff9481ed56670fd9d415f068b3300ba227538a232be06123567ea",
+      "source": "datasets/shared/catalog/100/canonical.json",
+      "path": "datasets/shared/catalog/100/canonical.json"
+    },
+    "catalog/1000": {
+      "domain": "catalog",
+      "tier": "1000",
+      "spec": "catalog/1000",
+      "profile": "structured_key_value_catalog",
+      "payload_bytes": 216533,
+      "payload_sha256": "663886434cd4b2febb6e3df1a8b9de70833c83affc30327acfdb827a05873b61",
+      "source": "datasets/shared/catalog/1000/canonical.json",
+      "path": "datasets/shared/catalog/1000/canonical.json"
+    },
+    "catalog/10k": {
+      "domain": "catalog",
+      "tier": "10k",
+      "spec": "catalog/10k",
+      "profile": "structured_key_value_catalog",
+      "payload_bytes": 2178120,
+      "payload_sha256": "890106b616b1366cf3cf3b35e8551b80cd24721075b49fe9bbb239bcdfb76e4a",
+      "source": "datasets/shared/catalog/10k/canonical.json",
+      "path": "datasets/shared/catalog/10k/canonical.json"
+    },
+    "catalog/100k": {
+      "domain": "catalog",
+      "tier": "100k",
+      "spec": "catalog/100k",
+      "profile": "structured_key_value_catalog",
+      "payload_bytes": 21866557,
+      "payload_sha256": "de9edf4929faccc8d5b45c3f7f3f4a7bd048bc23195faba50c2d6fe149708b61",
+      "source": "datasets/shared/catalog/100k/canonical.json",
+      "path": "datasets/shared/catalog/100k/canonical.json"
+    },
+    "mesh/100": {
+      "domain": "mesh",
+      "tier": "100",
+      "spec": "mesh/100",
+      "profile": "numeric_float_arrays",
+      "payload_bytes": 10590,
+      "payload_sha256": "7926a8029916a26a3d0fd786f1368950f779cefb0e8cbb815b485c3c3f0c20ca",
+      "source": "datasets/shared/mesh/100/canonical.json",
+      "path": "datasets/shared/mesh/100/canonical.json"
+    },
+    "mesh/1000": {
+      "domain": "mesh",
+      "tier": "1000",
+      "spec": "mesh/1000",
+      "profile": "numeric_float_arrays",
+      "payload_bytes": 106209,
+      "payload_sha256": "d4e9483337b97205d44dd2adf0fbcf4da76fba0b175dc98f75d5ff250e0f5a3c",
+      "source": "datasets/shared/mesh/1000/canonical.json",
+      "path": "datasets/shared/mesh/1000/canonical.json"
+    },
+    "mesh/10k": {
+      "domain": "mesh",
+      "tier": "10k",
+      "spec": "mesh/10k",
+      "profile": "numeric_float_arrays",
+      "payload_bytes": 1071559,
+      "payload_sha256": "fdd854a099215a52d80fdd48c4006b8491cff7fb7c8f2d828e984cbb3e7331ab",
+      "source": "datasets/shared/mesh/10k/canonical.json",
+      "path": "datasets/shared/mesh/10k/canonical.json"
+    },
+    "mesh/100k": {
+      "domain": "mesh",
+      "tier": "100k",
+      "spec": "mesh/100k",
+      "profile": "numeric_float_arrays",
+      "payload_bytes": 10816695,
+      "payload_sha256": "c8b8ff1d3c68276f3935ece8b184aa3846505ddca6d5d0d4168506cd0f1d25ee",
+      "source": "datasets/shared/mesh/100k/canonical.json",
+      "path": "datasets/shared/mesh/100k/canonical.json"
+    },
+    "random/64k": {
+      "domain": "random",
+      "tier": "64k",
+      "spec": "random/64k",
+      "profile": "high_entropy_random",
+      "payload_bytes": 65536,
+      "payload_sha256": "6548308d96b360eca85fe8007a453a0b167289bb08125fa925be840ba5be38ad",
+      "path": "datasets/compression/random/64k/payload.bin"
+    },
+    "random/256k": {
+      "domain": "random",
+      "tier": "256k",
+      "spec": "random/256k",
+      "profile": "high_entropy_random",
+      "payload_bytes": 262144,
+      "payload_sha256": "fd5fbdaa7963448d67d9cee4eddabc3df581b5fd1635127f1b3a445713200be2",
+      "path": "datasets/compression/random/256k/payload.bin"
+    },
+    "random/1m": {
+      "domain": "random",
+      "tier": "1m",
+      "spec": "random/1m",
+      "profile": "high_entropy_random",
+      "payload_bytes": 1048576,
+      "payload_sha256": "d80db4faea993047e08d9f13605ab44bf8c709d76f953a0f27ec0bfab9215e92",
+      "path": "datasets/compression/random/1m/payload.bin"
+    },
+    "random/4m": {
+      "domain": "random",
+      "tier": "4m",
+      "spec": "random/4m",
+      "profile": "high_entropy_random",
+      "payload_bytes": 4194304,
+      "payload_sha256": "1fea3e1b2435feade52aa2465cae5748663d2a384f8844e6c60228876fb0e4ab",
+      "path": "datasets/compression/random/4m/payload.bin"
+    },
+    "sparse/64k": {
+      "domain": "sparse",
+      "tier": "64k",
+      "spec": "sparse/64k",
+      "profile": "sparse_mostly_zeros",
+      "payload_bytes": 65536,
+      "payload_sha256": "d85447195dbfc9a2f9e3c5d41bb386226430d23289edec699d0b4827498fbd1e",
+      "path": "datasets/compression/sparse/64k/payload.bin"
+    },
+    "sparse/256k": {
+      "domain": "sparse",
+      "tier": "256k",
+      "spec": "sparse/256k",
+      "profile": "sparse_mostly_zeros",
+      "payload_bytes": 262144,
+      "payload_sha256": "919c436e16e6f06baa1f0c42c76b629f99849cfaaefc0d35940352c1bf606035",
+      "path": "datasets/compression/sparse/256k/payload.bin"
+    },
+    "sparse/1m": {
+      "domain": "sparse",
+      "tier": "1m",
+      "spec": "sparse/1m",
+      "profile": "sparse_mostly_zeros",
+      "payload_bytes": 1048576,
+      "payload_sha256": "50bb34177ce1582a0658a511dbd3ff3c1e586f53079cd7e49945001ebef76a8b",
+      "path": "datasets/compression/sparse/1m/payload.bin"
+    },
+    "sparse/4m": {
+      "domain": "sparse",
+      "tier": "4m",
+      "spec": "sparse/4m",
+      "profile": "sparse_mostly_zeros",
+      "payload_bytes": 4194304,
+      "payload_sha256": "7ab849cf667f60bcc6298507640b7995f81a2e8098df3b4cca0c0ee79aa96602",
+      "path": "datasets/compression/sparse/4m/payload.bin"
+    },
+    "english/64k": {
+      "domain": "english",
+      "tier": "64k",
+      "spec": "english/64k",
+      "profile": "natural_language_text",
+      "payload_bytes": 65536,
+      "payload_sha256": "04f7c4c7ec2bb2757b23bc65b2b5b65ca461027a6122fc8fc319375b18c7e645",
+      "path": "datasets/compression/english/64k/payload.bin"
+    },
+    "english/256k": {
+      "domain": "english",
+      "tier": "256k",
+      "spec": "english/256k",
+      "profile": "natural_language_text",
+      "payload_bytes": 262144,
+      "payload_sha256": "2c1c008a005d328688ea256b3d18c41453416d1bafc0bfe0ae57a9a6d5e5fd68",
+      "path": "datasets/compression/english/256k/payload.bin"
+    },
+    "english/1m": {
+      "domain": "english",
+      "tier": "1m",
+      "spec": "english/1m",
+      "profile": "natural_language_text",
+      "payload_bytes": 1048576,
+      "payload_sha256": "125e91e9fdef42d2c1ccff896b493f6a24eaf9495e130d63b66039ab812a924b",
+      "path": "datasets/compression/english/1m/payload.bin"
+    },
+    "english/4m": {
+      "domain": "english",
+      "tier": "4m",
+      "spec": "english/4m",
+      "profile": "natural_language_text",
+      "payload_bytes": 4194304,
+      "payload_sha256": "50929926ee35db9545751fe7d5687a3e8b41745b7901ed51eabb3ac621516d09",
+      "path": "datasets/compression/english/4m/payload.bin"
+    },
+    "repetitive/64k": {
+      "domain": "repetitive",
+      "tier": "64k",
+      "spec": "repetitive/64k",
+      "profile": "low_entropy_repeated_pattern",
+      "payload_bytes": 65536,
+      "payload_sha256": "591bf78168fb8d24e3d08a292c8a034e91022717ac6d3427bf6a17a59f0c7006",
+      "path": "datasets/compression/repetitive/64k/payload.bin"
+    },
+    "repetitive/256k": {
+      "domain": "repetitive",
+      "tier": "256k",
+      "spec": "repetitive/256k",
+      "profile": "low_entropy_repeated_pattern",
+      "payload_bytes": 262144,
+      "payload_sha256": "1dc3c1f789ad305e34f61573a6bf06ac43d7bffce63879af89c469380012cfc4",
+      "path": "datasets/compression/repetitive/256k/payload.bin"
+    },
+    "repetitive/1m": {
+      "domain": "repetitive",
+      "tier": "1m",
+      "spec": "repetitive/1m",
+      "profile": "low_entropy_repeated_pattern",
+      "payload_bytes": 1048576,
+      "payload_sha256": "68a9ffe168da36028176e61e7581b03f7f0871c870b8695d3e531f09dc96e135",
+      "path": "datasets/compression/repetitive/1m/payload.bin"
+    },
+    "repetitive/4m": {
+      "domain": "repetitive",
+      "tier": "4m",
+      "spec": "repetitive/4m",
+      "profile": "low_entropy_repeated_pattern",
+      "payload_bytes": 4194304,
+      "payload_sha256": "be1bb7b598e8aacece0c759403565862a2882980f89ad9bc7a0988adde8539ee",
+      "path": "datasets/compression/repetitive/4m/payload.bin"
+    }
+  },
+  "datasets_count": 35
+}

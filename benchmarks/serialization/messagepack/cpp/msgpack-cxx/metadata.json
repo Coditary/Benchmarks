@@ -1,0 +1,27 @@
+{
+  "language": "C++",
+  "implementation": "msgpack-cxx",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "messagepack",
+    "binary"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "Canonical dataset to msgpack map encoding (untimed load, timed pack)."
+}

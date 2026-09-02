@@ -1,0 +1,27 @@
+{
+  "language": "C++",
+  "implementation": "libbzip2",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "decompression",
+    "bzip2"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/fixtures/compression",
+    "parameter": "{domain}/{tier}",
+    "input": "fixture.bin"
+  },
+  "notes": "Loads bzip2 fixture once (untimed), then measures decompression."
+}

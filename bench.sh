@@ -26,6 +26,11 @@ print_header() {
     echo -e "  ${BOLD}Action:${RESET} ${MAGENTA}${ACTION^^}${RESET} | ${BOLD}Scope:${RESET} ${DIM}benchmarks/${FILTER:-"all"}${RESET}\n"
 }
 
+if [ "$ACTION" = "clean" ]; then
+    print_header
+    echo -e "${BOLD}${CYAN}-> Cleaning build artifacts via per-task clean hooks...${RESET}\n"
+fi
+
 if [ "$ACTION" = "reports" ]; then
     print_header
 
@@ -48,7 +53,12 @@ fi
 
 print_header
 
-find "benchmarks/$FILTER" -mindepth 1 -maxdepth 4 -name "metadata.json" | sort | while read -r meta_path; do
+SEARCH_ROOT="benchmarks"
+if [ -n "$FILTER" ]; then
+    SEARCH_ROOT="benchmarks/$FILTER"
+fi
+
+find "$SEARCH_ROOT" -name "metadata.json" | sort | while read -r meta_path; do
     TARGET_DIR=$(dirname "$meta_path")
 
     DOMAIN=$(echo "$TARGET_DIR" | cut -d'/' -f2)
@@ -57,9 +67,21 @@ find "benchmarks/$FILTER" -mindepth 1 -maxdepth 4 -name "metadata.json" | sort |
     echo -e "${BOLD}${CYAN}◈ Domain:${RESET} $DOMAIN ${DIM}❯${RESET} ${BOLD}${MAGENTA}Task:${RESET} $TASK"
     echo -e "  ${DIM}└─ Target:${RESET} ${BOLD}$TARGET_DIR${RESET}"
 
-    "./scripts/executer/code-impl-pattern.sh" "$ACTION" "$TARGET_DIR"
+    if [ "$ACTION" = "clean" ]; then
+        "./scripts/executer/code-impl-pattern.sh" "$ACTION" "$TARGET_DIR" || true
+    else
+        "./scripts/executer/code-impl-pattern.sh" "$ACTION" "$TARGET_DIR"
+    fi
 
     echo -e "${DIM}──────────────────────────────────────────────────────────────────${RESET}"
 done
+
+if [ "$ACTION" = "clean" ]; then
+    echo -e "\n${BOLD}${CYAN}-> Cleaning repo-root build caches...${RESET}\n"
+    bash "./scripts/clean-repo-build-caches.sh"
+    echo -e "\n${BOLD}${GREEN}✔ Build artifacts cleaned.${RESET}"
+    echo -e "${DIM}Source code, datasets, and benchmark results were not touched.${RESET}\n"
+    exit 0
+fi
 
 echo -e "\n${BOLD}${CYAN}✔ All tasks completed successfully.${RESET}\n"

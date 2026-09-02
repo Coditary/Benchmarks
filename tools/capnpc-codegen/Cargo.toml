@@ -1,0 +1,12 @@
+[package]
+name = "capnpc-codegen"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "capnpc-rust"
+path = "src/main.rs"
+
+[dependencies]
+capnpc = "0.20"

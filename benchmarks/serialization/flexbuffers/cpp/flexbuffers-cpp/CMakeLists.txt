@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.16)
+project(flexbuffers_cpp_serialize LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include("../../../../../tools/cpp/cmake/BenchDeps.cmake")
+bench_fetch_nlohmann_json()
+bench_fetch_flatbuffers()
+
+add_executable(bench main.cpp serialize.cpp)
+target_include_directories(bench PRIVATE "../../../../../tools/cpp/bench-support/include")
+target_compile_options(bench PRIVATE -O3 -DNDEBUG)
+target_link_libraries(bench PRIVATE nlohmann_json::nlohmann_json)
+bench_link_flatbuffers(bench)
+bench_link_z(bench)

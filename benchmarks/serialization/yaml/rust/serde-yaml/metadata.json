@@ -1,0 +1,29 @@
+{
+  "language": "Rust",
+  "implementation": "serde-yaml",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "rust",
+    "serialize",
+    "yaml",
+    "text",
+    "config"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/yaml-serialize-serde-yaml ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": [
+    "src/main.rs",
+    "Cargo.toml"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "YAML encode from canonical dataset (untimed load, timed serialize)."
+}

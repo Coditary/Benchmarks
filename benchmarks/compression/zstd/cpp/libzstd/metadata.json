@@ -1,0 +1,27 @@
+{
+  "language": "C++",
+  "implementation": "libzstd",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "compression",
+    "zstd"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/compression",
+    "parameter": "{domain}/{tier}",
+    "input": "payload.bin"
+  },
+  "notes": "Loads payload.bin once (untimed), then measures zstd compression."
+}

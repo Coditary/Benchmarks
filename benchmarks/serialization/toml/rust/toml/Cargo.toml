@@ -1,0 +1,13 @@
+[package]
+name = "toml-serialize"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+bench-support = { path = "../../../rust/bench-support", features = ["toml"] }
+toml = "0.8"
+
+[profile.release]
+lto = true
+codegen-units = 1

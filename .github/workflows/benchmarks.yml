@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "benchmarks/**"
+      - "datasets/**"
+      - "tools/generate-datasets.py"
       - "scripts/**"
       - "requirements.txt"
       - ".github/workflows/benchmarks.yml"
@@ -12,6 +14,8 @@ on:
     branches: [main]
     paths:
       - "benchmarks/**"
+      - "datasets/**"
+      - "tools/generate-datasets.py"
       - "scripts/**"
       - "requirements.txt"
       - ".github/workflows/benchmarks.yml"
@@ -52,7 +56,14 @@ jobs:
         if: steps.detect.outputs.has_targets == 'true'
         run: |
           sudo apt-get update
-          sudo apt-get install -y hyperfine python3-pip build-essential
+          sudo apt-get install -y hyperfine python3-pip build-essential cmake pkg-config \
+            nlohmann-json3-dev libmsgpack-dev \
+            protobuf-compiler libprotobuf-dev \
+            flatbuffers-compiler libflatbuffers-dev \
+            capnproto libcapnp-dev \
+            libyaml-cpp-dev \
+            libzstd-dev zlib1g-dev liblz4-dev libsnappy-dev \
+            libbrotli-dev libbz2-dev liblzma-dev
           pip install -r requirements.txt
 
       - name: Run changed benchmarks

@@ -1,0 +1,13 @@
+[package]
+name = "messagepack-deserialize-msgpacker"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+bench-support = { path = "../../../../serialization/rust/bench-support" }
+msgpacker = { version = "0.7", features = ["std", "derive"] }
+
+[profile.release]
+lto = true
+codegen-units = 1

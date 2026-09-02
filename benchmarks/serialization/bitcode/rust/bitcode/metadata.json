@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "bitcode",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "bitcode", "binary"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/bitcode-serialize ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml"],
+  "artifact_path": "bench",
+  "notes": "bitcode::encode on shared log dataset types."
+}

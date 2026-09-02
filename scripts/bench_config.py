@@ -203,6 +203,19 @@ def write_ci_metadata(config_path: str | Path, artifacts_dir: str | Path) -> Non
     (path / "ci_limits.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
+def export_internal_env(config_path: str | Path) -> str:
+    settings = get_benchmark_settings(config_path)
+    pairs = [
+        f"BENCH_WARMUP={settings['warmup']}",
+        f"BENCH_MIN_RUNS={settings['min_runs']}",
+        f"BENCH_MAX_RUNS={settings['max_runs']}",
+    ]
+    runs = settings.get("runs")
+    if runs is not None:
+        pairs.append(f"BENCH_RUNS={runs}")
+    return " ".join(pairs)
+
+
 def main() -> None:
     if len(sys.argv) < 3:
         print("Usage: bench_config.py <command> <config.json>", file=sys.stderr)
@@ -229,6 +242,8 @@ def main() -> None:
         key = sys.argv[3]
         value = settings.get(key, "")
         print(value if value is not None else "")
+    elif command == "export-internal-env":
+        print(export_internal_env(config_path))
     else:
         print(f"Unknown command: {command}", file=sys.stderr)
         sys.exit(1)

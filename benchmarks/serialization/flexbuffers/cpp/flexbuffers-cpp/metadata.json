@@ -1,0 +1,29 @@
+{
+  "language": "C++",
+  "implementation": "flexbuffers-cpp",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "flexbuffers",
+    "binary"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "serialize.cpp",
+    "serialize.hpp",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "FlexBuffers builder encode from canonical dataset (untimed load, timed serialize)."
+}

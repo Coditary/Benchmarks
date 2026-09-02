@@ -1,0 +1,17 @@
+[package]
+name = "protobuf-serialize-prost"
+version = "0.1.0"
+edition = "2021"
+publish = false
+build = "build.rs"
+
+[dependencies]
+bench-support = { path = "../../../rust/bench-support" }
+prost = "0.13"
+
+[build-dependencies]
+prost-build = "0.13"
+
+[profile.release]
+lto = true
+codegen-units = 1

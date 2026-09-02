@@ -1,6 +1,7 @@
 {
   "language": "Python",
   "implementation": "simple-loop",
+  "timing": "internal",
   "run_cmd": "python3 main.py {size}",
   "tags": [
     "interpreted",
@@ -11,5 +12,5 @@
     "main.py"
   ],
   "artifact_path": "main.py",
-  "notes": "Standard Python for-loop iteration. Script-based execution without pre-compilation."
+  "notes": "Standard Python for-loop iteration. List construction is untimed; loop body is measured in-process."
 }

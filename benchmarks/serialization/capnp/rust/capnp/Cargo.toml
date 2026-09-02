@@ -1,0 +1,17 @@
+[package]
+name = "capnp-serialize"
+version = "0.1.0"
+edition = "2021"
+publish = false
+build = "build.rs"
+
+[dependencies]
+bench-support = { path = "../../../rust/bench-support" }
+capnp = "0.20"
+
+[build-dependencies]
+capnpc = "0.20"
+
+[profile.release]
+lto = true
+codegen-units = 1

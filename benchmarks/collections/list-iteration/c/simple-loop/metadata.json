@@ -1,6 +1,7 @@
 {
   "language": "C",
   "implementation": "simple-loop",
+  "timing": "internal",
   "run_cmd": "./bench {size}",
   "tags": [
     "compiled",
@@ -10,12 +11,12 @@
   ],
   "hooks": {
     "install": "./install.sh",
-    "build": "gcc -O3 -s -o bench main.c",
+    "build": "gcc -O3 -s -o bench main.c -lm",
     "clean": "rm -f bench"
   },
   "source_files": [
     "main.c"
   ],
   "artifact_path": "bench",
-  "notes": "Minimal C: heap int64 array, fill + sum loop. Built with gcc -O3 -s."
+  "notes": "Minimal C: heap int64 array setup is untimed; timed loop sums all elements. Built with gcc -O3 -s."
 }

@@ -5,6 +5,7 @@ TARGET_DIR=$2
 
 cd "$TARGET_DIR"
 TARGET_DIR="$(pwd)"
+export CARGO_TARGET_DIR="$TARGET_DIR/target"
 
 execute_hook() {
     local hook_name=$1
@@ -23,7 +24,12 @@ case "$ACTION" in
 
         "$OLDPWD/scripts/metrics.sh"
         RUN_CMD=$(python3 -c "import json; print(json.load(open('metadata.json'))['run_cmd'])")
-        "$OLDPWD/scripts/hyperfine-run.sh" "$RUN_CMD"
+        TIMING=$(python3 -c "import json; print(json.load(open('metadata.json')).get('timing', 'internal'))")
+        if [ "$TIMING" = "internal" ]; then
+            "$OLDPWD/scripts/internal-bench-run.sh" "$RUN_CMD"
+        else
+            "$OLDPWD/scripts/hyperfine-run.sh" "$RUN_CMD"
+        fi
 
         python3 "$OLDPWD/scripts/collect.py" "$TARGET_DIR"
 
@@ -36,5 +42,11 @@ case "$ACTION" in
         ;;
     "collect")
         python3 "$OLDPWD/scripts/collect.py" "$TARGET_DIR"
+        ;;
+    "clean")
+        # Only run the per-task clean hook (bench, target/, build/).
+        set +e
+        execute_hook "clean"
+        set -e
         ;;
 esac

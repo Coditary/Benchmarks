@@ -45,8 +45,39 @@ def task_dir_for(path: Path) -> Path | None:
         return None
 
     if path.name == "config.json":
-        return Path(*parts[:4])
+        return Path(*parts[:3])
     return None
+
+
+def all_impls() -> list[Path]:
+    return sorted(
+        meta.parent
+        for meta in Path("benchmarks").rglob("metadata.json")
+    )
+
+
+def compression_impls() -> list[Path]:
+    return sorted(
+        meta.parent
+        for meta in Path("benchmarks").rglob("metadata.json")
+        if len(meta.parts) > 2 and meta.parts[1] == "compression"
+    )
+
+
+def decompression_impls() -> list[Path]:
+    return sorted(
+        meta.parent
+        for meta in Path("benchmarks").rglob("metadata.json")
+        if len(meta.parts) > 2 and meta.parts[1] == "decompression"
+    )
+
+
+def serialization_impls() -> list[Path]:
+    return sorted(
+        meta.parent
+        for meta in Path("benchmarks").rglob("metadata.json")
+        if len(meta.parts) > 2 and meta.parts[1] == "serialization"
+    )
 
 
 def impls_for_task(task_dir: Path) -> list[Path]:
@@ -67,10 +98,20 @@ def detect_targets(changed_files: list[str]) -> list[str]:
         path = Path(file_path)
 
         if path.parts[:1] == ("scripts",):
-            return sorted(
-                str(meta.parent)
-                for meta in Path("benchmarks").rglob("metadata.json")
-            )
+            return [str(impl) for impl in all_impls()]
+
+        if path.parts[:1] == ("datasets",):
+            targets = serialization_impls() + compression_impls()
+            return [str(impl) for impl in targets]
+
+        if path.parts[:2] == ("tools", "generate-datasets.py"):
+            return [str(impl) for impl in serialization_impls()]
+
+        if path.parts[:2] == ("tools", "generate-compression-datasets.py"):
+            return [str(impl) for impl in compression_impls()]
+
+        if path.parts[:2] == ("tools", "generate-compression-fixtures.py"):
+            return [str(impl) for impl in decompression_impls()]
 
         impl = impl_dir_for(path)
         if impl is not None:

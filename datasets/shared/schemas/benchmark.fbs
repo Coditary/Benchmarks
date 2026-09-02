@@ -1,0 +1,95 @@
+namespace benchmark;
+
+table LogMetadata {
+  status:ushort;
+  duration_ms:uint;
+  bytes_sent:uint;
+  user_agent:string;
+  remote_addr:string;
+}
+
+table LogEntry {
+  timestamp:string;
+  level:string;
+  message:string;
+  request_id:string;
+  metadata:LogMetadata;
+}
+
+table LogDataset {
+  version:uint;
+  domain:string;
+  tier:string;
+  entries:[LogEntry];
+}
+
+table ProfilePreferences {
+  locale:string;
+  newsletter:bool;
+  theme:string;
+}
+
+table ProfileAddress {
+  city:string;
+  postal_code:string;
+  country:string;
+}
+
+table Profile {
+  id:string;
+  name:string;
+  email:string;
+  active:bool;
+  tags:[string];
+  preferences:ProfilePreferences;
+  address:ProfileAddress;
+}
+
+table ProfileDataset {
+  version:uint;
+  domain:string;
+  tier:string;
+  profiles:[Profile];
+}
+
+table Vertex {
+  x:float;
+  y:float;
+  z:float;
+  nx:float;
+  ny:float;
+  nz:float;
+}
+
+table MeshDataset {
+  version:uint;
+  domain:string;
+  tier:string;
+  name:string;
+  vertices:[Vertex];
+  indices:[uint];
+}
+
+table KeyValue {
+  key:string;
+  value:string;
+}
+
+table Product {
+  sku:string;
+  name:string;
+  price_cents:uint;
+  currency:string;
+  in_stock:bool;
+  tags:[string];
+  attributes:[KeyValue];
+}
+
+table CatalogDataset {
+  version:uint;
+  domain:string;
+  tier:string;
+  products:[Product];
+}
+
+root_type LogDataset;

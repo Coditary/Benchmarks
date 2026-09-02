@@ -24,7 +24,7 @@ format_memory() {
 
 echo "-> Measuring peak memory usage..."
 mkdir -p artifacts
-echo "parameter_size,peak_memory_bytes" > artifacts/memory.csv
+echo "parameter_size,process_peak_memory_bytes" > artifacts/memory.csv
 
 IFS=',' read -ra SIZE_ARRAY <<< "$SIZES"
 for size in "${SIZE_ARRAY[@]}"; do

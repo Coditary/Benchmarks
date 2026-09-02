@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "domain": "profile",
+  "tier": "10",
+  "profiles": [
+    {"id": "usr_00000000", "name": "Taylor Becker", "email": "taylor.becker0@example.com", "active": true, "tags": ["verified"], "preferences": {"locale": "de-DE", "newsletter": true, "theme": "light"}, "address": {"city": "Munich", "postal_code": "94374", "country": "DE"}},
+    {"id": "usr_00000001", "name": "Jordan Weber", "email": "jordan.weber1@example.com", "active": true, "tags": ["beta", "trial"], "preferences": {"locale": "de-DE", "newsletter": true, "theme": "dark"}, "address": {"city": "Zurich", "postal_code": "46111", "country": "CH"}},
+    {"id": "usr_00000002", "name": "Morgan Wagner", "email": "morgan.wagner2@example.com", "active": true, "tags": ["active", "admin", "premium"], "preferences": {"locale": "fr-FR", "newsletter": false, "theme": "system"}, "address": {"city": "Vienna", "postal_code": "43030", "country": "CH"}},
+    {"id": "usr_00000003", "name": "Morgan Fischer", "email": "morgan.fischer3@example.com", "active": true, "tags": ["admin", "verified", "trial"], "preferences": {"locale": "en-US", "newsletter": true, "theme": "system"}, "address": {"city": "Hamburg", "postal_code": "43475", "country": "DE"}},
+    {"id": "usr_00000004", "name": "Morgan Wagner", "email": "morgan.wagner4@example.com", "active": true, "tags": ["trial", "premium"], "preferences": {"locale": "de-DE", "newsletter": true, "theme": "light"}, "address": {"city": "Vienna", "postal_code": "18677", "country": "CH"}},
+    {"id": "usr_00000005", "name": "Jordan Becker", "email": "jordan.becker5@example.com", "active": true, "tags": ["premium", "verified"], "preferences": {"locale": "fr-FR", "newsletter": false, "theme": "light"}, "address": {"city": "Cologne", "postal_code": "82585", "country": "DE"}},
+    {"id": "usr_00000006", "name": "Morgan Fischer", "email": "morgan.fischer6@example.com", "active": false, "tags": ["verified"], "preferences": {"locale": "en-US", "newsletter": false, "theme": "light"}, "address": {"city": "Cologne", "postal_code": "74713", "country": "DE"}},
+    {"id": "usr_00000007", "name": "Casey Schmidt", "email": "casey.schmidt7@example.com", "active": true, "tags": ["beta", "trial"], "preferences": {"locale": "en-US", "newsletter": false, "theme": "system"}, "address": {"city": "Zurich", "postal_code": "71358", "country": "DE"}},
+    {"id": "usr_00000008", "name": "Alex Becker", "email": "alex.becker8@example.com", "active": true, "tags": ["beta", "admin"], "preferences": {"locale": "de-DE", "newsletter": true, "theme": "dark"}, "address": {"city": "Berlin", "postal_code": "10423", "country": "AT"}},
+    {"id": "usr_00000009", "name": "Taylor Meyer", "email": "taylor.meyer9@example.com", "active": true, "tags": ["beta"], "preferences": {"locale": "fr-FR", "newsletter": true, "theme": "dark"}, "address": {"city": "Hamburg", "postal_code": "88735", "country": "DE"}}
+  ]
+}

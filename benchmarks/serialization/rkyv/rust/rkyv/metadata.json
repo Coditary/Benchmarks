@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "rkyv",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "rkyv", "binary", "zero-copy"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/rkyv-serialize ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml"],
+  "artifact_path": "bench",
+  "notes": "rkyv::to_bytes on shared log dataset types."
+}

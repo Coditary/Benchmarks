@@ -46,11 +46,11 @@ def discover_reports() -> list[Entry]:
             with report_path.open(encoding="utf-8") as handle:
                 data = json.load(handle)
 
+            implementation = data.get("implementation", data.get("impl", "unknown"))
             key = (
                 data.get("domain", "unknown"),
                 data.get("test", "unknown"),
-                data.get("lang", "unknown"),
-                data.get("impl", "unknown"),
+                implementation,
             )
             label = (
                 f"{data.get('language', data.get('lang', 'unknown'))}/"
@@ -163,11 +163,249 @@ def format_number(value: Any, suffix: str = "") -> str:
         return "-"
 
 
+DOMAIN_ORDER = {
+    "logs": 0,
+    "profile": 1,
+    "catalog": 2,
+    "mesh": 3,
+}
+
+
+def parse_tier(tier: str) -> int:
+    if tier.endswith("k"):
+        return int(tier[:-1]) * 1_000
+    if tier.endswith("m"):
+        return int(tier[:-1]) * 1_000_000
+    return int(tier)
+
+
+def sort_parameter_sizes(sizes: list[str]) -> list[str]:
+    def sort_key(size: str) -> tuple[int, int, str, str]:
+        if "/" in size:
+            domain, tier = size.split("/", 1)
+            return (DOMAIN_ORDER.get(domain, 99), parse_tier(tier), domain, tier)
+        if size.isdigit():
+            return (99, int(size), "", size)
+        return (99, 0, size, "")
+
+    return sorted(sizes, key=sort_key)
+
+
 def sorted_sizes(entries: list[Entry]) -> list[str]:
-    return sorted(
-        {size for entry in entries for size in result_rows(entry)},
-        key=lambda value: int(value) if value.isdigit() else value,
+    return sort_parameter_sizes(
+        {size for entry in entries for size in result_rows(entry)}
     )
+
+
+def split_parameter_size(size: str) -> tuple[str, str]:
+    if "/" in size:
+        domain, tier = size.split("/", 1)
+        return domain, tier
+    return "default", size
+
+
+def group_sizes_by_domain(sizes: list[str]) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = defaultdict(list)
+    for size in sizes:
+        domain, _ = split_parameter_size(size)
+        grouped[domain].append(size)
+    return {
+        domain: sort_parameter_sizes(items)
+        for domain, items in sorted(
+            grouped.items(),
+            key=lambda item: DOMAIN_ORDER.get(item[0], 99),
+        )
+    }
+
+
+def domain_bundles(sizes: list[str]) -> list[dict[str, Any]]:
+    return [
+        {
+            "name": domain,
+            "tiers": [split_parameter_size(size)[1] for size in domain_sizes],
+            "sizes": domain_sizes,
+        }
+        for domain, domain_sizes in group_sizes_by_domain(sizes).items()
+    ]
+
+
+def build_domain_reports(
+    entries: list[Entry], sizes: list[str]
+) -> list[dict[str, Any]]:
+    reports: list[dict[str, Any]] = []
+    for bundle in domain_bundles(sizes):
+        domain_sizes = bundle["sizes"]
+        reports.append(
+            {
+                **bundle,
+                "runtime_rankings": build_runtime_rankings(entries, domain_sizes),
+                "runtime_matrix": build_runtime_matrix(entries, domain_sizes),
+                "metric_rankings": {
+                    metric_key: build_metric_rankings(entries, domain_sizes, metric_key)
+                    for metric_key, _, _ in RANKED_METRIC_SPECS
+                },
+                "metric_matrices": {
+                    metric_key: build_metric_matrix(entries, domain_sizes, metric_key)
+                    for metric_key, _, _ in RANKED_METRIC_SPECS
+                },
+            }
+        )
+    return reports
+
+
+def metric_values_for_sizes(
+    entry: Entry,
+    sizes: list[str],
+    metric_key: str,
+) -> list[Any]:
+    values: list[Any] = []
+    for size in sizes:
+        row = result_rows(entry).get(size, {})
+        if metric_key == "mean":
+            values.append(
+                round(float(row["mean"]) * 1000, 4) if row.get("mean") else None
+            )
+        elif metric_key == "memory":
+            values.append(
+                int(row["peak_memory_bytes"]) if row.get("peak_memory_bytes") else None
+            )
+        elif metric_key == "output_size":
+            values.append(int(row["output_bytes"]) if row.get("output_bytes") else None)
+        elif metric_key == "output_gzip":
+            values.append(
+                int(row["output_gzip_bytes"]) if row.get("output_gzip_bytes") else None
+            )
+        elif metric_key == "stability":
+            values.append(
+                round(float(row["cv_percent"]), 4) if row.get("cv_percent") else None
+            )
+        else:
+            value = metric_value(row, metric_key)
+            values.append(round(value, 4) if value is not None else None)
+    return values
+
+
+def runtime_mean_ms(row: dict[str, Any]) -> float | None:
+    if not row.get("mean"):
+        return None
+    return float(row["mean"]) * 1000
+
+
+def metric_value(row: dict[str, Any] | None, metric_key: str) -> float | None:
+    if not row:
+        return None
+    if metric_key == "mean":
+        return float(row["mean"]) * 1000 if row.get("mean") else None
+    if row.get(metric_key) in (None, ""):
+        return None
+    return float(row[metric_key])
+
+
+def format_metric_value(metric_key: str, value: float) -> str:
+    if metric_key == "mean":
+        return format_ms(value / 1000)
+    if metric_key in {"output_bytes", "output_gzip_bytes", "peak_memory_bytes", "process_peak_memory_bytes"}:
+        return format_bytes(int(value))
+    if metric_key in {"cv_percent", "spread_percent"}:
+        return f"{value:.2f}%"
+    if metric_key == "load_serialize_ratio":
+        return f"{value:.2f}x"
+    return str(value)
+
+
+RANKED_METRIC_SPECS: tuple[tuple[str, str, str], ...] = (
+    ("mean", "Runtime", "Fastest serialize mean; lower is better."),
+    ("output_bytes", "Output size", "Smallest raw output; lower is better."),
+    ("output_gzip_bytes", "Gzip size", "Smallest gzip-compressed output; lower is better."),
+    ("peak_memory_bytes", "Serialize peak RSS", "Lowest RSS during timed serialize loop; lower is better."),
+    ("process_peak_memory_bytes", "Process peak RSS", "Lowest whole-process RSS (includes load); lower is better."),
+    ("cv_percent", "Stability (CV)", "Lowest coefficient of variation (stddev/mean); lower is better."),
+    ("spread_percent", "Spread", "Lowest min-max spread relative to mean; lower is better."),
+    ("load_serialize_ratio", "Load/serialize ratio", "Lowest load time relative to serialize mean; lower is better."),
+)
+
+
+def build_metric_rankings(
+    entries: list[Entry], sizes: list[str], metric_key: str
+) -> dict[str, list[dict[str, Any]]]:
+    rankings: dict[str, list[dict[str, Any]]] = {}
+
+    for size in sizes:
+        rows: list[tuple[str, float]] = []
+        for entry in entries:
+            row = result_rows(entry).get(size)
+            value = metric_value(row, metric_key)
+            if value is None:
+                continue
+            rows.append((entry.label, value))
+
+        rows.sort(key=lambda item: item[1])
+        best = rows[0][1] if rows else None
+        rankings[size] = [
+            {
+                "rank": index + 1,
+                "label": label,
+                "value": value,
+                "display": format_metric_value(metric_key, value),
+                "vs_best_pct": round((value / best - 1) * 100, 1) if best and index else 0.0,
+            }
+            for index, (label, value) in enumerate(rows)
+        ]
+
+    return rankings
+
+
+def build_metric_matrix(
+    entries: list[Entry], sizes: list[str], metric_key: str
+) -> list[dict[str, Any]]:
+    matrix: list[dict[str, Any]] = []
+
+    for entry in entries:
+        values: dict[str, float] = {}
+        for size in sizes:
+            row = result_rows(entry).get(size)
+            value = metric_value(row, metric_key)
+            if value is not None:
+                values[size] = value
+        matrix.append({"label": entry.label, "values": values, "ranks": {}})
+
+    for size in sizes:
+        ranked = sorted(
+            (row for row in matrix if size in row["values"]),
+            key=lambda row: row["values"][size],
+        )
+        for rank, row in enumerate(ranked, start=1):
+            row["ranks"][size] = rank
+
+    for row in matrix:
+        ranks = list(row["ranks"].values())
+        row["wins"] = sum(1 for rank in ranks if rank == 1)
+        row["avg_rank"] = round(sum(ranks) / len(ranks), 2) if ranks else None
+
+    matrix.sort(
+        key=lambda row: (
+            -row["wins"],
+            row["avg_rank"] if row["avg_rank"] is not None else 999,
+            row["label"].lower(),
+        )
+    )
+    return matrix
+
+
+def build_runtime_rankings(
+    entries: list[Entry], sizes: list[str]
+) -> dict[str, list[dict[str, Any]]]:
+    rankings = build_metric_rankings(entries, sizes, "mean")
+    for size_rows in rankings.values():
+        for row in size_rows:
+            row["mean_ms"] = row["value"]
+    return rankings
+
+
+def build_runtime_matrix(
+    entries: list[Entry], sizes: list[str]
+) -> list[dict[str, Any]]:
+    return build_metric_matrix(entries, sizes, "mean")
 
 
 def winner_by_size(
@@ -183,8 +421,15 @@ def winner_by_size(
 
         if metric == "mean":
             value = float(row.get("mean", "inf"))
-        elif metric == "peak_memory_bytes":
-            value = int(row.get("peak_memory_bytes", 2**62))
+        elif metric in {
+            "peak_memory_bytes",
+            "process_peak_memory_bytes",
+            "output_bytes",
+            "output_gzip_bytes",
+        }:
+            value = int(row.get(metric, 2**62))
+        elif metric in {"cv_percent", "spread_percent", "load_serialize_ratio"}:
+            value = float(row.get(metric, "inf"))
         else:
             continue
 
@@ -297,19 +542,20 @@ def build_warnings(entries: list[Entry]) -> list[dict[str, str]]:
 
 def chart_payload(domain: str, test: str, entries: list[Entry]) -> dict[str, Any]:
     sizes = sorted_sizes(entries)
+    domain_reports = build_domain_reports(entries, sizes)
     datasets = []
 
     for entry in sorted(entries, key=lambda item: item.label.lower()):
-        runtime = []
-        memory = []
-        for size in sizes:
-            row = result_rows(entry).get(size, {})
-            runtime.append(
-                round(float(row["mean"]) * 1000, 4) if row.get("mean") else None
-            )
-            memory.append(
-                int(row["peak_memory_bytes"]) if row.get("peak_memory_bytes") else None
-            )
+        by_domain: dict[str, dict[str, list[Any]]] = {}
+        for report in domain_reports:
+            domain_sizes = report["sizes"]
+            by_domain[report["name"]] = {
+                "runtime": metric_values_for_sizes(entry, domain_sizes, "mean"),
+                "memory": metric_values_for_sizes(entry, domain_sizes, "memory"),
+                "output_size": metric_values_for_sizes(entry, domain_sizes, "output_size"),
+                "output_gzip": metric_values_for_sizes(entry, domain_sizes, "output_gzip"),
+                "stability": metric_values_for_sizes(entry, domain_sizes, "stability"),
+            }
 
         env = entry.data.get("env", {})
         metrics = entry.data.get("metrics", {})
@@ -318,8 +564,7 @@ def chart_payload(domain: str, test: str, entries: list[Entry]) -> dict[str, Any
             {
                 "label": entry.label,
                 "lang": entry.lang,
-                "runtime": runtime,
-                "memory": memory,
+                "by_domain": by_domain,
                 "static": static_metrics(entry),
                 "details": {
                     "git_hash": entry.data.get("git_hash", "unknown"),
@@ -341,8 +586,13 @@ def chart_payload(domain: str, test: str, entries: list[Entry]) -> dict[str, Any
         "domain": domain,
         "test": test,
         "sizes": sizes,
+        "domain_reports": domain_reports,
         "datasets": datasets,
         "warnings": build_warnings(entries),
+        "ranked_metric_specs": [
+            {"key": metric_key, "label": label, "description": description}
+            for metric_key, label, description in RANKED_METRIC_SPECS
+        ],
         "static_metrics": [
             {"key": key, "label": label, "unit": unit, "exclude_zero_option": exclude_zero}
             for key, label, unit, exclude_zero in STATIC_METRICS
@@ -350,8 +600,71 @@ def chart_payload(domain: str, test: str, entries: list[Entry]) -> dict[str, Any
     }
 
 
+def append_domain_leaderboard_markdown(
+    lines: list[str],
+    title: str,
+    description: str,
+    domain_reports: list[dict[str, Any]],
+    metric_key: str,
+) -> None:
+    lines.extend([f"## {title}", "", description, ""])
+    for report in domain_reports:
+        domain_name = report["name"]
+        rankings = report["metric_rankings"][metric_key]
+        lines.extend([f"### {domain_name}", ""])
+        for tier, size in zip(report["tiers"], report["sizes"]):
+            rows = rankings.get(size, [])
+            if not rows:
+                continue
+            lines.extend(
+                [
+                    f"#### {tier}",
+                    "",
+                    "| Rank | Implementation | Value | vs best |",
+                    "| ---: | --- | ---: | ---: |",
+                ]
+            )
+            for row in rows:
+                vs_best = "—" if row["rank"] == 1 else f"+{row['vs_best_pct']:.1f}%"
+                lines.append(
+                    f"| {row['rank']} | {row['label']} | {row['display']} | {vs_best} |"
+                )
+            lines.append("")
+
+        matrix = report["metric_matrices"][metric_key]
+        tier_header = " | ".join(report["tiers"])
+        lines.extend(
+            [
+                f"#### {domain_name} comparison matrix",
+                "",
+                f"| Implementation | Wins | Avg rank | {tier_header} |",
+                "| --- | ---: | ---: | " + " | ".join("---:" for _ in report["tiers"]) + " |",
+            ]
+        )
+        for row in matrix:
+            cells = []
+            for size in report["sizes"]:
+                value = row["values"].get(size)
+                rank = row["ranks"].get(size)
+                if value is None:
+                    cells.append("-")
+                    continue
+                rank_suffix = f" #{rank}" if rank else ""
+                if metric_key == "mean":
+                    display = format_ms(value / 1000)
+                else:
+                    display = format_metric_value(metric_key, value)
+                cells.append(f"{display}{rank_suffix}")
+            avg_rank = "-" if row["avg_rank"] is None else f"{row['avg_rank']:.2f}"
+            lines.append(
+                f"| {row['label']} | {row['wins']} | {avg_rank} | " + " | ".join(cells) + " |"
+            )
+        lines.append("")
+
+
 def build_task_markdown(domain: str, test: str, entries: list[Entry]) -> str:
     sizes = sorted_sizes(entries)
+    domain_reports = build_domain_reports(entries, sizes)
     lines = [
         f"# {domain} / {test}",
         "",
@@ -366,6 +679,33 @@ def build_task_markdown(domain: str, test: str, entries: list[Entry]) -> str:
             lines.append(f"- **{warning['level'].upper()}**: {warning['message']} {warning.get('details', '')}")
         lines.append("")
 
+    append_domain_leaderboard_markdown(
+        lines,
+        "Runtime leaderboard",
+        "Implementations ranked fastest-first per domain and tier. "
+        "`vs best` shows how much slower the entry is compared to the winner.",
+        domain_reports,
+        "mean",
+    )
+
+    metric_rankings = {
+        metric_key: {
+            report["name"]: report["metric_rankings"][metric_key]
+            for report in domain_reports
+        }
+        for metric_key, _, _ in RANKED_METRIC_SPECS
+    }
+    for metric_key, label, description in RANKED_METRIC_SPECS:
+        if metric_key == "mean":
+            continue
+        append_domain_leaderboard_markdown(
+            lines,
+            f"{label} leaderboard",
+            description,
+            domain_reports,
+            metric_key,
+        )
+
     lines.extend(["## Static metric winners", ""])
     lines.append("| Metric | Winner | Value |")
     lines.append("| --- | --- | --- |")
@@ -377,39 +717,61 @@ def build_task_markdown(domain: str, test: str, entries: list[Entry]) -> str:
         winner_label, value = result
         lines.append(f"| {label} | {winner_label} | {format_number(value, unit)} |")
 
-    lines.extend(["", "## Runtime winners (mean)", ""])
-    lines.append("| Size | Winner | Mean |")
-    lines.append("| --- | --- | --- |")
-    for size in sizes:
-        result = winner_by_size(entries, size, "mean")
-        if result:
-            label, value = result
-            lines.append(f"| {size} | {label} | {format_ms(value)} |")
+    lines.extend(["", "## Metric winners (summary)", ""])
+    lines.append("| Metric | Domain | Tier | Winner | Value |")
+    lines.append("| --- | --- | --- | --- | --- |")
+    for metric_key, label, _ in RANKED_METRIC_SPECS:
+        for report in domain_reports:
+            for tier, size in zip(report["tiers"], report["sizes"]):
+                result = winner_by_size(entries, size, metric_key)
+                if not result:
+                    continue
+                winner_label, value = result
+                if metric_key == "mean":
+                    display = format_ms(value)
+                elif metric_key in {"output_bytes", "output_gzip_bytes", "peak_memory_bytes", "process_peak_memory_bytes"}:
+                    display = format_bytes(value)
+                elif metric_key in {"cv_percent", "spread_percent"}:
+                    display = f"{float(value):.2f}%"
+                elif metric_key == "load_serialize_ratio":
+                    display = f"{float(value):.2f}x"
+                else:
+                    display = str(value)
+                lines.append(
+                    f"| {label} | {report['name']} | {tier} | {winner_label} | {display} |"
+                )
 
-    lines.extend(["", "## Memory winners (peak RSS)", ""])
-    lines.append("| Size | Winner | Peak memory |")
-    lines.append("| --- | --- | --- |")
-    for size in sizes:
-        result = winner_by_size(entries, size, "peak_memory_bytes")
-        if result:
-            label, value = result
-            lines.append(f"| {size} | {label} | {format_bytes(value)} |")
-
-    lines.extend(["", "## Full comparison", ""])
+    lines.extend(["", "## Per-implementation results", ""])
     lines.append(
-        "| Implementation | LoC | Artifact | Build time | Size | Mean | Peak memory |"
+        "| Implementation | Domain | Tier | Mean | Output | Gzip | Serialize RSS | Process RSS | CV% | Load/ser |"
     )
-    lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+    lines.append("| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
+    runtime_rankings = metric_rankings["mean"]
     for entry in sorted(entries, key=lambda item: item.label.lower()):
-        static = static_metrics(entry)
-        for size in sizes:
-            row = result_rows(entry).get(size, {})
-            lines.append(
-                f"| {entry.label} | {static['lines_of_code']} | "
-                f"{format_bytes(static['artifact_size_bytes'])} | "
-                f"{format_number(static['build_time_ms'], 'ms')} | {size} | "
-                f"{format_ms(row.get('mean'))} | {format_bytes(row.get('peak_memory_bytes'))} |"
-            )
+        for report in domain_reports:
+            for tier, size in zip(report["tiers"], report["sizes"]):
+                row = result_rows(entry).get(size, {})
+                rank = next(
+                    (
+                        ranked["rank"]
+                        for ranked in runtime_rankings[report["name"]].get(size, [])
+                        if ranked["label"] == entry.label
+                    ),
+                    None,
+                )
+                mean_display = format_ms(row.get("mean"))
+                if rank is not None:
+                    mean_display = f"{mean_display} (#{rank})"
+                load_ratio = row.get("load_serialize_ratio")
+                lines.append(
+                    f"| {entry.label} | {report['name']} | {tier} | {mean_display} | "
+                    f"{format_bytes(row.get('output_bytes'))} | "
+                    f"{format_bytes(row.get('output_gzip_bytes'))} | "
+                    f"{format_bytes(row.get('peak_memory_bytes'))} | "
+                    f"{format_bytes(row.get('process_peak_memory_bytes'))} | "
+                    f"{row.get('cv_percent', '-')} | "
+                    f"{load_ratio if load_ratio is not None else '-'} |"
+                )
 
     lines.extend(["", "## Implementation details", ""])
     for entry in sorted(entries, key=lambda item: item.label.lower()):
@@ -487,6 +849,73 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
     table {{ width: 100%; border-collapse: collapse; }}
     th, td {{ border-bottom: 1px solid var(--border); padding: 0.65rem 0.5rem; text-align: left; vertical-align: top; }}
     th {{ color: var(--muted); font-weight: 600; }}
+    td.num, th.num {{ text-align: right; font-variant-numeric: tabular-nums; }}
+    td.best {{ background: rgba(52, 211, 153, 0.18); font-weight: 600; }}
+    .rank-badge {{
+      display: inline-block; min-width: 1.5rem; margin-right: 0.35rem;
+      padding: 0.1rem 0.35rem; border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15); color: #7dd3fc; font-size: 0.8rem;
+    }}
+    .rank-badge.gold {{ background: rgba(251, 191, 36, 0.2); color: #fcd34d; }}
+    .matrix-scroll {{ overflow-x: auto; }}
+    .leaderboard-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }}
+    .leaderboard-card {{
+      border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem;
+      background: #0b1220;
+    }}
+    .leaderboard-card h3 {{ font-size: 1rem; margin-bottom: 0.75rem; }}
+    .domain-section {{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #0b1220;
+    }}
+    .domain-section > h3 {{
+      margin: 0 0 0.75rem;
+      text-transform: capitalize;
+    }}
+    .domain-chart-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }}
+    .domain-chart-card {{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.8);
+    }}
+    .domain-chart-card h3 {{
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }}
+    .domain-controls {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }}
+    .domain-controls label {{
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }}
+    #metric-select {{
+      margin-top: 0.35rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }}
     .warning {{
       border-left: 4px solid var(--warn);
       padding: 0.75rem 1rem; margin-bottom: 0.75rem;
@@ -556,6 +985,50 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
     </section>
 
     <section class="panel">
+      <h2>Runtime leaderboard</h2>
+      <p class="muted">Per domain: implementations ranked fastest-first for each tier.</p>
+      <div id="leaderboard-by-domain"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Runtime comparison matrix</h2>
+      <p class="muted">One matrix per domain. Columns are tiers (10, 100, 10k, …), not mixed domains.</p>
+      <div id="comparison-matrix-by-domain"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Metric comparison</h2>
+      <p class="muted">Pick a domain and metric to inspect rankings and the comparison matrix.</p>
+      <div class="domain-controls">
+        <label>
+          Domain
+          <select id="domain-select"></select>
+        </label>
+        <label>
+          Metric
+          <select id="metric-select"></select>
+        </label>
+      </div>
+      <div class="leaderboard-grid" id="metric-leaderboard-grid" style="margin-top: 1rem;"></div>
+      <div class="matrix-scroll" id="metric-comparison-matrix" style="margin-top: 1rem;"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Output size by domain</h2>
+      <div id="output-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Gzip size by domain</h2>
+      <div id="gzip-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Stability (CV %) by domain</h2>
+      <div id="stability-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
       <h2>Filters</h2>
       <div class="controls" id="language-controls"></div>
       <div class="controls" id="implementation-controls"></div>
@@ -565,9 +1038,14 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
       </label>
     </section>
 
-    <section class="panel grid-2">
-      <div><h2>Runtime</h2><canvas id="runtime-chart"></canvas></div>
-      <div><h2>Peak memory</h2><canvas id="memory-chart"></canvas></div>
+    <section class="panel">
+      <h2>Runtime by domain</h2>
+      <div id="runtime-domain-charts" class="domain-chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Peak memory by domain</h2>
+      <div id="memory-domain-charts" class="domain-chart-grid"></div>
     </section>
 
     <section class="panel">
@@ -745,36 +1223,59 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
       ).join("");
     }}
 
-    function makeLineChart(canvasId, metric, yTitle) {{
-      const chart = new Chart(document.getElementById(canvasId), {{
-        type: "line",
-        data: {{ labels: payload.sizes, datasets: [] }},
-        options: {{
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: {{ mode: "index", intersect: false }},
-          plugins: {{ legend: {{ labels: {{ color: "#e5e7eb" }} }} }},
-          scales: {{
-            x: {{ ticks: {{ color: "#94a3b8" }}, grid: {{ color: "rgba(148,163,184,0.15)" }} }},
-            y: {{
-              title: {{ display: true, text: yTitle, color: "#94a3b8" }},
-              ticks: {{ color: "#94a3b8" }},
-              grid: {{ color: "rgba(148,163,184,0.15)" }}
+    function domainReport(name) {{
+      return (payload.domain_reports || []).find((report) => report.name === name);
+    }}
+
+    function makeDomainCharts(containerId, metric, yTitle) {{
+      const container = document.getElementById(containerId);
+      const charts = [];
+
+      container.innerHTML = (payload.domain_reports || []).map((report) => `
+        <div class="domain-chart-card">
+          <h3>${{report.name}}</h3>
+          <canvas id="${{containerId}}-${{report.name}}"></canvas>
+        </div>
+      `).join("");
+
+      (payload.domain_reports || []).forEach((report) => {{
+        const chart = new Chart(document.getElementById(`${{containerId}}-${{report.name}}`), {{
+          type: "line",
+          data: {{ labels: report.tiers, datasets: [] }},
+          options: {{
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {{ mode: "index", intersect: false }},
+            plugins: {{ legend: {{ labels: {{ color: "#e5e7eb" }} }} }},
+            scales: {{
+              x: {{
+                title: {{ display: true, text: "Tier", color: "#94a3b8" }},
+                ticks: {{ color: "#94a3b8" }},
+                grid: {{ color: "rgba(148,163,184,0.15)" }}
+              }},
+              y: {{
+                title: {{ display: true, text: yTitle, color: "#94a3b8" }},
+                ticks: {{ color: "#94a3b8" }},
+                grid: {{ color: "rgba(148,163,184,0.15)" }}
+              }}
             }}
           }}
-        }}
+        }});
+        charts.push({{ report, chart }});
       }});
 
       return () => {{
-        chart.data.datasets = visibleDatasets().map((dataset, index) => ({{
-          label: dataset.label,
-          data: dataset[metric],
-          borderColor: palette[index % palette.length],
-          backgroundColor: palette[index % palette.length],
-          tension: 0.25,
-          spanGaps: true
-        }}));
-        chart.update();
+        charts.forEach(({{ report, chart }}, chartIndex) => {{
+          chart.data.datasets = visibleDatasets().map((dataset, index) => ({{
+            label: dataset.label,
+            data: (dataset.by_domain[report.name] || {{}})[metric] || [],
+            borderColor: palette[index % palette.length],
+            backgroundColor: palette[index % palette.length],
+            tension: 0.25,
+            spanGaps: true
+          }}));
+          chart.update();
+        }});
       }};
     }}
 
@@ -809,8 +1310,11 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
       }};
     }}
 
-    const refreshRuntime = makeLineChart("runtime-chart", "runtime", "Milliseconds");
-    const refreshMemory = makeLineChart("memory-chart", "memory", "Bytes");
+    const refreshRuntime = makeDomainCharts("runtime-domain-charts", "runtime", "Milliseconds");
+    const refreshMemory = makeDomainCharts("memory-domain-charts", "memory", "Bytes");
+    const refreshOutput = makeDomainCharts("output-domain-charts", "output_size", "Bytes");
+    const refreshGzip = makeDomainCharts("gzip-domain-charts", "output_gzip", "Bytes");
+    const refreshStability = makeDomainCharts("stability-domain-charts", "stability", "CV %");
     const refreshLoc = makeBarChart("loc-chart", "lines_of_code");
     const refreshArtifact = makeBarChart("artifact-chart", "artifact_size_bytes");
     const refreshBuild = makeBarChart("build-chart", "build_time_ms");
@@ -825,15 +1329,122 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
       return best;
     }}
 
-    function winnerBySize(size, metric) {{
+    function winnerByTier(domainName, tierIndex, metric) {{
       let best = null;
       visibleDatasets().forEach((dataset) => {{
-        const index = payload.sizes.indexOf(size);
-        const value = dataset[metric][index];
+        const value = (dataset.by_domain[domainName] || {{}})[metric]?.[tierIndex];
         if (value == null) return;
         if (!best || value < best.value) best = {{ label: dataset.label, value }};
       }});
       return best;
+    }}
+
+    function renderLeaderboardCard(title, rows, valueFormatter) {{
+      if (!rows.length) return "";
+      const body = rows.map((row) => {{
+        const badgeClass = row.rank === 1 ? "rank-badge gold" : "rank-badge";
+        const delta = row.rank === 1 ? "" : `<span class="muted">+${{row.vs_best_pct}}%</span>`;
+        const display = valueFormatter ? valueFormatter(row) : row.display;
+        return `<tr>
+          <td class="num"><span class="${{badgeClass}}">#${{row.rank}}</span></td>
+          <td>${{row.label}}</td>
+          <td class="num">${{display}}</td>
+          <td class="num">${{delta}}</td>
+        </tr>`;
+      }}).join("");
+      return `
+        <div class="leaderboard-card">
+          <h3>${{title}}</h3>
+          <table>
+            <thead><tr><th class="num">#</th><th>Implementation</th><th class="num">Value</th><th class="num">vs best</th></tr></thead>
+            <tbody>${{body}}</tbody>
+          </table>
+        </div>`;
+    }}
+
+    function renderLeaderboard() {{
+      const container = document.getElementById("leaderboard-by-domain");
+      container.innerHTML = (payload.domain_reports || []).map((report) => {{
+        const cards = report.tiers.map((tier, index) => {{
+          const size = report.sizes[index];
+          const rows = (report.runtime_rankings || {{}})[size] || [];
+          return renderLeaderboardCard(
+            tier,
+            rows,
+            (row) => formatMs(row.mean_ms)
+          );
+        }}).join("");
+        return `
+          <div class="domain-section">
+            <h3>${{report.name}}</h3>
+            <div class="leaderboard-grid">${{cards}}</div>
+          </div>`;
+      }}).join("");
+    }}
+
+    function renderComparisonMatrix(containerId, matrix, metricKey, report) {{
+      const rows = (matrix || []).filter((row) =>
+        visibleDatasets().some((dataset) => dataset.label === row.label)
+      );
+      const header = `<tr><th>Implementation</th><th class="num">Wins</th><th class="num">Avg rank</th>${{
+        report.tiers.map((tier) => `<th class="num">${{tier}}</th>`).join("")
+      }}</tr>`;
+      const body = rows.map((row) => {{
+        const cells = report.sizes.map((size) => {{
+          const value = row.values[size];
+          if (value == null) return `<td class="num">-</td>`;
+          const rank = row.ranks[size];
+          const best = rank === 1 ? "best" : "";
+          const rankLabel = rank ? `<div class="muted">#${{rank}}</div>` : "";
+          const display = metricKey === "mean"
+            ? formatMs(value)
+            : metricKey === "cv_percent" || metricKey === "spread_percent"
+              ? `${{Number(value).toFixed(2)}}%`
+              : metricKey === "load_serialize_ratio"
+                ? `${{Number(value).toFixed(2)}}x`
+                : formatBytesHuman(value);
+          return `<td class="num ${{best}}">${{display}}${{rankLabel}}</td>`;
+        }}).join("");
+        const avgRank = row.avg_rank == null ? "-" : row.avg_rank.toFixed(2);
+        return `<tr>
+          <td>${{row.label}}</td>
+          <td class="num">${{row.wins}}</td>
+          <td class="num">${{avgRank}}</td>
+          ${{cells}}
+        </tr>`;
+      }}).join("");
+      return `<table><thead>${{header}}</thead><tbody>${{body}}</tbody></table>`;
+    }}
+
+    function renderComparisonMatrices() {{
+      const container = document.getElementById("comparison-matrix-by-domain");
+      container.innerHTML = (payload.domain_reports || []).map((report) => `
+        <div class="domain-section">
+          <h3>${{report.name}}</h3>
+          <div class="matrix-scroll">${{
+            renderComparisonMatrix("", report.runtime_matrix || [], "mean", report)
+          }}</div>
+        </div>
+      `).join("");
+    }}
+
+    function renderMetricSections(metricKey, domainName) {{
+      const report = domainReport(domainName);
+      if (!report) return;
+      const rankings = (report.metric_rankings || {{}})[metricKey] || {{}};
+      const container = document.getElementById("metric-leaderboard-grid");
+      container.innerHTML = report.tiers.map((tier, index) => {{
+        const size = report.sizes[index];
+        const rows = rankings[size] || [];
+        return renderLeaderboardCard(tier, rows);
+      }}).join("");
+      document.getElementById("metric-comparison-matrix").innerHTML =
+        renderComparisonMatrix(
+          "metric-comparison-matrix",
+          (report.metric_matrices || {{}})[metricKey] || [],
+          metricKey,
+          report
+        );
     }}
 
     function renderWinnerTable() {{
@@ -850,15 +1461,18 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
         return `<tr><td>${{metric.label}}</td><td colspan="2">${{display}}</td></tr>`;
       }}).join("");
 
-      const sizeRows = payload.sizes.map((size) => {{
-        const bestRuntime = winnerBySize(size, "runtime");
-        const bestMemory = winnerBySize(size, "memory");
-        return `<tr>
-          <td>${{size}}</td>
-          <td>${{bestRuntime ? `${{bestRuntime.label}} (${{formatMs(bestRuntime.value)}})` : "-"}}</td>
-          <td>${{bestMemory ? `${{bestMemory.label}} (${{formatBytes(bestMemory.value)}})` : "-"}}</td>
-        </tr>`;
-      }}).join("");
+      const sizeRows = (payload.domain_reports || []).flatMap((report) =>
+        report.tiers.map((tier, index) => {{
+          const bestRuntime = winnerByTier(report.name, index, "runtime");
+          const bestMemory = winnerByTier(report.name, index, "memory");
+          return `<tr>
+            <td>${{report.name}}</td>
+            <td>${{tier}}</td>
+            <td>${{bestRuntime ? `${{bestRuntime.label}} (${{formatMs(bestRuntime.value)}})` : "-"}}</td>
+            <td>${{bestMemory ? `${{bestMemory.label}} (${{formatBytes(bestMemory.value)}})` : "-"}}</td>
+          </tr>`;
+        }})
+      ).join("");
 
       document.getElementById("winner-table").innerHTML = `
         <table>
@@ -866,7 +1480,7 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
           <tbody>${{staticRows}}</tbody>
         </table>
         <table style="margin-top: 1rem;">
-          <thead><tr><th>Size</th><th>Fastest runtime</th><th>Lowest memory</th></tr></thead>
+          <thead><tr><th>Domain</th><th>Tier</th><th>Fastest runtime</th><th>Lowest memory</th></tr></thead>
           <tbody>${{sizeRows}}</tbody>
         </table>`;
     }}
@@ -879,7 +1493,12 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
             <td>${{row.parameter_size}}</td>
             <td>${{formatSecondsAsMs(row.mean)}}</td>
             <td>${{row.stddev ? (Number(row.stddev) * 1000).toFixed(4) + " ms" : "-"}}</td>
+            <td>${{formatBytesHuman(row.output_bytes)}}</td>
+            <td>${{formatBytesHuman(row.output_gzip_bytes)}}</td>
             <td>${{formatBytesHuman(row.peak_memory_bytes)}}</td>
+            <td>${{formatBytesHuman(row.process_peak_memory_bytes)}}</td>
+            <td>${{row.cv_percent != null ? Number(row.cv_percent).toFixed(2) + "%" : "-"}}</td>
+            <td>${{row.load_serialize_ratio != null ? Number(row.load_serialize_ratio).toFixed(2) + "x" : "-"}}</td>
             <td>${{row.min ? formatSecondsAsMs(row.min) : "-"}}</td>
             <td>${{row.max ? formatSecondsAsMs(row.max) : "-"}}</td>
           </tr>`).join("");
@@ -909,7 +1528,8 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
             <table>
               <thead>
                 <tr>
-                  <th>Size</th><th>Mean</th><th>Stddev</th><th>Peak memory</th><th>Min</th><th>Max</th>
+                  <th>Size</th><th>Mean</th><th>Stddev</th><th>Output</th><th>Gzip</th>
+                  <th>Serialize RSS</th><th>Process RSS</th><th>CV%</th><th>Load/ser</th><th>Min</th><th>Max</th>
                 </tr>
               </thead>
               <tbody>${{rows}}</tbody>
@@ -942,11 +1562,46 @@ def build_task_html(domain: str, test: str, entries: list[Entry]) -> str:
     function refreshAll() {{
       refreshRuntime();
       refreshMemory();
+      refreshOutput();
+      refreshGzip();
+      refreshStability();
       refreshLoc();
       refreshArtifact();
       refreshBuild();
+      renderLeaderboard();
+      renderComparisonMatrices();
+      renderMetricSections(
+        document.getElementById("metric-select").value,
+        document.getElementById("domain-select").value
+      );
       renderWinnerTable();
     }}
+
+    const domainSelect = document.getElementById("domain-select");
+    (payload.domain_reports || []).forEach((report) => {{
+      const option = document.createElement("option");
+      option.value = report.name;
+      option.textContent = report.name;
+      domainSelect.appendChild(option);
+    }});
+    domainSelect.addEventListener("change", () => {{
+      renderMetricSections(
+        document.getElementById("metric-select").value,
+        domainSelect.value
+      );
+    }});
+
+    const metricSelect = document.getElementById("metric-select");
+    (payload.ranked_metric_specs || []).forEach((spec) => {{
+      const option = document.createElement("option");
+      option.value = spec.key;
+      option.textContent = spec.label;
+      metricSelect.appendChild(option);
+    }});
+    metricSelect.value = "output_bytes";
+    metricSelect.addEventListener("change", () => {{
+      renderMetricSections(metricSelect.value, domainSelect.value);
+    }});
 
     renderWarnings();
 

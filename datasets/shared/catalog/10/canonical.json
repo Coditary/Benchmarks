@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "domain": "catalog",
+  "tier": "10",
+  "products": [
+    {"sku": "SKU-00000000", "name": "Product 0", "price_cents": 68167, "currency": "USD", "in_stock": true, "tags": ["sale", "limited"], "attributes": {"size": "3994", "material": "4573", "weight_g": "2168", "warranty_years": "2937"}},
+    {"sku": "SKU-00000001", "name": "Product 1", "price_cents": 53838, "currency": "EUR", "in_stock": true, "tags": ["electronics", "sale"], "attributes": {"color": "red", "warranty_years": "1345", "material": "320", "weight_g": "4779"}},
+    {"sku": "SKU-00000002", "name": "Product 2", "price_cents": 72141, "currency": "EUR", "in_stock": true, "tags": ["eco", "bestseller"], "attributes": {"weight_g": "2557", "color": "blue", "warranty_years": "2903", "material": "423"}},
+    {"sku": "SKU-00000003", "name": "Product 3", "price_cents": 32557, "currency": "CHF", "in_stock": true, "tags": ["bestseller", "sale", "electronics"], "attributes": {"weight_g": "2394", "color": "black", "size": "1945"}},
+    {"sku": "SKU-00000004", "name": "Product 4", "price_cents": 75186, "currency": "EUR", "in_stock": true, "tags": ["limited", "bestseller", "new"], "attributes": {"material": "4619", "weight_g": "195"}},
+    {"sku": "SKU-00000005", "name": "Product 5", "price_cents": 22003, "currency": "USD", "in_stock": true, "tags": ["electronics", "limited", "bestseller"], "attributes": {"warranty_years": "782", "weight_g": "1991"}},
+    {"sku": "SKU-00000006", "name": "Product 6", "price_cents": 14127, "currency": "CHF", "in_stock": false, "tags": ["electronics"], "attributes": {"warranty_years": "3417", "size": "2593", "color": "blue", "weight_g": "4940"}},
+    {"sku": "SKU-00000007", "name": "Product 7", "price_cents": 60380, "currency": "EUR", "in_stock": true, "tags": ["limited", "eco"], "attributes": {"warranty_years": "3217", "size": "1058", "color": "black", "weight_g": "3504"}},
+    {"sku": "SKU-00000008", "name": "Product 8", "price_cents": 78066, "currency": "EUR", "in_stock": true, "tags": ["eco"], "attributes": {"warranty_years": "2667", "color": "blue", "material": "2476"}},
+    {"sku": "SKU-00000009", "name": "Product 9", "price_cents": 71412, "currency": "EUR", "in_stock": true, "tags": ["limited", "sale", "bestseller"], "attributes": {"color": "black", "material": "1581", "weight_g": "965", "warranty_years": "1997"}}
+  ]
+}

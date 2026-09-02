@@ -1,0 +1,32 @@
+{
+  "language": "C++",
+  "implementation": "capnp-cpp",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "capnp",
+    "binary",
+    "zero-copy"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "serialize.cpp",
+    "serialize.hpp",
+    "generated/benchmark.capnp.h",
+    "generated/benchmark.capnp.c++",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "Cap'n Proto message build from canonical dataset (untimed load, timed serialize)."
+}

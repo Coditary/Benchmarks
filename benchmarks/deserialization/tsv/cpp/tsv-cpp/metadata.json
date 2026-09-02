@@ -1,0 +1,29 @@
+{
+  "language": "C++",
+  "implementation": "tsv-cpp",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "cpp",
+    "deserialize",
+    "tsv",
+    "text",
+    "tabular"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "./build.sh",
+    "clean": "rm -rf build bench"
+  },
+  "source_files": [
+    "main.cpp",
+    "CMakeLists.txt"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/fixtures",
+    "parameter": "{domain}/{tier}",
+    "input": "fixture.bin"
+  },
+  "notes": "C++ TSV parse from wire fixture."
+}

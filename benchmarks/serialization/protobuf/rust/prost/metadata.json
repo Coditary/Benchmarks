@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "prost",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "protobuf", "prost", "binary"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/protobuf-serialize-prost ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml", "build.rs"],
+  "artifact_path": "bench",
+  "notes": "prost encode after untimed conversion from canonical log dataset."
+}

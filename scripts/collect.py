@@ -86,6 +86,26 @@ def get_git_hash():
         return "unknown"
 
 
+def enrich_result_row(row: dict) -> dict:
+    entry = dict(row)
+    if entry.get("mean"):
+        mean = float(entry["mean"])
+        entry["mean_ms"] = round(mean * 1000, 4)
+        if entry.get("stddev") and "cv_percent" not in entry:
+            stddev = float(entry["stddev"])
+            entry["cv_percent"] = round((stddev / mean) * 100, 4) if mean > 0 else 0.0
+        if entry.get("min") is not None and entry.get("max") is not None and "spread_percent" not in entry:
+            min_value = float(entry["min"])
+            max_value = float(entry["max"])
+            entry["spread_percent"] = (
+                round(((max_value - min_value) / mean) * 100, 4) if mean > 0 else 0.0
+            )
+        if entry.get("load_seconds") is not None and "load_serialize_ratio" not in entry:
+            load_seconds = float(entry["load_seconds"])
+            entry["load_serialize_ratio"] = round(load_seconds / mean, 4) if mean > 0 else 0.0
+    return entry
+
+
 def collect_target(dir_path: str, git_hash: str) -> dict:
     meta_path = os.path.join(dir_path, "metadata.json")
     artifacts_dir = os.path.join(dir_path, "artifacts")
@@ -113,8 +133,11 @@ def collect_target(dir_path: str, git_hash: str) -> dict:
         with open(memory_path, "r", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
             for row in reader:
+                key = "process_peak_memory_bytes"
+                if "process_peak_memory_bytes" not in row and "peak_memory_bytes" in row:
+                    key = "peak_memory_bytes"
                 memory_by_param[row["parameter_size"]] = {
-                    "peak_memory_bytes": int(row["peak_memory_bytes"]),
+                    "process_peak_memory_bytes": int(row[key]),
                 }
 
     hyperfine_data = []
@@ -123,11 +146,9 @@ def collect_target(dir_path: str, git_hash: str) -> dict:
             reader = csv.DictReader(handle)
             for row in reader:
                 param = row.get("parameter_size", "")
-                entry = dict(row)
+                entry = enrich_result_row(dict(row))
                 if param in memory_by_param:
                     entry.update(memory_by_param[param])
-                if entry.get("mean"):
-                    entry["mean_ms"] = round(float(entry["mean"]) * 1000, 4)
                 hyperfine_data.append(entry)
 
     domain, test, lang, impl = parse_benchmark_path(dir_path)

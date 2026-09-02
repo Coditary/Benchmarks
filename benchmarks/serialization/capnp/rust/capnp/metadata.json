@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "capnp",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "capnp", "binary", "zero-copy"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/capnp-serialize ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml", "build.rs"],
+  "artifact_path": "bench",
+  "notes": "capnp message build + serialize from shared log dataset types."
+}

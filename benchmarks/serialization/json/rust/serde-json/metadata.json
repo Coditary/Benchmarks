@@ -1,0 +1,20 @@
+{
+  "language": "Rust",
+  "implementation": "serde-json",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "json", "serde", "text"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/json-serialize-serde-json ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml"],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "Loads canonical JSON once (untimed), then measures serde_json::to_vec in-process. load_seconds is reported separately."
+}

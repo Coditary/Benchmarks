@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "simd-json",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "json", "simd", "text"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/json-serialize-simd-json ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml"],
+  "artifact_path": "bench",
+  "notes": "simd-json serde compatibility layer. Internal timing for serialization only."
+}

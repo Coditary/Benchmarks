@@ -1,0 +1,45 @@
+[package]
+name = "bench-support"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[features]
+bitcode = ["dep:bitcode"]
+rkyv = ["dep:rkyv"]
+flexbuffers = ["dep:flexbuffers"]
+rmp-serde = ["dep:rmp-serde"]
+simd-json = ["dep:simd-json"]
+yaml = ["dep:serde_yaml"]
+toml = ["dep:toml"]
+xml = []
+ini = []
+kdl = []
+bson = ["dep:bson"]
+cbor = ["dep:ciborium"]
+csv = []
+tsv = []
+json5 = ["dep:json5"]
+hjson = ["dep:serde_hjson"]
+cjson = ["dep:sonic-rs"]
+plist = ["dep:plist"]
+ucl = []
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+flate2 = "1"
+libc = "0.2"
+bitcode = { version = "0.6", optional = true }
+rkyv = { version = "0.8", optional = true }
+flexbuffers = { version = "25", optional = true }
+rmp-serde = { version = "1", optional = true }
+simd-json = { version = "0.14", optional = true }
+serde_yaml = { version = "0.9", optional = true }
+toml = { version = "0.8", optional = true }
+bson = { version = "2", optional = true }
+ciborium = { version = "0.2", optional = true }
+json5 = { version = "0.4", optional = true }
+serde_hjson = { package = "serde-hjson", version = "1", optional = true }
+sonic-rs = { version = "0.3", optional = true }
+plist = { version = "1", optional = true }

@@ -1,0 +1,12 @@
+[package]
+name = "kdl-serialize"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+bench-support = { path = "../../../rust/bench-support", features = ["kdl"] }
+
+[profile.release]
+lto = true
+codegen-units = 1

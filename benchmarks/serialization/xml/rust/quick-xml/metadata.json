@@ -1,0 +1,29 @@
+{
+  "language": "Rust",
+  "implementation": "quick-xml",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": [
+    "rust",
+    "serialize",
+    "xml",
+    "text",
+    "markup"
+  ],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/xml-serialize-quick-xml ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": [
+    "src/main.rs",
+    "Cargo.toml"
+  ],
+  "artifact_path": "bench",
+  "dataset": {
+    "root": "datasets/shared",
+    "parameter": "{domain}/{tier}",
+    "input": "canonical.json"
+  },
+  "notes": "XML encode from canonical dataset (untimed load, timed serialize)."
+}

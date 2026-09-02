@@ -18,6 +18,9 @@ benchmarks/
 │                   ├── memory.csv
 │                   ├── metrics.json
 │                   └── report.json
+tools/cpp/                       # Shared C++ bench-support (not a benchmark)
+├── bench-support/include/bench/
+└── cmake/BenchDeps.cmake
 ```
 
 Results are published separately on the `benchmark-results` branch:
@@ -51,11 +54,13 @@ Each task defines shared parameters and benchmark execution settings in `config.
 }
 ```
 
-`benchmark` settings are passed directly to Hyperfine:
+`benchmark` settings are passed to each implementation via environment variables (`BENCH_WARMUP`, `BENCH_MIN_RUNS`, `BENCH_MAX_RUNS`, `BENCH_RUNS`):
 
-- `warmup`: warmup runs before measuring
-- `min_runs` / `max_runs`: adaptive run count (default)
-- `runs`: fixed run count; when set, overrides `min_runs` / `max_runs`
+- `warmup`: untimed warmup iterations before measuring
+- `min_runs` / `max_runs`: timed iteration count (default uses `max_runs`)
+- `runs`: fixed timed run count; when set, overrides `min_runs` / `max_runs`
+
+Implementations use **internal timing** by default (`"timing": "internal"` in `metadata.json`): setup/load happens once per process, only the hot path is measured in-process. Set `"timing": "hyperfine"` to opt into whole-process timing via Hyperfine.
 
 `ci` settings apply automatically when `CI=true` (GitHub Actions):
 
@@ -72,7 +77,7 @@ Each task defines shared parameters and benchmark execution settings in `config.
 
 - `memory_budget_ratio`: skips parameter sizes that would need more RAM than this fraction of currently available memory (based on `element_type`, e.g. `int64` = 8 bytes per element)
 - `sizes`: optional explicit CI size list; when set, overrides automatic filtering
-- `ci.benchmark`: lighter Hyperfine settings for faster, safer CI runs
+- `ci.benchmark`: lighter internal timing settings for faster, safer CI runs
 
 Skipped CI sizes are logged in the workflow output and saved to `artifacts/ci_limits.json`.
 
@@ -104,9 +109,65 @@ Generate reports only for a specific scope (incremental update):
 ./bench.sh reports collections/list-iteration
 ```
 
+Remove compiled binaries and build caches (does not touch source code or datasets):
+
+```bash
+./bench.sh clean
+```
+
 Open `reports/index.html` for the overview or `reports/<domain>/<task>/index.html` for interactive charts with language/implementation toggles.
 
-## CI workflow
+## Datasets
+
+The repo keeps a **single canonical source** under `datasets/shared/` (`canonical.json` per domain/tier).
+Serialization benches read it directly. Deserialization and decompression benches derive wire bytes
+from it at runtime (encode/compress in the untimed load phase), so no per-format fixture copies are
+stored in git.
+
+Synthetic compression inputs (`random`, `sparse`, `english`, `repetitive`) live under
+`datasets/compression/` because they are not derived from the structured canonical datasets.
+
+Optional: materialize fixture files for inspection only:
+
+```bash
+python3 tools/generate-fixtures.py --formats serde-yaml toml quick-xml
+```
+
+## C++ benchmarks
+
+C++ implementations live under `benchmarks/<domain>/<task>/cpp/<impl>/` and share timing helpers in `tools/cpp/bench-support/`.
+
+| Domain | C++ implementations | Notes |
+|--------|---------------------|-------|
+| serialization / deserialization | `nlohmann-json`, `msgpack-cxx`, `protobuf-cpp`, `flatbuffers-cpp`, `capnp-cpp`, `flexbuffers-cpp` | Wire bytes derived from canonical JSON at runtime |
+| serialization / deserialization (text) | `yaml-cpp`, `tomlplusplus`, `pugixml`, custom `ini` / `kdl` | YAML/TOML/XML via libraries; INI/KDL use shared custom wire format |
+| serialization / deserialization (more) | `nlohmann` BSON/CBOR, custom `csv`/`tsv`/`ucl`, `json5-cpp`, `hjson-cpp`, `cjson`, `pugixml` plist | BSON/CBOR via nlohmann/json; CSV/TSV/UCL custom wire format |
+| compression / decompression | `libzstd`, `zlib`, `lz4`, `libbz2`, `snappy`, `libbrotli`, `liblzma` | Structured domains read canonical JSON; synthetic payloads stay under `datasets/compression/` |
+| Rust-only formats | — | `bitcode`, `rkyv` (no C++ equivalent) |
+
+Install C++ dependencies (Debian/Ubuntu or Fedora):
+
+```bash
+./tools/cpp/install-cpp.sh
+```
+
+Scaffold or regenerate all C++ benchmarks:
+
+```bash
+python3 tools/scaffold-cpp-benchmarks.py
+python3 tools/scaffold-text-format-benchmarks.py
+python3 tools/scaffold-extra-format-benchmarks.py
+python3 tools/fix-cpp-cmake.py
+```
+
+Run a single C++ target:
+
+```bash
+./scripts/executer/code-impl-pattern.sh run benchmarks/serialization/json/cpp/nlohmann-json
+```
+
+Build uses CMake (`build.sh` per implementation). nlohmann/json is fetched automatically when not installed system-wide.
+
 
 GitHub Actions runs on changes under `benchmarks/**` or `scripts/**`.
 
@@ -159,7 +220,8 @@ Each implementation also keeps its own machine-readable result file:
 
 ## Tooling
 
-- Hyperfine: runtime benchmarking
+- Internal in-process timing: runtime benchmarking (default)
+- Hyperfine: optional whole-process timing (`"timing": "hyperfine"`)
 - GNU `time`: peak memory measurement
 - Python 3 + psutil: aggregation and report generation
 - GitHub Actions: selective CI and results publishing

@@ -1,0 +1,15 @@
+{
+  "language": "Rust",
+  "implementation": "rmp-serde",
+  "timing": "internal",
+  "run_cmd": "./bench {size}",
+  "tags": ["rust", "messagepack", "serde", "binary"],
+  "hooks": {
+    "install": "./install.sh",
+    "build": "cargo build --release && cp target/release/messagepack-serialize-rmp-serde ./bench",
+    "clean": "cargo clean && rm -f bench"
+  },
+  "source_files": ["src/main.rs", "Cargo.toml"],
+  "artifact_path": "bench",
+  "notes": "rmp-serde::to_vec on shared log dataset types."
+}

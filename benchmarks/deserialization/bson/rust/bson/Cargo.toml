@@ -1,0 +1,12 @@
+[package]
+name = "bson-deserialize"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+bench-support = { path = "../../../../serialization/rust/bench-support", features = ["bson"] }
+
+[profile.release]
+lto = true
+codegen-units = 1

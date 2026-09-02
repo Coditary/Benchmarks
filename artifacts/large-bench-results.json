@@ -1,0 +1,914 @@
+{
+  "sizes": [
+    "logs/100",
+    "logs/10k",
+    "profile/100",
+    "profile/10k",
+    "catalog/100",
+    "catalog/10k",
+    "mesh/10k",
+    "mesh/100k"
+  ],
+  "results": {
+    "bitcode": {
+      "logs/100": {
+        "load_seconds": 0.000215663,
+        "max_seconds": 2.755e-06,
+        "mean_seconds": 2.0960999999999997e-06,
+        "median_seconds": 1.9590000000000002e-06,
+        "min_seconds": 1.863e-06,
+        "output_bytes": 13066,
+        "runs": 10,
+        "stddev_seconds": 2.9162285575722627e-07,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004050256,
+        "max_seconds": 0.000162331,
+        "mean_seconds": 0.0001219595,
+        "median_seconds": 0.000113347,
+        "min_seconds": 0.000112345,
+        "output_bytes": 1297323,
+        "runs": 10,
+        "stddev_seconds": 1.5425512796986683e-05,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 0.000124939,
+        "max_seconds": 4.709e-06,
+        "mean_seconds": 3.1210000000000003e-06,
+        "median_seconds": 2.8804999999999998e-06,
+        "min_seconds": 2.325e-06,
+        "output_bytes": 8821,
+        "runs": 10,
+        "stddev_seconds": 8.009119801825916e-07,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.006097257,
+        "max_seconds": 0.000274175,
+        "mean_seconds": 0.00021074469999999998,
+        "median_seconds": 0.0002007245,
+        "min_seconds": 0.000186888,
+        "output_bytes": 876657,
+        "runs": 10,
+        "stddev_seconds": 2.5826733529620037e-05,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 8.388e-05,
+        "max_seconds": 5.22e-06,
+        "mean_seconds": 4.0036999999999995e-06,
+        "median_seconds": 3.5170000000000004e-06,
+        "min_seconds": 3.276e-06,
+        "output_bytes": 8081,
+        "runs": 10,
+        "stddev_seconds": 8.018043464586608e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.0061096,
+        "max_seconds": 0.000535406,
+        "mean_seconds": 0.0004361053,
+        "median_seconds": 0.0004210915,
+        "min_seconds": 0.000408192,
+        "output_bytes": 832235,
+        "runs": 10,
+        "stddev_seconds": 3.826285341698917e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001603441,
+        "max_seconds": 3.7571e-05,
+        "mean_seconds": 2.8830100000000004e-05,
+        "median_seconds": 2.7768000000000002e-05,
+        "min_seconds": 2.7623e-05,
+        "output_bytes": 260033,
+        "runs": 10,
+        "stddev_seconds": 2.9204311822058064e-06,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.015429709,
+        "max_seconds": 0.000333659,
+        "mean_seconds": 0.0002911116,
+        "median_seconds": 0.00028829699999999997,
+        "min_seconds": 0.000276189,
+        "output_bytes": 2800037,
+        "runs": 10,
+        "stddev_seconds": 1.4845113823746851e-05,
+        "warmup": 2
+      }
+    },
+    "capnp": {
+      "logs/100": {
+        "load_seconds": 0.000182099,
+        "max_seconds": 4.579e-06,
+        "mean_seconds": 4.3442e-06,
+        "median_seconds": 4.323e-06,
+        "min_seconds": 4.238e-06,
+        "output_bytes": 25320,
+        "runs": 10,
+        "stddev_seconds": 8.87680122566681e-08,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.003811108,
+        "max_seconds": 0.000526819,
+        "mean_seconds": 0.0005211501,
+        "median_seconds": 0.0005213435,
+        "min_seconds": 0.000516018,
+        "output_bytes": 2607664,
+        "runs": 10,
+        "stddev_seconds": 2.871088206586476e-06,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 0.000143686,
+        "max_seconds": 7.365e-06,
+        "mean_seconds": 7.2378e-06,
+        "median_seconds": 7.2234999999999995e-06,
+        "min_seconds": 7.143e-06,
+        "output_bytes": 28384,
+        "runs": 10,
+        "stddev_seconds": 7.183286156070907e-08,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.005597289,
+        "max_seconds": 0.000883763,
+        "mean_seconds": 0.0008514827000000001,
+        "median_seconds": 0.0008494415,
+        "min_seconds": 0.000830922,
+        "output_bytes": 2900920,
+        "runs": 10,
+        "stddev_seconds": 1.4414805576559115e-05,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 9.7707e-05,
+        "max_seconds": 1.1703e-05,
+        "mean_seconds": 8.6577e-06,
+        "median_seconds": 8.241000000000001e-06,
+        "min_seconds": 7.975e-06,
+        "output_bytes": 27576,
+        "runs": 10,
+        "stddev_seconds": 1.063196411769716e-06,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.005739862,
+        "max_seconds": 0.001107241,
+        "mean_seconds": 0.0010811866,
+        "median_seconds": 0.00107811,
+        "min_seconds": 0.001058567,
+        "output_bytes": 2841400,
+        "runs": 10,
+        "stddev_seconds": 1.4764320297257141e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001674567,
+        "max_seconds": 1.601e-05,
+        "mean_seconds": 1.39016e-05,
+        "median_seconds": 1.3371000000000001e-05,
+        "min_seconds": 1.3235e-05,
+        "output_bytes": 280128,
+        "runs": 10,
+        "stddev_seconds": 8.842011309651218e-07,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.015958722,
+        "max_seconds": 0.000161669,
+        "mean_seconds": 0.00015681330000000003,
+        "median_seconds": 0.00015620899999999998,
+        "min_seconds": 0.000154917,
+        "output_bytes": 2800128,
+        "runs": 10,
+        "stddev_seconds": 1.9730897115944815e-06,
+        "warmup": 2
+      }
+    },
+    "flatbuffers": {
+      "logs/100": {
+        "load_seconds": 0.000251812,
+        "max_seconds": 9.598e-06,
+        "mean_seconds": 9.062300000000001e-06,
+        "median_seconds": 8.992499999999999e-06,
+        "min_seconds": 8.957e-06,
+        "output_bytes": 21864,
+        "runs": 10,
+        "stddev_seconds": 1.8403317635687316e-07,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.003996092,
+        "max_seconds": 0.000964987,
+        "mean_seconds": 0.0009532532000000001,
+        "median_seconds": 0.0009511014999999999,
+        "min_seconds": 0.000946803,
+        "output_bytes": 2164560,
+        "runs": 10,
+        "stddev_seconds": 4.913554574847023e-06,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 8.4502e-05,
+        "max_seconds": 1.6221e-05,
+        "mean_seconds": 1.60345e-05,
+        "median_seconds": 1.60105e-05,
+        "min_seconds": 1.592e-05,
+        "output_bytes": 23084,
+        "runs": 10,
+        "stddev_seconds": 9.75615190533644e-08,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.006482014,
+        "max_seconds": 0.001705586,
+        "mean_seconds": 0.0016924082,
+        "median_seconds": 0.0016925565,
+        "min_seconds": 0.00168121,
+        "output_bytes": 2298516,
+        "runs": 10,
+        "stddev_seconds": 6.996395154649285e-06,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 9.2767e-05,
+        "max_seconds": 1.9206e-05,
+        "mean_seconds": 1.8091599999999998e-05,
+        "median_seconds": 1.794e-05,
+        "min_seconds": 1.7734e-05,
+        "output_bytes": 24508,
+        "runs": 10,
+        "stddev_seconds": 4.052616932304358e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.006548932,
+        "max_seconds": 0.002002916,
+        "mean_seconds": 0.0019826908999999995,
+        "median_seconds": 0.001983919,
+        "min_seconds": 0.001961877,
+        "output_bytes": 2505516,
+        "runs": 10,
+        "stddev_seconds": 1.3504654689772696e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001579755,
+        "max_seconds": 0.000440343,
+        "mean_seconds": 0.0004339179,
+        "median_seconds": 0.00043349,
+        "min_seconds": 0.000431396,
+        "output_bytes": 359320,
+        "runs": 10,
+        "stddev_seconds": 2.629767687458342e-06,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.016050919,
+        "max_seconds": 0.004619627,
+        "mean_seconds": 0.0045486317,
+        "median_seconds": 0.0045970335,
+        "min_seconds": 0.004394505,
+        "output_bytes": 3592124,
+        "runs": 10,
+        "stddev_seconds": 8.551029215252392e-05,
+        "warmup": 2
+      }
+    },
+    "flexbuffers": {
+      "logs/100": {
+        "load_seconds": 0.000305325,
+        "max_seconds": 2.9176e-05,
+        "mean_seconds": 2.8757100000000003e-05,
+        "median_seconds": 2.8729999999999998e-05,
+        "min_seconds": 2.8404e-05,
+        "output_bytes": 19839,
+        "runs": 10,
+        "stddev_seconds": 1.9255671891679072e-07,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004394345,
+        "max_seconds": 0.00303918,
+        "mean_seconds": 0.0029540804,
+        "median_seconds": 0.002951482,
+        "min_seconds": 0.002919251,
+        "output_bytes": 2239087,
+        "runs": 10,
+        "stddev_seconds": 3.1363950073930374e-05,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 8.2879e-05,
+        "max_seconds": 4.0658e-05,
+        "mean_seconds": 4.00367e-05,
+        "median_seconds": 4.0107e-05,
+        "min_seconds": 3.9335e-05,
+        "output_bytes": 18317,
+        "runs": 10,
+        "stddev_seconds": 4.006182846551068e-07,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.005941218,
+        "max_seconds": 0.007271576,
+        "mean_seconds": 0.0047788009,
+        "median_seconds": 0.0041118745,
+        "min_seconds": 0.003986224,
+        "output_bytes": 2181135,
+        "runs": 10,
+        "stddev_seconds": 0.0011322973448036032,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 9.2367e-05,
+        "max_seconds": 3.7572e-05,
+        "mean_seconds": 3.26797e-05,
+        "median_seconds": 3.1735999999999996e-05,
+        "min_seconds": 3.1441e-05,
+        "output_bytes": 14123,
+        "runs": 10,
+        "stddev_seconds": 1.879573890540087e-06,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.006375459,
+        "max_seconds": 0.003511104,
+        "mean_seconds": 0.0033906173999999996,
+        "median_seconds": 0.003385794,
+        "min_seconds": 0.003339665,
+        "output_bytes": 1700339,
+        "runs": 10,
+        "stddev_seconds": 5.0075309750814364e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001985853,
+        "max_seconds": 0.001423657,
+        "mean_seconds": 0.0012910453,
+        "median_seconds": 0.0012818945,
+        "min_seconds": 0.00125329,
+        "output_bytes": 771405,
+        "runs": 10,
+        "stddev_seconds": 4.6458594841105566e-05,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.020036211,
+        "max_seconds": 0.012908371,
+        "mean_seconds": 0.0128075505,
+        "median_seconds": 0.012778066000000001,
+        "min_seconds": 0.012742292,
+        "output_bytes": 8081409,
+        "runs": 10,
+        "stddev_seconds": 6.145657208183654e-05,
+        "warmup": 2
+      }
+    },
+    "serde-json": {
+      "logs/100": {
+        "load_seconds": 0.000235501,
+        "max_seconds": 1.1632e-05,
+        "mean_seconds": 1.1518099999999999e-05,
+        "median_seconds": 1.1507e-05,
+        "min_seconds": 1.1482e-05,
+        "output_bytes": 27467,
+        "runs": 10,
+        "stddev_seconds": 4.1314525290749857e-08,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004261691,
+        "max_seconds": 0.001219656,
+        "mean_seconds": 0.0011567322999999998,
+        "median_seconds": 0.0011481084999999999,
+        "min_seconds": 0.001102391,
+        "output_bytes": 2733128,
+        "runs": 10,
+        "stddev_seconds": 3.2896902641586175e-05,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 8.6396e-05,
+        "max_seconds": 1.7142e-05,
+        "mean_seconds": 1.36973e-05,
+        "median_seconds": 1.3165e-05,
+        "min_seconds": 1.3076e-05,
+        "output_bytes": 25514,
+        "runs": 10,
+        "stddev_seconds": 1.1809802750257938e-06,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.005643216,
+        "max_seconds": 0.001439767,
+        "mean_seconds": 0.0014247966,
+        "median_seconds": 0.0014259105,
+        "min_seconds": 0.001406013,
+        "output_bytes": 2544897,
+        "runs": 10,
+        "stddev_seconds": 1.07329376985055e-05,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 8.6896e-05,
+        "max_seconds": 1.1332e-05,
+        "mean_seconds": 1.10302e-05,
+        "median_seconds": 1.0991e-05,
+        "min_seconds": 1.0921e-05,
+        "output_bytes": 19155,
+        "runs": 10,
+        "stddev_seconds": 1.1981469025123734e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.006233588,
+        "max_seconds": 0.001235466,
+        "mean_seconds": 0.0012093389999999998,
+        "median_seconds": 0.0012055185,
+        "min_seconds": 0.001189598,
+        "output_bytes": 1937892,
+        "runs": 10,
+        "stddev_seconds": 1.5960237078439616e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001973059,
+        "max_seconds": 0.001136185,
+        "mean_seconds": 0.0010999144,
+        "median_seconds": 0.001094281,
+        "min_seconds": 0.001086371,
+        "output_bytes": 861532,
+        "runs": 10,
+        "stddev_seconds": 1.5775021370508496e-05,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.016198962,
+        "max_seconds": 0.011150875,
+        "mean_seconds": 0.0110410485,
+        "median_seconds": 0.0110377285,
+        "min_seconds": 0.010968055,
+        "output_bytes": 8716686,
+        "runs": 10,
+        "stddev_seconds": 5.202288360567836e-05,
+        "warmup": 2
+      }
+    },
+    "simd-json": {
+      "logs/100": {
+        "load_seconds": 0.000203449,
+        "max_seconds": 2.0068e-05,
+        "mean_seconds": 1.39115e-05,
+        "median_seconds": 1.3205e-05,
+        "min_seconds": 1.2704e-05,
+        "output_bytes": 27467,
+        "runs": 10,
+        "stddev_seconds": 2.1366310046425895e-06,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004115061,
+        "max_seconds": 0.001328895,
+        "mean_seconds": 0.0012825162,
+        "median_seconds": 0.0012818600000000001,
+        "min_seconds": 0.001251016,
+        "output_bytes": 2733128,
+        "runs": 10,
+        "stddev_seconds": 2.1472053305634308e-05,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 0.000133997,
+        "max_seconds": 1.6481e-05,
+        "mean_seconds": 1.62081e-05,
+        "median_seconds": 1.6210999999999998e-05,
+        "min_seconds": 1.5981e-05,
+        "output_bytes": 25514,
+        "runs": 10,
+        "stddev_seconds": 1.4955831638528125e-07,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.006181759,
+        "max_seconds": 0.001819344,
+        "mean_seconds": 0.0017295492,
+        "median_seconds": 0.001720129,
+        "min_seconds": 0.001684576,
+        "output_bytes": 2544897,
+        "runs": 10,
+        "stddev_seconds": 3.6932005891367504e-05,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 9.1265e-05,
+        "max_seconds": 3.3153e-05,
+        "mean_seconds": 1.67521e-05,
+        "median_seconds": 1.48085e-05,
+        "min_seconds": 1.4228e-05,
+        "output_bytes": 19155,
+        "runs": 10,
+        "stddev_seconds": 5.536205802713624e-06,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.006731201,
+        "max_seconds": 0.001814134,
+        "mean_seconds": 0.0016553690999999999,
+        "median_seconds": 0.001687753,
+        "min_seconds": 0.00150924,
+        "output_bytes": 1937892,
+        "runs": 10,
+        "stddev_seconds": 0.00012328276850918785,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001678434,
+        "max_seconds": 0.001278188,
+        "mean_seconds": 0.0012640927999999997,
+        "median_seconds": 0.0012622825,
+        "min_seconds": 0.001256636,
+        "output_bytes": 1525727,
+        "runs": 10,
+        "stddev_seconds": 6.840743187695333e-06,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.016186879,
+        "max_seconds": 0.012926104,
+        "mean_seconds": 0.012571867300000001,
+        "median_seconds": 0.012503591000000001,
+        "min_seconds": 0.012487054,
+        "output_bytes": 15358759,
+        "runs": 10,
+        "stddev_seconds": 0.00013387150485824105,
+        "warmup": 2
+      }
+    },
+    "msgpacker": {
+      "logs/100": {
+        "load_seconds": 0.00019885,
+        "max_seconds": 2.154e-06,
+        "mean_seconds": 1.9167000000000002e-06,
+        "median_seconds": 1.8935000000000002e-06,
+        "min_seconds": 1.824e-06,
+        "output_bytes": 13779,
+        "runs": 10,
+        "stddev_seconds": 8.848169302177711e-08,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004331244,
+        "max_seconds": 0.000243857,
+        "mean_seconds": 0.00024004869999999997,
+        "median_seconds": 0.0002392835,
+        "min_seconds": 0.000237485,
+        "output_bytes": 1368413,
+        "runs": 10,
+        "stddev_seconds": 2.146546298126364e-06,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 9.5223e-05,
+        "max_seconds": 3.076e-06,
+        "mean_seconds": 2.9688e-06,
+        "median_seconds": 2.946e-06,
+        "min_seconds": 2.906e-06,
+        "output_bytes": 9817,
+        "runs": 10,
+        "stddev_seconds": 5.517571929753157e-08,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.00620878,
+        "max_seconds": 0.000301567,
+        "mean_seconds": 0.000287261,
+        "median_seconds": 0.00028485049999999997,
+        "min_seconds": 0.000280817,
+        "output_bytes": 978866,
+        "runs": 10,
+        "stddev_seconds": 6.764114783177461e-06,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 8.8119e-05,
+        "max_seconds": 2.635e-06,
+        "mean_seconds": 2.3283999999999996e-06,
+        "median_seconds": 2.305e-06,
+        "min_seconds": 2.255e-06,
+        "output_bytes": 8992,
+        "runs": 10,
+        "stddev_seconds": 1.0479045758083133e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.005845194,
+        "max_seconds": 0.000581954,
+        "mean_seconds": 0.0005300351,
+        "median_seconds": 0.000520557,
+        "min_seconds": 0.000510548,
+        "output_bytes": 923818,
+        "runs": 10,
+        "stddev_seconds": 2.209656315561313e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001654037,
+        "max_seconds": 3.2342e-05,
+        "mean_seconds": 2.9556699999999994e-05,
+        "median_seconds": 2.9241e-05,
+        "min_seconds": 2.9216e-05,
+        "output_bytes": 329644,
+        "runs": 10,
+        "stddev_seconds": 9.288310987472381e-07,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.016344662,
+        "max_seconds": 0.000364227,
+        "mean_seconds": 0.0003032337,
+        "median_seconds": 0.0002879065,
+        "min_seconds": 0.000284395,
+        "output_bytes": 3368576,
+        "runs": 10,
+        "stddev_seconds": 2.8936000428704722e-05,
+        "warmup": 2
+      }
+    },
+    "rmp-serde": {
+      "logs/100": {
+        "load_seconds": 0.000190365,
+        "max_seconds": 3.607e-06,
+        "mean_seconds": 3.5038e-06,
+        "median_seconds": 3.497e-06,
+        "min_seconds": 3.436e-06,
+        "output_bytes": 13980,
+        "runs": 10,
+        "stddev_seconds": 4.7978745294140414e-08,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004427549,
+        "max_seconds": 0.000405186,
+        "mean_seconds": 0.00035162249999999996,
+        "median_seconds": 0.000346168,
+        "min_seconds": 0.000343278,
+        "output_bytes": 1388414,
+        "runs": 10,
+        "stddev_seconds": 1.78972687483314e-05,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 8.6035e-05,
+        "max_seconds": 5.55e-06,
+        "mean_seconds": 5.482499999999999e-06,
+        "median_seconds": 5.4804999999999995e-06,
+        "min_seconds": 5.44e-06,
+        "output_bytes": 10118,
+        "runs": 10,
+        "stddev_seconds": 3.3410327744576326e-08,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.006424223,
+        "max_seconds": 0.000583377,
+        "mean_seconds": 0.0005569768,
+        "median_seconds": 0.000556155,
+        "min_seconds": 0.000545315,
+        "output_bytes": 1008867,
+        "runs": 10,
+        "stddev_seconds": 1.0425382178126629e-05,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 9.0454e-05,
+        "max_seconds": 6.693e-06,
+        "mean_seconds": 6.282e-06,
+        "median_seconds": 6.2165000000000005e-06,
+        "min_seconds": 6.171e-06,
+        "output_bytes": 9093,
+        "runs": 10,
+        "stddev_seconds": 1.5745602560715164e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.006638603,
+        "max_seconds": 0.000963886,
+        "mean_seconds": 0.0008469286999999999,
+        "median_seconds": 0.0008199349999999999,
+        "min_seconds": 0.00079901,
+        "output_bytes": 933819,
+        "runs": 10,
+        "stddev_seconds": 5.871498363969795e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001610775,
+        "max_seconds": 0.00015143,
+        "mean_seconds": 0.0001289129,
+        "median_seconds": 0.000125641,
+        "min_seconds": 0.000124318,
+        "output_bytes": 339645,
+        "runs": 10,
+        "stddev_seconds": 7.79115450302457e-06,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.016742463,
+        "max_seconds": 0.001405362,
+        "mean_seconds": 0.0013007359,
+        "median_seconds": 0.0012603585,
+        "min_seconds": 0.001253741,
+        "output_bytes": 3468577,
+        "runs": 10,
+        "stddev_seconds": 6.455469441249026e-05,
+        "warmup": 2
+      }
+    },
+    "prost": {
+      "logs/100": {
+        "load_seconds": 0.000231514,
+        "max_seconds": 4.298e-06,
+        "mean_seconds": 3.9144e-06,
+        "median_seconds": 3.852500000000001e-06,
+        "min_seconds": 3.767e-06,
+        "output_bytes": 14815,
+        "runs": 10,
+        "stddev_seconds": 1.4953808879345766e-07,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.005765772,
+        "max_seconds": 0.000330463,
+        "mean_seconds": 0.00032739790000000003,
+        "median_seconds": 0.000327437,
+        "min_seconds": 0.000324933,
+        "output_bytes": 1472039,
+        "runs": 10,
+        "stddev_seconds": 2.004351338962309e-06,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 0.000105442,
+        "max_seconds": 5.18e-06,
+        "mean_seconds": 4.9625e-06,
+        "median_seconds": 4.94e-06,
+        "min_seconds": 4.809e-06,
+        "output_bytes": 11388,
+        "runs": 10,
+        "stddev_seconds": 1.0150985173863678e-07,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.008557518,
+        "max_seconds": 0.000513243,
+        "mean_seconds": 0.0005029062,
+        "median_seconds": 0.0005032545,
+        "min_seconds": 0.000491611,
+        "output_bytes": 1136778,
+        "runs": 10,
+        "stddev_seconds": 7.688697351307313e-06,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 0.000132914,
+        "max_seconds": 9.237e-06,
+        "mean_seconds": 7.150699999999999e-06,
+        "median_seconds": 6.6725e-06,
+        "min_seconds": 6.533e-06,
+        "output_bytes": 10773,
+        "runs": 10,
+        "stddev_seconds": 9.710870249364881e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.010295497,
+        "max_seconds": 0.001180672,
+        "mean_seconds": 0.0010734084999999998,
+        "median_seconds": 0.0010541435,
+        "min_seconds": 0.00103368,
+        "output_bytes": 1104376,
+        "runs": 10,
+        "stddev_seconds": 4.758571004671467e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.00186448,
+        "max_seconds": 7.6306e-05,
+        "mean_seconds": 7.57271e-05,
+        "median_seconds": 7.57105e-05,
+        "min_seconds": 7.5314e-05,
+        "output_bytes": 338863,
+        "runs": 10,
+        "stddev_seconds": 2.7807569113462403e-07,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.018041411,
+        "max_seconds": 0.001001919,
+        "mean_seconds": 0.0008204193000000001,
+        "median_seconds": 0.00079632,
+        "min_seconds": 0.000780515,
+        "output_bytes": 3473480,
+        "runs": 10,
+        "stddev_seconds": 6.279674323251167e-05,
+        "warmup": 2
+      }
+    },
+    "rkyv": {
+      "logs/100": {
+        "load_seconds": 0.00018838,
+        "max_seconds": 1.904e-06,
+        "mean_seconds": 1.7053e-06,
+        "median_seconds": 1.6835e-06,
+        "min_seconds": 1.643e-06,
+        "output_bytes": 17824,
+        "runs": 10,
+        "stddev_seconds": 7.280803527084079e-08,
+        "warmup": 2
+      },
+      "logs/10k": {
+        "load_seconds": 0.004221144,
+        "max_seconds": 0.000213979,
+        "mean_seconds": 0.0001976033,
+        "median_seconds": 0.000195078,
+        "min_seconds": 0.000190815,
+        "output_bytes": 1770736,
+        "runs": 10,
+        "stddev_seconds": 8.112993603473383e-06,
+        "warmup": 2
+      },
+      "profile/100": {
+        "load_seconds": 8.6004e-05,
+        "max_seconds": 2.825e-06,
+        "mean_seconds": 2.5859999999999995e-06,
+        "median_seconds": 2.5400000000000002e-06,
+        "min_seconds": 2.515e-06,
+        "output_bytes": 14728,
+        "runs": 10,
+        "stddev_seconds": 9.256889326334202e-08,
+        "warmup": 2
+      },
+      "profile/10k": {
+        "load_seconds": 0.006079523,
+        "max_seconds": 0.000395728,
+        "mean_seconds": 0.0003368961,
+        "median_seconds": 0.0003230385,
+        "min_seconds": 0.000317568,
+        "output_bytes": 1470804,
+        "runs": 10,
+        "stddev_seconds": 2.9311658862814294e-05,
+        "warmup": 2
+      },
+      "catalog/100": {
+        "load_seconds": 9.2527e-05,
+        "max_seconds": 4.508e-06,
+        "mean_seconds": 4.0687000000000005e-06,
+        "median_seconds": 4.013e-06,
+        "min_seconds": 3.977e-06,
+        "output_bytes": 19256,
+        "runs": 10,
+        "stddev_seconds": 1.51194609692277e-07,
+        "warmup": 2
+      },
+      "catalog/10k": {
+        "load_seconds": 0.006331686,
+        "max_seconds": 0.000847974,
+        "mean_seconds": 0.0007319516999999999,
+        "median_seconds": 0.0007221580000000001,
+        "min_seconds": 0.000675653,
+        "output_bytes": 1936360,
+        "runs": 10,
+        "stddev_seconds": 5.4196520296140794e-05,
+        "warmup": 2
+      },
+      "mesh/10k": {
+        "load_seconds": 0.001584524,
+        "max_seconds": 5.009e-06,
+        "mean_seconds": 4.439399999999999e-06,
+        "median_seconds": 4.354e-06,
+        "min_seconds": 4.318e-06,
+        "output_bytes": 280056,
+        "runs": 10,
+        "stddev_seconds": 2.0322017616368702e-07,
+        "warmup": 2
+      },
+      "mesh/100k": {
+        "load_seconds": 0.016272574,
+        "max_seconds": 8.4501e-05,
+        "mean_seconds": 8.08417e-05,
+        "median_seconds": 8.02435e-05,
+        "min_seconds": 7.9632e-05,
+        "output_bytes": 2800056,
+        "runs": 10,
+        "stddev_seconds": 1.5285708390519554e-06,
+        "warmup": 2
+      }
+    }
+  }
+}
